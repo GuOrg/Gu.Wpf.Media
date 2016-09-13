@@ -44,6 +44,7 @@
                 this.CanPauseMedia = this.mediaElement.CanPause;
                 this.NaturalVideoHeight = this.mediaElement.NaturalVideoHeight;
                 this.NaturalVideoWidth = this.mediaElement.NaturalVideoWidth;
+                this.Position = this.mediaElement.Position;
                 this.ReRaiseEvent(o, e);
                 CommandManager.InvalidateRequerySuggested();
             };

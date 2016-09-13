@@ -20,7 +20,7 @@ using System.Windows.Markup;
 
 [assembly:ThemeInfo(ResourceDictionaryLocation.None, ResourceDictionaryLocation.SourceAssembly)]
 
-[assembly: AssemblyVersion("0.1.1.0")]
-[assembly: AssemblyFileVersion("0.1.1.0")]
+[assembly: AssemblyVersion("0.1.1.1")]
+[assembly: AssemblyFileVersion("0.1.1.1")]
 [assembly: XmlnsDefinition("https://github.com/JohanLarsson/Gu.Wpf.Media", "Gu.Wpf.Media")]
 [assembly: XmlnsPrefix("https://github.com/JohanLarsson/Gu.Wpf.Media", "media")]

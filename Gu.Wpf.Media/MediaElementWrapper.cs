@@ -18,12 +18,18 @@
             {
                 LoadedBehavior = MediaState.Manual,
                 UnloadedBehavior = MediaState.Manual,
-                Source = this.Source,
             };
+
+            this.mediaElement.MediaFailed += (o, e) => this.RaiseEvent(e);
+            this.mediaElement.MediaEnded += (o, e) => this.RaiseEvent(e);
+            this.mediaElement.BufferingStarted += (o, e) => this.RaiseEvent(e);
+            this.mediaElement.BufferingEnded += (o, e) => this.RaiseEvent(e);
+            this.mediaElement.ScriptCommand += (o, e) => this.RaiseEvent(e);
             this.mediaElement.MediaOpened += (o, e) =>
             {
                 this.Pause();
                 this.Length = this.mediaElement.NaturalDuration.TimeSpan;
+                this.RaiseEvent(e);
                 CommandManager.InvalidateRequerySuggested();
             };
 

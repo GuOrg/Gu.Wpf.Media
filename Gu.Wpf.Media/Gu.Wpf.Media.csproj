@@ -53,6 +53,7 @@
     <Compile Include="MediaElementWrapper.cs" />
     <Compile Include="MediaElementWrapper.DependencyProperties.cs" />
     <Compile Include="MediaElementWrapper.DependencyProperties.generated.cs" />
+    <Compile Include="MediaElementWrapper.Events.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

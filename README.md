@@ -1,7 +1,7 @@
 # Gu.Wpf.Media
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE.md) 
 [![NuGet](https://img.shields.io/nuget/v/Gu.Wpf.Media.svg)](https://www.nuget.org/packages/Gu.Wpf.Media/)
-[![Build status](https://ci.appveyor.com/api/projects/status/a92oxrywc9nv7f21?svg=true)](https://ci.appveyor.com/project/JohanLarsson/gu-wpf-numericinput)
+[![Build status](https://ci.appveyor.com/api/projects/status/eg96glf1osi8on6y/branch/master?svg=true)](https://ci.appveyor.com/project/JohanLarsson/gu-wpf-media/branch/master)
 
 Wrapper for System.Windows.Controls.MediaElement.
 

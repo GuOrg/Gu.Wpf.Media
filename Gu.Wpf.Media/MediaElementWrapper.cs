@@ -13,6 +13,7 @@
         private readonly DispatcherTimer updateProgressTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
         private readonly MediaElement mediaElement;
 
+        /// <summary>Initializes a new instance of the <see cref="MediaElementWrapper"/> class.</summary>
         public MediaElementWrapper()
         {
             this.mediaElement = new MediaElement
@@ -71,84 +72,149 @@
             Binding.AddTargetUpdatedHandler(this.mediaElement, this.OnTargetUpdated);
         }
 
+        /// <inheritdoc/>
         public override void BeginInit()
         {
             this.Child = this.mediaElement;
             base.BeginInit();
         }
 
+        /// <summary>
+        /// Check if playback of current media, if any, can be started.
+        /// </summary>
+        /// <returns>True if media can be started.</returns>
         public bool CanPlay()
         {
             return this.mediaElement.Source != null && this.State != MediaState.Play;
         }
 
+        /// <summary>
+        /// Sets <see cref="State"/> to <see cref="MediaState.Play"/>
+        /// </summary>
         public void Play()
         {
             this.State = MediaState.Play;
         }
 
+        /// <summary>
+        /// Check if current playback, if any, can be paused.
+        /// </summary>
+        /// <returns>True if media can be paused.</returns>
         public bool CanPause()
         {
-            return this.mediaElement.Source != null && this.State == MediaState.Play;
+            return this.mediaElement.Source != null && this.CanPauseMedia == true && this.State == MediaState.Play;
         }
 
+        /// <summary>
+        /// Sets <see cref="State"/> to <see cref="MediaState.Pause"/>
+        /// </summary>
         public void Pause()
         {
             this.State = MediaState.Pause;
         }
 
+        /// <summary>
+        /// Toggles between <see cref="MediaState.Play"/> and <see cref="MediaState.Pause"/>
+        /// Does nothing if no media is loaded.
+        /// </summary>
         public void TogglePlayPause()
         {
+            if (this.Length == null)
+            {
+                return;
+            }
+
             this.State = this.State != MediaState.Play
                              ? MediaState.Play
                              : MediaState.Pause;
         }
 
+        /// <summary>
+        /// Check if current playback, if any, can be stopped.
+        /// </summary>
+        /// <returns>True if media can be stopped.</returns>
         public bool CanStop()
         {
             return this.mediaElement.Source != null && this.State == MediaState.Play;
         }
 
+        /// <summary>
+        /// Sets <see cref="State"/> to <see cref="MediaState.Pause"/>
+        /// </summary>
         public void Stop()
         {
             this.State = MediaState.Stop;
         }
 
+        /// <summary>
+        /// Check if current playback, if any, can be rewound.
+        /// </summary>
+        /// <returns>True if media can be rewound.</returns>
         public bool CanRewind()
         {
             return this.mediaElement.Source != null && this.Position > TimeSpan.Zero;
         }
 
+        /// <summary>
+        /// Sets <see cref="Position"/> to <see cref="TimeSpan.Zero"/>
+        /// </summary>
         public void Rewind()
         {
             this.Position = TimeSpan.Zero;
         }
 
+        /// <summary>
+        /// Check if <see cref="Volume"/> can be decreased.
+        /// </summary>
+        /// <returns>True if <see cref="Volume"/> can be decreased.</returns>
         public bool CanDecreaseVolume()
         {
             return this.Volume > 0;
         }
 
+        /// <summary>
+        /// <see cref="Volume"/> is a value between 0 and 1.
+        /// Decreases <see cref="Volume"/> by <paramref name="increment"/>
+        /// Truncates to between 0 and 1 if overflow.
+        /// </summary>
+        /// <param name="increment">A value between 0 and 1. Typical value is 0.05.</param>
         public void DecreaseVolume(double increment)
         {
-            this.Volume = Math.Min(this.mediaElement.Volume - increment, 1);
+            this.Volume = Math.Max(0, Math.Min(this.mediaElement.Volume - increment, 1));
         }
 
+        /// <summary>
+        /// Check if <see cref="Volume"/> can be increased.
+        /// </summary>
+        /// <returns>True if <see cref="Volume"/> can be increased.</returns>
         public bool CanIncreaseVolume()
         {
             return this.Volume < 1;
         }
 
+        /// <summary>
+        /// <see cref="Volume"/> is a value between 0 and 1.
+        /// Increases <see cref="Volume"/> by <paramref name="increment"/>
+        /// Truncates to between 0 and 1 if overflow.
+        /// </summary>
+        /// <param name="increment">A value between 0 and 1. Typical value is 0.05.</param>
         public void IncreaseVolume(double increment)
         {
-            this.Volume = Math.Min(this.mediaElement.Volume + increment, 1);
+            this.Volume = Math.Max(0, Math.Min(this.mediaElement.Volume + increment, 1));
         }
 
+        /// <summary>
+        /// Checks if audio can be muted.
+        /// </summary>
+        /// <returns>True if audio can be muted.</returns>
         public bool CanMute()
         {
             return !this.IsMuted;
         }
 
+        /// <summary>
+        /// Sets IsMuted = true
+        /// </summary>
         public void Mute()
         {
             this.IsMuted = true;

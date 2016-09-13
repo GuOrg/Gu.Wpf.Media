@@ -61,7 +61,7 @@
         public static readonly DependencyProperty StretchDirectionProperty = Viewbox.StretchDirectionProperty.AddOwner(typeof(MediaElementWrapper));
 
         /// <summary>
-        /// Gets or sets a media source on the <see cref="MediaElementWrapper" />.  
+        /// Gets or sets a media source on the <see cref="MediaElementWrapper" />.
         /// </summary>
         /// <returns>
         /// The URI that specifies the source of the element. The default is null.
@@ -73,7 +73,7 @@
         }
 
         /// <summary>
-        /// Gets or sets the media's volume. 
+        /// Gets or sets the media's volume.
         /// </summary>
         /// <returns>
         /// The media's volume represented on a linear scale between 0 and 1. The default is 0.5.
@@ -85,7 +85,7 @@
         }
 
         /// <summary>
-        /// Gets or sets a ratio of volume across speakers.  
+        /// Gets or sets a ratio of volume across speakers.
         /// </summary>
         /// <returns>
         /// The ratio of volume across speakers in the range between -1 and 1. The default is 0.
@@ -97,7 +97,7 @@
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether the audio is muted.  
+        /// Gets or sets a value indicating whether the audio is muted.
         /// </summary>
         /// <returns>
         /// true if audio is muted; otherwise, false. The default is false.
@@ -109,7 +109,7 @@
         }
 
         /// <summary>
-        /// Gets or sets a value that indicates whether the <see cref="MediaElementWrapper" /> will update frames for seek operations while paused. 
+        /// Gets or sets a value that indicates whether the <see cref="MediaElementWrapper" /> will update frames for seek operations while paused.
         /// </summary>
         /// <returns>
         /// true if frames are updated while paused; otherwise, false. The default is false.
@@ -127,8 +127,8 @@
         /// <seealso cref="MediaElement.StretchProperty" />
         public Stretch Stretch
         {
-            get { return (Stretch)GetValue(StretchProperty); }
-            set { SetValue(StretchProperty, value); }
+            get { return (Stretch)this.GetValue(StretchProperty); }
+            set { this.SetValue(StretchProperty, value); }
         }
 
         /// <summary>
@@ -140,8 +140,8 @@
         /// <seealso cref="Viewbox.StretchDirectionProperty" />
         public StretchDirection StretchDirection
         {
-            get { return (StretchDirection)GetValue(StretchDirectionProperty); }
-            set { SetValue(StretchDirectionProperty, value); }
+            get { return (StretchDirection)this.GetValue(StretchDirectionProperty); }
+            set { this.SetValue(StretchDirectionProperty, value); }
         }
     }
 }

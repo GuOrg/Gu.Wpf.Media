@@ -68,6 +68,30 @@
             typeof(MediaElementWrapper),
             new PropertyMetadata(default(double), OnSpeedRatioChanged));
 
+        private static readonly DependencyPropertyKey IsBufferingPropertyKey = DependencyProperty.RegisterReadOnly(
+            "IsBuffering",
+            typeof(bool),
+            typeof(MediaElementWrapper),
+            new PropertyMetadata(default(bool)));
+
+        public static readonly DependencyProperty IsBufferingProperty = IsBufferingPropertyKey.DependencyProperty;
+
+        private static readonly DependencyPropertyKey DownloadProgressPropertyKey = DependencyProperty.RegisterReadOnly(
+            "DownloadProgress",
+            typeof(double),
+            typeof(MediaElementWrapper),
+            new PropertyMetadata(default(double)));
+
+        public static readonly DependencyProperty DownloadProgressProperty = DownloadProgressPropertyKey.DependencyProperty;
+
+        private static readonly DependencyPropertyKey BufferingProgressPropertyKey = DependencyProperty.RegisterReadOnly(
+            "BufferingProgress",
+            typeof(double),
+            typeof(MediaElementWrapper),
+            new PropertyMetadata(default(double)));
+
+        public static readonly DependencyProperty BufferingProgressProperty = BufferingProgressPropertyKey.DependencyProperty;
+
         public static readonly DependencyProperty VolumeIncrementProperty = DependencyProperty.Register(
             nameof(VolumeIncrement),
             typeof(double),
@@ -168,6 +192,34 @@
         {
             get { return (double)this.GetValue(SpeedRatioProperty); }
             set { this.SetValue(SpeedRatioProperty, value); }
+        }
+
+        /// <summary>
+        /// Returns whether the given media is currently being buffered. This
+        /// applies to network accessed media only.
+        /// </summary>
+        public bool IsBuffering
+        {
+            get { return (bool)this.GetValue(IsBufferingProperty); }
+            protected set { this.SetValue(IsBufferingPropertyKey, value); }
+        }
+
+        /// <summary>
+        /// Returns the download progress of the media.
+        /// </summary>
+        public double DownloadProgress
+        {
+            get { return (double)this.GetValue(DownloadProgressProperty); }
+            protected set { this.SetValue(DownloadProgressPropertyKey, value); }
+        }
+
+        /// <summary>
+        /// Returns the buffering progress of the media.
+        /// </summary>
+        public double BufferingProgress
+        {
+            get { return (double)this.GetValue(BufferingProgressProperty); }
+            protected set { this.SetValue(BufferingProgressPropertyKey, value); }
         }
 
         /// <summary>

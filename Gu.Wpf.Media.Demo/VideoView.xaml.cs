@@ -19,6 +19,7 @@
             this.MediaElement.MediaOpened += this.OnMediaOpened;
 
             var timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(0.1) };
+            // ReSharper disable once ConstantNullCoalescingCondition R# fails this static analysis.
             timer.Tick += (_, __) => { this.ProgressSlider.Value = this.MediaElement?.Position.TotalSeconds ?? 0; };
             timer.Start();
         }

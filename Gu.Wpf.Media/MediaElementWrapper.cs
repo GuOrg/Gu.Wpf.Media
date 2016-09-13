@@ -10,6 +10,7 @@
     public partial class MediaElementWrapper : Decorator
     {
         private readonly DispatcherTimer updatePositionTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(0.1) };
+        private readonly DispatcherTimer updateProgressTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
         private readonly MediaElement mediaElement;
 
         public MediaElementWrapper()
@@ -22,8 +23,18 @@
 
             this.mediaElement.MediaFailed += this.ReRaiseEvent;
             this.mediaElement.MediaEnded += this.ReRaiseEvent;
-            this.mediaElement.BufferingStarted += this.ReRaiseEvent;
-            this.mediaElement.BufferingEnded += this.ReRaiseEvent;
+            this.mediaElement.BufferingStarted += (o, e) =>
+                {
+                    this.IsBuffering = true;
+                    this.updateProgressTimer.Start();
+                    this.ReRaiseEvent(o, e); 
+                };
+            this.mediaElement.BufferingEnded += (o, e) =>
+                {
+                    this.IsBuffering = true;
+                    this.updateProgressTimer.Start();
+                    this.ReRaiseEvent(o, e);
+                };
             this.mediaElement.ScriptCommand += this.ReRaiseEvent;
             this.mediaElement.MediaOpened += (o, e) =>
             {
@@ -32,8 +43,7 @@
                 this.CanPauseMedia = this.mediaElement.CanPause;
                 this.NaturalVideoHeight = this.mediaElement.NaturalVideoHeight;
                 this.NaturalVideoWidth = this.mediaElement.NaturalVideoWidth;
-                this.RaiseEvent(e);
-                e.Handled = true;
+                this.ReRaiseEvent(o, e);
                 CommandManager.InvalidateRequerySuggested();
             };
 
@@ -52,7 +62,12 @@
             this.CommandBindings.Add(new CommandBinding(MediaCommands.IncreaseVolume, HandleExecute(() => this.IncreaseVolume(this.VolumeIncrement)), HandleCanExecute(this.CanIncreaseVolume)));
             this.CommandBindings.Add(new CommandBinding(MediaCommands.DecreaseVolume, HandleExecute(() => this.DecreaseVolume(this.VolumeIncrement)), HandleCanExecute(this.CanDecreaseVolume)));
             this.CommandBindings.Add(new CommandBinding(MediaCommands.MuteVolume, HandleExecute(this.Mute), HandleCanExecute(this.CanMute)));
-            this.updatePositionTimer.Tick += (o, e) => this.Position = this.mediaElement?.Position;
+            this.updatePositionTimer.Tick += (o, e) => this.Position = this.mediaElement.Position;
+            this.updateProgressTimer.Tick += (o, e) =>
+                {
+                    this.DownloadProgress = this.mediaElement.DownloadProgress;
+                    this.BufferingProgress = this.mediaElement.BufferingProgress;
+                };
         }
 
         public override void BeginInit()

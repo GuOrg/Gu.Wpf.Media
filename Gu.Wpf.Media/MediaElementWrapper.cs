@@ -29,6 +29,9 @@
             {
                 this.Pause();
                 this.Length = this.mediaElement.NaturalDuration.TimeSpan;
+                this.CanPauseMedia = this.mediaElement.CanPause;
+                this.NaturalVideoHeight = this.mediaElement.NaturalVideoHeight;
+                this.NaturalVideoWidth = this.mediaElement.NaturalVideoWidth;
                 this.RaiseEvent(e);
                 e.Handled = true;
                 CommandManager.InvalidateRequerySuggested();

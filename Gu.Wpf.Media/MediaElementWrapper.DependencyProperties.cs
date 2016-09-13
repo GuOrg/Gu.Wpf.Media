@@ -23,7 +23,50 @@
             typeof(TimeSpan?),
             typeof(MediaElementWrapper),
             new PropertyMetadata(default(TimeSpan?)));
+
         public static readonly DependencyProperty LengthProperty = LengthPropertyKey.DependencyProperty;
+
+        private static readonly DependencyPropertyKey CanPausePropertyKey = DependencyProperty.RegisterReadOnly(
+            "CanPause",
+            typeof(bool?),
+            typeof(MediaElementWrapper),
+            new PropertyMetadata(default(bool?)));
+
+        public static readonly DependencyProperty CanPauseMediaProperty = CanPausePropertyKey.DependencyProperty;
+
+        public static readonly DependencyProperty NaturalVideoHeightProperty = DependencyProperty.Register(
+            nameof(NaturalVideoHeight),
+            typeof(int?),
+            typeof(MediaElementWrapper),
+            new PropertyMetadata(default(int?)));
+
+        public static readonly DependencyProperty NaturalVideoWidthProperty = DependencyProperty.Register(
+            nameof(NaturalVideoWidth),
+            typeof(int?),
+            typeof(MediaElementWrapper),
+            new PropertyMetadata(default(int?)));
+
+        private static readonly DependencyPropertyKey HasAudioPropertyKey = DependencyProperty.RegisterReadOnly(
+            "HasAudio",
+            typeof(bool?),
+            typeof(MediaElementWrapper),
+            new PropertyMetadata(default(bool?)));
+
+        public static readonly DependencyProperty HasAudioProperty = HasAudioPropertyKey.DependencyProperty;
+
+        private static readonly DependencyPropertyKey HasVideoPropertyKey = DependencyProperty.RegisterReadOnly(
+            "HasVideo",
+            typeof(bool?),
+            typeof(MediaElementWrapper),
+            new PropertyMetadata(default(bool?)));
+
+        public static readonly DependencyProperty HasVideoProperty = HasVideoPropertyKey.DependencyProperty;
+
+        public static readonly DependencyProperty SpeedRatioProperty = DependencyProperty.Register(
+            nameof(SpeedRatio),
+            typeof(double),
+            typeof(MediaElementWrapper),
+            new PropertyMetadata(default(double), OnSpeedRatioChanged));
 
         public static readonly DependencyProperty VolumeIncrementProperty = DependencyProperty.Register(
             nameof(VolumeIncrement),
@@ -69,6 +112,65 @@
         }
 
         /// <summary>
+        /// Returns whether the given media can be paused. This is only valid
+        /// after the MediaOpened event has fired.
+        /// </summary>
+        public bool? CanPauseMedia
+        {
+            get { return (bool?)this.GetValue(CanPauseMediaProperty); }
+            protected set { this.SetValue(CanPausePropertyKey, value); }
+        }
+
+        /// <summary>
+        /// Returns the natural height of the media in the video. Only valid after
+        /// the MediaOpened event has fired.
+        /// </summary>
+        public int? NaturalVideoHeight
+        {
+            get { return (int?)this.GetValue(NaturalVideoHeightProperty); }
+            set { this.SetValue(NaturalVideoHeightProperty, value); }
+        }
+
+        /// <summary>
+        /// Returns the natural width of the media in the video. Only valid after
+        /// the MediaOpened event has fired.
+        /// </summary>
+        public int? NaturalVideoWidth
+        {
+            get { return (int?)this.GetValue(NaturalVideoWidthProperty); }
+            set { this.SetValue(NaturalVideoWidthProperty, value); }
+        }
+
+        /// <summary>
+        /// Returns whether the given media has audio. Only valid after the
+        /// MediaOpened event has fired.
+        /// </summary>
+        public bool? HasAudio
+        {
+            get { return (bool?)this.GetValue(HasAudioProperty); }
+            protected set { this.SetValue(HasAudioPropertyKey, value); }
+        }
+
+        /// <summary>
+        /// Returns whether the given media has video. Only valid after the
+        /// MediaOpened event has fired.
+        /// </summary>
+        public bool? HasVideo
+        {
+            get { return (bool?)this.GetValue(HasVideoProperty); }
+            protected set { this.SetValue(HasVideoPropertyKey, value); }
+        }
+
+        /// <summary>
+        /// Allows the speed ration of the media to be controlled.
+        /// </summary>
+        public double SpeedRatio
+        {
+            get { return (double)this.GetValue(SpeedRatioProperty); }
+            set { this.SetValue(SpeedRatioProperty, value); }
+        }
+
+        /// <summary>
         /// The increment by which the IncreaseVolume
         /// </summary>
         public double VolumeIncrement
@@ -93,6 +195,11 @@
         {
             get { return (string)this.GetValue(AudioFormatsProperty); }
             set { this.SetValue(AudioFormatsProperty, value); }
+        }
+
+        private static void OnSpeedRatioChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            ((MediaElementWrapper)d).mediaElement.SpeedRatio = (double)e.NewValue;
         }
     }
 }

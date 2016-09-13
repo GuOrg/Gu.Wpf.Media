@@ -88,7 +88,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Gu.Wpf.MediaElementWrapper\Gu.Wpf.Media.csproj">
+    <ProjectReference Include="..\Gu.Wpf.Media\Gu.Wpf.Media.csproj">
       <Project>{bd54b3c3-a3c3-41bd-b188-94b4a0c20303}</Project>
       <Name>Gu.Wpf.Media</Name>
     </ProjectReference>

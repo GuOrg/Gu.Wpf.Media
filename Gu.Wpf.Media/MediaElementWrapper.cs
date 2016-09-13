@@ -20,16 +20,17 @@
                 UnloadedBehavior = MediaState.Manual,
             };
 
-            this.mediaElement.MediaFailed += (o, e) => this.RaiseEvent(e);
-            this.mediaElement.MediaEnded += (o, e) => this.RaiseEvent(e);
-            this.mediaElement.BufferingStarted += (o, e) => this.RaiseEvent(e);
-            this.mediaElement.BufferingEnded += (o, e) => this.RaiseEvent(e);
-            this.mediaElement.ScriptCommand += (o, e) => this.RaiseEvent(e);
+            this.mediaElement.MediaFailed += this.ReRaiseEvent;
+            this.mediaElement.MediaEnded += this.ReRaiseEvent;
+            this.mediaElement.BufferingStarted += this.ReRaiseEvent;
+            this.mediaElement.BufferingEnded += this.ReRaiseEvent;
+            this.mediaElement.ScriptCommand += this.ReRaiseEvent;
             this.mediaElement.MediaOpened += (o, e) =>
             {
                 this.Pause();
                 this.Length = this.mediaElement.NaturalDuration.TimeSpan;
                 this.RaiseEvent(e);
+                e.Handled = true;
                 CommandManager.InvalidateRequerySuggested();
             };
 
@@ -92,50 +93,44 @@
             this.State = MediaState.Stop;
         }
 
-        private bool CanRewind()
+        public bool CanRewind()
         {
             return this.mediaElement.Source != null && this.Position > TimeSpan.Zero;
         }
 
-        private void Rewind()
+        public void Rewind()
         {
             this.Position = TimeSpan.Zero;
         }
 
-        private bool CanDecreaseVolume()
+        public bool CanDecreaseVolume()
         {
             return this.Volume > 0;
         }
 
-        private void DecreaseVolume(double increment)
+        public void DecreaseVolume(double increment)
         {
             this.Volume = Math.Min(this.mediaElement.Volume - increment, 1);
         }
 
-        private bool CanIncreaseVolume()
+        public bool CanIncreaseVolume()
         {
             return this.Volume < 1;
         }
 
-        private void IncreaseVolume(double increment)
+        public void IncreaseVolume(double increment)
         {
             this.Volume = Math.Min(this.mediaElement.Volume + increment, 1);
         }
 
-        private bool CanMute()
+        public bool CanMute()
         {
             return !this.IsMuted;
         }
 
-        private void Mute()
+        public void Mute()
         {
             this.IsMuted = true;
-        }
-
-        private void Bind(DependencyProperty sourceProperty, DependencyProperty targetProperty)
-        {
-            var binding = new Binding(sourceProperty.Name) { Mode = BindingMode.OneWay, Source = this };
-            BindingOperations.SetBinding(this.mediaElement, targetProperty, binding);
         }
 
         private static void OnPositionChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -194,6 +189,18 @@
                 e.CanExecute = canExecute();
                 e.Handled = true;
             };
+        }
+
+        private void ReRaiseEvent(object sender, RoutedEventArgs e)
+        {
+            this.RaiseEvent(e);
+            e.Handled = true;
+        }
+
+        private void Bind(DependencyProperty sourceProperty, DependencyProperty targetProperty)
+        {
+            var binding = new Binding(sourceProperty.Name) { Mode = BindingMode.OneWay, Source = this };
+            BindingOperations.SetBinding(this.mediaElement, targetProperty, binding);
         }
     }
 }

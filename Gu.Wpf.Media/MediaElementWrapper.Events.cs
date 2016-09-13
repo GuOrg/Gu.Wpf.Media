@@ -2,17 +2,14 @@
 {
     using System;
     using System.Windows;
+    using System.Windows.Controls;
 
     public partial class MediaElementWrapper
     {
         /// <summary>
         /// MediaFailedEvent is a routed event.
         /// </summary>
-        public static readonly RoutedEvent MediaFailedEvent = EventManager.RegisterRoutedEvent(
-            "MediaFailed",
-            RoutingStrategy.Bubble,
-            typeof(EventHandler<ExceptionRoutedEventArgs>),
-            typeof(MediaElementWrapper));
+        public static readonly RoutedEvent MediaFailedEvent = MediaElement.MediaFailedEvent.AddOwner(typeof(MediaElementWrapper));
 
         /// <summary>
         /// Raised when there is a failure in media.
@@ -33,11 +30,7 @@
         /// <summary>
         /// MediaOpened is a routed event.
         /// </summary>
-        public static readonly RoutedEvent MediaOpenedEvent = EventManager.RegisterRoutedEvent(
-            "MediaOpened",
-            RoutingStrategy.Bubble,
-            typeof(RoutedEventHandler),
-            typeof(MediaElementWrapper));
+        public static readonly RoutedEvent MediaOpenedEvent = MediaElement.MediaOpenedEvent.AddOwner(typeof(MediaElementWrapper));
 
         /// <summary>
         /// Raised when the media is opened
@@ -57,11 +50,7 @@
         /// <summary>
         /// BufferingStarted is a routed event.
         /// </summary>
-        public static readonly RoutedEvent BufferingStartedEvent = EventManager.RegisterRoutedEvent(
-            "BufferingStarted",
-            RoutingStrategy.Bubble,
-            typeof(RoutedEventHandler),
-            typeof(MediaElementWrapper));
+        public static readonly RoutedEvent BufferingStartedEvent = MediaElement.BufferingStartedEvent.AddOwner(typeof(MediaElementWrapper));
 
         /// <summary>
         /// Raised when buffering starts on the corresponding media.
@@ -81,11 +70,7 @@
         /// <summary>
         /// BufferingEnded is a routed event.
         /// </summary>
-        public static readonly RoutedEvent BufferingEndedEvent = EventManager.RegisterRoutedEvent(
-            "BufferingEnded",
-            RoutingStrategy.Bubble,
-            typeof(RoutedEventHandler),
-            typeof(MediaElementWrapper));
+        public static readonly RoutedEvent BufferingEndedEvent = MediaElement.BufferingEndedEvent.AddOwner(typeof(MediaElementWrapper));
 
         /// <summary>
         /// Raised when buffering ends on the corresponding media.
@@ -105,11 +90,7 @@
         /// <summary>
         /// ScriptCommand is a routed event.
         /// </summary>
-        public static readonly RoutedEvent ScriptCommandEvent = EventManager.RegisterRoutedEvent(
-            "ScriptCommand",
-            RoutingStrategy.Bubble,
-            typeof(EventHandler<MediaScriptCommandRoutedEventArgs>),
-            typeof(MediaElementWrapper));
+        public static readonly RoutedEvent ScriptCommandEvent = MediaElement.ScriptCommandEvent.AddOwner(typeof(MediaElementWrapper));
 
         /// <summary>
         /// Raised when a script command in the media is encountered during playback.
@@ -129,11 +110,7 @@
         /// <summary>
         /// MediaEnded is a routed event
         /// </summary>
-        public static readonly RoutedEvent MediaEndedEvent = EventManager.RegisterRoutedEvent(
-            "MediaEnded",
-            RoutingStrategy.Bubble,
-            typeof(RoutedEventHandler),
-            typeof(MediaElementWrapper));
+        public static readonly RoutedEvent MediaEndedEvent = MediaElement.MediaEndedEvent.AddOwner(typeof(MediaElementWrapper));
 
         /// <summary>
         /// Raised when the corresponding media ends.

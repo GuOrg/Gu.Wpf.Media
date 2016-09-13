@@ -1,6 +1,7 @@
 ﻿type project
 
-// releasenotes
+releasenotes
+ FEATURE: MediaElementWrapper.Skip()
 
 tags wpf xaml media mediaelement
 projectUrl https://github.com/JohanLarsson/Gu.Wpf.Media

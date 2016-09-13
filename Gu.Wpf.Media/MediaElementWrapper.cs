@@ -220,6 +220,23 @@
             this.IsMuted = true;
         }
 
+        /// <summary>
+        /// Skips <paramref name="time"/> from <see cref="Position"/>
+        /// Guaranteed to be within 0 and <see cref="Length"/> after.
+        /// </summary>
+        /// <param name="time">The amount of time to skip, can be negative.</param>
+        public void Skip(TimeSpan time)
+        {
+            if (this.Position == null || this.Length == null)
+            {
+                return;
+            }
+
+            var newTime = (this.Position.Value + time).TotalSeconds;
+            newTime = Math.Max(0, Math.Min(this.Length.Value.TotalSeconds, newTime));
+            this.Position = TimeSpan.FromSeconds(newTime);
+        }
+
         private static void OnPositionChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var wrapper = (MediaElementWrapper)d;

@@ -3,6 +3,7 @@
     using System;
     using System.Windows;
     using System.Windows.Controls;
+    using System.Windows.Media;
 
     public partial class MediaElementWrapper
     {
@@ -45,6 +46,19 @@
         /// The identifier for the <see cref="MediaElementWrapper.ScrubbingEnabled" /> dependency property.
         /// </returns>
         public static readonly DependencyProperty ScrubbingEnabledProperty = MediaElement.ScrubbingEnabledProperty.AddOwner(typeof(MediaElementWrapper));
+
+        /// <summary>
+        /// DependencyProperty for Stretch property.
+        /// </summary>
+        /// <seealso cref="MediaElement.Stretch" />
+        /// This property is cached and grouped (AspectRatioGroup)
+        public static readonly DependencyProperty StretchProperty = Viewbox.StretchProperty.AddOwner(typeof(MediaElementWrapper));
+
+        /// <summary>
+        /// DependencyProperty for StretchDirection property.
+        /// </summary>
+        /// <seealso cref="Viewbox.Stretch" />
+        public static readonly DependencyProperty StretchDirectionProperty = Viewbox.StretchDirectionProperty.AddOwner(typeof(MediaElementWrapper));
 
         /// <summary>
         /// Gets or sets a media source on the <see cref="MediaElementWrapper" />.  
@@ -104,6 +118,30 @@
         {
             get { return (bool)this.GetValue(ScrubbingEnabledProperty); }
             set { this.SetValue(ScrubbingEnabledProperty, value); }
+        }
+
+        /// <summary>
+        /// Gets/Sets the Stretch on this MediaElement.
+        /// The Stretch property determines how large the MediaElement will be drawn.
+        /// </summary>
+        /// <seealso cref="MediaElement.StretchProperty" />
+        public Stretch Stretch
+        {
+            get { return (Stretch)GetValue(StretchProperty); }
+            set { SetValue(StretchProperty, value); }
+        }
+
+        /// <summary>
+        /// Gets/Sets the stretch direction of the Viewbox, which determines the restrictions on
+        /// scaling that are applied to the content inside the Viewbox.  For instance, this property
+        /// can be used to prevent the content from being smaller than its native size or larger than
+        /// its native size.
+        /// </summary>
+        /// <seealso cref="Viewbox.StretchDirectionProperty" />
+        public StretchDirection StretchDirection
+        {
+            get { return (StretchDirection)GetValue(StretchDirectionProperty); }
+            set { SetValue(StretchDirectionProperty, value); }
         }
     }
 }

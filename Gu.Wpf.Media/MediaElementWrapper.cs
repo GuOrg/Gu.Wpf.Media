@@ -39,6 +39,8 @@
             this.Bind(BalanceProperty, MediaElement.BalanceProperty);
             this.Bind(IsMutedProperty, MediaElement.IsMutedProperty);
             this.Bind(ScrubbingEnabledProperty, MediaElement.ScrubbingEnabledProperty);
+            this.Bind(StretchProperty, MediaElement.StretchProperty);
+            this.Bind(StretchDirectionProperty, MediaElement.StretchDirectionProperty);
             this.CommandBindings.Add(new CommandBinding(MediaCommands.Play, HandleExecute(this.Play), HandleCanExecute(this.CanPlay)));
             this.CommandBindings.Add(new CommandBinding(MediaCommands.Pause, HandleExecute(this.Pause), HandleCanExecute(this.CanPause)));
             this.CommandBindings.Add(new CommandBinding(MediaCommands.Stop, HandleExecute(this.Stop), HandleCanExecute(this.CanStop)));

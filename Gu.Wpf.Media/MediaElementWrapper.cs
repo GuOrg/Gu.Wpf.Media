@@ -19,7 +19,6 @@
                 LoadedBehavior = MediaState.Manual,
                 UnloadedBehavior = MediaState.Manual,
                 Source = this.Source,
-                ScrubbingEnabled = true
             };
             this.mediaElement.MediaOpened += (o, e) =>
             {
@@ -30,6 +29,9 @@
 
             this.Bind(SourceProperty, MediaElement.SourceProperty);
             this.Bind(VolumeProperty, MediaElement.VolumeProperty);
+            this.Bind(BalanceProperty, MediaElement.BalanceProperty);
+            this.Bind(IsMutedProperty, MediaElement.IsMutedProperty);
+            this.Bind(ScrubbingEnabledProperty, MediaElement.ScrubbingEnabledProperty);
             this.CommandBindings.Add(new CommandBinding(MediaCommands.Play, HandleExecute(this.Play), HandleCanExecute(this.CanPlay)));
             this.CommandBindings.Add(new CommandBinding(MediaCommands.Pause, HandleExecute(this.Pause), HandleCanExecute(this.CanPause)));
             this.CommandBindings.Add(new CommandBinding(MediaCommands.Stop, HandleExecute(this.Stop), HandleCanExecute(this.CanStop)));
@@ -37,6 +39,7 @@
             this.CommandBindings.Add(new CommandBinding(MediaCommands.Rewind, HandleExecute(this.Rewind), HandleCanExecute(this.CanRewind)));
             this.CommandBindings.Add(new CommandBinding(MediaCommands.IncreaseVolume, HandleExecute(() => this.IncreaseVolume(this.VolumeIncrement)), HandleCanExecute(this.CanIncreaseVolume)));
             this.CommandBindings.Add(new CommandBinding(MediaCommands.DecreaseVolume, HandleExecute(() => this.DecreaseVolume(this.VolumeIncrement)), HandleCanExecute(this.CanDecreaseVolume)));
+            this.CommandBindings.Add(new CommandBinding(MediaCommands.MuteVolume, HandleExecute(this.Mute), HandleCanExecute(this.CanMute)));
             this.updatePositionTimer.Tick += (o, e) => this.Position = this.mediaElement?.Position;
         }
 
@@ -111,6 +114,16 @@
         private void IncreaseVolume(double increment)
         {
             this.Volume = Math.Min(this.mediaElement.Volume + increment, 1);
+        }
+
+        private bool CanMute()
+        {
+            return !this.IsMuted;
+        }
+
+        private void Mute()
+        {
+            this.IsMuted = true;
         }
 
         private void Bind(DependencyProperty sourceProperty, DependencyProperty targetProperty)

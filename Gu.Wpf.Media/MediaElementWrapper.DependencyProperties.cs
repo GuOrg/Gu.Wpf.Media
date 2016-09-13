@@ -6,8 +6,6 @@
 
     public partial class MediaElementWrapper
     {
-        public static readonly DependencyProperty SourceProperty = MediaElement.SourceProperty.AddOwner(typeof(MediaElementWrapper));
-
         public static readonly DependencyProperty StateProperty = DependencyProperty.Register(
             nameof(State),
             typeof(MediaState),
@@ -27,8 +25,6 @@
             new PropertyMetadata(default(TimeSpan?)));
         public static readonly DependencyProperty LengthProperty = LengthPropertyKey.DependencyProperty;
 
-        public static readonly DependencyProperty VolumeProperty = MediaElement.VolumeProperty.AddOwner(typeof(MediaElementWrapper));
-
         public static readonly DependencyProperty VolumeIncrementProperty = DependencyProperty.Register(
             nameof(VolumeIncrement),
             typeof(double),
@@ -47,15 +43,6 @@
             typeof(string),
             typeof(MediaElementWrapper),
             new PropertyMetadata("*.mp3; *.wma; *.aac; *.adt; *.adts; *.m4a; *.wav; *.aif; *.aifc; *.aiff; *.cda"));
-
-        /// <summary>
-        /// See <see cref="MediaElement.Source"/>
-        /// </summary>
-        public Uri Source
-        {
-            get { return (Uri)this.GetValue(SourceProperty); }
-            set { this.SetValue(SourceProperty, value); }
-        }
 
         public MediaState State
         {
@@ -79,15 +66,6 @@
         {
             get { return (TimeSpan?)this.GetValue(LengthProperty); }
             protected set { this.SetValue(LengthPropertyKey, value); }
-        }
-
-        /// <summary>
-        /// See <see cref="MediaElement.Volume"/>
-        /// </summary>
-        public double Volume
-        {
-            get { return (double)this.GetValue(VolumeProperty); }
-            set { this.SetValue(VolumeProperty, value); }
         }
 
         /// <summary>

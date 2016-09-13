@@ -35,7 +35,9 @@
             </Button>
         </ToolBar>
 
-        <media:MediaElementWrapper x:Name="MediaElement" Grid.Row="1" />
+        <media:MediaElementWrapper x:Name="MediaElement"
+                                   Grid.Row="1"
+                                   ScrubbingEnabled="True" />
 
         <StatusBar Grid.Row="2">
             <StatusBar.ItemsPanel>

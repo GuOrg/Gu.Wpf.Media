@@ -1,7 +1,7 @@
 ﻿type project
 
 releasenotes
-  BUGFIX: start and stop updateProgressTimer correctly.
+  USABILITY: Expose file filters via FileFormats.
 
 tags wpf xaml media mediaelement
 projectUrl https://github.com/JohanLarsson/Gu.Wpf.Media

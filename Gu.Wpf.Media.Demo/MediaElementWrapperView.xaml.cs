@@ -1,4 +1,4 @@
-﻿namespace VideoBox
+﻿namespace Gu.Wpf.Media.Demo
 {
     using System;
     using System.Windows.Controls;

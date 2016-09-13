@@ -1,4 +1,4 @@
-﻿namespace VideoBox
+﻿namespace Gu.Wpf.Media.Demo
 {
     using System;
     using System.Windows;
@@ -15,7 +15,7 @@
 
         public VideoView()
         {
-            InitializeComponent();
+            this.InitializeComponent();
             this.MediaElement.MediaOpened += this.OnMediaOpened;
 
             var timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(0.1) };

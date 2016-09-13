@@ -1,0 +1,102 @@
+﻿<Window x:Class="VideoBox.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:local="clr-namespace:VideoBox"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        Title="MainWindow"
+        Width="300"
+        Height="300"
+        MinWidth="300"
+        SizeToContent="WidthAndHeight"
+        mc:Ignorable="d">
+    <Window.CommandBindings>
+        <CommandBinding CanExecute="Open_CanExecute"
+                        Command="ApplicationCommands.Open"
+                        Executed="Open_Executed" />
+        <CommandBinding CanExecute="Play_CanExecute"
+                        Command="MediaCommands.Play"
+                        Executed="Play_Executed" />
+        <CommandBinding CanExecute="Pause_CanExecute"
+                        Command="MediaCommands.Pause"
+                        Executed="Pause_Executed" />
+        <CommandBinding CanExecute="Stop_CanExecute"
+                        Command="MediaCommands.Stop"
+                        Executed="Stop_Executed" />
+        <CommandBinding CanExecute="Next_CanExecute"
+                        Command="MediaCommands.NextTrack"
+                        Executed="Next_Executed" />
+    </Window.CommandBindings>
+    <Grid MouseWheel="OnMouseWheel">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <ToolBar>
+            <Button Command="ApplicationCommands.Open">
+                Open
+                <!--<Image Source="/WpfTutorialSamples;component/Images/folder.png" />-->
+            </Button>
+            <Separator />
+            <!--<Button Command="{Binding ElementName=MediaElement, Path=(local:MediaCommands.PlayCommand)}">
+                Play
+            -->
+            <!--<Image Source="/WpfTutorialSamples;component/Images/control_play_blue.png" />-->
+            <!--
+            </Button>-->
+            <Button Command="MediaCommands.Play">
+                Play
+                <!--<Image Source="/WpfTutorialSamples;component/Images/control_play_blue.png" />-->
+            </Button>
+            <Button Command="MediaCommands.Pause">
+                Pause
+                <!--<Image Source="/WpfTutorialSamples;component/Images/control_pause_blue.png" />-->
+            </Button>
+            <Button Command="MediaCommands.NextTrack">
+                Next
+                <!--<Image Source="/WpfTutorialSamples;component/Images/control_pause_blue.png" />-->
+            </Button>
+            <Button Command="MediaCommands.Stop">
+                Stop
+                <!--<Image Source="/WpfTutorialSamples;component/Images/control_stop_blue.png" />-->
+            </Button>
+        </ToolBar>
+
+        <MediaElement Name="MediaElement"
+                      Grid.Row="1"
+                      LoadedBehavior="Manual"
+                      ScrubbingEnabled="True"
+                      Stretch="None" />
+
+        <StatusBar Grid.Row="2">
+            <StatusBar.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                    </Grid>
+                </ItemsPanelTemplate>
+            </StatusBar.ItemsPanel>
+            <StatusBarItem>
+                <TextBlock Text="{Binding ElementName=ProgressSlider, Path=Value, Converter={x:Static local:SecondsToTimeSpanConverter.Default}}" />
+            </StatusBarItem>
+            <StatusBarItem Grid.Column="1" HorizontalContentAlignment="Stretch">
+                <Slider x:Name="ProgressSlider"
+                        Thumb.DragCompleted="OnDragCompleted"
+                        Thumb.DragStarted="OnDragStarted"
+                        ValueChanged="OnValueChanged" />
+            </StatusBarItem>
+            <StatusBarItem Grid.Column="2">
+                <ProgressBar Width="50"
+                             Height="12"
+                             Maximum="1"
+                             Value="{Binding ElementName=MediaElement,
+                                             Path=Volume}" />
+            </StatusBarItem>
+        </StatusBar>
+    </Grid>
+</Window>

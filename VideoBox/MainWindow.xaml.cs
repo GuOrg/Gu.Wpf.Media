@@ -10,7 +10,6 @@
     public partial class MainWindow : Window
     {
         private bool isPlaying;
-        private bool isSeeking;
 
         public MainWindow()
         {
@@ -18,16 +17,16 @@
             this.MediaElement.MediaOpened += this.OnMediaOpened;
 
             var timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(0.1) };
-            timer.Tick += (_, __) => { this.ProgressSlider.Value =  this.MediaElement?.Position.TotalSeconds ?? 0; };
+            timer.Tick += (_, __) => { this.ProgressSlider.Value = this.MediaElement?.Position.TotalSeconds ?? 0; };
             timer.Start();
         }
-  
-        private void Open_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+
+        private void OpenCanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
             e.CanExecute = true;
         }
 
-        private void Open_Executed(object sender, ExecutedRoutedEventArgs e)
+        private void OpenExecuted(object sender, ExecutedRoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog
             {
@@ -41,47 +40,47 @@
             }
         }
 
-        private void Play_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        private void PlayCanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
             e.CanExecute = !this.isPlaying && this.MediaElement?.NaturalDuration.HasTimeSpan == true;
         }
 
-        private void Play_Executed(object sender, ExecutedRoutedEventArgs e)
+        private void PlayExecuted(object sender, ExecutedRoutedEventArgs e)
         {
             this.MediaElement.Play();
             this.isPlaying = true;
         }
 
-        private void Pause_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        private void PauseCanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
             e.CanExecute = this.isPlaying;
         }
 
-        private void Pause_Executed(object sender, ExecutedRoutedEventArgs e)
+        private void PauseExecuted(object sender, ExecutedRoutedEventArgs e)
         {
             this.MediaElement.Pause();
             this.isPlaying = false;
         }
 
-        private void Stop_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        private void StopCanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
             e.CanExecute = this.isPlaying;
         }
 
-        private void Stop_Executed(object sender, ExecutedRoutedEventArgs e)
+        private void StopExecuted(object sender, ExecutedRoutedEventArgs e)
         {
             this.MediaElement.Stop();
             this.isPlaying = false;
         }
 
 
-        private void Next_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        private void ForwardCanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
             e.CanExecute = this.MediaElement?.NaturalDuration.HasTimeSpan == true &&
                            this.MediaElement.Position < this.MediaElement.NaturalDuration.TimeSpan;
         }
 
-        private async void Next_Executed(object sender, ExecutedRoutedEventArgs e)
+        private async void ForwardExecuted(object sender, ExecutedRoutedEventArgs e)
         {
             var position = this.MediaElement.Position;
             this.MediaElement.Play();
@@ -100,15 +99,13 @@
             this.ProgressSlider.Maximum = this.MediaElement.NaturalDuration.TimeSpan.TotalSeconds;
         }
 
-        private void OnDragStarted(object sender, DragStartedEventArgs e)
+        private void OnProgressSliderDragStarted(object sender, DragStartedEventArgs e)
         {
-            this.isSeeking = true;
             this.MediaElement.Pause();
         }
 
-        private void OnDragCompleted(object sender, DragCompletedEventArgs e)
+        private void OnProgressSliderDragCompleted(object sender, DragCompletedEventArgs e)
         {
-            this.isSeeking = false;
             this.MediaElement.Position = TimeSpan.FromSeconds(this.ProgressSlider.Value);
             if (this.isPlaying)
             {
@@ -116,7 +113,7 @@
             }
         }
 
-        private void OnValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        private void OnProgressSliderValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             this.MediaElement.Position = TimeSpan.FromSeconds(this.ProgressSlider.Value);
         }

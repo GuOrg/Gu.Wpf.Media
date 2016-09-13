@@ -11,21 +11,21 @@
         SizeToContent="WidthAndHeight"
         mc:Ignorable="d">
     <Window.CommandBindings>
-        <CommandBinding CanExecute="Open_CanExecute"
+        <CommandBinding CanExecute="OpenCanExecute"
                         Command="ApplicationCommands.Open"
-                        Executed="Open_Executed" />
-        <CommandBinding CanExecute="Play_CanExecute"
+                        Executed="OpenExecuted" />
+        <CommandBinding CanExecute="PlayCanExecute"
                         Command="MediaCommands.Play"
-                        Executed="Play_Executed" />
-        <CommandBinding CanExecute="Pause_CanExecute"
+                        Executed="PlayExecuted" />
+        <CommandBinding CanExecute="PauseCanExecute"
                         Command="MediaCommands.Pause"
-                        Executed="Pause_Executed" />
-        <CommandBinding CanExecute="Stop_CanExecute"
+                        Executed="PauseExecuted" />
+        <CommandBinding CanExecute="StopCanExecute"
                         Command="MediaCommands.Stop"
-                        Executed="Stop_Executed" />
-        <CommandBinding CanExecute="Next_CanExecute"
-                        Command="MediaCommands.NextTrack"
-                        Executed="Next_Executed" />
+                        Executed="StopExecuted" />
+        <CommandBinding CanExecute="ForwardCanExecute"
+                        Command="MediaCommands.FastForward"
+                        Executed="ForwardExecuted" />
     </Window.CommandBindings>
     <Grid MouseWheel="OnMouseWheel">
         <Grid.RowDefinitions>
@@ -86,9 +86,9 @@
             </StatusBarItem>
             <StatusBarItem Grid.Column="1" HorizontalContentAlignment="Stretch">
                 <Slider x:Name="ProgressSlider"
-                        Thumb.DragCompleted="OnDragCompleted"
-                        Thumb.DragStarted="OnDragStarted"
-                        ValueChanged="OnValueChanged" />
+                        Thumb.DragCompleted="OnProgressSliderDragCompleted"
+                        Thumb.DragStarted="OnProgressSliderDragStarted"
+                        ValueChanged="OnProgressSliderValueChanged" />
             </StatusBarItem>
             <StatusBarItem Grid.Column="2">
                 <ProgressBar Width="50"

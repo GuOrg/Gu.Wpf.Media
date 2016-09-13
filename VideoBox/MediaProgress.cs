@@ -1,6 +1,0 @@
-﻿namespace VideoBox
-{
-    class MediaProgress
-    {
-    }
-}

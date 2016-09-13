@@ -49,7 +49,6 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="DurationToSecondsConverter.cs" />
-    <Compile Include="MediaCommands.cs" />
     <Compile Include="SecondsToTimeSpanConverter.cs" />
     <Compile Include="TimeSpanToSecondsConverter.cs" />
     <Page Include="MainWindow.xaml">

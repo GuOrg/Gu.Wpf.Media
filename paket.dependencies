@@ -1,0 +1,5 @@
+source http://www.nuget.org/api/v2
+framework: >= net4
+
+nuget JetBrains.Annotations
+nuget StyleCop.Analyzers

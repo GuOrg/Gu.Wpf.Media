@@ -31,7 +31,6 @@
             </Button>
             <Button Command="MediaCommands.Stop" CommandTarget="{Binding ElementName=MediaElement}">
                 Stop
-                <!--<Image Source="/WpfTutorialSamples;component/Images/control_stop_blue.png" />-->
             </Button>
         </ToolBar>
 

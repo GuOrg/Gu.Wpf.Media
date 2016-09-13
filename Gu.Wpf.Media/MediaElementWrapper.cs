@@ -27,7 +27,7 @@
                 {
                     this.IsBuffering = true;
                     this.updateProgressTimer.Start();
-                    this.ReRaiseEvent(o, e); 
+                    this.ReRaiseEvent(o, e);
                 };
             this.mediaElement.BufferingEnded += (o, e) =>
                 {
@@ -68,6 +68,7 @@
                     this.DownloadProgress = this.mediaElement.DownloadProgress;
                     this.BufferingProgress = this.mediaElement.BufferingProgress;
                 };
+            Binding.AddTargetUpdatedHandler(this.mediaElement, this.OnTargetUpdated);
         }
 
         public override void BeginInit()
@@ -188,6 +189,8 @@
                     wrapper.mediaElement.Stop();
                     wrapper.updatePositionTimer.Stop();
                     break;
+                case MediaState.Manual:
+                    break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
@@ -219,8 +222,19 @@
 
         private void Bind(DependencyProperty sourceProperty, DependencyProperty targetProperty)
         {
-            var binding = new Binding(sourceProperty.Name) { Mode = BindingMode.OneWay, Source = this };
+            var binding = new Binding(sourceProperty.Name) { Mode = BindingMode.OneWay, Source = this, NotifyOnTargetUpdated = true };
             BindingOperations.SetBinding(this.mediaElement, targetProperty, binding);
+        }
+
+        private void OnTargetUpdated(object sender, DataTransferEventArgs e)
+        {
+            if (e.Property == MediaElement.SourceProperty)
+            {
+                if (this.mediaElement.Source != null)
+                {
+                    this.mediaElement.Play();
+                }
+            }
         }
     }
 }

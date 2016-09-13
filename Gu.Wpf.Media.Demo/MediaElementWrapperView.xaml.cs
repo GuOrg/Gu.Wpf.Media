@@ -27,7 +27,6 @@
             if (openFileDialog.ShowDialog() == true)
             {
                 this.MediaElement.Source = new Uri(openFileDialog.FileName);
-                this.MediaElement.Play();
             }
         }
 

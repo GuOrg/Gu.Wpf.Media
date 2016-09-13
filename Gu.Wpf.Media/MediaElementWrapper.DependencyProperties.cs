@@ -96,7 +96,7 @@
             nameof(VolumeIncrement),
             typeof(double),
             typeof(MediaElementWrapper),
-            new PropertyMetadata(default(double)));
+            new PropertyMetadata(0.05));
 
         public static readonly DependencyProperty VideoFormatsProperty = DependencyProperty.Register(
             nameof(VideoFormats),

@@ -38,7 +38,6 @@
 
         private void OnProgressSliderDragCompleted(object sender, DragCompletedEventArgs e)
         {
-            this.MediaElement.Position = TimeSpan.FromSeconds(this.ProgressSlider.Value);
             if (this.mediaState == MediaState.Play)
             {
                 this.MediaElement.Play();

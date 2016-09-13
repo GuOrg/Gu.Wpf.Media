@@ -48,15 +48,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="DurationToSecondsConverter.cs" />
     <Compile Include="MediaElementWrapperView.xaml.cs">
       <DependentUpon>MediaElementWrapperView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SecondsToTimeSpanConverter.cs" />
-    <Compile Include="TimeSpanToSecondsConverter.cs" />
-    <Compile Include="VideoView.xaml.cs">
-      <DependentUpon>VideoView.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="Converters\SecondsToTimeSpanConverter.cs" />
+    <Compile Include="Converters\TimeSpanToSecondsConverter.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -70,10 +66,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="MediaElementWrapperView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="VideoView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

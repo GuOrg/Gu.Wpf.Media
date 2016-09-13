@@ -177,89 +177,97 @@ Adds command bindings for:
   - MediaCommands.DecreaseVolume
   - MediaCommands.MuteVolume
 
-
-
-
 # 4. Sample
 
 ```xaml
-<UserControl.CommandBindings>
-    <CommandBinding Command="ApplicationCommands.Open" Executed="OpenExecuted" />
-</UserControl.CommandBindings>
-<Grid>
-    <Grid.RowDefinitions>
-        <RowDefinition Height="Auto" />
-        <RowDefinition Height="*" />
-        <RowDefinition Height="Auto" />
-    </Grid.RowDefinitions>
-    <ToolBar>
-        <Button Command="ApplicationCommands.Open">
-            Open
-        </Button>
-        <Separator />
+<Window x:Class="Gu.Wpf.Media.Demo.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:demo="clr-namespace:Gu.Wpf.Media.Demo"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:media="https://github.com/JohanLarsson/Gu.Wpf.Media"
+        Title="MainWindow"
+        Width="300"
+        Height="300"
+        MinWidth="300"
+        SizeToContent="WidthAndHeight"
+        mc:Ignorable="d">
+    <Window.InputBindings>
+        <KeyBinding Key="Space"
+                    Command="TogglePlayPause"
+                    CommandTarget="{Binding ElementName=MediaElement}" />
+    </Window.InputBindings>
+    <Window.CommandBindings>
+        <CommandBinding Command="ApplicationCommands.Open" Executed="OpenExecuted" />
+    </Window.CommandBindings>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <ToolBar>
+            <Button Command="ApplicationCommands.Open" Content="Open"/>
+            <Separator />
+            <Button Command="MediaCommands.Play" CommandTarget="{Binding ElementName=MediaElement}" Content="Play"/>
+            <Button Command="MediaCommands.Pause" CommandTarget="{Binding ElementName=MediaElement}" Content="Pause"/>
+            <Button Command="MediaCommands.Stop" CommandTarget="{Binding ElementName=MediaElement}" Content="Stop"/>
+        </ToolBar>
 
-        <Button Command="MediaCommands.Play" CommandTarget="{Binding ElementName=MediaElement}">
-            Play
-        </Button>
-        <Button Command="MediaCommands.Pause" CommandTarget="{Binding ElementName=MediaElement}">
-            Pause
-        </Button>
-        <Button Command="MediaCommands.Stop" CommandTarget="{Binding ElementName=MediaElement}">
-            Stop
-        </Button>
-    </ToolBar>
+        <media:MediaElementWrapper x:Name="MediaElement"
+                                   Grid.Row="1"
+                                   MediaOpened="OnMediaOpened"
+                                   ScrubbingEnabled="True" />
 
-    <media:MediaElementWrapper x:Name="MediaElement"
-                                Grid.Row="1"
-                                ScrubbingEnabled="True" />
+        <StatusBar Grid.Row="2">
+            <StatusBar.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                    </Grid>
+                </ItemsPanelTemplate>
+            </StatusBar.ItemsPanel>
 
-    <StatusBar Grid.Row="2">
-        <StatusBar.ItemsPanel>
-            <ItemsPanelTemplate>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="Auto" />
-                    </Grid.ColumnDefinitions>
-                </Grid>
-            </ItemsPanelTemplate>
-        </StatusBar.ItemsPanel>
+            <StatusBarItem Grid.Column="0" HorizontalContentAlignment="Stretch">
+                <Slider x:Name="ProgressSlider"
+                        Maximum="{Binding ElementName=MediaElement,
+                                          Path=Length,
+                                          Converter={x:Static demo:TimeSpanToSecondsConverter.Default}}"
+                        Minimum="0"
+                        Thumb.DragCompleted="OnProgressSliderDragCompleted"
+                        Thumb.DragStarted="OnProgressSliderDragStarted"
+                        Value="{Binding ElementName=MediaElement,
+                                        Path=Position,
+                                        Converter={x:Static demo:TimeSpanToSecondsConverter.Default}}" />
+            </StatusBarItem>
 
-        <StatusBarItem Grid.Column="0" HorizontalContentAlignment="Stretch">
-            <Slider x:Name="ProgressSlider"
-                    Maximum="{Binding ElementName=MediaElement,
-                                        Path=Length,
-                                        Converter={x:Static local:TimeSpanToSecondsConverter.Default}}"
-                    Minimum="0"
-                    Thumb.DragCompleted="OnProgressSliderDragCompleted"
-                    Thumb.DragStarted="OnProgressSliderDragStarted"
-                    Value="{Binding ElementName=MediaElement,
-                                    Path=Position,
-                                    Converter={x:Static local:TimeSpanToSecondsConverter.Default}}" />
-        </StatusBarItem>
-
-        <StatusBarItem Grid.Column="1">
-            <TextBlock>
-                <TextBlock.Text>
-                    <MultiBinding StringFormat="{}{0}/{1}">
-                        <Binding ElementName="MediaElement" Path="Position" />
-                        <Binding ElementName="MediaElement" Path="Length" />
-                    </MultiBinding>
-                </TextBlock.Text>
-            </TextBlock>
-        </StatusBarItem>
-    </StatusBar>
-</Grid>
+            <StatusBarItem Grid.Column="1">
+                <TextBlock x:Name="ProgressTextBlock">
+                    <TextBlock.Text>
+                        <MultiBinding StringFormat="{}{0}/{1}">
+                            <Binding ElementName="MediaElement" Path="Position" />
+                            <Binding ElementName="MediaElement" Path="Length" />
+                        </MultiBinding>
+                    </TextBlock.Text>
+                </TextBlock>
+            </StatusBarItem>
+        </StatusBar>
+    </Grid>
+</Window>
 ```
 
 With code behind:
 
 ```c#
-public partial class MediaElementWrapperView : UserControl
+public partial class MainWindow : Window
 {
     private MediaState mediaState;
 
-    public MediaElementWrapperView()
+    public MainWindow()
     {
         this.InitializeComponent();
     }
@@ -285,7 +293,6 @@ public partial class MediaElementWrapperView : UserControl
 
     private void OnProgressSliderDragCompleted(object sender, DragCompletedEventArgs e)
     {
-        this.MediaElement.Position = TimeSpan.FromSeconds(this.ProgressSlider.Value);
         if (this.mediaState == MediaState.Play)
         {
             this.MediaElement.Play();

@@ -33,7 +33,7 @@
             this.mediaElement.BufferingEnded += (o, e) =>
                 {
                     this.IsBuffering = true;
-                    this.updateProgressTimer.Start();
+                    this.updateProgressTimer.Stop();
                     this.ReRaiseEvent(o, e);
                 };
             this.mediaElement.ScriptCommand += this.ReRaiseEvent;

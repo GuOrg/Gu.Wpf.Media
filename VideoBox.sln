@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoBox", "VideoBox\VideoBox.csproj", "{A465E2F7-3665-4B08-8FCF-05700F46C2F5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gu.Wpf.Media.Demo", "VideoBox\Gu.Wpf.Media.Demo.csproj", "{A465E2F7-3665-4B08-8FCF-05700F46C2F5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gu.Wpf.Media", "Gu.Wpf.MediaElementWrapper\Gu.Wpf.Media.csproj", "{BD54B3C3-A3C3-41BD-B188-94B4A0C20303}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{A465E2F7-3665-4B08-8FCF-05700F46C2F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A465E2F7-3665-4B08-8FCF-05700F46C2F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A465E2F7-3665-4B08-8FCF-05700F46C2F5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD54B3C3-A3C3-41BD-B188-94B4A0C20303}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD54B3C3-A3C3-41BD-B188-94B4A0C20303}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD54B3C3-A3C3-41BD-B188-94B4A0C20303}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD54B3C3-A3C3-41BD-B188-94B4A0C20303}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

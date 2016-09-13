@@ -1,8 +1,7 @@
 ﻿type project
 
 releasenotes
-  BUGFIX: Set position to zero on load.
-  FEATURE: Commands.ToggleFullScreen
+  BUGFIX: start and stop updateProgressTimer correctly.
 
 tags wpf xaml media mediaelement
 projectUrl https://github.com/JohanLarsson/Gu.Wpf.Media

@@ -20,50 +20,41 @@
         <CommandBinding Command="ApplicationCommands.Open" Executed="OpenExecuted" />
     </Window.CommandBindings>
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
-        <ToolBar>
-            <Button Command="ApplicationCommands.Open" Content="Open"/>
-            <Separator />
-            <Button Command="MediaCommands.Play" CommandTarget="{Binding ElementName=MediaElement}" Content="Play"/>
-            <Button Command="MediaCommands.Pause" CommandTarget="{Binding ElementName=MediaElement}" Content="Pause"/>
-            <Button Command="MediaCommands.Stop" CommandTarget="{Binding ElementName=MediaElement}" Content="Stop"/>
-        </ToolBar>
-
         <media:MediaElementWrapper x:Name="MediaElement"
-                                   Grid.Row="1"
                                    MediaOpened="OnMediaOpened"
                                    ScrubbingEnabled="True" />
-
-        <StatusBar Grid.Row="2">
-            <StatusBar.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
-                    </Grid>
-                </ItemsPanelTemplate>
-            </StatusBar.ItemsPanel>
-
-            <StatusBarItem Grid.Column="0" HorizontalContentAlignment="Stretch">
-                <Slider x:Name="ProgressSlider"
-                        Maximum="{Binding ElementName=MediaElement,
-                                          Path=Length,
-                                          Converter={x:Static demo:TimeSpanToSecondsConverter.Default}}"
-                        Minimum="0"
-                        Thumb.DragCompleted="OnProgressSliderDragCompleted"
-                        Thumb.DragStarted="OnProgressSliderDragStarted"
-                        Value="{Binding ElementName=MediaElement,
-                                        Path=Position,
-                                        Converter={x:Static demo:TimeSpanToSecondsConverter.Default}}" />
-            </StatusBarItem>
-
-            <StatusBarItem Grid.Column="1">
+        <Grid VerticalAlignment="Bottom">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Slider x:Name="ProgressSlider"
+                    Grid.Row="0"
+                    Maximum="{Binding ElementName=MediaElement,
+                                      Path=Length,
+                                      Converter={x:Static demo:TimeSpanToSecondsConverter.Default}}"
+                    Minimum="0"
+                    Thumb.DragCompleted="OnProgressSliderDragCompleted"
+                    Thumb.DragStarted="OnProgressSliderDragStarted"
+                    Value="{Binding ElementName=MediaElement,
+                                    Path=Position,
+                                    Converter={x:Static demo:TimeSpanToSecondsConverter.Default}}" />
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Button Command="ApplicationCommands.Open" Content="Open" />
+                <Button Command="MediaCommands.Play"
+                        CommandTarget="{Binding ElementName=MediaElement}"
+                        Content="Play" />
+                <Button Command="MediaCommands.Pause"
+                        CommandTarget="{Binding ElementName=MediaElement}"
+                        Content="Pause" />
+                <Button Command="MediaCommands.Stop"
+                        CommandTarget="{Binding ElementName=MediaElement}"
+                        Content="Stop" />
                 <TextBlock x:Name="ProgressTextBlock">
                     <TextBlock.Text>
                         <MultiBinding StringFormat="{}{0}/{1}">
@@ -72,7 +63,8 @@
                         </MultiBinding>
                     </TextBlock.Text>
                 </TextBlock>
-            </StatusBarItem>
-        </StatusBar>
+                <Button Command="media:Commands.ToggleFullScreen" />
+            </Grid>
+        </Grid>
     </Grid>
 </Window>

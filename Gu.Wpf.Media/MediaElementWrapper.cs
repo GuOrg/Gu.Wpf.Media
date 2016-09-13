@@ -29,6 +29,14 @@
             typeof(MediaElementWrapper),
             new PropertyMetadata(default(TimeSpan?)));
 
+        public static readonly DependencyProperty VolumeProperty = MediaElement.VolumeProperty.AddOwner(typeof(MediaElementWrapper));
+
+        public static readonly DependencyProperty VolumeIncrementProperty = DependencyProperty.Register(
+            nameof(VolumeIncrement),
+            typeof(double),
+            typeof(MediaElementWrapper),
+            new PropertyMetadata(default(double)));
+
         public static readonly DependencyProperty VideoFormatsProperty = DependencyProperty.Register(
             nameof(VideoFormats),
             typeof(string),
@@ -42,12 +50,6 @@
             typeof(MediaElementWrapper),
             new PropertyMetadata("*.mp3; *.wma; *.aac; *.adt; *.adts; *.m4a; *.wav; *.aif; *.aifc; *.aiff; *.cda"));
 
-        public string AudioFormats
-        {
-            get { return (string)this.GetValue(AudioFormatsProperty); }
-            set { this.SetValue(AudioFormatsProperty, value); }
-        }
-
         public static readonly DependencyProperty LengthProperty = LengthPropertyKey.DependencyProperty;
 
         private readonly DispatcherTimer updatePositionTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(0.1) };
@@ -55,13 +57,35 @@
 
         public MediaElementWrapper()
         {
+            this.mediaElement = new MediaElement
+            {
+                LoadedBehavior = MediaState.Manual,
+                UnloadedBehavior = MediaState.Manual,
+                Source = this.Source,
+                ScrubbingEnabled = true
+            };
+            this.mediaElement.MediaOpened += (o, e) =>
+            {
+                this.Pause();
+                this.Length = this.mediaElement.NaturalDuration.TimeSpan;
+                CommandManager.InvalidateRequerySuggested();
+            };
+
+            this.Bind(SourceProperty, MediaElement.SourceProperty);
+            this.Bind(VolumeProperty, MediaElement.VolumeProperty);
             this.CommandBindings.Add(new CommandBinding(MediaCommands.Play, HandleExecute(this.Play), HandleCanExecute(this.CanPlay)));
             this.CommandBindings.Add(new CommandBinding(MediaCommands.Pause, HandleExecute(this.Pause), HandleCanExecute(this.CanPause)));
             this.CommandBindings.Add(new CommandBinding(MediaCommands.Stop, HandleExecute(this.Stop), HandleCanExecute(this.CanStop)));
             this.CommandBindings.Add(new CommandBinding(MediaCommands.TogglePlayPause, HandleExecute(this.TogglePlayPause), HandleCanExecute(() => this.CanPlay() || this.CanPause())));
+            this.CommandBindings.Add(new CommandBinding(MediaCommands.Rewind, HandleExecute(this.Rewind), HandleCanExecute(this.CanRewind)));
+            this.CommandBindings.Add(new CommandBinding(MediaCommands.IncreaseVolume, HandleExecute(() => this.IncreaseVolume(this.VolumeIncrement)), HandleCanExecute(this.CanIncreaseVolume)));
+            this.CommandBindings.Add(new CommandBinding(MediaCommands.DecreaseVolume, HandleExecute(() => this.DecreaseVolume(this.VolumeIncrement)), HandleCanExecute(this.CanDecreaseVolume)));
             this.updatePositionTimer.Tick += (o, e) => this.Position = this.mediaElement?.Position;
         }
 
+        /// <summary>
+        /// See <see cref="MediaElement.Source"/>
+        /// </summary>
         public Uri Source
         {
             get { return (Uri)this.GetValue(SourceProperty); }
@@ -74,16 +98,40 @@
             set { this.SetValue(StateProperty, value); }
         }
 
+        /// <summary>
+        /// The position in the current media.
+        /// </summary>
         public TimeSpan? Position
         {
             get { return (TimeSpan?)this.GetValue(PositionProperty); }
             set { this.SetValue(PositionProperty, value); }
         }
 
+        /// <summary>
+        /// The length of the current media
+        /// </summary>
         public TimeSpan? Length
         {
             get { return (TimeSpan?)this.GetValue(LengthProperty); }
             protected set { this.SetValue(LengthPropertyKey, value); }
+        }
+
+        /// <summary>
+        /// See <see cref="MediaElement.Volume"/>
+        /// </summary>
+        public double Volume
+        {
+            get { return (double)this.GetValue(VolumeProperty); }
+            set { this.SetValue(VolumeProperty, value); }
+        }
+
+        /// <summary>
+        /// The increment by which the IncreaseVolume
+        /// </summary>
+        public double VolumeIncrement
+        {
+            get { return (double)this.GetValue(VolumeIncrementProperty); }
+            set { this.SetValue(VolumeIncrementProperty, value); }
         }
 
         public string VideoFormats
@@ -92,31 +140,21 @@
             set { this.SetValue(VideoFormatsProperty, value); }
         }
 
+        public string AudioFormats
+        {
+            get { return (string)this.GetValue(AudioFormatsProperty); }
+            set { this.SetValue(AudioFormatsProperty, value); }
+        }
+
         public override void BeginInit()
         {
-            this.mediaElement = new MediaElement
-            {
-                LoadedBehavior = MediaState.Manual,
-                UnloadedBehavior = MediaState.Manual,
-                Source = this.Source,
-                ScrubbingEnabled = true
-            };
-            this.mediaElement.MediaOpened += (o, e) =>
-                {
-                    this.Pause();
-                    this.Length = this.mediaElement.NaturalDuration.TimeSpan;
-                    CommandManager.InvalidateRequerySuggested();
-                };
-
-            var sourceBinding = new Binding(SourceProperty.Name) { Mode = BindingMode.OneWay, Source = this };
-            BindingOperations.SetBinding(this.mediaElement, MediaElement.SourceProperty, sourceBinding);
             this.Child = this.mediaElement;
             base.BeginInit();
         }
 
         public bool CanPlay()
         {
-            return this.mediaElement?.Source != null && this.State != MediaState.Play;
+            return this.mediaElement.Source != null && this.State != MediaState.Play;
         }
 
         public void Play()
@@ -126,7 +164,7 @@
 
         public bool CanPause()
         {
-            return this.mediaElement?.Source != null && this.State == MediaState.Play;
+            return this.mediaElement.Source != null && this.State == MediaState.Play;
         }
 
         public void Pause()
@@ -136,24 +174,55 @@
 
         public void TogglePlayPause()
         {
-            if (this.State != MediaState.Play)
-            {
-                this.State = MediaState.Play;
-            }
-            else
-            {
-                this.State = MediaState.Pause;
-            }
+            this.State = this.State != MediaState.Play
+                             ? MediaState.Play
+                             : MediaState.Pause;
         }
 
         public bool CanStop()
         {
-            return this.mediaElement?.Source != null && this.State == MediaState.Play;
+            return this.mediaElement.Source != null && this.State == MediaState.Play;
         }
 
         public void Stop()
         {
             this.State = MediaState.Stop;
+        }
+
+        private bool CanRewind()
+        {
+            return this.mediaElement.Source != null && this.Position > TimeSpan.Zero;
+        }
+
+        private void Rewind()
+        {
+            this.Position = TimeSpan.Zero;
+        }
+
+        private bool CanDecreaseVolume()
+        {
+            return this.Volume > 0;
+        }
+
+        private void DecreaseVolume(double increment)
+        {
+            this.Volume = Math.Min(this.mediaElement.Volume - increment, 1);
+        }
+
+        private bool CanIncreaseVolume()
+        {
+            return this.Volume < 1;
+        }
+
+        private void IncreaseVolume(double increment)
+        {
+            this.Volume = Math.Min(this.mediaElement.Volume + increment, 1);
+        }
+
+        private void Bind(DependencyProperty sourceProperty, DependencyProperty targetProperty)
+        {
+            var binding = new Binding(sourceProperty.Name) { Mode = BindingMode.OneWay, Source = this };
+            BindingOperations.SetBinding(this.mediaElement, targetProperty, binding);
         }
 
         private static void OnPositionChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -168,7 +237,7 @@
         private static void OnStateChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var wrapper = (MediaElementWrapper)d;
-            if (wrapper.mediaElement == null)
+            if (wrapper.mediaElement.Source == null)
             {
                 return;
             }

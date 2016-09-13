@@ -6,6 +6,38 @@
 Wrapper for System.Windows.Controls.MediaElement.
 
 # Contents
+- [1. Properties](#1-properties)
+  - [1.1. State (`MediaState`)](#11-state--mediastate)
+  - [1.2. Position (`Timespan?`)](#12-position--timespan)
+  - [1.3. Length (`Timespan?`)](#13-length--timespan)
+  - [1.4. CanPauseMedia (`bool?`)](#14-canpausemedia--bool)
+  - [1.5. NaturalVideoHeight (`int?`)](#15-naturalvideoheight--int)
+  - [1.6. NaturalVideoWidth (`int?`)](#16-naturalvideowidth--int)
+  - [1.7. HasAudio (`bool?`)](#17-hasaudio--bool)
+  - [1.8. HasVideo (`bool?`)](#18-hasvideo--bool)
+  - [1.9. SpeedRatio (`double`)](#19-speedratio--double)
+  - [1.10. IsBuffering (`bool`)](#110-isbuffering--bool)
+  - [1.11. DownloadProgress (`double`)](#111-downloadprogress--double)
+  - [1.12. BufferingProgress (`double`)](#112-bufferingprogress--double)
+  - [1.13. VolumeIncrement (`double`)](#113-volumeincrement--double)
+  - [1.14. VideoFormats](#114-videoformats)
+  - [1.15. AudioFormats](#115-audioformats)
+  - [1.16. Source (`Uri`)](#116-source--uri)
+  - [1.17. Volume (`double`)](#117-volume--double)
+  - [1.18. Balance (`double`)](#118-balance--double)
+  - [1.19. IsMuted (`bool`)](#119-ismuted--bool)
+  - [1.20. ScrubbingEnabled (`bool`)](#120-scrubbingenabled--bool)
+  - [1.21. Stretch (`Stretch`)](#121-stretch--stretch)
+  - [1.22. StretchDirection (`StretchDirection`)](#122-stretchdirection--stretchdirection)
+- [2. Events](#2-events)
+  - [2.1. MediaFailed](#21-mediafailed)
+  - [2.2. MediaOpened](#22-mediaopened)
+  - [2.3. BufferingStarted](#23-bufferingstarted)
+  - [2.4. BufferingEnded](#24-bufferingended)
+  - [2.5. ScriptCommand](#25-scriptcommand)
+  - [2.6. MediaEnded](#26-mediaended)
+- [3. MediaCommands](#3-mediacommands)
+- [4. Sample](#4-sample)
 
 # 1. Properties
 The wrapper wraps the properties of System.Windows.Controls.MediaElement and adds a couple of new properties.

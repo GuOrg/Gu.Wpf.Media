@@ -1,14 +1,6 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:local="clr-namespace:Gu.Wpf.Media">
-    <StreamGeometry x:Key="{x:Static local:Geometries.PlayGeometryKey}">F1M0,0L70,50 0,100 0,0z</StreamGeometry>
-    <StreamGeometry x:Key="{x:Static local:Geometries.PauseGeometryKey}">F1M56,0L78,0 78,100 56,100 56,0z M0,0L22,0 22,100 0,100 0,0z</StreamGeometry>
-    <StreamGeometry x:Key="{x:Static local:Geometries.StopGeometryKey}">F1M0,0L100,0 100,100 0,100 0,0z</StreamGeometry>
-    <StreamGeometry x:Key="{x:Static local:Geometries.RewindGeometryKey}">F1M0,2L13,2 13,52 0,52 0,2z M100,0L100,54 65,27 100,0z M54,0L54,54 19,27 54,0z</StreamGeometry>
-
-    <StreamGeometry x:Key="{x:Static local:Geometries.MuteGeometryKey}">M65,11L78,24 92,11 100,19 86,32 100,46 92,54 78,41 65,54 57,46 70,32 57,19z M46,0L46,65 23,42 8,42C3,42,0,39,0,34L0,27C0,23,3,19,8,19L23,19z</StreamGeometry>
-    <StreamGeometry x:Key="{x:Static local:Geometries.UnMuteGeometryKey}">F1M60,20C65,21 68,26 68,31 68,36 65,40 60,42L56,34C58,34 60,33 60,31 60,29 58,27 56,27L60,20z M74,10C80,15 84,22 84,31 84,39 80,46 74,51L68,46C73,42 76,37 76,31 76,24 73,19 68,15L74,10z M86,0C95,8 100,19 100,31 100,42 95,53 87,60L81,55C88,49 92,40 92,31 92,21 88,12 81,6L86,0z M48,0L48,65 24,42 8,42C4,42,0,39,0,34L0,27C0,23,4,19,8,19L24,19 48,0z</StreamGeometry>
-
-    <StreamGeometry x:Key="{x:Static local:Geometries.FolderOpenGeometryKey}">M20,23L100,23 80,59 0,59z M68,0C69,0,70,2,70,3L70,9 80,9 80,18 18,18 0,51 0,9 36,9C39,2,42,0,42,0z</StreamGeometry>
-    <StreamGeometry x:Key="{x:Static local:Geometries.FullScreenGeometryKey}">F1M100,73L100,100 73,100 100,73z M0,73L27,100 0,100 0,73z M73,0L100,0 100,27 73,0z M0,0L27,0 0,27 0,0z</StreamGeometry>
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/Gu.Wpf.Media;component/Themes/Geometries.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Gu.Wpf.Media;component/Themes/Styles.xaml" />
+    </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

@@ -21,6 +21,18 @@
             new PropertyMetadata(default(MediaState), OnStateChanged));
 
         /// <summary>
+        /// Identifies the <see cref="MediaElementWrapper.IsPlaying" /> dependency property.
+        /// </summary>
+        /// <returns>
+        /// The identifier for the <see cref="MediaElementWrapper.IsPlaying" /> dependency property.
+        /// </returns>
+        public static readonly DependencyProperty IsPlayingProperty = DependencyProperty.Register(
+            nameof(IsPlaying),
+            typeof(bool),
+            typeof(MediaElementWrapper),
+            new PropertyMetadata(default(bool), OnIsPlayingChanged));
+
+        /// <summary>
         /// Identifies the <see cref="MediaElementWrapper.Position" /> dependency property.
         /// </summary>
         /// <returns>
@@ -60,14 +72,22 @@
         /// </returns>
         public static readonly DependencyProperty CanPauseMediaProperty = CanPausePropertyKey.DependencyProperty;
 
+        private static readonly DependencyPropertyKey NaturalVideoHeightPropertyKey = DependencyProperty.RegisterAttachedReadOnly(
+            nameof(NaturalVideoHeight),
+            typeof(int?),
+            typeof(MediaElementWrapper),
+            new PropertyMetadata(default(int?)));
+
         /// <summary>
         /// Identifies the <see cref="MediaElementWrapper.NaturalVideoHeight" /> dependency property.
         /// </summary>
         /// <returns>
         /// The identifier for the <see cref="MediaElementWrapper.NaturalVideoHeight" /> dependency property.
         /// </returns>
-        public static readonly DependencyProperty NaturalVideoHeightProperty = DependencyProperty.Register(
-            nameof(NaturalVideoHeight),
+        public static readonly DependencyProperty NaturalVideoHeightProperty = NaturalVideoHeightPropertyKey.DependencyProperty;
+
+        private static readonly DependencyPropertyKey NaturalVideoWidthPropertyKey = DependencyProperty.RegisterReadOnly(
+            nameof(NaturalVideoWidth),
             typeof(int?),
             typeof(MediaElementWrapper),
             new PropertyMetadata(default(int?)));
@@ -78,11 +98,7 @@
         /// <returns>
         /// The identifier for the <see cref="MediaElementWrapper.NaturalVideoWidth" /> dependency property.
         /// </returns>
-        public static readonly DependencyProperty NaturalVideoWidthProperty = DependencyProperty.Register(
-            nameof(NaturalVideoWidth),
-            typeof(int?),
-            typeof(MediaElementWrapper),
-            new PropertyMetadata(default(int?)));
+        public static readonly DependencyProperty NaturalVideoWidthProperty = NaturalVideoWidthPropertyKey.DependencyProperty;
 
         private static readonly DependencyPropertyKey HasAudioPropertyKey = DependencyProperty.RegisterReadOnly(
             "HasAudio",
@@ -111,6 +127,20 @@
         /// The identifier for the <see cref="MediaElementWrapper.HasVideo" /> dependency property.
         /// </returns>
         public static readonly DependencyProperty HasVideoProperty = HasVideoPropertyKey.DependencyProperty;
+
+        private static readonly DependencyPropertyKey HasMediaPropertyKey = DependencyProperty.RegisterReadOnly(
+            "HasMedia",
+            typeof(bool),
+            typeof(MediaElementWrapper),
+            new PropertyMetadata(default(bool)));
+
+        /// <summary>
+        /// Identifies the <see cref="MediaElementWrapper.HasMedia" /> dependency property.
+        /// </summary>
+        /// <returns>
+        /// The identifier for the <see cref="MediaElementWrapper.HasMedia" /> dependency property.
+        /// </returns>
+        public static readonly DependencyProperty HasMediaProperty = HasMediaPropertyKey.DependencyProperty;
 
         /// <summary>
         /// Identifies the <see cref="MediaElementWrapper.SpeedRatio" /> dependency property.
@@ -179,7 +209,7 @@
             new PropertyMetadata(0.05));
 
         /// <summary>
-        /// Gest or sets a list with video file formats.
+        /// Gets or sets a list with video file formats.
         /// This is a convenience for use in <see cref="Microsoft.Win32.OpenFileDialog"/>
         /// https://support.microsoft.com/en-us/kb/316992
         /// </summary>
@@ -190,7 +220,7 @@
             new PropertyMetadata(FileFormats.DefaultVideoFormats));
 
         /// <summary>
-        /// Gest or sets a list with audio file formats.
+        /// Gets or sets a list with audio file formats.
         /// This is a convenience for use in <see cref="Microsoft.Win32.OpenFileDialog"/>
         /// https://support.microsoft.com/en-us/kb/316992
         /// </summary>
@@ -203,7 +233,7 @@
 #pragma warning restore SA1202 // Elements must be ordered by access
 
         /// <summary>
-        /// Gest or sets the current <see cref="MediaState"/>.
+        /// Get or sets the current <see cref="MediaState"/>.
         /// </summary>
         public MediaState State
         {
@@ -212,7 +242,16 @@
         }
 
         /// <summary>
-        /// Gest or sets the current position in the media.
+        /// Sets <see cref="State"/> to <see cref="MediaState.Pause"/> if <see cref="MediaState.Play"/> and to <see cref="MediaState.Play"/> if <see cref="MediaState.Pause"/>
+        /// </summary>
+        public bool IsPlaying
+        {
+            get { return (bool)this.GetValue(IsPlayingProperty); }
+            set { this.SetValue(IsPlayingProperty, value); }
+        }
+
+        /// <summary>
+        /// Gets or sets the current position in the media.
         /// Null if no media.
         /// </summary>
         public TimeSpan? Position
@@ -247,7 +286,7 @@
         public int? NaturalVideoHeight
         {
             get { return (int?)this.GetValue(NaturalVideoHeightProperty); }
-            set { this.SetValue(NaturalVideoHeightProperty, value); }
+            protected set { this.SetValue(NaturalVideoHeightPropertyKey, value); }
         }
 
         /// <summary>
@@ -257,12 +296,11 @@
         public int? NaturalVideoWidth
         {
             get { return (int?)this.GetValue(NaturalVideoWidthProperty); }
-            set { this.SetValue(NaturalVideoWidthProperty, value); }
+            protected set { this.SetValue(NaturalVideoWidthPropertyKey, value); }
         }
 
         /// <summary>
-        /// Returns whether the given media has audio. Only valid after the
-        /// MediaOpened event has fired.
+        /// Returns whether the given media has audio, null if no media.
         /// </summary>
         public bool? HasAudio
         {
@@ -271,13 +309,21 @@
         }
 
         /// <summary>
-        /// Returns whether the given media has video. Only valid after the
-        /// MediaOpened event has fired.
+        /// Returns whether the given media has video, null if no media.
         /// </summary>
         public bool? HasVideo
         {
             get { return (bool?)this.GetValue(HasVideoProperty); }
             protected set { this.SetValue(HasVideoPropertyKey, value); }
+        }
+
+        /// <summary>
+        /// Returns whether the given media has video.
+        /// </summary>
+        public bool HasMedia
+        {
+            get { return (bool)this.GetValue(HasMediaProperty); }
+            protected set { this.SetValue(HasMediaPropertyKey, value); }
         }
 
         /// <summary>
@@ -342,6 +388,13 @@
         {
             get { return (string)this.GetValue(AudioFormatsProperty); }
             set { this.SetValue(AudioFormatsProperty, value); }
+        }
+
+        private static void OnIsPlayingChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            ((MediaElementWrapper)d).State = (bool)e.NewValue
+                                                 ? MediaState.Play
+                                                 : MediaState.Pause;
         }
 
         private static void OnSpeedRatioChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)

@@ -22,24 +22,47 @@
                 UnloadedBehavior = MediaState.Manual,
             };
 
-            this.mediaElement.MediaFailed += this.ReRaiseEvent;
-            this.mediaElement.MediaEnded += this.ReRaiseEvent;
+            this.mediaElement.MediaFailed += (o, e) =>
+                {
+                    this.HasMedia = false;
+                    this.HasAudio = null;
+                    this.HasVideo = null;
+                    this.Length = null;
+                    this.CanPauseMedia = null;
+                    this.NaturalVideoHeight = null;
+                    this.NaturalVideoWidth = null;
+                    this.Position = null;
+                    this.ReRaiseEvent(o, e);
+                    CommandManager.InvalidateRequerySuggested();
+                };
+
+            this.mediaElement.MediaEnded += (o, e) =>
+                {
+                    this.State = MediaState.Pause;
+                    this.ReRaiseEvent(o, e);
+                };
+
             this.mediaElement.BufferingStarted += (o, e) =>
                 {
                     this.IsBuffering = true;
                     this.updateProgressTimer.Start();
                     this.ReRaiseEvent(o, e);
                 };
+
             this.mediaElement.BufferingEnded += (o, e) =>
                 {
                     this.IsBuffering = true;
                     this.updateProgressTimer.Stop();
                     this.ReRaiseEvent(o, e);
                 };
+
             this.mediaElement.ScriptCommand += this.ReRaiseEvent;
             this.mediaElement.MediaOpened += (o, e) =>
             {
                 this.Pause();
+                this.HasMedia = true;
+                this.HasAudio = this.mediaElement.HasAudio;
+                this.HasVideo = this.mediaElement.HasVideo;
                 this.Length = this.mediaElement.NaturalDuration.TimeSpan;
                 this.CanPauseMedia = this.mediaElement.CanPause;
                 this.NaturalVideoHeight = this.mediaElement.NaturalVideoHeight;
@@ -64,6 +87,7 @@
             this.CommandBindings.Add(new CommandBinding(MediaCommands.IncreaseVolume, HandleExecute(() => this.IncreaseVolume(this.VolumeIncrement)), HandleCanExecute(this.CanIncreaseVolume)));
             this.CommandBindings.Add(new CommandBinding(MediaCommands.DecreaseVolume, HandleExecute(() => this.DecreaseVolume(this.VolumeIncrement)), HandleCanExecute(this.CanDecreaseVolume)));
             this.CommandBindings.Add(new CommandBinding(MediaCommands.MuteVolume, HandleExecute(this.Mute), HandleCanExecute(this.CanMute)));
+            this.CommandBindings.Add(new CommandBinding(Commands.ToggleMute, HandleExecute(this.ToggleMute), HandleCanExecute(this.CanToggleMute)));
             this.updatePositionTimer.Tick += (o, e) => this.Position = this.mediaElement.Position;
             this.updateProgressTimer.Tick += (o, e) =>
                 {
@@ -221,6 +245,16 @@
             this.IsMuted = true;
         }
 
+        private bool CanToggleMute()
+        {
+            return true;
+        }
+
+        private void ToggleMute()
+        {
+            this.IsMuted = !this.IsMuted;
+        }
+
         /// <summary>
         /// Skips <paramref name="time"/> from <see cref="Position"/>
         /// Guaranteed to be within 0 and <see cref="Length"/> after.
@@ -250,12 +284,14 @@
         private static void OnStateChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var wrapper = (MediaElementWrapper)d;
+            var newValue = (MediaState)e.NewValue;
+            wrapper.IsPlaying = newValue == MediaState.Play;
             if (wrapper.mediaElement.Source == null)
             {
                 return;
             }
 
-            switch ((MediaState)e.NewValue)
+            switch (newValue)
             {
                 case MediaState.Play:
                     wrapper.mediaElement.Play();

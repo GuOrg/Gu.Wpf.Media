@@ -44,8 +44,18 @@
             }
         }
 
-        private void OnMediaOpened(object sender, RoutedEventArgs e)
+        private void OnToggleFullScreenExecuted(object sender, ExecutedRoutedEventArgs e)
         {
+            if (this.WindowStyle == WindowStyle.SingleBorderWindow)
+            {
+                this.WindowStyle = WindowStyle.None;
+                this.WindowState = WindowState.Maximized;
+            }
+            else
+            {
+                this.WindowStyle = WindowStyle.SingleBorderWindow;
+                this.WindowState = WindowState.Normal;
+            }
         }
     }
 }

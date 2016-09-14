@@ -2,7 +2,7 @@
 {
     using System.Windows;
 
-    public static class Resources
+    public static class Geometries
     {
         public static ResourceKey PlayGeometryKey { get; } = Create(nameof(PlayGeometryKey));
 
@@ -20,7 +20,7 @@
 
         private static ComponentResourceKey Create(string name)
         {
-            return new ComponentResourceKey { ResourceId = nameof(name).Replace("Key", string.Empty) };
+            return new ComponentResourceKey(typeof(Geometries), nameof(name).Replace("Key", string.Empty));
         }
     }
 }

@@ -10,9 +10,11 @@
 
         public static ResourceKey StopGeometryKey { get; } = Create(nameof(StopGeometryKey));
 
+        public static ResourceKey RewindGeometryKey { get; } = Create(nameof(RewindGeometryKey));
+
         public static ResourceKey FolderOpenGeometryKey { get; } = Create(nameof(FolderOpenGeometryKey));
 
-        public static ResourceKey MaximizeGeometryKey { get; } = Create(nameof(MaximizeGeometryKey));
+        public static ResourceKey FullScreenGeometryKey { get; } = Create(nameof(FullScreenGeometryKey));
 
         public static ResourceKey MuteGeometryKey { get; } = Create(nameof(MuteGeometryKey));
 
@@ -20,7 +22,7 @@
 
         private static ComponentResourceKey Create(string name)
         {
-            return new ComponentResourceKey(typeof(Geometries), nameof(name).Replace("Key", string.Empty));
+            return new ComponentResourceKey(typeof(Geometries), name.Replace("Key", string.Empty));
         }
     }
 }

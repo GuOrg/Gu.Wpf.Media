@@ -37,7 +37,8 @@ Wrapper for System.Windows.Controls.MediaElement.
   - [2.5. ScriptCommand](#25-scriptcommand)
   - [2.6. MediaEnded](#26-mediaended)
 - [3. MediaCommands](#3-mediacommands)
-- [4. Sample](#4-sample)
+- [4. Commands](#4-commands)
+- [5. Sample](#5-sample)
 
 # 1. Properties
 The wrapper wraps the properties of System.Windows.Controls.MediaElement and adds a couple of new properties.
@@ -176,6 +177,13 @@ Adds command bindings for:
   - MediaCommands.IncreaseVolume
   - MediaCommands.DecreaseVolume
   - MediaCommands.MuteVolume
+
+# 4. ommands
+- Commands.ToggleMute
+- Commands.ToggleFullScreen
+
+Adds command bindings for:
+  - Commands.ToggleMute
 
 # 4. Sample
 

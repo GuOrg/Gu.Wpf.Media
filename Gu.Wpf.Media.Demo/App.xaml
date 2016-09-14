@@ -1,8 +1,33 @@
 ﻿<Application x:Class="Gu.Wpf.Media.Demo.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:media="https://github.com/JohanLarsson/Gu.Wpf.Media"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <Style x:Key="PlayerButtonStyle" TargetType="{x:Type ButtonBase}">
+            <Setter Property="Height" Value="25" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="Padding" Value="24,6" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ButtonBase}">
+                        <Border Background="Transparent">
+                            <Path Margin="{TemplateBinding Padding}"
+                                  HorizontalAlignment="Center"
+                                  Data="{Binding RelativeSource={RelativeSource TemplatedParent},
+                                                 Path=(media:Icon.Geometry)}"
+                                  Fill="{TemplateBinding Foreground}"
+                                  Stretch="Uniform" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
+            <Style.Triggers>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Opacity" Value="0.6" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
     </Application.Resources>
 </Application>

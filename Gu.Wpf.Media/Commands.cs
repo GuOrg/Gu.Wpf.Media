@@ -14,5 +14,10 @@
                                                                       "Toggle full screen.",
                                                                       nameof(ToggleFullScreen),
                                                                       typeof(Commands));
+
+        public static RoutedUICommand ToggleMute { get; } = new RoutedUICommand(
+                                                              "Toggle mute.",
+                                                              nameof(ToggleMute),
+                                                              typeof(Commands));
     }
 }

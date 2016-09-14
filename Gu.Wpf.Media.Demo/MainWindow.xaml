@@ -9,20 +9,23 @@
         Width="300"
         Height="300"
         MinWidth="300"
+        Background="Black"
         SizeToContent="WidthAndHeight"
         mc:Ignorable="d">
     <Window.InputBindings>
         <KeyBinding Key="Space"
                     Command="TogglePlayPause"
                     CommandTarget="{Binding ElementName=MediaElement}" />
+        <KeyBinding Key="F11" Command="media:Commands.ToggleFullScreen" />
     </Window.InputBindings>
     <Window.CommandBindings>
         <CommandBinding Command="ApplicationCommands.Open" Executed="OpenExecuted" />
+        <CommandBinding Command="media:Commands.ToggleFullScreen" Executed="OnToggleFullScreenExecuted" />
     </Window.CommandBindings>
     <Grid>
         <media:MediaElementWrapper x:Name="MediaElement"
-                                   MediaOpened="OnMediaOpened"
                                    ScrubbingEnabled="True" />
+        
         <Grid VerticalAlignment="Bottom">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
@@ -39,31 +42,82 @@
                     Value="{Binding ElementName=MediaElement,
                                     Path=Position,
                                     Converter={x:Static demo:TimeSpanToSecondsConverter.Default}}" />
+
             <Grid Grid.Row="1">
+                <Grid.Resources>
+                    <Style BasedOn="{StaticResource PlayerButtonStyle}" TargetType="{x:Type Button}" />
+                    <Style BasedOn="{StaticResource PlayerButtonStyle}" TargetType="{x:Type ToggleButton}" />
+                </Grid.Resources>
                 <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
                     <ColumnDefinition />
-                    <ColumnDefinition />
-                    <ColumnDefinition />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
-                <Button Command="ApplicationCommands.Open" Content="Open" />
-                <Button Command="MediaCommands.Play"
-                        CommandTarget="{Binding ElementName=MediaElement}"
-                        Content="Play" />
-                <Button Command="MediaCommands.Pause"
-                        CommandTarget="{Binding ElementName=MediaElement}"
-                        Content="Pause" />
-                <Button Command="MediaCommands.Stop"
-                        CommandTarget="{Binding ElementName=MediaElement}"
-                        Content="Stop" />
-                <TextBlock x:Name="ProgressTextBlock">
+
+                <ToggleButton Grid.Column="0"
+                              media:Icon.Geometry="{StaticResource {x:Static media:Geometries.PauseGeometryKey}}"
+                              IsChecked="{Binding ElementName=MediaElement,
+                                                  Path=IsPlaying}"
+                              IsEnabled="{Binding ElementName=MediaElement,
+                                                  Path=HasMedia}">
+                    <Style BasedOn="{StaticResource PlayerButtonStyle}" TargetType="{x:Type ToggleButton}">
+                        <Style.Triggers>
+                            <Trigger Property="IsChecked" Value="False">
+                                <Setter Property="media:Icon.Geometry" Value="{StaticResource {x:Static media:Geometries.PlayGeometryKey}}" />
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter Property="media:Icon.Geometry" Value="{StaticResource {x:Static media:Geometries.PauseGeometryKey}}" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </ToggleButton>
+
+                <ToggleButton Grid.Column="1"
+                              media:Icon.Geometry="{StaticResource {x:Static media:Geometries.UnMuteGeometryKey}}"
+                              IsChecked="{Binding ElementName=MediaElement,
+                                                  Path=IsMuted}"
+                              IsEnabled="{Binding ElementName=MediaElement,
+                                                  Path=HasMedia}">
+                    <ToggleButton.Style>
+                        <Style BasedOn="{StaticResource PlayerButtonStyle}" TargetType="{x:Type ToggleButton}">
+                            <Style.Triggers>
+                                <Trigger Property="IsChecked" Value="False">
+                                    <Setter Property="media:Icon.Geometry" Value="{StaticResource {x:Static media:Geometries.MuteGeometryKey}}" />
+                                </Trigger>
+                                <Trigger Property="IsChecked" Value="True">
+                                    <Setter Property="media:Icon.Geometry" Value="{StaticResource {x:Static media:Geometries.UnMuteGeometryKey}}" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ToggleButton.Style>
+                </ToggleButton>
+
+                <TextBlock x:Name="ProgressTextBlock"
+                           Grid.Column="2"
+                           VerticalAlignment="Center"
+                           Foreground="White">
                     <TextBlock.Text>
-                        <MultiBinding StringFormat="{}{0}/{1}">
+                        <MultiBinding StringFormat="{}{0:hh':'mm':'ss} / {1:hh':'mm':'ss}">
                             <Binding ElementName="MediaElement" Path="Position" />
                             <Binding ElementName="MediaElement" Path="Length" />
                         </MultiBinding>
                     </TextBlock.Text>
                 </TextBlock>
-                <Button Command="media:Commands.ToggleFullScreen" />
+
+                <Button Grid.Column="4"
+                        media:Icon.Geometry="{StaticResource {x:Static media:Geometries.FolderOpenGeometryKey}}"
+                        Command="ApplicationCommands.Open" />
+
+                <Button Grid.Column="5"
+                        HorizontalAlignment="Right"
+                        media:Icon.Geometry="{StaticResource {x:Static media:Geometries.FullScreenGeometryKey}}"
+                        Command="media:Commands.ToggleFullScreen"
+                        IsEnabled="{Binding ElementName=MediaElement,
+                                            Path=HasMedia}"
+                        Padding="12,6,6,6" />
             </Grid>
         </Grid>
     </Grid>

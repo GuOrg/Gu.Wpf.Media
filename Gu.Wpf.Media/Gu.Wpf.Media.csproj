@@ -55,6 +55,7 @@
   <ItemGroup>
     <Compile Include="Commands.cs" />
     <Compile Include="FileFormats.cs" />
+    <Compile Include="Icon.cs" />
     <Compile Include="MediaElementWrapper.cs" />
     <Compile Include="MediaElementWrapper.DependencyProperties.cs" />
     <Compile Include="MediaElementWrapper.DependencyProperties.generated.cs" />

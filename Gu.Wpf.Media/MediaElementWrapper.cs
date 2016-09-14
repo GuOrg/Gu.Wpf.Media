@@ -256,6 +256,22 @@
         }
 
         /// <summary>
+        /// Pauses the player without changing the <see cref="State"/> and <see cref="IsPlaying"/> properties.
+        /// </summary>
+        public void Break()
+        {
+            this.mediaElement.Pause();
+        }
+
+        /// <summary>
+        /// Resumes playing without changing the <see cref="State"/> and <see cref="IsPlaying"/> properties.
+        /// </summary>
+        public void Resume()
+        {
+            this.mediaElement.Play();
+        }
+
+        /// <summary>
         /// Skips <paramref name="time"/> from <see cref="Position"/>
         /// Guaranteed to be within 0 and <see cref="Length"/> after.
         /// </summary>

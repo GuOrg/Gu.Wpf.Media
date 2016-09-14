@@ -41,7 +41,7 @@
                     Value="{Binding ElementName=MediaElement,
                                     Path=Position,
                                     Converter={x:Static demo:TimeSpanToSecondsConverter.Default}}" />
-
+            
             <Grid Grid.Row="1">
                 <Grid.Resources>
                     <Style BasedOn="{StaticResource {x:Static media:Styles.PlayerButtonBaseStyleKey}}" TargetType="{x:Type Button}" />

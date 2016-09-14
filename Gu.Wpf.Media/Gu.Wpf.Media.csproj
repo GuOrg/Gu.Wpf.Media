@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Gu.Wpf.Media</RootNamespace>
     <AssemblyName>Gu.Wpf.Media</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
@@ -24,6 +24,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CodeAnalysisRuleSet>Gu.Wpf.Media.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -34,6 +35,7 @@
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>bin\Release\Gu.Wpf.Media.XML</DocumentationFile>
     <CodeAnalysisRuleSet>Gu.Wpf.Media.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -73,6 +75,7 @@
     </Compile>
     <AppDesigner Include="Properties\" />
     <Compile Include="ResourceKeys\Geometries.cs" />
+    <Compile Include="ResourceKeys\StringExt.cs" />
     <Compile Include="ResourceKeys\Styles.cs" />
   </ItemGroup>
   <ItemGroup>

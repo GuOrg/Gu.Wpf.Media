@@ -1,28 +1,29 @@
 ﻿namespace Gu.Wpf.Media
 {
+    using System.Runtime.CompilerServices;
     using System.Windows;
 
     public static class Geometries
     {
-        public static ResourceKey PlayGeometryKey { get; } = Create(nameof(PlayGeometryKey));
+        public static ResourceKey PlayGeometryKey { get; } = Create();
 
-        public static ResourceKey PauseGeometryKey { get; } = Create(nameof(PauseGeometryKey));
+        public static ResourceKey PauseGeometryKey { get; } = Create();
 
-        public static ResourceKey StopGeometryKey { get; } = Create(nameof(StopGeometryKey));
+        public static ResourceKey StopGeometryKey { get; } = Create();
 
-        public static ResourceKey RewindGeometryKey { get; } = Create(nameof(RewindGeometryKey));
+        public static ResourceKey RewindGeometryKey { get; } = Create();
 
-        public static ResourceKey FolderOpenGeometryKey { get; } = Create(nameof(FolderOpenGeometryKey));
+        public static ResourceKey FolderOpenGeometryKey { get; } = Create();
 
-        public static ResourceKey FullScreenGeometryKey { get; } = Create(nameof(FullScreenGeometryKey));
+        public static ResourceKey FullScreenGeometryKey { get; } = Create();
 
-        public static ResourceKey MuteGeometryKey { get; } = Create(nameof(MuteGeometryKey));
+        public static ResourceKey MuteGeometryKey { get; } = Create();
 
-        public static ResourceKey UnMuteGeometryKey { get; } = Create(nameof(UnMuteGeometryKey));
+        public static ResourceKey UnMuteGeometryKey { get; } = Create();
 
-        private static ComponentResourceKey Create(string name)
+        private static ComponentResourceKey Create([CallerMemberName]string name = null)
         {
-            return new ComponentResourceKey(typeof(Geometries), name.Replace("Key", string.Empty));
+            return new ComponentResourceKey(typeof(Geometries), name.TrimEnd("Key"));
         }
     }
 }

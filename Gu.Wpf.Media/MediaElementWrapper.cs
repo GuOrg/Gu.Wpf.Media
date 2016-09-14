@@ -38,7 +38,7 @@
 
             this.mediaElement.MediaEnded += (o, e) =>
                 {
-                    this.State = MediaState.Pause;
+                    this.State = MediaState.Stop;
                     this.ReRaiseEvent(o, e);
                 };
 

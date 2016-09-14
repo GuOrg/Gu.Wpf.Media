@@ -18,5 +18,10 @@
 
             return text.Substring(0, text.Length - toTrim.Length);
         }
+
+        internal static string Slice(this string text, int start, int end)
+        {
+            return text.Substring(start, end - start);
+        }
     }
 }

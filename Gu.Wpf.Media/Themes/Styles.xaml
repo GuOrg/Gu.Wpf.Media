@@ -26,4 +26,95 @@
             </Trigger>
         </Style.Triggers>
     </Style>
+
+    <Style x:Key="{x:Static media:Styles.ProgressRepeatButtonStyleKey}" TargetType="{x:Type RepeatButton}">
+        <Setter Property="SnapsToDevicePixels" Value="true" />
+        <Setter Property="OverridesDefaultStyle" Value="true" />
+        <Setter Property="IsTabStop" Value="false" />
+        <Setter Property="Focusable" Value="false" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type RepeatButton}">
+                    <Border Background="{TemplateBinding Background}" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="{x:Static media:Styles.ProgressThumbStyleKey}" TargetType="{x:Type Thumb}">
+        <Setter Property="SnapsToDevicePixels" Value="true" />
+        <Setter Property="OverridesDefaultStyle" Value="true" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Thumb}">
+                    <Ellipse Name="Ellipse" Fill="{TemplateBinding Background}" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="{x:Static media:Styles.ProgressSliderStyleKey}" TargetType="{x:Type Slider}">
+        <Setter Property="SnapsToDevicePixels" Value="true" />
+        <Setter Property="OverridesDefaultStyle" Value="true" />
+        <Setter Property="Background" Value="White" />
+        <Setter Property="Height" Value="14" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Slider}">
+                    <Border x:Name="Border" Background="Transparent">
+                        <Track Name="PART_Track">
+                            <Track.DecreaseRepeatButton>
+                                <RepeatButton Background="{TemplateBinding Background}"
+                                              Command="Slider.DecreaseLarge"
+                                              Style="{StaticResource {x:Static media:Styles.ProgressRepeatButtonStyleKey}}" />
+                            </Track.DecreaseRepeatButton>
+                            <Track.Thumb>
+                                <Thumb x:Name="Thumb"
+                                       Width="0"
+                                       Height="0"
+                                       Background="{TemplateBinding Background}"
+                                       RenderTransformOrigin="0.5,0.5"
+                                       Style="{StaticResource {x:Static media:Styles.ProgressThumbStyleKey}}" />
+                            </Track.Thumb>
+                            <Track.IncreaseRepeatButton>
+                                <RepeatButton x:Name="IncreaseButton"
+                                              Background="{TemplateBinding Background}"
+                                              Command="Slider.IncreaseLarge"
+                                              Opacity="0.6"
+                                              Style="{StaticResource {x:Static media:Styles.ProgressRepeatButtonStyleKey}}" />
+                            </Track.IncreaseRepeatButton>
+                        </Track>
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="Orientation" Value="Horizontal">
+                            <Setter TargetName="Border" Property="Padding" Value="0,6" />
+                            <Setter TargetName="Thumb" Property="VerticalAlignment" Value="Center" />
+                        </Trigger>
+                        <Trigger Property="Orientation" Value="Vertical">
+                            <Setter TargetName="Border" Property="Padding" Value="6,0" />
+                            <Setter TargetName="Thumb" Property="HorizontalAlignment" Value="Center" />
+                        </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsMouseOver" Value="True" />
+                                <Condition Property="IsEnabled" Value="True" />
+                            </MultiTrigger.Conditions>
+                            <MultiTrigger.Setters>
+                                <Setter TargetName="Thumb" Property="Width" Value="0.01" />
+                                <Setter TargetName="Thumb" Property="Height" Value="0.01" />
+                                <Setter TargetName="Thumb" Property="RenderTransform">
+                                    <Setter.Value>
+                                        <TransformGroup>
+                                            <ScaleTransform ScaleX="1200" ScaleY="1200" />
+                                        </TransformGroup>
+                                    </Setter.Value>
+                                </Setter>
+                            </MultiTrigger.Setters>
+                        </MultiTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 </ResourceDictionary>

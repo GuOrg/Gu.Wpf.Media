@@ -65,8 +65,11 @@
   <ItemGroup>
     <Compile Include="AttachedProperties\Drag.cs" />
     <Compile Include="Commands.cs" />
+    <Compile Include="Converters\TimeSpanToStringConverter.cs" />
     <Compile Include="FileFormats.cs" />
     <Compile Include="AttachedProperties\Icon.cs" />
+    <Compile Include="Internals\Is.cs" />
+    <Compile Include="Internals\StringExt.cs" />
     <Compile Include="MediaElementWrapper.cs" />
     <Compile Include="MediaElementWrapper.DependencyProperties.cs" />
     <Compile Include="MediaElementWrapper.DependencyProperties.generated.cs" />
@@ -76,7 +79,6 @@
     </Compile>
     <AppDesigner Include="Properties\" />
     <Compile Include="ResourceKeys\Geometries.cs" />
-    <Compile Include="ResourceKeys\StringExt.cs" />
     <Compile Include="ResourceKeys\Styles.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -94,7 +96,7 @@
   -->
   <Import Project="..\.paket\paket.targets" />
   <Choose>
-    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v4.0' Or $(TargetFrameworkVersion) == 'v4.5' Or $(TargetFrameworkVersion) == 'v4.5.1' Or $(TargetFrameworkVersion) == 'v4.5.2' Or $(TargetFrameworkVersion) == 'v4.5.3' Or $(TargetFrameworkVersion) == 'v4.6' Or $(TargetFrameworkVersion) == 'v4.6.1' Or $(TargetFrameworkVersion) == 'v4.6.2' Or $(TargetFrameworkVersion) == 'v4.6.3')">
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v4.5' Or $(TargetFrameworkVersion) == 'v4.5.1' Or $(TargetFrameworkVersion) == 'v4.5.2' Or $(TargetFrameworkVersion) == 'v4.5.3' Or $(TargetFrameworkVersion) == 'v4.6' Or $(TargetFrameworkVersion) == 'v4.6.1' Or $(TargetFrameworkVersion) == 'v4.6.2' Or $(TargetFrameworkVersion) == 'v4.6.3')">
       <ItemGroup>
         <Reference Include="JetBrains.Annotations">
           <HintPath>..\packages\JetBrains.Annotations\lib\net\JetBrains.Annotations.dll</HintPath>

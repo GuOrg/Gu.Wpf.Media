@@ -39,6 +39,7 @@
                                       Path=Length,
                                       Converter={x:Static demo:TimeSpanToSecondsConverter.Default}}"
                     Minimum="0"
+                    Style="{StaticResource {x:Static media:Styles.ProgressSliderStyleKey}}"
                     Value="{Binding ElementName=MediaElement,
                                     Path=Position,
                                     Converter={x:Static demo:TimeSpanToSecondsConverter.Default}}" />

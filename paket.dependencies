@@ -3,3 +3,4 @@ framework: >= net45
 
 nuget JetBrains.Annotations
 nuget StyleCop.Analyzers
+nuget NUnit

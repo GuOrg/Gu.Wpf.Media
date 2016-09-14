@@ -23,6 +23,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{3F38FD3E-9
 		RELEASE_NOTES.md = RELEASE_NOTES.md
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gu.Wpf.Media.Tests", "Gu.Wpf.Media.Tests\Gu.Wpf.Media.Tests.csproj", "{62B99F94-EF1C-45AC-AFA3-811411419D58}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,6 +39,10 @@ Global
 		{A465E2F7-3665-4B08-8FCF-05700F46C2F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A465E2F7-3665-4B08-8FCF-05700F46C2F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A465E2F7-3665-4B08-8FCF-05700F46C2F5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{62B99F94-EF1C-45AC-AFA3-811411419D58}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{62B99F94-EF1C-45AC-AFA3-811411419D58}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{62B99F94-EF1C-45AC-AFA3-811411419D58}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{62B99F94-EF1C-45AC-AFA3-811411419D58}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

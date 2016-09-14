@@ -68,9 +68,6 @@
                             <Trigger Property="IsChecked" Value="False">
                                 <Setter Property="media:Icon.Geometry" Value="{StaticResource {x:Static media:Geometries.PlayGeometryKey}}" />
                             </Trigger>
-                            <Trigger Property="IsChecked" Value="True">
-                                <Setter Property="media:Icon.Geometry" Value="{StaticResource {x:Static media:Geometries.PauseGeometryKey}}" />
-                            </Trigger>
                         </Style.Triggers>
                     </Style>
                 </ToggleButton>
@@ -86,9 +83,6 @@
                             <Style.Triggers>
                                 <Trigger Property="IsChecked" Value="False">
                                     <Setter Property="media:Icon.Geometry" Value="{StaticResource {x:Static media:Geometries.MuteGeometryKey}}" />
-                                </Trigger>
-                                <Trigger Property="IsChecked" Value="True">
-                                    <Setter Property="media:Icon.Geometry" Value="{StaticResource {x:Static media:Geometries.UnMuteGeometryKey}}" />
                                 </Trigger>
                             </Style.Triggers>
                         </Style>

@@ -23,7 +23,9 @@
         <CommandBinding Command="media:Commands.ToggleFullScreen" Executed="OnToggleFullScreenExecuted" />
     </Window.CommandBindings>
     <Grid>
-        <media:MediaElementWrapper x:Name="MediaElement" ScrubbingEnabled="True" />
+        <media:MediaElementWrapper x:Name="MediaElement"
+                                   ScrubbingEnabled="True"
+                                   Stretch="None" />
 
         <Grid VerticalAlignment="Bottom">
             <Grid.RowDefinitions>
@@ -32,12 +34,11 @@
             </Grid.RowDefinitions>
             <Slider x:Name="ProgressSlider"
                     Grid.Row="0"
+                    media:Drag.PauseWhileDragging="{Binding ElementName=MediaElement}"
                     Maximum="{Binding ElementName=MediaElement,
                                       Path=Length,
                                       Converter={x:Static demo:TimeSpanToSecondsConverter.Default}}"
                     Minimum="0"
-                    Thumb.DragCompleted="OnProgressSliderDragCompleted"
-                    Thumb.DragStarted="OnProgressSliderDragStarted"
                     Value="{Binding ElementName=MediaElement,
                                     Path=Position,
                                     Converter={x:Static demo:TimeSpanToSecondsConverter.Default}}" />
@@ -56,13 +57,13 @@
                 </Grid.ColumnDefinitions>
 
                 <ToggleButton Grid.Column="0"
-                              media:Icon.Geometry="{StaticResource {x:Static media:Geometries.PauseGeometryKey}}"
                               IsChecked="{Binding ElementName=MediaElement,
                                                   Path=IsPlaying}"
                               IsEnabled="{Binding ElementName=MediaElement,
                                                   Path=HasMedia}">
                     <ToggleButton.Style>
                         <Style BasedOn="{StaticResource {x:Static media:Styles.PlayerButtonBaseStyleKey}}" TargetType="{x:Type ToggleButton}">
+                            <Setter Property="media:Icon.Geometry" Value="{StaticResource {x:Static media:Geometries.PauseGeometryKey}}" />
                             <Style.Triggers>
                                 <Trigger Property="IsChecked" Value="False">
                                     <Setter Property="media:Icon.Geometry" Value="{StaticResource {x:Static media:Geometries.PlayGeometryKey}}" />
@@ -73,13 +74,13 @@
                 </ToggleButton>
 
                 <ToggleButton Grid.Column="1"
-                              media:Icon.Geometry="{StaticResource {x:Static media:Geometries.UnMuteGeometryKey}}"
                               IsChecked="{Binding ElementName=MediaElement,
                                                   Path=IsMuted}"
                               IsEnabled="{Binding ElementName=MediaElement,
                                                   Path=HasMedia}">
                     <ToggleButton.Style>
                         <Style BasedOn="{StaticResource {x:Static media:Styles.PlayerButtonBaseStyleKey}}" TargetType="{x:Type ToggleButton}">
+                            <Setter Property="media:Icon.Geometry" Value="{StaticResource {x:Static media:Geometries.UnMuteGeometryKey}}" />
                             <Style.Triggers>
                                 <Trigger Property="IsChecked" Value="False">
                                     <Setter Property="media:Icon.Geometry" Value="{StaticResource {x:Static media:Geometries.MuteGeometryKey}}" />

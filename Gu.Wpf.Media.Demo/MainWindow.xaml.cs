@@ -3,11 +3,13 @@
     using System;
     using System.Windows;
     using System.Windows.Input;
-
+    using System.Windows.Media;
     using Microsoft.Win32;
 
     public partial class MainWindow : Window
     {
+        private Stretch stretch;
+
         public MainWindow()
         {
             this.InitializeComponent();
@@ -30,12 +32,17 @@
         {
             if (this.WindowStyle == WindowStyle.SingleBorderWindow)
             {
+                this.stretch = this.MediaElement.Stretch;
+                this.MediaElement.Stretch = Stretch.Uniform;
                 this.WindowStyle = WindowStyle.None;
+                this.SizeToContent = SizeToContent.Manual;
                 this.WindowState = WindowState.Maximized;
             }
             else
             {
+                this.MediaElement.Stretch = this.stretch;
                 this.WindowStyle = WindowStyle.SingleBorderWindow;
+                this.SizeToContent = SizeToContent.WidthAndHeight;
                 this.WindowState = WindowState.Normal;
             }
         }

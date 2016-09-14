@@ -63,7 +63,7 @@
       <SubType>Code</SubType>
     </Compile>
     <AppDesigner Include="Properties\" />
-    <Compile Include="Resources.cs" />
+    <Compile Include="Geometries.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Gu.Wpf.Media.ruleset" />

@@ -4,6 +4,9 @@
     using System.Windows.Controls;
     using System.Windows.Controls.Primitives;
 
+    /// <summary>
+    /// Exposes attached properties that can be useful when controlling a player with a slider.
+    /// </summary>
     public static class Drag
     {
         public static readonly DependencyProperty PauseWhileDraggingProperty = DependencyProperty.RegisterAttached(

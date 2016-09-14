@@ -4,10 +4,13 @@
     using System.Globalization;
     using System.Windows.Data;
 
+    /// <inheritdoc/>
+    [ValueConversion(typeof(TimeSpan?), typeof(double?))]
     public class NullableTimeSpanToSecondsConverter : IValueConverter
     {
         public static readonly NullableTimeSpanToSecondsConverter Default = new NullableTimeSpanToSecondsConverter();
 
+        /// <inheritdoc/>
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (value == null)
@@ -28,6 +31,7 @@
             return Binding.DoNothing;
         }
 
+        /// <inheritdoc/>
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (value == null)

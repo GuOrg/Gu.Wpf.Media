@@ -1,7 +1,12 @@
 ﻿type project
 
 releasenotes
-  USABILITY: Expose file filters via FileFormats.
+  USABILITY: Styles & Gemoetries and converters.
+  USABILITY: IsPlaying & HasMedia properties.
+  BREAKING CHANGE: .Net 4.5
+  BUGFIXES: Make properties readonly.
+  USABILITY: Drag.PauseWhileDragging
+  USABILITY: Expose default file formats viw FileFormats.
 
 tags wpf xaml media mediaelement
 projectUrl https://github.com/JohanLarsson/Gu.Wpf.Media

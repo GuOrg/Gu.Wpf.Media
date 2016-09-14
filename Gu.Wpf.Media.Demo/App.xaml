@@ -1,7 +1,6 @@
 ﻿<Application x:Class="Gu.Wpf.Media.Demo.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:media="https://github.com/JohanLarsson/Gu.Wpf.Media"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
 

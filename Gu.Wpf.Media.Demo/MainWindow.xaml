@@ -6,8 +6,6 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:media="https://github.com/JohanLarsson/Gu.Wpf.Media"
         Title="MainWindow"
-        Width="300"
-        Height="300"
         MinWidth="300"
         Background="Black"
         SizeToContent="WidthAndHeight"
@@ -57,7 +55,8 @@
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
 
-                <ToggleButton Grid.Column="0"
+                <ToggleButton x:Name="PlayPauseButton"
+                              Grid.Column="0"
                               IsChecked="{Binding ElementName=MediaElement,
                                                   Path=IsPlaying}"
                               IsEnabled="{Binding ElementName=MediaElement,
@@ -74,7 +73,7 @@
                     </ToggleButton.Style>
                 </ToggleButton>
 
-                <ToggleButton Grid.Column="1"
+                <ToggleButton x:Name="ToggleMutedButton" Grid.Column="1"
                               IsChecked="{Binding ElementName=MediaElement,
                                                   Path=IsMuted}"
                               IsEnabled="{Binding ElementName=MediaElement,
@@ -93,12 +92,17 @@
 
                 <TextBlock x:Name="ProgressTextBlock"
                            Grid.Column="2"
-                           VerticalAlignment="Center"
-                           Foreground="White">
+                           Opacity="{Binding ElementName=ToggleMutedButton, Path=Opacity}"
+                           Foreground="{Binding ElementName=ToggleMutedButton, Path=Foreground}"
+                           VerticalAlignment="Center">
                     <TextBlock.Text>
-                        <MultiBinding StringFormat="{}{0:hh':'mm':'ss} / {1:hh':'mm':'ss}">
-                            <Binding ElementName="MediaElement" Path="Position" />
-                            <Binding ElementName="MediaElement" Path="Length" />
+                        <MultiBinding StringFormat="{}{0} / {1}">
+                            <Binding Converter="{x:Static media:TimeSpanToStringConverter.Default}"
+                                     ElementName="MediaElement"
+                                     Path="Position" />
+                            <Binding Converter="{x:Static media:TimeSpanToStringConverter.Default}"
+                                     ElementName="MediaElement"
+                                     Path="Length" />
                         </MultiBinding>
                     </TextBlock.Text>
                 </TextBlock>

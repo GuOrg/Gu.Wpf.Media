@@ -51,11 +51,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Themes\Geometries.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Styles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Commands.cs" />
     <Compile Include="FileFormats.cs" />
-    <Compile Include="Icon.cs" />
+    <Compile Include="AttachedProperties\Icon.cs" />
     <Compile Include="MediaElementWrapper.cs" />
     <Compile Include="MediaElementWrapper.DependencyProperties.cs" />
     <Compile Include="MediaElementWrapper.DependencyProperties.generated.cs" />
@@ -64,7 +72,8 @@
       <SubType>Code</SubType>
     </Compile>
     <AppDesigner Include="Properties\" />
-    <Compile Include="Geometries.cs" />
+    <Compile Include="ResourceKeys\Geometries.cs" />
+    <Compile Include="ResourceKeys\Styles.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Gu.Wpf.Media.ruleset" />

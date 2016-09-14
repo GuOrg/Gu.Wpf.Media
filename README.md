@@ -6,88 +6,97 @@
 Wrapper for System.Windows.Controls.MediaElement.
 
 # Contents
-- [1. Properties](#1-properties)
-  - [1.1. State (`MediaState`)](#11-state--mediastate)
-  - [1.2. Position (`Timespan?`)](#12-position--timespan)
-  - [1.3. Length (`Timespan?`)](#13-length--timespan)
-  - [1.4. CanPauseMedia (`bool?`)](#14-canpausemedia--bool)
-  - [1.5. NaturalVideoHeight (`int?`)](#15-naturalvideoheight--int)
-  - [1.6. NaturalVideoWidth (`int?`)](#16-naturalvideowidth--int)
-  - [1.7. HasAudio (`bool?`)](#17-hasaudio--bool)
-  - [1.8. HasVideo (`bool?`)](#18-hasvideo--bool)
-  - [1.9. SpeedRatio (`double`)](#19-speedratio--double)
-  - [1.10. IsBuffering (`bool`)](#110-isbuffering--bool)
-  - [1.11. DownloadProgress (`double`)](#111-downloadprogress--double)
-  - [1.12. BufferingProgress (`double`)](#112-bufferingprogress--double)
-  - [1.13. VolumeIncrement (`double`)](#113-volumeincrement--double)
-  - [1.14. VideoFormats](#114-videoformats)
-  - [1.15. AudioFormats](#115-audioformats)
-  - [1.16. Source (`Uri`)](#116-source--uri)
-  - [1.17. Volume (`double`)](#117-volume--double)
-  - [1.18. Balance (`double`)](#118-balance--double)
-  - [1.19. IsMuted (`bool`)](#119-ismuted--bool)
-  - [1.20. ScrubbingEnabled (`bool`)](#120-scrubbingenabled--bool)
-  - [1.21. Stretch (`Stretch`)](#121-stretch--stretch)
-  - [1.22. StretchDirection (`StretchDirection`)](#122-stretchdirection--stretchdirection)
-- [2. Events](#2-events)
-  - [2.1. MediaFailed](#21-mediafailed)
-  - [2.2. MediaOpened](#22-mediaopened)
-  - [2.3. BufferingStarted](#23-bufferingstarted)
-  - [2.4. BufferingEnded](#24-bufferingended)
-  - [2.5. ScriptCommand](#25-scriptcommand)
-  - [2.6. MediaEnded](#26-mediaended)
-- [3. MediaCommands](#3-mediacommands)
-- [4. Commands](#4-commands)
-- [5. Sample](#5-sample)
+- [1. MediaElementWrapper](#1-mediaelementwrapper)
+  - [1.1 Properties](#11-properties)
+    - [1.1.1 State (`MediaState`)](#111-state--mediastate)
+    - [1.1.2. Position (`Timespan?`)](#112-position--timespan)
+    - [1.1.3. Length (`Timespan?`)](#113-length--timespan)
+    - [1.1.4. CanPauseMedia (`bool?`)](#114-canpausemedia--bool)
+    - [1.1.5. NaturalVideoHeight (`int?`)](#115-naturalvideoheight--int)
+    - [1.1.6. NaturalVideoWidth (`int?`)](#116-naturalvideowidth--int)
+    - [1.1.7. HasAudio (`bool?`)](#117-hasaudio--bool)
+    - [1.1.8. HasVideo (`bool?`)](#118-hasvideo--bool)
+    - [1.1.8. HasMedia (`bool`)](#118-hasmedia--bool)
+    - [1.1.9. SpeedRatio (`double`)](#119-speedratio--double)
+    - [1.1.10. IsBuffering (`bool`)](#1110-isbuffering--bool)
+    - [1.1.11. DownloadProgress (`double`)](#1111-downloadprogress--double)
+    - [1.1.12. BufferingProgress (`double`)](#1112-bufferingprogress--double)
+    - [1.1.13. VolumeIncrement (`double`)](#1113-volumeincrement--double)
+    - [1.1.14. VideoFormats](#1114-videoformats)
+    - [1.1.15. AudioFormats](#1115-audioformats)
+    - [1.1.16. Source (`Uri`)](#1116-source--uri)
+    - [1.1.17. Volume (`double`)](#1117-volume--double)
+    - [1.1.18. Balance (`double`)](#1118-balance--double)
+    - [1.1.19. IsMuted (`bool`)](#1119-ismuted--bool)
+    - [1.1.20. ScrubbingEnabled (`bool`)](#1120-scrubbingenabled--bool)
+    - [1.1.21. Stretch (`Stretch`)](#1121-stretch--stretch)
+    - [1.1.22. StretchDirection (`StretchDirection`)](#1122-stretchdirection--stretchdirection)
+  - [1.2. Events](#12-events)
+    - [1.2.1. MediaFailed](#121-mediafailed)
+    - [1.2.2. MediaOpened](#122-mediaopened)
+    - [1.2.3. BufferingStarted](#123-bufferingstarted)
+    - [1.2.4. BufferingEnded](#124-bufferingended)
+    - [1.2.5. ScriptCommand](#125-scriptcommand)
+    - [1.2.6. MediaEnded](#126-mediaended)
+- [1.3. MediaCommands](#13-mediacommands)
+- [2. Icon](#2-icon)
+- [3. Drag](#3-drag)
+- [4. TimeSpanToStringConverter](#4-timespantostringconverter)
+- [5. Commands](#5-commands)
+- [6. Sample](#6-sample)
 
-# 1. Properties
+# 1. MediaElementWrapper
+## 1.1 Properties
 The wrapper wraps the properties of System.Windows.Controls.MediaElement and adds a couple of new properties.
 Mapped properties are dependency properties that are updated when needed.
 
-## 1.1. State (`MediaState`)
+### 1.1.1 State (`MediaState`)
 The current `MediaState` of the player.
 
-## 1.2. Position (`Timespan?`)
+### 1.1.2. Position (`Timespan?`)
 The current position in the media, `null` if no media is loaded.
 Twoway bindable and updates every 0.1 s when playing.
 
-## 1.3. Length (`Timespan?`)
+### 1.1.3. Length (`Timespan?`)
 The length of the current media, `null`if no media is loaded.
 
-## 1.4. CanPauseMedia (`bool?`)
+### 1.1.4. CanPauseMedia (`bool?`)
 Mapped to System.Windows.Controls.MediaElement.CanPause, `null`if no media is loaded.
 
-## 1.5. NaturalVideoHeight (`int?`)
+### 1.1.5. NaturalVideoHeight (`int?`)
 Mapped to System.Windows.Controls.MediaElement.NaturalVideoHeight, `null`if no media is loaded.
 
-## 1.6. NaturalVideoWidth (`int?`)
+### 1.1.6. NaturalVideoWidth (`int?`)
 Mapped to System.Windows.Controls.MediaElement.NaturalVideoWidth, `null`if no media is loaded.
 
-## 1.7. HasAudio (`bool?`)
+### 1.1.7. HasAudio (`bool?`)
 Mapped to System.Windows.Controls.MediaElement.HasAudio, `null`if no media is loaded.
 
-## 1.8. HasVideo (`bool?`)
+### 1.1.8. HasVideo (`bool?`)
 Mapped to System.Windows.Controls.MediaElement.HasVideo, `null`if no media is loaded.
 
-## 1.9. SpeedRatio (`double`)
+### 1.1.8. HasMedia (`bool`)
+Returns true if media is loaded.
+
+### 1.1.9. SpeedRatio (`double`)
 Mapped to System.Windows.Controls.MediaElement.SpeedRatio.
 
-## 1.10. IsBuffering (`bool`)
+### 1.1.10. IsBuffering (`bool`)
 Mapped to System.Windows.Controls.MediaElement.IsBuffering.
 
-## 1.11. DownloadProgress (`double`)
+### 1.1.11. DownloadProgress (`double`)
 Mapped to System.Windows.Controls.MediaElement.DownloadProgress.
 Updated every 1 s when buffering.
 
-## 1.12. BufferingProgress (`double`)
+### 1.1.12. BufferingProgress (`double`)
 Mapped to System.Windows.Controls.MediaElement.BufferingProgress.
 Updated every 1 s when buffering.
 
-## 1.13. VolumeIncrement (`double`)
+### 1.1.13. VolumeIncrement (`double`)
 How much volume is changed when MediaCommands.IncreaseVolume & MediaCommands.DecreaseVolume are invoked.
 Default 0.05;
 
-## 1.14. VideoFormats
+### 1.1.14. VideoFormats
 A list of video file formats for convenience.
 *.dat; *.wmv; *.3g2; *.3gp; *.3gp2; *.3gpp; *.amv; *.asf;  *.avi; *.bin; *.cue; *.divx; *.dv; *.flv; *.gxf; *.iso; *.m1v; *.m2v; *.m2t; *.m2ts; *.m4v; *.mkv; *.mov; *.mp2; *.mp2v; *.mp4; *.mp4v; *.mpa; *.mpe; *.mpeg; *.mpeg1; *.mpeg2; *.mpeg4; *.mpg; *.mpv2; *.mts; *.nsv; *.nuv; *.ogg; *.ogm; *.ogv; *.ogx; *.ps; *.rec; *.rm; *.rmvb; *.tod; *.ts; *.tts; *.vob; *.vro; *.webm
 
@@ -105,7 +114,7 @@ if (openFileDialog.ShowDialog() == true)
 }
 ```
 
-## 1.15. AudioFormats
+### 1.1.15. AudioFormats
 A list of audio file formats for convenience.
 *.mp3; *.wma; *.aac; *.adt; *.adts; *.m4a; *.wav; *.aif; *.aifc; *.aiff; *.cda
 
@@ -123,52 +132,52 @@ if (openFileDialog.ShowDialog() == true)
 }
 ```
 
-## 1.16. Source (`Uri`)
+### 1.1.16. Source (`Uri`)
 Mapped to System.Windows.Controls.MediaElement.Source.
 When source changes play is invoked to trigger load. Then pause is invoked in the MediaOpened event.
 This results in the video paused at the first frame as initial state after setting `Source`
 Subscribe to `MediaOpened` if you want to start playing on load.
 
-## 1.17. Volume (`double`)
+### 1.1.17. Volume (`double`)
 Mapped to System.Windows.Controls.MediaElement.Volume.
 
-## 1.18. Balance (`double`)
+### 1.1.18. Balance (`double`)
 Mapped to System.Windows.Controls.MediaElement.Balance.
 
-## 1.19. IsMuted (`bool`)
+### 1.1.19. IsMuted (`bool`)
 Mapped to System.Windows.Controls.MediaElement.IsMuted.
 
-## 1.20. ScrubbingEnabled (`bool`)
+### 1.1.20. ScrubbingEnabled (`bool`)
 Mapped to System.Windows.Controls.MediaElement.ScrubbingEnabled.
 
-## 1.21. Stretch (`Stretch`)
+### 1.1.21. Stretch (`Stretch`)
 Mapped to System.Windows.Controls.MediaElement.Stretch.
 
-## 1.22. StretchDirection (`StretchDirection`)
+### 1.1.22. StretchDirection (`StretchDirection`)
 Mapped to System.Windows.Controls.MediaElement.StretchDirection.
 
-# 2. Events
+## 1.2. Events
 
-## 2.1. MediaFailed
+### 1.2.1. MediaFailed
 Mapped to System.Windows.Controls.MediaElement.MediaFailed.
 
-## 2.2. MediaOpened
+### 1.2.2. MediaOpened
 Mapped to System.Windows.Controls.MediaElement.MediaOpened.
 
-## 2.3. BufferingStarted
+### 1.2.3. BufferingStarted
 Mapped to System.Windows.Controls.MediaElement.BufferingStarted.
 
-## 2.4. BufferingEnded
+### 1.2.4. BufferingEnded
 Mapped to System.Windows.Controls.MediaElement.BufferingEnded.
 
-## 2.5. ScriptCommand
+### 1.2.5. ScriptCommand
 Mapped to System.Windows.Controls.MediaElement.ScriptCommand.
 
-## 2.6. MediaEnded
+### 1.2.6. MediaEnded
 Mapped to System.Windows.Controls.MediaElement.MediaEnded.
 
-# 3. MediaCommands
-Adds command bindings for:
+# 1.3. MediaCommands
+Has command bindings for:
   - MediaCommands.Play
   - MediaCommands.Pause
   - MediaCommands.Stop
@@ -178,14 +187,52 @@ Adds command bindings for:
   - MediaCommands.DecreaseVolume
   - MediaCommands.MuteVolume
 
-# 4. ommands
+# 2. Icon
+Exposes a `Gemoetry` attached property.
+```xaml
+<Button media:Icon.Geometry="{StaticResource {x:Static media:Geometries.PlayGeometryKey}}"
+        Command="Play"
+        CommandTarget="{Binding ElementName=MediaElement}" />
+```
+
+# 3. Drag
+Exposes a `PauseWhileDragging` attached property.
+When binidng this to a `MediaElementWrapper`playback is paused while dragging.
+
+```xaml
+<Slider x:Name="ProgressSlider"
+        Grid.Row="0"
+        media:Drag.PauseWhileDragging="{Binding ElementName=MediaElement}"
+        Maximum="{Binding ElementName=MediaElement,
+                            Path=Length,
+                            Converter={x:Static demo:TimeSpanToSecondsConverter.Default}}"
+        Minimum="0"
+        Style="{StaticResource {x:Static media:Styles.ProgressSliderStyleKey}}"
+        Value="{Binding ElementName=MediaElement,
+                        Path=Position,
+                        Converter={x:Static demo:TimeSpanToSecondsConverter.Default}}" />
+```
+
+# 4. TimeSpanToStringConverter
+Converts Timespans like this:
+|Time|Result|
+|---|---|
+|null|-:--|
+|00:00:01|0:01|
+|00:00:12|0:12|
+|00:01:23|1:23|
+|00:12:34|12:23|
+|01:23:45|1:23:45|
+
+
+# 5. Commands
 - Commands.ToggleMute
 - Commands.ToggleFullScreen
 
-Adds command bindings for:
+MediaElementWrapper has a command bindings for:
   - Commands.ToggleMute
 
-# 4. Sample
+# 6. Sample
 
 ```xaml
 <Window x:Class="Gu.Wpf.Media.Demo.MainWindow"

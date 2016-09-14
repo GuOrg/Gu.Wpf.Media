@@ -73,7 +73,8 @@
                     </ToggleButton.Style>
                 </ToggleButton>
 
-                <ToggleButton x:Name="ToggleMutedButton" Grid.Column="1"
+                <ToggleButton x:Name="ToggleMutedButton"
+                              Grid.Column="1"
                               IsChecked="{Binding ElementName=MediaElement,
                                                   Path=IsMuted}"
                               IsEnabled="{Binding ElementName=MediaElement,
@@ -92,9 +93,11 @@
 
                 <TextBlock x:Name="ProgressTextBlock"
                            Grid.Column="2"
-                           Opacity="{Binding ElementName=ToggleMutedButton, Path=Opacity}"
-                           Foreground="{Binding ElementName=ToggleMutedButton, Path=Foreground}"
-                           VerticalAlignment="Center">
+                           VerticalAlignment="Center"
+                           Foreground="{Binding ElementName=ToggleMutedButton,
+                                                Path=Foreground}"
+                           Opacity="{Binding ElementName=ToggleMutedButton,
+                                             Path=Opacity}">
                     <TextBlock.Text>
                         <MultiBinding StringFormat="{}{0} / {1}">
                             <Binding Converter="{x:Static media:TimeSpanToStringConverter.Default}"

@@ -87,7 +87,7 @@
                                           Background="{TemplateBinding Background}"
                                           ClipToBounds="False"
                                           Command="Slider.IncreaseLarge"
-                                          Opacity="0.6"
+                                          Opacity="0.4"
                                           Style="{StaticResource {x:Static media:Styles.ProgressRepeatButtonStyleKey}}" />
                         </Track.IncreaseRepeatButton>
                     </Track>

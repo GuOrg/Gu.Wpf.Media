@@ -49,7 +49,6 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Converters\SecondsToTimeSpanConverter.cs" />
-    <Compile Include="Converters\TimeSpanToSecondsConverter.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

@@ -239,78 +239,126 @@ MediaElementWrapper has a command bindings for:
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:demo="clr-namespace:Gu.Wpf.Media.Demo"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:media="https://github.com/JohanLarsson/Gu.Wpf.Media"
         Title="MainWindow"
-        Width="300"
-        Height="300"
         MinWidth="300"
+        Background="Black"
         SizeToContent="WidthAndHeight"
         mc:Ignorable="d">
     <Window.InputBindings>
         <KeyBinding Key="Space"
                     Command="TogglePlayPause"
                     CommandTarget="{Binding ElementName=MediaElement}" />
+        <KeyBinding Key="F11" Command="media:Commands.ToggleFullScreen" />
     </Window.InputBindings>
     <Window.CommandBindings>
         <CommandBinding Command="ApplicationCommands.Open" Executed="OpenExecuted" />
+        <CommandBinding Command="media:Commands.ToggleFullScreen" Executed="OnToggleFullScreenExecuted" />
     </Window.CommandBindings>
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
-        <ToolBar>
-            <Button Command="ApplicationCommands.Open" Content="Open"/>
-            <Separator />
-            <Button Command="MediaCommands.Play" CommandTarget="{Binding ElementName=MediaElement}" Content="Play"/>
-            <Button Command="MediaCommands.Pause" CommandTarget="{Binding ElementName=MediaElement}" Content="Pause"/>
-            <Button Command="MediaCommands.Stop" CommandTarget="{Binding ElementName=MediaElement}" Content="Stop"/>
-        </ToolBar>
-
         <media:MediaElementWrapper x:Name="MediaElement"
-                                   Grid.Row="1"
-                                   MediaOpened="OnMediaOpened"
-                                   ScrubbingEnabled="True" />
+                                   ScrubbingEnabled="True"
+                                   Stretch="None" />
 
-        <StatusBar Grid.Row="2">
-            <StatusBar.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
-                    </Grid>
-                </ItemsPanelTemplate>
-            </StatusBar.ItemsPanel>
+        <Grid VerticalAlignment="Bottom">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Slider x:Name="ProgressSlider"
+                    Grid.Row="0"
+                    media:Drag.PauseWhileDragging="{Binding ElementName=MediaElement}"
+                    Maximum="{Binding ElementName=MediaElement,
+                                      Path=Length,
+                                      Converter={x:Static media:NullableTimeSpanToSecondsConverter.Default}}"
+                    Minimum="0"
+                    Style="{StaticResource {x:Static media:Styles.ProgressSliderStyleKey}}"
+                    Value="{Binding ElementName=MediaElement,
+                                    Path=Position,
+                                    Converter={x:Static media:NullableTimeSpanToSecondsConverter.Default}}" />
+            
+            <Grid Grid.Row="1">
+                <Grid.Resources>
+                    <Style BasedOn="{StaticResource {x:Static media:Styles.PlayerButtonBaseStyleKey}}" TargetType="{x:Type Button}" />
+                </Grid.Resources>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
 
-            <StatusBarItem Grid.Column="0" HorizontalContentAlignment="Stretch">
-                <Slider x:Name="ProgressSlider"
-                        Maximum="{Binding ElementName=MediaElement,
-                                          Path=Length,
-                                          Converter={x:Static demo:TimeSpanToSecondsConverter.Default}}"
-                        Minimum="0"
-                        Thumb.DragCompleted="OnProgressSliderDragCompleted"
-                        Thumb.DragStarted="OnProgressSliderDragStarted"
-                        Value="{Binding ElementName=MediaElement,
-                                        Path=Position,
-                                        Converter={x:Static demo:TimeSpanToSecondsConverter.Default}}" />
-            </StatusBarItem>
+                <ToggleButton x:Name="PlayPauseButton"
+                              Grid.Column="0"
+                              IsChecked="{Binding ElementName=MediaElement,
+                                                  Path=IsPlaying}"
+                              IsEnabled="{Binding ElementName=MediaElement,
+                                                  Path=HasMedia}">
+                    <ToggleButton.Style>
+                        <Style BasedOn="{StaticResource {x:Static media:Styles.PlayerButtonBaseStyleKey}}" TargetType="{x:Type ToggleButton}">
+                            <Setter Property="media:Icon.Geometry" Value="{StaticResource {x:Static media:Geometries.PauseGeometryKey}}" />
+                            <Style.Triggers>
+                                <Trigger Property="IsChecked" Value="False">
+                                    <Setter Property="media:Icon.Geometry" Value="{StaticResource {x:Static media:Geometries.PlayGeometryKey}}" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ToggleButton.Style>
+                </ToggleButton>
 
-            <StatusBarItem Grid.Column="1">
-                <TextBlock x:Name="ProgressTextBlock">
+                <ToggleButton x:Name="ToggleMutedButton"
+                              Grid.Column="1"
+                              IsChecked="{Binding ElementName=MediaElement,
+                                                  Path=IsMuted}"
+                              IsEnabled="{Binding ElementName=MediaElement,
+                                                  Path=HasMedia}">
+                    <ToggleButton.Style>
+                        <Style BasedOn="{StaticResource {x:Static media:Styles.PlayerButtonBaseStyleKey}}" TargetType="{x:Type ToggleButton}">
+                            <Setter Property="media:Icon.Geometry" Value="{StaticResource {x:Static media:Geometries.UnMuteGeometryKey}}" />
+                            <Style.Triggers>
+                                <Trigger Property="IsChecked" Value="False">
+                                    <Setter Property="media:Icon.Geometry" Value="{StaticResource {x:Static media:Geometries.MuteGeometryKey}}" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ToggleButton.Style>
+                </ToggleButton>
+
+                <TextBlock x:Name="ProgressTextBlock"
+                           Grid.Column="2"
+                           VerticalAlignment="Center"
+                           Foreground="{Binding ElementName=ToggleMutedButton,
+                                                Path=Foreground}"
+                           Opacity="{Binding ElementName=ToggleMutedButton,
+                                             Path=Opacity}">
                     <TextBlock.Text>
-                        <MultiBinding StringFormat="{}{0}/{1}">
-                            <Binding ElementName="MediaElement" Path="Position" />
-                            <Binding ElementName="MediaElement" Path="Length" />
+                        <MultiBinding StringFormat="{}{0} / {1}">
+                            <Binding Converter="{x:Static media:TimeSpanToStringConverter.Default}"
+                                     ElementName="MediaElement"
+                                     Path="Position" />
+                            <Binding Converter="{x:Static media:TimeSpanToStringConverter.Default}"
+                                     ElementName="MediaElement"
+                                     Path="Length" />
                         </MultiBinding>
                     </TextBlock.Text>
                 </TextBlock>
-            </StatusBarItem>
-        </StatusBar>
+
+                <Button Grid.Column="4"
+                        media:Icon.Geometry="{StaticResource {x:Static media:Geometries.FolderOpenGeometryKey}}"
+                        Command="ApplicationCommands.Open" />
+
+                <Button Grid.Column="5"
+                        HorizontalAlignment="Right"
+                        media:Icon.Geometry="{StaticResource {x:Static media:Geometries.FullScreenGeometryKey}}"
+                        Command="media:Commands.ToggleFullScreen"
+                        IsEnabled="{Binding ElementName=MediaElement,
+                                            Path=HasMedia}"
+                        Padding="12,6,6,6" />
+            </Grid>
+        </Grid>
     </Grid>
 </Window>
 ```
@@ -318,9 +366,15 @@ MediaElementWrapper has a command bindings for:
 With code behind:
 
 ```c#
+using System;
+using System.Windows;
+using System.Windows.Input;
+using System.Windows.Media;
+using Microsoft.Win32;
+
 public partial class MainWindow : Window
 {
-    private MediaState mediaState;
+    private Stretch stretch;
 
     public MainWindow()
     {
@@ -340,17 +394,22 @@ public partial class MainWindow : Window
         }
     }
 
-    private void OnProgressSliderDragStarted(object sender, DragStartedEventArgs e)
+    private void OnToggleFullScreenExecuted(object sender, ExecutedRoutedEventArgs e)
     {
-        this.mediaState = this.MediaElement.State;
-        this.MediaElement.Pause();
-    }
-
-    private void OnProgressSliderDragCompleted(object sender, DragCompletedEventArgs e)
-    {
-        if (this.mediaState == MediaState.Play)
+        if (this.WindowStyle == WindowStyle.SingleBorderWindow)
         {
-            this.MediaElement.Play();
+            this.stretch = this.MediaElement.Stretch;
+            this.MediaElement.Stretch = Stretch.Uniform;
+            this.WindowStyle = WindowStyle.None;
+            this.SizeToContent = SizeToContent.Manual;
+            this.WindowState = WindowState.Maximized;
+        }
+        else
+        {
+            this.MediaElement.Stretch = this.stretch;
+            this.WindowStyle = WindowStyle.SingleBorderWindow;
+            this.SizeToContent = SizeToContent.WidthAndHeight;
+            this.WindowState = WindowState.Normal;
         }
     }
 }

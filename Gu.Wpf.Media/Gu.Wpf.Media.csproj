@@ -81,6 +81,7 @@
     <AppDesigner Include="Properties\" />
     <Compile Include="ResourceKeys\Geometries.cs" />
     <Compile Include="ResourceKeys\Styles.cs" />
+    <Compile Include="Converters\NullableTimeSpanToSecondsConverter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Gu.Wpf.Media.ruleset" />

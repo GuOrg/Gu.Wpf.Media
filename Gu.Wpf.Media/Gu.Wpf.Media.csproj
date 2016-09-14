@@ -63,6 +63,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AttachedProperties\Drag.cs" />
     <Compile Include="Commands.cs" />
     <Compile Include="FileFormats.cs" />
     <Compile Include="AttachedProperties\Icon.cs" />

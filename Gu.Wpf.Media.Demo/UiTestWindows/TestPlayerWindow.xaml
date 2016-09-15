@@ -31,21 +31,21 @@
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
                             <TextBlock Grid.Row="0"
-                                       Grid.Column="1"
+                                       Grid.Column="0"
                                        Text="Value" />
                             <TextBox Grid.Row="0"
                                      Grid.Column="1"
                                      IsEnabled="{Binding Property.ReadOnly, Converter={x:Static local:InvertBoolConverter.Default}}"
                                      Text="{Binding Value}" />
 
-                            <TextBlock Grid.Row="0"
-                                       Grid.Column="1"
+                            <!--<TextBlock Grid.Row="1"
+                                       Grid.Column="0"
                                        Text="IsReadonly" />
-                            <TextBox Grid.Row="0"
+                            <TextBox Grid.Row="1"
                                      Grid.Column="1"
                                      IsEnabled="False"
                                      Text="{Binding Property.ReadOnly,
-                                                    Mode=OneWay}" />
+                                                    Mode=OneWay}" />-->
                         </Grid>
                     </GroupBox>
                 </DataTemplate>

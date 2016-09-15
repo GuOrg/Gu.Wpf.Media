@@ -6,7 +6,7 @@
     {
         public TestPlayerWindow()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
     }
 }

@@ -4,12 +4,52 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:local="clr-namespace:Gu.Wpf.Media.Demo.UiTestWindows"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:media="https://github.com/JohanLarsson/Gu.Wpf.Media"
         Title="TestPlayerWindow"
         d:DesignHeight="300"
         d:DesignWidth="300"
         mc:Ignorable="d">
-    <StackPanel>
-        <TextBox x:Name="a" Text="" />
-        <TextBox x:Name="b" Text="{Binding ElementName=a, Path=Text, Converter={x:Static local:TestConverter.Default}}" />
-    </StackPanel>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <media:MediaElementWrapper x:Name="MediaElement"
+                                   ScrubbingEnabled="True"
+                                   Stretch="None" />
+        <ItemsControl Grid.Column="1" ItemsSource="{Binding ElementName=MediaElement, Converter={x:Static local:MediaElementToPropertyListConverter.Default}}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate DataType="{x:Type local:PropertyItem}">
+                    <GroupBox Header="{Binding Property.Name}">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Row="0"
+                                       Grid.Column="1"
+                                       Text="Value" />
+                            <TextBox Grid.Row="0"
+                                     Grid.Column="1"
+                                     IsEnabled="{Binding Property.ReadOnly, Converter={x:Static local:InvertBoolConverter.Default}}"
+                                     Text="{Binding Value}" />
+
+                            <TextBlock Grid.Row="0"
+                                       Grid.Column="1"
+                                       Text="IsReadonly" />
+                            <TextBox Grid.Row="0"
+                                     Grid.Column="1"
+                                     IsEnabled="False"
+                                     Text="{Binding Property.ReadOnly,
+                                                    Mode=OneWay}" />
+                        </Grid>
+                    </GroupBox>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </Grid>
 </Window>

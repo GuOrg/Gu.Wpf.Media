@@ -2,6 +2,11 @@
 {
     using System;
     using System.Globalization;
+    using System.Linq;
+    using System.Reflection;
+    using System.Windows;
+    using System.Windows.Markup;
+
     using NUnit.Framework;
 
     public class TimeSpanToStringConverterTests

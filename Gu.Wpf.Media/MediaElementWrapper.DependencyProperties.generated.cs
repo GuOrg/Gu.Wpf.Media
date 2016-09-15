@@ -39,7 +39,7 @@
         /// </returns>
         public static readonly DependencyProperty IsMutedProperty = MediaElement.IsMutedProperty.AddOwner(
             typeof(MediaElementWrapper),
-            new FrameworkPropertyMetadata(false,FrameworkPropertyMetadataOptions.None, null, OnIsMutedCoerce));
+            new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.None, null, OnIsMutedCoerce));
 
         /// <summary>
         /// Identifies the <see cref="MediaElementWrapper.ScrubbingEnabled" /> dependency property.

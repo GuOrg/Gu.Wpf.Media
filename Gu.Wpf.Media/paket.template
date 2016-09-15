@@ -1,12 +1,10 @@
 ﻿type project
 
 releasenotes
-  USABILITY: Styles & Gemoetries and converters.
-  USABILITY: IsPlaying & HasMedia properties.
-  BREAKING CHANGE: .Net 4.5
-  BUGFIXES: Make properties readonly.
-  USABILITY: Drag.PauseWhileDragging
-  USABILITY: Expose default file formats viw FileFormats.
+  USABILITY: UnmuteVolume command.
+  BREAKING CHANGE: Renamed MuteVolume & CanMuteVolume
+  BUGFIX: Use SetCurrentValue for mutable dependency properties.
+  BUGFIX: Handle set source to null.
 
 tags wpf xaml media mediaelement
 projectUrl https://github.com/JohanLarsson/Gu.Wpf.Media

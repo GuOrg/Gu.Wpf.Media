@@ -19,11 +19,21 @@
             typeof(Icon),
             new PropertyMetadata(default(Geometry)));
 
+        /// <summary>
+        /// Set a <see cref="Geometry"/> that can be used in the <see cref="System.Windows.Controls.ControlTemplate"/>
+        /// </summary>
+        /// <param name="element">The button.</param>
+        /// <param name="value">The icon geometry.</param>
         public static void SetGeometry(this ButtonBase element, Geometry value)
         {
             element.SetValue(GeometryProperty, value);
         }
 
+        /// <summary>
+        /// Set a <see cref="Geometry"/> that can be used in the <see cref="System.Windows.Controls.ControlTemplate"/>
+        /// </summary>
+        /// <param name="element">The button.</param>
+        /// <returns>The icon geometry.</returns>
         [AttachedPropertyBrowsableForChildren(IncludeDescendants = false)]
         [AttachedPropertyBrowsableForType(typeof(ButtonBase))]
         public static Geometry GetGeometry(this ButtonBase element)

@@ -25,11 +25,21 @@
             EventManager.RegisterClassHandler(typeof(Slider), Thumb.DragCompletedEvent, new DragCompletedEventHandler(OnDragComplated));
         }
 
+        /// <summary>
+        /// Set the <paramref name="value"/> for which playback will be paused while <paramref name="element"/> is dragging.
+        /// </summary>
+        /// <param name="element">A slider controlling position of <paramref name="value"/></param>
+        /// <param name="value">A <see cref="MediaElementWrapper"/></param>
         public static void SetPauseWhileDragging(Slider element, MediaElementWrapper value)
         {
             element.SetValue(PauseWhileDraggingProperty, value);
         }
 
+        /// <summary>
+        /// Get the <see cref="MediaElementWrapper"/> for which playback will be paused while <paramref name="element"/> is dragging.
+        /// </summary>
+        /// <param name="element">A slider controlling position of a <see cref="MediaElementWrapper"/></param>
+        /// <returns>The <see cref="MediaElementWrapper"/></returns>
         [AttachedPropertyBrowsableForChildren(IncludeDescendants = false)]
         [AttachedPropertyBrowsableForType(typeof(Slider))]
         public static MediaElementWrapper GetPauseWhileDragging(Slider element)

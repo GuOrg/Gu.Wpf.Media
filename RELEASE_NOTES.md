@@ -1,9 +1,16 @@
+#### 0.3.0
+* USABILITY: UnmuteVolume command.
+* BREAKING CHANGE: Renamed MuteVolume & CanMuteVolume
+* BUGFIX: Use SetCurrentValue for mutable dependency properties.
+* BUGFIX: Handle set source to null.
+
 #### 0.2.0
 * USABILITY: Styles & Gemoetries and converters.
 * BREAKING CHANGE: .Net 4.5
 * BUGFIXES: Make properties readonly.
 * USABILITY: Drag.PauseWhileDragging
 * USABILITY: Expose default file formats viw FileFormats.
+
 #### 0.1.1.3
 * USABILITY: Expose file filters via FileFormats.
 

@@ -260,12 +260,15 @@
         /// Resturns false if volume is zero.
         /// </summary>
         /// <returns>True if audio can be muted.</returns>
-        private bool CanUnmuteVolume()
+        public bool CanUnmuteVolume()
         {
             return this.IsMuted && this.Volume > 0;
         }
 
-        private void UnmuteVolume()
+        /// <summary>
+        /// Turns sound on by setting IsMuted = false
+        /// </summary>
+        public void UnmuteVolume()
         {
             this.SetCurrentValue(IsMutedProperty, false);
         }

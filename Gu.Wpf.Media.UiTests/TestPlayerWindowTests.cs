@@ -15,8 +15,8 @@ namespace Gu.Wpf.Media.UiTests
         [SetUp]
         public void SetUp()
         {
-            this.SetValue(MediaElementWrapper.StateProperty, "Stop");
-            this.SetValue(MediaElementWrapper.StateProperty, "Manual");
+            this.SetValue(MediaElementWrapper.StateProperty, "Pause");
+            this.SetValue(MediaElementWrapper.LoadedBehaviorProperty, "Pause");
             this.SetValue(MediaElementWrapper.SourceProperty, "");
             this.SetValue(MediaElementWrapper.VolumeProperty, "0.5");
             this.SetValue(MediaElementWrapper.VolumeIncrementProperty, "0.05");

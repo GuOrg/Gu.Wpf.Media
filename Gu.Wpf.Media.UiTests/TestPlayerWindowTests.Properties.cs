@@ -2,13 +2,9 @@ namespace Gu.Wpf.Media.UiTests
 {
     using System;
     using System.Threading;
-    using System.Windows;
-
     using Gu.Wpf.Media.UiTests.Helpers;
 
     using NUnit.Framework;
-
-    using TestStack.White.UIItems;
 
     public partial class TestPlayerWindowTests
     {
@@ -33,7 +29,7 @@ namespace Gu.Wpf.Media.UiTests
             this.AreEqual("True", false, MediaElementWrapper.ScrubbingEnabledProperty);
             this.AreEqual("", false, MediaElementWrapper.SourceProperty);
             this.AreEqual("0", false, MediaElementWrapper.SpeedRatioProperty);
-            this.AreEqual("Manual", false, MediaElementWrapper.StateProperty);
+            this.AreEqual("Pause", false, MediaElementWrapper.StateProperty);
             this.AreEqual("None", false, MediaElementWrapper.StretchProperty);
             this.AreEqual("Both", false, MediaElementWrapper.StretchDirectionProperty);
             this.AreEqual(FileFormats.DefaultVideoFormats, false, MediaElementWrapper.VideoFormatsProperty);
@@ -42,8 +38,9 @@ namespace Gu.Wpf.Media.UiTests
         }
 
         [Test]
-        public void SetSourceToCoffeClip()
+        public void SetSourceToCoffeeClipPause()
         {
+            this.SetValue(MediaElementWrapper.LoadedBehaviorProperty, "Pause");
             this.SetValue(MediaElementWrapper.SourceProperty, Info.CoffeeClipFileName());
             this.AreEqual("0", false, MediaElementWrapper.BalanceProperty);
             this.AreEqual("0", true, MediaElementWrapper.BufferingProgressProperty);
@@ -67,6 +64,26 @@ namespace Gu.Wpf.Media.UiTests
             this.AreEqual("Both", false, MediaElementWrapper.StretchDirectionProperty);
             this.AreEqual("0.5", false, MediaElementWrapper.VolumeProperty);
             this.AreEqual("0.05", false, MediaElementWrapper.VolumeIncrementProperty);
+        }
+
+        [Test]
+        public void SetSourceToCoffeeClipLoadedBehaviorPlay()
+        {
+            this.SetValue(MediaElementWrapper.LoadedBehaviorProperty, "Play");
+            this.SetValue(MediaElementWrapper.SourceProperty, Info.CoffeeClipFileName());
+            this.AreEqual("True", false, MediaElementWrapper.IsPlayingProperty);
+            this.AreEqual(Info.CoffeeClipFileName(), false, MediaElementWrapper.SourceProperty);
+            this.AreEqual("Play", false, MediaElementWrapper.StateProperty);
+        }
+
+        [Test]
+        public void SetSourceToCoffeeClipLoadedBehaviorStop()
+        {
+            this.SetValue(MediaElementWrapper.LoadedBehaviorProperty, "Stop");
+            this.SetValue(MediaElementWrapper.SourceProperty, Info.CoffeeClipFileName());
+            this.AreEqual("False", false, MediaElementWrapper.IsPlayingProperty);
+            this.AreEqual(Info.CoffeeClipFileName(), false, MediaElementWrapper.SourceProperty);
+            this.AreEqual("Stop", false, MediaElementWrapper.StateProperty);
         }
 
         [Test]

@@ -1,6 +1,7 @@
 #### 0.3.1
-* USABILITY: QuitFullScreen command.
+* USABILITY: BeginFullScreen & EndFullScreen command.
 * USABILITY: LoadedBehavior
+* BREAKING CHANGE: Use custom MediaState.
 
 #### 0.3.0
 * USABILITY: UnmuteVolume command.

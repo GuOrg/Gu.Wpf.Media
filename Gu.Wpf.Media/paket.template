@@ -3,6 +3,7 @@
 releasenotes
   USABILITY: BeginFullScreen & EndFullScreen command.
   USABILITY: LoadedBehavior
+  BREAKING CHANGE: Use custom MediaState.
 
 tags wpf xaml media mediaelement
 projectUrl https://github.com/JohanLarsson/Gu.Wpf.Media

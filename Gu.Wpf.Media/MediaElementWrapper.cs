@@ -18,8 +18,8 @@
         {
             this.mediaElement = new MediaElement
             {
-                LoadedBehavior = MediaState.Manual,
-                UnloadedBehavior = MediaState.Manual,
+                LoadedBehavior = System.Windows.Controls.MediaState.Manual,
+                UnloadedBehavior = System.Windows.Controls.MediaState.Manual,
             };
 
             this.mediaElement.MediaFailed += (o, e) =>
@@ -61,14 +61,11 @@
             {
                 switch (this.LoadedBehavior)
                 {
-                    case MediaState.Manual:
                     case MediaState.Stop:
                         this.Stop();
                         break;
                     case MediaState.Play:
                         this.Play();
-                        break;
-                    case MediaState.Close:
                         break;
                     case MediaState.Pause:
                         this.Pause();
@@ -393,10 +390,6 @@
                     wrapper.mediaElement.Play();
                     wrapper.updatePositionTimer.Start();
                     break;
-                case MediaState.Close:
-                    wrapper.mediaElement.Close();
-                    wrapper.updatePositionTimer.Stop();
-                    break;
                 case MediaState.Pause:
                     wrapper.mediaElement.Pause();
                     wrapper.updatePositionTimer.Stop();
@@ -404,8 +397,6 @@
                 case MediaState.Stop:
                     wrapper.mediaElement.Stop();
                     wrapper.updatePositionTimer.Stop();
-                    break;
-                case MediaState.Manual:
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -453,7 +444,18 @@
             {
                 if (this.mediaElement.Source != null)
                 {
-                    this.mediaElement.Play();
+                    switch (this.LoadedBehavior)
+                    {
+                        case MediaState.Play:
+                        case MediaState.Pause:
+                        case MediaState.Stop:
+                            // this gets stopped or paused in the loaded event
+                            // we do this to load so we get data like length.
+                            this.mediaElement.Play();
+                            break;
+                        default:
+                            throw new ArgumentOutOfRangeException();
+                    }
                 }
             }
         }

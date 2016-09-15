@@ -233,9 +233,11 @@
         /// <summary>
         /// The DependencyProperty for the MediaElementWrapper.LoadedBehavior property.
         /// </summary>
-        public static readonly DependencyProperty LoadedBehaviorProperty = MediaElement.LoadedBehaviorProperty.AddOwner(
+        public static readonly DependencyProperty LoadedBehaviorProperty = DependencyProperty.Register(
+            nameof(LoadedBehavior),
+            typeof(MediaState),
             typeof(MediaElementWrapper),
-            new FrameworkPropertyMetadata(MediaState.Play));
+            new PropertyMetadata(MediaState.Play));
 
 #pragma warning restore SA1202 // Elements must be ordered by access
 
@@ -403,7 +405,7 @@
         /// </summary>
         public MediaState LoadedBehavior
         {
-            get { return (MediaState) this.GetValue(LoadedBehaviorProperty); }
+            get { return (MediaState)this.GetValue(LoadedBehaviorProperty); }
             set { this.SetValue(LoadedBehaviorProperty, value); }
         }
 

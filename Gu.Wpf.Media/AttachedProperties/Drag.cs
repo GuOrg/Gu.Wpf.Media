@@ -9,6 +9,10 @@
     /// </summary>
     public static class Drag
     {
+        /// <summary>
+        /// This is an attached property.
+        /// Setting this to {Binding ElementName=SomeMediaElementWrapper} will pause playback when the slider controlling postion is dragged.
+        /// </summary>
         public static readonly DependencyProperty PauseWhileDraggingProperty = DependencyProperty.RegisterAttached(
             "PauseWhileDragging",
             typeof(MediaElementWrapper),

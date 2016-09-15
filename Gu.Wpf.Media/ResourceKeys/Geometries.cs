@@ -1,8 +1,13 @@
-﻿namespace Gu.Wpf.Media
+﻿#pragma warning disable SA1600 // Elements must be documented
+#pragma warning disable 1591
+namespace Gu.Wpf.Media
 {
     using System.Runtime.CompilerServices;
     using System.Windows;
 
+    /// <summary>
+    /// A set of resource keys for geometries.
+    /// </summary>
     public static class Geometries
     {
         public static ResourceKey PlayGeometryKey { get; } = Create();

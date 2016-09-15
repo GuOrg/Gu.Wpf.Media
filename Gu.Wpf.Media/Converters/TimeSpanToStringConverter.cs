@@ -7,9 +7,14 @@
     using System.Windows.Data;
     using System.Windows.Markup;
 
+    /// <inheritdoc />
     [ValueConversion(typeof(TimeSpan?), typeof(string), ParameterType = typeof(string))]
+    [MarkupExtensionReturnType(typeof(IValueConverter))]
     public class TimeSpanToStringConverter : MarkupExtension, IValueConverter
     {
+        /// <summary>
+        /// The default instance used like Converter="{x:Static TimeSpanToStringConverter.Default}"
+        /// </summary>
         public static readonly TimeSpanToStringConverter Default = new TimeSpanToStringConverter();
 
         // Expecting this to only be called from the UI-thread.
@@ -104,7 +109,7 @@
         /// <inheritdoc/>
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value == null)
+            if (value == null || Equals(this.NullString, value))
             {
                 return null;
             }

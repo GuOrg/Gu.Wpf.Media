@@ -245,12 +245,19 @@
             this.IsMuted = true;
         }
 
-        private bool CanToggleMute()
+        /// <summary>
+        /// Checks if sound can be muted.
+        /// </summary>
+        /// <returns>True if sound can be muted.</returns>
+        public bool CanToggleMute()
         {
             return true;
         }
 
-        private void ToggleMute()
+        /// <summary>
+        /// Sets IsMuted = !Muted
+        /// </summary>
+        public void ToggleMute()
         {
             this.IsMuted = !this.IsMuted;
         }

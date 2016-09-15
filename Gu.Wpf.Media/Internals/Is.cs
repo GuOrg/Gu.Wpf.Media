@@ -1,4 +1,5 @@
-﻿namespace Gu.Wpf.Media
+﻿#pragma warning disable SA1600 // Elements must be documented
+namespace Gu.Wpf.Media
 {
     using System.ComponentModel;
     using System.Windows;

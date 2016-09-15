@@ -54,6 +54,11 @@
             }
         }
 
+        public override string ToString()
+        {
+            return $"{nameof(this.Property)}: {this.Property}, {nameof(this.Value)}: {this.Value}";
+        }
+
         [NotifyPropertyChangedInvocator]
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {

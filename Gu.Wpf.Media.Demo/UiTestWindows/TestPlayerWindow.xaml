@@ -50,7 +50,8 @@
                              Grid.Column="1"
                              IsEnabled="{Binding SelectedProperty.Property.ReadOnly,
                                                  Converter={x:Static local:InvertBoolConverter.Default}}"
-                             Text="{Binding SelectedProperty.Value}" />
+                             Text="{Binding SelectedProperty.Value,
+                                            Converter={x:Static local:NullConverter.Default}}" />
                 </Grid>
             </GroupBox>
             <DataGrid Grid.Row="1"

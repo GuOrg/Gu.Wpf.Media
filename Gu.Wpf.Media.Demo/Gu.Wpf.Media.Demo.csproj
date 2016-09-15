@@ -9,11 +9,12 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Gu.Wpf.Media.Demo</RootNamespace>
     <AssemblyName>Gu.Wpf.Media.Demo</AssemblyName>
-    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -51,7 +52,11 @@
     <Compile Include="Converters\SecondsToTimeSpanConverter.cs" />
     <Compile Include="UiTestWindows\InvertBoolConverter.cs" />
     <Compile Include="UiTestWindows\MediaElementToPropertyListConverter.cs" />
+    <Compile Include="UiTestWindows\NullConverter.cs" />
     <Compile Include="UiTestWindows\PropertyItem.cs" />
+    <Compile Include="UiTestWindows\TestPlayerViewModel.cs">
+      <DependentUpon>TestPlayerWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UiTestWindows\TestPlayerWindow.xaml.cs">
       <DependentUpon>TestPlayerWindow.xaml</DependentUpon>
     </Compile>

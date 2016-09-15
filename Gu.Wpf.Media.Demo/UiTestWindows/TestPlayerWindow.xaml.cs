@@ -7,6 +7,7 @@
         public TestPlayerWindow()
         {
             this.InitializeComponent();
+            this.DataContext = new TestPlayerViewModel(this.MediaElement);
         }
     }
 }

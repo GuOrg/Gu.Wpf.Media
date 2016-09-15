@@ -6,8 +6,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:media="https://github.com/JohanLarsson/Gu.Wpf.Media"
         Title="TestPlayerWindow"
-        d:DesignHeight="300"
-        d:DesignWidth="300"
+        d:DataContext="{d:DesignInstance local:TestPlayerViewModel}"
         mc:Ignorable="d">
     <Grid>
         <Grid.ColumnDefinitions>
@@ -17,39 +16,56 @@
         <media:MediaElementWrapper x:Name="MediaElement"
                                    ScrubbingEnabled="True"
                                    Stretch="None" />
-        <ItemsControl Grid.Column="1" ItemsSource="{Binding ElementName=MediaElement, Converter={x:Static local:MediaElementToPropertyListConverter.Default}}">
-            <ItemsControl.ItemTemplate>
-                <DataTemplate DataType="{x:Type local:PropertyItem}">
-                    <GroupBox Header="{Binding Property.Name}">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Row="0"
-                                       Grid.Column="0"
-                                       Text="Value" />
-                            <TextBox Grid.Row="0"
-                                     Grid.Column="1"
-                                     IsEnabled="{Binding Property.ReadOnly, Converter={x:Static local:InvertBoolConverter.Default}}"
-                                     Text="{Binding Value}" />
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <GroupBox Header="SelectedProperty">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Row="0"
+                               Grid.Column="0"
+                               Text="Selected" />
+                    <TextBox x:Name="SelectedPropertyNameTextBox"
+                             Grid.Row="0"
+                             Grid.Column="1"
+                             Text="{Binding SelectedPropertyName,
+                                            UpdateSourceTrigger=PropertyChanged}" />
 
-                            <!--<TextBlock Grid.Row="1"
-                                       Grid.Column="0"
-                                       Text="IsReadonly" />
-                            <TextBox Grid.Row="1"
-                                     Grid.Column="1"
-                                     IsEnabled="False"
-                                     Text="{Binding Property.ReadOnly,
-                                                    Mode=OneWay}" />-->
-                        </Grid>
-                    </GroupBox>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
+                    <TextBlock Grid.Row="1"
+                               Grid.Column="0"
+                               Text="Value" />
+                    <TextBox x:Name="ValueTextBox"
+                             Grid.Row="1"
+                             Grid.Column="1"
+                             IsEnabled="{Binding SelectedProperty.Property.ReadOnly,
+                                                 Converter={x:Static local:InvertBoolConverter.Default}}"
+                             Text="{Binding SelectedProperty.Value}" />
+                </Grid>
+            </GroupBox>
+            <DataGrid Grid.Row="1"
+                      AutoGenerateColumns="False"
+                      IsReadOnly="True"
+                      ItemsSource="{Binding Properties}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding Property.Name}" Header="Property" />
+                    <DataGridTextColumn Binding="{Binding Property.ReadOnly}" Header="ReadOnly" />
+                    <DataGridTextColumn MaxWidth="100"
+                                        Binding="{Binding Value,
+                                                          Converter={x:Static local:NullConverter.Default}}"
+                                        Header="Value" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
     </Grid>
 </Window>

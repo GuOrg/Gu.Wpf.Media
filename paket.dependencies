@@ -3,4 +3,8 @@ framework: >= net45
 
 nuget JetBrains.Annotations
 nuget StyleCop.Analyzers
-nuget NUnit
+
+group Test
+  source http://nuget.org/api/v2
+  nuget NUnit
+  nuget TestStack.White.Uia3 prerelease

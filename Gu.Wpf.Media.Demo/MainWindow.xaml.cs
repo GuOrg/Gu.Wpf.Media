@@ -24,7 +24,7 @@
 
             if (openFileDialog.ShowDialog() == true)
             {
-                this.MediaElement.Source = new Uri(openFileDialog.FileName);
+                this.MediaElement.SetCurrentValue(MediaElementWrapper.SourceProperty, new Uri(openFileDialog.FileName));
             }
         }
 
@@ -49,12 +49,12 @@
             e.Handled = true;
         }
 
-        private void OnQuitFullScreenCanExecute(object sender, CanExecuteRoutedEventArgs e)
+        private void OnEndFullScreenCanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
             e.CanExecute = this.WindowState == WindowState.Maximized && this.WindowStyle == WindowStyle.None;
         }
 
-        private void OnQuitFullScreenExecuted(object sender, ExecutedRoutedEventArgs e)
+        private void OnEndFullScreenExecuted(object sender, ExecutedRoutedEventArgs e)
         {
             this.MediaElement.Stretch = this.stretch;
             this.WindowStyle = WindowStyle.SingleBorderWindow;

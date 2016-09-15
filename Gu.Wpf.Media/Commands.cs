@@ -18,33 +18,33 @@
         /// <summary>
         /// Go to full screen command.
         /// </summary>
-        public static RoutedUICommand FullScreen { get; } = new RoutedUICommand(
+        public static RoutedUICommand BeginFullScreen { get; } = new RoutedUICommand(
             "Use full screen.",
-            nameof(FullScreen),
+            nameof(BeginFullScreen),
             typeof(Commands));
 
         /// <summary>
-        /// Quit to full screen command.
+        /// End full screen command.
         /// </summary>
-        public static RoutedUICommand QuitFullScreen { get; } = new RoutedUICommand(
+        public static RoutedUICommand EndFullScreen { get; } = new RoutedUICommand(
             "Quit full screen.",
-            nameof(QuitFullScreen),
+            nameof(EndFullScreen),
             typeof(Commands));
 
         /// <summary>
         /// Toggle sound on and off.
         /// </summary>
         public static RoutedUICommand ToggleMute { get; } = new RoutedUICommand(
-                                                              "Toggle sound on and off.",
-                                                              nameof(ToggleMute),
-                                                              typeof(Commands));
+            "Toggle sound on and off.",
+            nameof(ToggleMute),
+            typeof(Commands));
 
         /// <summary>
         /// Turn sound on.
         /// </summary>
         public static RoutedUICommand UnmuteVolume { get; } = new RoutedUICommand(
-                                                              "Turn sound on.",
-                                                              nameof(UnmuteVolume),
-                                                              typeof(Commands));
+            "Turn sound on.",
+            nameof(UnmuteVolume),
+            typeof(Commands));
     }
 }

@@ -1,7 +1,7 @@
 ﻿type project
 
 releasenotes
-  USABILITY: QuitFullScreen command.
+  USABILITY: BeginFullScreen & EndFullScreen command.
   USABILITY: LoadedBehavior
 
 tags wpf xaml media mediaelement

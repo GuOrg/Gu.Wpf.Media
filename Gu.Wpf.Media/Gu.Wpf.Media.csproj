@@ -68,6 +68,7 @@
     <Compile Include="Converters\TimeSpanToStringConverter.cs" />
     <Compile Include="FileFormats.cs" />
     <Compile Include="AttachedProperties\Icon.cs" />
+    <Compile Include="Internals\Clamp.cs" />
     <Compile Include="Internals\Is.cs" />
     <Compile Include="Internals\StringExt.cs" />
     <Compile Include="MediaElementWrapper.cs" />

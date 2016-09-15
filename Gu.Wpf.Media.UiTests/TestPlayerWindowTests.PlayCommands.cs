@@ -33,16 +33,16 @@ namespace Gu.Wpf.Media.UiTests
             this.PlayButton.Click();
             Assert.AreEqual(false, this.PlayButton.Enabled);
             Assert.AreEqual(true, this.PauseButton.Enabled);
-            this.AreEqual("True", false, MediaElementWrapper.IsPlayingProperty);
-            this.AreEqual("Play", false, MediaElementWrapper.StateProperty);
+            this.AreEqual("True", MediaElementWrapper.IsPlayingProperty);
+            this.AreEqual("Play", MediaElementWrapper.StateProperty);
 
             Thread.Sleep(TimeSpan.FromSeconds(0.2));
 
             this.PauseButton.Click();
             Assert.AreEqual(true, this.PlayButton.Enabled);
             Assert.AreEqual(false, this.PauseButton.Enabled);
-            this.AreEqual("False", false, MediaElementWrapper.IsPlayingProperty);
-            this.AreEqual("Pause", false, MediaElementWrapper.StateProperty);
+            this.AreEqual("False", MediaElementWrapper.IsPlayingProperty);
+            this.AreEqual("Pause", MediaElementWrapper.StateProperty);
             Assert.AreNotEqual(position, this.GetValue(MediaElementWrapper.PositionProperty));
         }
 
@@ -56,16 +56,16 @@ namespace Gu.Wpf.Media.UiTests
             this.PlayPauseButton.Click();
             Assert.AreEqual(false, this.PlayButton.Enabled);
             Assert.AreEqual(true, this.PauseButton.Enabled);
-            this.AreEqual("True", false, MediaElementWrapper.IsPlayingProperty);
-            this.AreEqual("Play", false, MediaElementWrapper.StateProperty);
+            this.AreEqual("True", MediaElementWrapper.IsPlayingProperty);
+            this.AreEqual("Play", MediaElementWrapper.StateProperty);
 
             Thread.Sleep(TimeSpan.FromSeconds(0.2));
 
             this.PlayPauseButton.Click();
             Assert.AreEqual(true, this.PlayButton.Enabled);
             Assert.AreEqual(false, this.PauseButton.Enabled);
-            this.AreEqual("False", false, MediaElementWrapper.IsPlayingProperty);
-            this.AreEqual("Pause", false, MediaElementWrapper.StateProperty);
+            this.AreEqual("False", MediaElementWrapper.IsPlayingProperty);
+            this.AreEqual("Pause", MediaElementWrapper.StateProperty);
             Assert.AreNotEqual(position, this.GetValue(MediaElementWrapper.PositionProperty));
         }
 
@@ -79,16 +79,16 @@ namespace Gu.Wpf.Media.UiTests
             this.BoundPlayPauseButton.Click();
             Assert.AreEqual(false, this.PlayButton.Enabled);
             Assert.AreEqual(true, this.PauseButton.Enabled);
-            this.AreEqual("True", false, MediaElementWrapper.IsPlayingProperty);
-            this.AreEqual("Play", false, MediaElementWrapper.StateProperty);
+            this.AreEqual("True", MediaElementWrapper.IsPlayingProperty);
+            this.AreEqual("Play", MediaElementWrapper.StateProperty);
 
             Thread.Sleep(TimeSpan.FromSeconds(0.2));
 
             this.BoundPlayPauseButton.Click();
             Assert.AreEqual(true, this.PlayButton.Enabled);
             Assert.AreEqual(false, this.PauseButton.Enabled);
-            this.AreEqual("False", false, MediaElementWrapper.IsPlayingProperty);
-            this.AreEqual("Pause", false, MediaElementWrapper.StateProperty);
+            this.AreEqual("False", MediaElementWrapper.IsPlayingProperty);
+            this.AreEqual("Pause", MediaElementWrapper.StateProperty);
             Assert.AreNotEqual(position, this.GetValue(MediaElementWrapper.PositionProperty));
         }
 
@@ -103,16 +103,16 @@ namespace Gu.Wpf.Media.UiTests
             this.PlayButton.Click();
             Assert.AreEqual(false, this.PlayButton.Enabled);
             Assert.AreEqual(true, this.PauseButton.Enabled);
-            this.AreEqual("True", false, MediaElementWrapper.IsPlayingProperty);
-            this.AreEqual("Play", false, MediaElementWrapper.StateProperty);
+            this.AreEqual("True", MediaElementWrapper.IsPlayingProperty);
+            this.AreEqual("Play", MediaElementWrapper.StateProperty);
 
             Thread.Sleep(TimeSpan.FromSeconds(0.2));
 
             this.StopButton.Click();
             Assert.AreEqual(true, this.PlayButton.Enabled);
             Assert.AreEqual(false, this.PauseButton.Enabled);
-            this.AreEqual("False", false, MediaElementWrapper.IsPlayingProperty);
-            this.AreEqual("Stop", false, MediaElementWrapper.StateProperty);
+            this.AreEqual("False", MediaElementWrapper.IsPlayingProperty);
+            this.AreEqual("Stop", MediaElementWrapper.StateProperty);
             Assert.AreNotEqual(position, this.GetValue(MediaElementWrapper.PositionProperty));
         }
 
@@ -126,21 +126,21 @@ namespace Gu.Wpf.Media.UiTests
             this.PlayButton.Click();
             Assert.AreEqual(false, this.PlayButton.Enabled);
             Assert.AreEqual(true, this.PauseButton.Enabled);
-            this.AreEqual("True", false, MediaElementWrapper.IsPlayingProperty);
-            this.AreEqual("Play", false, MediaElementWrapper.StateProperty);
+            this.AreEqual("True", MediaElementWrapper.IsPlayingProperty);
+            this.AreEqual("Play", MediaElementWrapper.StateProperty);
 
             Thread.Sleep(TimeSpan.FromSeconds(0.2));
 
             this.PauseButton.Click();
             Assert.AreEqual(true, this.PlayButton.Enabled);
             Assert.AreEqual(false, this.PauseButton.Enabled);
-            this.AreEqual("False", false, MediaElementWrapper.IsPlayingProperty);
-            this.AreEqual("Pause", false, MediaElementWrapper.StateProperty);
+            this.AreEqual("False", MediaElementWrapper.IsPlayingProperty);
+            this.AreEqual("Pause", MediaElementWrapper.StateProperty);
             Assert.AreNotEqual(position, this.GetValue(MediaElementWrapper.PositionProperty));
 
             Assert.AreEqual(true, this.RewindButton.Enabled);
             this.RewindButton.Click();
-            this.AreEqual("00:00:00", false, MediaElementWrapper.PositionProperty);
+            this.AreEqual("00:00:00", MediaElementWrapper.PositionProperty);
         }
     }
 }

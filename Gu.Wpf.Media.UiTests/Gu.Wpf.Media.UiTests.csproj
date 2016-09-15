@@ -51,11 +51,13 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Helpers\Info.cs" />
-    <Compile Include="TestPlayerWindowTests.Commands.cs" />
-    <Compile Include="TestPlayerWindowTests.cs" />
+    <Compile Include="TestPlayerWindowTests.PlayCommands.cs" />
+    <Compile Include="TestPlayerWindowTests.Properties.cs" />
     <Compile Include="Helpers\UIItemExt.cs" />
     <Compile Include="Helpers\WindowTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestPlayerWindowTests.cs" />
+    <Compile Include="TestPlayerWindowTests.VolumeCommands.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="paket.references" />

@@ -38,7 +38,7 @@
 
             this.mediaElement.MediaEnded += (o, e) =>
                 {
-                    this.State = MediaState.Stop;
+                    this.SetCurrentValue(StateProperty, MediaState.Stop);
                     this.ReRaiseEvent(o, e);
                 };
 
@@ -194,7 +194,7 @@
         /// <returns>True if <see cref="Volume"/> can be decreased.</returns>
         public bool CanDecreaseVolume()
         {
-            return this.Volume > 0;
+            return this.Volume > 0 && !this.IsMuted;
         }
 
         /// <summary>
@@ -205,7 +205,8 @@
         /// <param name="increment">A value between 0 and 1. Typical value is 0.05.</param>
         public void DecreaseVolume(double increment)
         {
-            this.Volume = Math.Max(0, Math.Min(this.mediaElement.Volume - increment, 1));
+            this.SetCurrentValue(VolumeProperty, Clamp.Between(this.mediaElement.Volume - increment, 0, 1, 3));
+            this.SetCurrentValue(IsMutedProperty, this.Volume <= 0);
         }
 
         /// <summary>
@@ -225,7 +226,14 @@
         /// <param name="increment">A value between 0 and 1. Typical value is 0.05.</param>
         public void IncreaseVolume(double increment)
         {
-            this.Volume = Math.Max(0, Math.Min(this.mediaElement.Volume + increment, 1));
+            if (this.IsMuted)
+            {
+                this.SetCurrentValue(VolumeProperty, Clamp.Between(increment, 0, 1, 3));
+                this.SetCurrentValue(IsMutedProperty, this.Volume <= 0);
+                return;
+            }
+
+            this.SetCurrentValue(VolumeProperty, Clamp.Between(this.mediaElement.Volume + increment, 0, 1, 3));
         }
 
         /// <summary>
@@ -234,7 +242,7 @@
         /// <returns>True if audio can be muted.</returns>
         public bool CanMute()
         {
-            return !this.IsMuted;
+            return !this.IsMuted && this.Volume > 0;
         }
 
         /// <summary>
@@ -242,7 +250,7 @@
         /// </summary>
         public void Mute()
         {
-            this.IsMuted = true;
+            this.SetCurrentValue(IsMutedProperty, true);
         }
 
         /// <summary>
@@ -251,7 +259,7 @@
         /// <returns>True if sound can be muted.</returns>
         public bool CanToggleMute()
         {
-            return true;
+            return this.Volume > 0;
         }
 
         /// <summary>
@@ -259,7 +267,13 @@
         /// </summary>
         public void ToggleMute()
         {
-            this.IsMuted = !this.IsMuted;
+            if (this.Volume <= 0)
+            {
+                this.SetCurrentValue(IsMutedProperty, true);
+                return;
+            }
+
+            this.SetCurrentValue(IsMutedProperty, !this.IsMuted);
         }
 
         /// <summary>
@@ -292,7 +306,7 @@
 
             var newTime = (this.Position.Value + time).TotalSeconds;
             newTime = Math.Max(0, Math.Min(this.Length.Value.TotalSeconds, newTime));
-            this.Position = TimeSpan.FromSeconds(newTime);
+            this.SetCurrentValue(PositionProperty, TimeSpan.FromSeconds(newTime));
         }
 
         private static void OnPositionChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -377,6 +391,10 @@
                 {
                     this.mediaElement.Play();
                 }
+            }
+            else if (e.Property == MediaElement.VolumeProperty)
+            {
+                this.SetCurrentValue(IsMutedProperty, this.Volume <= 0);
             }
         }
     }

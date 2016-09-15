@@ -66,15 +66,34 @@
                 </GroupBox>
                 <DataGrid Grid.Row="1"
                           AutoGenerateColumns="False"
-                          IsReadOnly="True"
                           ItemsSource="{Binding Properties}">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Binding="{Binding Property.Name}" Header="Property" />
-                        <DataGridTextColumn Binding="{Binding Property.ReadOnly}" Header="ReadOnly" />
-                        <DataGridTextColumn MaxWidth="100"
-                                            Binding="{Binding Value,
-                                                              Converter={x:Static local:NullConverter.Default}}"
-                                            Header="Value" />
+                        <DataGridTextColumn Binding="{Binding Property.Name}"
+                                            Header="Property"
+                                            IsReadOnly="True" />
+                        <DataGridTextColumn Binding="{Binding Property.ReadOnly}"
+                                            Header="ReadOnly"
+                                            IsReadOnly="True" />
+                        <DataGridTemplateColumn MaxWidth="100" Header="Value">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate DataType="{x:Type local:PropertyItem}">
+                                    <TextBox IsReadOnly="{Binding Property.ReadOnly}"
+                                             IsReadOnlyCaretVisible="True"
+                                             BorderThickness="0"
+                                             Text="{Binding Value,
+                                                            Converter={x:Static local:NullConverter.Default}}" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                            
+                            <!--<DataGridTemplateColumn.CellEditingTemplate>
+                                <DataTemplate DataType="{x:Type local:PropertyItem}">
+                                    <TextBox IsReadOnly="{Binding Property.ReadOnly}"
+                                             IsReadOnlyCaretVisible="True"
+                                             Text="{Binding Value,
+                                                            Converter={x:Static local:NullConverter.Default}}" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellEditingTemplate>-->
+                        </DataGridTemplateColumn>
                     </DataGrid.Columns>
                 </DataGrid>
             </Grid>
@@ -85,16 +104,19 @@
                 <Button Command="Play"
                         CommandTarget="{Binding ElementName=MediaElement}"
                         Content="Play" />
-                
+
                 <Button Command="Pause"
                         CommandTarget="{Binding ElementName=MediaElement}"
                         Content="Pause" />
-                
+
                 <Button Command="TogglePlayPause"
                         CommandTarget="{Binding ElementName=MediaElement}"
                         Content="TogglePlayPause" />
 
-                <ToggleButton x:Name="BoundPlayPause" Content="BoundPlayPause" IsChecked="{Binding ElementName=MediaElement, Path=IsPlaying}" />
+                <ToggleButton x:Name="BoundPlayPause"
+                              Content="BoundPlayPause"
+                              IsChecked="{Binding ElementName=MediaElement,
+                                                  Path=IsPlaying}" />
 
                 <Button Command="MediaCommands.Stop"
                         CommandTarget="{Binding ElementName=MediaElement}"
@@ -103,12 +125,15 @@
                 <Button Command="Rewind"
                         CommandTarget="{Binding ElementName=MediaElement}"
                         Content="Rewind" />
-                
+
                 <Button Command="media:Commands.ToggleMute"
                         CommandTarget="{Binding ElementName=MediaElement}"
                         Content="ToggleMute" />
 
-                <ToggleButton Content="BoundToggleMute" IsChecked="{Binding ElementName=MediaElement, Path=IsMuted}" />
+                <ToggleButton x:Name="BoundToggleMute"
+                              Content="BoundToggleMute"
+                              IsChecked="{Binding ElementName=MediaElement,
+                                                  Path=IsMuted}" />
 
                 <Button Command="MuteVolume"
                         CommandTarget="{Binding ElementName=MediaElement}"

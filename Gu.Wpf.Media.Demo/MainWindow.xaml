@@ -14,10 +14,14 @@
                     Command="TogglePlayPause"
                     CommandTarget="{Binding ElementName=MediaElement}" />
         <KeyBinding Key="F11" Command="media:Commands.ToggleFullScreen" />
+        <KeyBinding Key="Escape" Command="media:Commands.QuitFullScreen" />
     </Window.InputBindings>
     <Window.CommandBindings>
         <CommandBinding Command="ApplicationCommands.Open" Executed="OpenExecuted" />
         <CommandBinding Command="media:Commands.ToggleFullScreen" Executed="OnToggleFullScreenExecuted" />
+        <CommandBinding CanExecute="OnQuitFullScreenCanExecute"
+                        Command="media:Commands.QuitFullScreen"
+                        Executed="OnQuitFullScreenExecuted" />
     </Window.CommandBindings>
     <Grid>
         <media:MediaElementWrapper x:Name="MediaElement"

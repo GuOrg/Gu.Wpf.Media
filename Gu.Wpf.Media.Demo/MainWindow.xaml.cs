@@ -45,6 +45,22 @@
                 this.SizeToContent = SizeToContent.WidthAndHeight;
                 this.WindowState = WindowState.Normal;
             }
+
+            e.Handled = true;
+        }
+
+        private void OnQuitFullScreenCanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = this.WindowState == WindowState.Maximized && this.WindowStyle == WindowStyle.None;
+        }
+
+        private void OnQuitFullScreenExecuted(object sender, ExecutedRoutedEventArgs e)
+        {
+            this.MediaElement.Stretch = this.stretch;
+            this.WindowStyle = WindowStyle.SingleBorderWindow;
+            this.SizeToContent = SizeToContent.WidthAndHeight;
+            this.WindowState = WindowState.Normal;
+            e.Handled = true;
         }
     }
 }

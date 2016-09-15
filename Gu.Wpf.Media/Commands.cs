@@ -11,9 +11,25 @@
         /// Toggle full screen command.
         /// </summary>
         public static RoutedUICommand ToggleFullScreen { get; } = new RoutedUICommand(
-                                                                      "Toggle full screen.",
-                                                                      nameof(ToggleFullScreen),
-                                                                      typeof(Commands));
+            "Toggle full screen.",
+            nameof(ToggleFullScreen),
+            typeof(Commands));
+
+        /// <summary>
+        /// Go to full screen command.
+        /// </summary>
+        public static RoutedUICommand FullScreen { get; } = new RoutedUICommand(
+            "Use full screen.",
+            nameof(FullScreen),
+            typeof(Commands));
+
+        /// <summary>
+        /// Quit to full screen command.
+        /// </summary>
+        public static RoutedUICommand QuitFullScreen { get; } = new RoutedUICommand(
+            "Quit full screen.",
+            nameof(QuitFullScreen),
+            typeof(Commands));
 
         /// <summary>
         /// Toggle sound on and off.

@@ -10,7 +10,7 @@ namespace Gu.Wpf.Media.UiTests
 
     using TestStack.White.UIItems;
 
-    public class TestPlayerWindowTests : WindowTests
+    public partial class TestPlayerWindowTests : WindowTests
     {
         protected override string WindowName { get; } = "TestPlayerWindow";
 
@@ -127,13 +127,13 @@ namespace Gu.Wpf.Media.UiTests
             var groupBox = this.Window.GetByText<GroupBox>("SelectedProperty");
             groupBox.Get<TextBox>("SelectedPropertyNameTextBox").Text = property.Name;
             var textBox = groupBox.Get<TextBox>("ValueTextBox");
-            var loseFocusButton = groupBox.Get<Button>("LoseFocusButton");
 
             if (textBox.Text != value)
             {
                 textBox.BulkText = value;
                 this.Window.WaitWhileBusy();
-                loseFocusButton.Click();
+                groupBox.Get<Button>("LoseFocusButton")
+                        .Click();
             }
         }
 

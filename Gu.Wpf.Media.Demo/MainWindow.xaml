@@ -25,8 +25,8 @@
     </Window.CommandBindings>
     <Grid>
         <media:MediaElementWrapper x:Name="MediaElement"
-                                   ScrubbingEnabled="True"
                                    LoadedBehavior="Play"
+                                   ScrubbingEnabled="True"
                                    Stretch="None" />
 
         <Grid VerticalAlignment="Bottom" Background="#19000000">

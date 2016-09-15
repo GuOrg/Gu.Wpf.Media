@@ -1,3 +1,7 @@
+#### 0.3.1
+* USABILITY: QuitFullScreen command.
+* USABILITY: LoadedBehavior
+
 #### 0.3.0
 * USABILITY: UnmuteVolume command.
 * BREAKING CHANGE: Renamed MuteVolume & CanMuteVolume

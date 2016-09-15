@@ -392,9 +392,15 @@
 
         private static void OnIsPlayingChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            ((MediaElementWrapper)d).State = (bool)e.NewValue
-                                                 ? MediaState.Play
-                                                 : MediaState.Pause;
+            var wrapper = (MediaElementWrapper)d;
+            if ((bool)e.NewValue)
+            {
+                wrapper.State = MediaState.Play;
+            }
+            else if (wrapper.State == MediaState.Play)
+            {
+                wrapper.State = MediaState.Pause;
+            }
         }
 
         private static void OnSpeedRatioChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)

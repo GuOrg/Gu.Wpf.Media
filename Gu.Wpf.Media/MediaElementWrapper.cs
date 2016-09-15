@@ -298,7 +298,7 @@
         private static void OnPositionChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var wrapper = (MediaElementWrapper)d;
-            if (wrapper.mediaElement != null)
+            if (wrapper.mediaElement != null && e.NewValue != null)
             {
                 wrapper.mediaElement.Position = (TimeSpan)e.NewValue;
             }

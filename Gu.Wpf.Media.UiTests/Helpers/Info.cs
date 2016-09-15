@@ -47,6 +47,8 @@
 
         internal static string TestAssemblyDirectory() => Path.GetDirectoryName(TestAssemblyFullFileName());
 
+        internal static string CoffeeClipFileName() => Path.Combine(TestAssemblyDirectory(), "Samples", "coffee.mp4");
+
         internal static string ArtifactsDirectory()
         {
             // ReSharper disable PossibleNullReferenceException

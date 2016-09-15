@@ -9,15 +9,12 @@
 
     public class TestPlayerViewModel : INotifyPropertyChanged
     {
-        private readonly MediaElementWrapper wrapper;
-
         private string selectedPropertyName;
 
         private PropertyItem selectedProperty;
 
         public TestPlayerViewModel(MediaElementWrapper wrapper)
         {
-            this.wrapper = wrapper;
             this.Properties = MediaElementToPropertyListConverter.GetPropertyItems(wrapper);
         }
 

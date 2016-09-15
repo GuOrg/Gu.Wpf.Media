@@ -28,7 +28,8 @@
                                    ScrubbingEnabled="True"
                                    Stretch="None" />
 
-        <Grid VerticalAlignment="Bottom">
+        <Grid VerticalAlignment="Bottom"
+              Background="#19000000">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />

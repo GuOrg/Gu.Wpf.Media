@@ -34,14 +34,12 @@
         }
 
         [Test]
-        public void Kasta()
+        public void RoundtripNull()
         {
-            var text1 = new TimeSpan(0, 1, 2, 3, 456).ToString(@"\.ff");
-            var text2 = new TimeSpan(0, 1, 2, 3, 456).ToString(@"\.FF");
-            var text3 = new TimeSpan(0, 1, 2, 3, 456).ToString(@"FF");
-            var text4 = new TimeSpan(0, 1, 2, 3, 0).ToString(@"FF");
-            var text5 = new TimeSpan(0, 1, 2, 3, 0).ToString(@"%ff");
-            var text6 = new TimeSpan(0, 1, 2, 3, 0).ToString(@"ff");
+            var converted = (string)TimeSpanToStringConverter.Default.Convert(null, null, null, null);
+            Assert.AreEqual("-:--", converted);
+            var roundtrip = TimeSpanToStringConverter.Default.ConvertBack(converted, null, null, null);
+            Assert.AreEqual(null, roundtrip);
         }
     }
 }

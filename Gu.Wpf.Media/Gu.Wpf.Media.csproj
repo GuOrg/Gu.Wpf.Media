@@ -65,7 +65,6 @@
   <ItemGroup>
     <Compile Include="AttachedProperties\Drag.cs" />
     <Compile Include="Commands.cs" />
-    <Compile Include="Converters\ErrorHandlingStrategy.cs" />
     <Compile Include="Converters\TimeSpanToStringConverter.cs" />
     <Compile Include="FileFormats.cs" />
     <Compile Include="AttachedProperties\Icon.cs" />

@@ -2,6 +2,7 @@
 {
     using System;
     using System.Globalization;
+    using System.Runtime.CompilerServices;
     using System.Text;
     using System.Text.RegularExpressions;
     using System.Windows.Data;
@@ -29,11 +30,6 @@
         };
 
         /// <summary>
-        /// Use this to configure how errors are handled at runtime.
-        /// </summary>
-        public ErrorHandlingStrategy RuntimeErrorHandling { get; set; } = ErrorHandlingStrategy.SilentFailure;
-
-        /// <summary>
         /// The string to return when the value is null.
         /// </summary>
         public string NullString { get; set; } = "-:--";
@@ -54,8 +50,8 @@
 
             if (!IsValidFormat(parameter))
             {
-                var message = $"Expected parameter to be a valid format like 'fff' or 'FF', was: {value?.GetType()}";
-                if (Is.InDesignMode || this.RuntimeErrorHandling == ErrorHandlingStrategy.Throw)
+                var message = this.CreateErrorMessage($"Expected parameter to be a valid format like 'fff' or 'FF', was: {parameter}");
+                if (Is.InDesignMode)
                 {
                     throw new ArgumentException(message, nameof(parameter));
                 }
@@ -65,8 +61,8 @@
 
             if (!(value is TimeSpan))
             {
-                var message = $"Expected a timespan, was {value?.GetType()}";
-                if (Is.InDesignMode || this.RuntimeErrorHandling == ErrorHandlingStrategy.Throw)
+                var message = this.CreateErrorMessage($"Expected a timespan, was {value}");
+                if (Is.InDesignMode)
                 {
                     throw new ArgumentException(message, nameof(parameter));
                 }
@@ -116,13 +112,13 @@
 
             if (!IsValidFormat(parameter))
             {
-                var message = $"Expected parameter to be a valid format like 'fff' or 'FF', was: {value?.GetType()}";
-                if (Is.InDesignMode || this.RuntimeErrorHandling == ErrorHandlingStrategy.Throw)
+                var message = this.CreateErrorMessage($"Expected parameter to be a valid format like 'fff' or 'FF', was: {parameter}");
+                if (Is.InDesignMode)
                 {
                     throw new ArgumentException(message, nameof(parameter));
                 }
 
-                return Binding.DoNothing;
+                return message;
             }
 
             TimeSpan result;
@@ -131,12 +127,14 @@
                 return result;
             }
 
-            if (Is.InDesignMode || this.RuntimeErrorHandling == ErrorHandlingStrategy.Throw)
+            if (Is.InDesignMode)
             {
-                throw new FormatException($"Failed parsing a TimeSpan from {value}");
+                var message = this.CreateErrorMessage($"Failed parsing a TimeSpan from {value}");
+                throw new FormatException(message);
             }
 
-            return Binding.DoNothing;
+            // Returning raw value letting the binding fail the framework way
+            return value;
         }
 
         private static bool IsValidFormat(object parameter)
@@ -165,6 +163,11 @@
             }
 
             return TimeSpan.TryParseExact(text, Formats, CultureInfo.InvariantCulture, out result);
+        }
+
+        private string CreateErrorMessage(string message, [CallerMemberName] string caller = null)
+        {
+            return $"{this.GetType().FullName}.{caller} failed\r\n" + message;
         }
     }
 }

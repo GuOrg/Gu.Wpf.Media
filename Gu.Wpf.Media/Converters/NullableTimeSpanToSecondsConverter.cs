@@ -2,6 +2,7 @@
 {
     using System;
     using System.Globalization;
+    using System.Runtime.CompilerServices;
     using System.Windows.Data;
     using System.Windows.Markup;
 
@@ -14,11 +15,6 @@
         /// The default instance used like Converter="{x:Static NullableTimeSpanToSecondsConverter.Default}"
         /// </summary>
         public static readonly NullableTimeSpanToSecondsConverter Default = new NullableTimeSpanToSecondsConverter();
-
-        /// <summary>
-        /// Use this to configure how errors are handled at runtime.
-        /// </summary>
-        public ErrorHandlingStrategy RuntimeErrorHandling { get; set; } = ErrorHandlingStrategy.SilentFailure;
 
         /// <summary>
         /// The converted value to return when the value is null.
@@ -44,12 +40,14 @@
                 return ((TimeSpan)value).TotalSeconds;
             }
 
-            if (Is.InDesignMode || this.RuntimeErrorHandling == ErrorHandlingStrategy.Throw)
+            if (Is.InDesignMode)
             {
-                throw new ArgumentException($"Expected value to be a TimeSpan, was: {value}");
+                var message = this.CreateErrorMessage($"Expected value to be a Nullable<TimeSpan>, was: {value}");
+                throw new ArgumentException(message, nameof(value));
             }
 
-            return Binding.DoNothing;
+            // Returning raw value letting the binding fail the standard way
+            return value;
         }
 
         /// <inheritdoc/>
@@ -65,12 +63,19 @@
                 return TimeSpan.FromSeconds((double)value);
             }
 
-            if (Is.InDesignMode || this.RuntimeErrorHandling == ErrorHandlingStrategy.Throw)
+            if (Is.InDesignMode)
             {
-                throw new ArgumentException($"Expected value to be a double, was: {value}");
+                var message = this.CreateErrorMessage($"Expected value to be a Nullable<double>, was: {value}");
+                throw new ArgumentException(message, nameof(value));
             }
 
-            return Binding.DoNothing;
+            // Returning raw value letting the binding fail the framework way
+            return value;
+        }
+
+        private string CreateErrorMessage(string message, [CallerMemberName] string caller = null)
+        {
+            return $"{this.GetType().FullName}.{caller} failed\r\n" + message;
         }
     }
 }

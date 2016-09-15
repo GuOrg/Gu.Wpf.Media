@@ -86,7 +86,8 @@
             this.CommandBindings.Add(new CommandBinding(MediaCommands.Rewind, HandleExecute(this.Rewind), HandleCanExecute(this.CanRewind)));
             this.CommandBindings.Add(new CommandBinding(MediaCommands.IncreaseVolume, HandleExecute(() => this.IncreaseVolume(this.VolumeIncrement)), HandleCanExecute(this.CanIncreaseVolume)));
             this.CommandBindings.Add(new CommandBinding(MediaCommands.DecreaseVolume, HandleExecute(() => this.DecreaseVolume(this.VolumeIncrement)), HandleCanExecute(this.CanDecreaseVolume)));
-            this.CommandBindings.Add(new CommandBinding(MediaCommands.MuteVolume, HandleExecute(this.Mute), HandleCanExecute(this.CanMute)));
+            this.CommandBindings.Add(new CommandBinding(MediaCommands.MuteVolume, HandleExecute(this.MuteVolume), HandleCanExecute(this.CanMuteVolume)));
+            this.CommandBindings.Add(new CommandBinding(Commands.UnmuteVolume, HandleExecute(this.UnmuteVolume), HandleCanExecute(this.CanUnmuteVolume)));
             this.CommandBindings.Add(new CommandBinding(Commands.ToggleMute, HandleExecute(this.ToggleMute), HandleCanExecute(this.CanToggleMute)));
             this.updatePositionTimer.Tick += (o, e) => this.SetCurrentValue(PositionProperty, this.mediaElement.Position);
             this.updateProgressTimer.Tick += (o, e) =>
@@ -241,7 +242,7 @@
         /// Checks if audio can be muted.
         /// </summary>
         /// <returns>True if audio can be muted.</returns>
-        public bool CanMute()
+        public bool CanMuteVolume()
         {
             return !this.IsMuted && this.Volume > 0;
         }
@@ -249,9 +250,24 @@
         /// <summary>
         /// Sets IsMuted = true
         /// </summary>
-        public void Mute()
+        public void MuteVolume()
         {
             this.SetCurrentValue(IsMutedProperty, true);
+        }
+
+        /// <summary>
+        /// Checks if audio can be turned on.
+        /// Resturns false if volume is zero.
+        /// </summary>
+        /// <returns>True if audio can be muted.</returns>
+        private bool CanUnmuteVolume()
+        {
+            return this.IsMuted && this.Volume > 0;
+        }
+
+        private void UnmuteVolume()
+        {
+            this.SetCurrentValue(IsMutedProperty, false);
         }
 
         /// <summary>
@@ -327,7 +343,7 @@
                 return null;
             }
 
-            var time = (TimeSpan) basevalue;
+            var time = (TimeSpan)basevalue;
             if (time < TimeSpan.Zero)
             {
                 return TimeSpan.Zero;

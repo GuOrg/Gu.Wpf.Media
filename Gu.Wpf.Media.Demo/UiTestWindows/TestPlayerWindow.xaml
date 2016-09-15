@@ -145,6 +145,10 @@
                         CommandTarget="{Binding ElementName=MediaElement}"
                         Content="MuteVolume" />
 
+                <Button Command="media:Commands.UnmuteVolume"
+                        CommandTarget="{Binding ElementName=MediaElement}"
+                        Content="UnmuteVolume" />
+
                 <Button Command="DecreaseVolume"
                         CommandTarget="{Binding ElementName=MediaElement}"
                         Content="DecreaseVolume" />

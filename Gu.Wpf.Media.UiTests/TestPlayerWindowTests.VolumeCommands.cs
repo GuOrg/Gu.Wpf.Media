@@ -1,8 +1,5 @@
 namespace Gu.Wpf.Media.UiTests
 {
-    using System;
-    using System.Threading;
-
     using Gu.Wpf.Media.UiTests.Helpers;
 
     using NUnit.Framework;
@@ -16,6 +13,8 @@ namespace Gu.Wpf.Media.UiTests
         public Button BoundToggleMuteButton => this.Window.Get<Button>("BoundToggleMute");
 
         public Button MuteVolumeButton => this.Window.Get<Button>("MuteVolume");
+
+        public Button UnmuteVolumeButton => this.Window.Get<Button>("UnmuteVolume");
 
         public Button DecreaseVolumeButton => this.Window.Get<Button>("DecreaseVolume");
 
@@ -70,6 +69,36 @@ namespace Gu.Wpf.Media.UiTests
             this.AreEqual("False", MediaElementWrapper.IsMutedProperty);
             this.AreEqual("0.5", MediaElementWrapper.VolumeProperty);
             Assert.AreEqual(true, this.MuteVolumeButton.Enabled);
+            Assert.AreEqual(true, this.DecreaseVolumeButton.Enabled);
+            Assert.AreEqual(true, this.IncreaseVolumeButton.Enabled);
+            Assert.AreEqual(true, this.BoundToggleMuteButton.Enabled);
+        }
+
+        [Test]
+        public void ClickMuteThenUnmute()
+        {
+            this.SetValue(MediaElementWrapper.SourceProperty, Info.CoffeeClipFileName());
+            this.AreEqual("False", MediaElementWrapper.IsMutedProperty);
+            this.AreEqual("0.5", MediaElementWrapper.VolumeProperty);
+            Assert.AreEqual(true, this.MuteVolumeButton.Enabled);
+            Assert.AreEqual(false, this.UnmuteVolumeButton.Enabled);
+            Assert.AreEqual(true, this.DecreaseVolumeButton.Enabled);
+            Assert.AreEqual(true, this.IncreaseVolumeButton.Enabled);
+            Assert.AreEqual(true, this.BoundToggleMuteButton.Enabled);
+
+            this.MuteVolumeButton.Click();
+            this.AreEqual("True", MediaElementWrapper.IsMutedProperty);
+            Assert.AreEqual(false, this.MuteVolumeButton.Enabled);
+            Assert.AreEqual(true, this.UnmuteVolumeButton.Enabled);
+            Assert.AreEqual(false, this.DecreaseVolumeButton.Enabled);
+            Assert.AreEqual(true, this.IncreaseVolumeButton.Enabled);
+            Assert.AreEqual(true, this.BoundToggleMuteButton.Enabled);
+
+            this.UnmuteVolumeButton.Click();
+            this.AreEqual("False", MediaElementWrapper.IsMutedProperty);
+            this.AreEqual("0.5", MediaElementWrapper.VolumeProperty);
+            Assert.AreEqual(true, this.MuteVolumeButton.Enabled);
+            Assert.AreEqual(false, this.UnmuteVolumeButton.Enabled);
             Assert.AreEqual(true, this.DecreaseVolumeButton.Enabled);
             Assert.AreEqual(true, this.IncreaseVolumeButton.Enabled);
             Assert.AreEqual(true, this.BoundToggleMuteButton.Enabled);

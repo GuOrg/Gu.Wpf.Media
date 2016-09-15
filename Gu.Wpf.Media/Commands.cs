@@ -22,5 +22,10 @@
                                                               "Toggle sound on and off.",
                                                               nameof(ToggleMute),
                                                               typeof(Commands));
+
+        public static RoutedUICommand UnmuteVolume { get; } = new RoutedUICommand(
+                                                              "Turn sound on.",
+                                                              nameof(UnmuteVolume),
+                                                              typeof(Commands));
     }
 }

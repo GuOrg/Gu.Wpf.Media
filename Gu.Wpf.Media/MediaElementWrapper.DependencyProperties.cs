@@ -230,6 +230,13 @@
             typeof(MediaElementWrapper),
             new PropertyMetadata(FileFormats.DefaultAudioFormats));
 
+        /// <summary>
+        /// The DependencyProperty for the MediaElementWrapper.LoadedBehavior property.
+        /// </summary>
+        public static readonly DependencyProperty LoadedBehaviorProperty = MediaElement.LoadedBehaviorProperty.AddOwner(
+            typeof(MediaElementWrapper),
+            new FrameworkPropertyMetadata(MediaState.Play));
+
 #pragma warning restore SA1202 // Elements must be ordered by access
 
         /// <summary>
@@ -388,6 +395,16 @@
         {
             get { return (string)this.GetValue(AudioFormatsProperty); }
             set { this.SetValue(AudioFormatsProperty, value); }
+        }
+
+        /// <summary>
+        /// Specifies the initial state when media is loaded.
+        /// Unlike MediaElement.LoadedBehavior this does not affect controlling playback later.
+        /// </summary>
+        public MediaState LoadedBehavior
+        {
+            get { return (MediaState) this.GetValue(LoadedBehaviorProperty); }
+            set { this.SetValue(LoadedBehaviorProperty, value); }
         }
 
         private static void OnIsPlayingChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)

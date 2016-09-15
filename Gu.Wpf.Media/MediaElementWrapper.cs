@@ -59,7 +59,24 @@
             this.mediaElement.ScriptCommand += this.ReRaiseEvent;
             this.mediaElement.MediaOpened += (o, e) =>
             {
-                this.Pause();
+                switch (this.LoadedBehavior)
+                {
+                    case MediaState.Manual:
+                    case MediaState.Stop:
+                        this.Stop();
+                        break;
+                    case MediaState.Play:
+                        this.Play();
+                        break;
+                    case MediaState.Close:
+                        break;
+                    case MediaState.Pause:
+                        this.Pause();
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
+
                 this.HasMedia = true;
                 this.HasAudio = this.mediaElement.HasAudio;
                 this.HasVideo = this.mediaElement.HasVideo;

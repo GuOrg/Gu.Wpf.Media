@@ -26,10 +26,10 @@
     <Grid>
         <media:MediaElementWrapper x:Name="MediaElement"
                                    ScrubbingEnabled="True"
+                                   LoadedBehavior="Play"
                                    Stretch="None" />
 
-        <Grid VerticalAlignment="Bottom"
-              Background="#19000000">
+        <Grid VerticalAlignment="Bottom" Background="#19000000">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />

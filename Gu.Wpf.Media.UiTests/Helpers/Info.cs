@@ -47,7 +47,12 @@
 
         internal static string TestAssemblyDirectory() => Path.GetDirectoryName(TestAssemblyFullFileName());
 
-        internal static string CoffeeClipFileName() => Path.Combine(TestAssemblyDirectory(), "Samples", "coffee.mp4");
+        internal static string CoffeeClipFileName()
+        {
+            var fileName = Path.Combine(TestAssemblyDirectory(), "Samples", "coffee.mp4");
+            Assert.AreEqual(true, File.Exists(fileName), "Could not find coffee clip.");
+            return fileName;
+        }
 
         internal static string ArtifactsDirectory()
         {
@@ -65,7 +70,7 @@
             var fileName = Path.GetFileNameWithoutExtension(TestAssemblyFullFileName()).Replace("UiTests", "Demo");
             // ReSharper disable once AssignNullToNotNullAttribute
             var fullFileName = Path.Combine(TestAssemblyDirectory(), fileName + ".exe");
-            Assert.AreEqual(true, File.Exists(fullFileName));
+            Assert.AreEqual(true, File.Exists(fullFileName), "Could not find demo exe.");
             return fullFileName;
         }
     }

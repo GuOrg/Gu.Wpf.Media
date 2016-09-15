@@ -27,11 +27,11 @@
                     this.HasMedia = false;
                     this.HasAudio = null;
                     this.HasVideo = null;
-                    this.Length = null;
                     this.CanPauseMedia = null;
                     this.NaturalVideoHeight = null;
                     this.NaturalVideoWidth = null;
-                    this.Position = null;
+                    this.Length = null;
+                    this.SetCurrentValue(PositionProperty, null);
                     this.ReRaiseEvent(o, e);
                     CommandManager.InvalidateRequerySuggested();
                 };
@@ -63,11 +63,11 @@
                 this.HasMedia = true;
                 this.HasAudio = this.mediaElement.HasAudio;
                 this.HasVideo = this.mediaElement.HasVideo;
-                this.Length = this.mediaElement.NaturalDuration.TimeSpan;
                 this.CanPauseMedia = this.mediaElement.CanPause;
                 this.NaturalVideoHeight = this.mediaElement.NaturalVideoHeight;
                 this.NaturalVideoWidth = this.mediaElement.NaturalVideoWidth;
-                this.Position = this.mediaElement.Position;
+                this.Length = this.mediaElement.NaturalDuration.TimeSpan;
+                this.SetCurrentValue(PositionProperty, this.mediaElement.Position);
                 this.ReRaiseEvent(o, e);
                 CommandManager.InvalidateRequerySuggested();
             };
@@ -88,7 +88,7 @@
             this.CommandBindings.Add(new CommandBinding(MediaCommands.DecreaseVolume, HandleExecute(() => this.DecreaseVolume(this.VolumeIncrement)), HandleCanExecute(this.CanDecreaseVolume)));
             this.CommandBindings.Add(new CommandBinding(MediaCommands.MuteVolume, HandleExecute(this.Mute), HandleCanExecute(this.CanMute)));
             this.CommandBindings.Add(new CommandBinding(Commands.ToggleMute, HandleExecute(this.ToggleMute), HandleCanExecute(this.CanToggleMute)));
-            this.updatePositionTimer.Tick += (o, e) => this.Position = this.mediaElement.Position;
+            this.updatePositionTimer.Tick += (o, e) => this.SetCurrentValue(PositionProperty, this.mediaElement.Position);
             this.updateProgressTimer.Tick += (o, e) =>
                 {
                     this.DownloadProgress = this.mediaElement.DownloadProgress;
@@ -118,7 +118,7 @@
         /// </summary>
         public void Play()
         {
-            this.State = MediaState.Play;
+            this.SetCurrentValue(StateProperty, MediaState.Play);
         }
 
         /// <summary>
@@ -135,7 +135,7 @@
         /// </summary>
         public void Pause()
         {
-            this.State = MediaState.Pause;
+            this.SetCurrentValue(StateProperty, MediaState.Pause);
         }
 
         /// <summary>
@@ -149,9 +149,10 @@
                 return;
             }
 
-            this.State = this.State != MediaState.Play
-                             ? MediaState.Play
-                             : MediaState.Pause;
+            var mediaState = this.State != MediaState.Play
+                ? MediaState.Play
+                : MediaState.Pause;
+            this.SetCurrentValue(StateProperty, mediaState);
         }
 
         /// <summary>
@@ -168,7 +169,7 @@
         /// </summary>
         public void Stop()
         {
-            this.State = MediaState.Stop;
+            this.SetCurrentValue(StateProperty, MediaState.Stop);
         }
 
         /// <summary>
@@ -185,7 +186,7 @@
         /// </summary>
         public void Rewind()
         {
-            this.Position = TimeSpan.Zero;
+            this.SetCurrentValue(PositionProperty, TimeSpan.Zero);
         }
 
         /// <summary>
@@ -318,6 +319,28 @@
             }
         }
 
+        private static object OnPositionCoerce(DependencyObject d, object basevalue)
+        {
+            var wrapper = (MediaElementWrapper)d;
+            if (wrapper.Length == null || basevalue == null)
+            {
+                return null;
+            }
+
+            var time = (TimeSpan) basevalue;
+            if (time < TimeSpan.Zero)
+            {
+                return TimeSpan.Zero;
+            }
+
+            if (time > wrapper.Length.Value)
+            {
+                return wrapper.Length.Value;
+            }
+
+            return basevalue;
+        }
+
         private static void OnStateChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var wrapper = (MediaElementWrapper)d;
@@ -379,7 +402,12 @@
 
         private void Bind(DependencyProperty sourceProperty, DependencyProperty targetProperty)
         {
-            var binding = new Binding(sourceProperty.Name) { Mode = BindingMode.OneWay, Source = this, NotifyOnTargetUpdated = true };
+            var binding = new Binding(sourceProperty.Name)
+            {
+                Mode = BindingMode.OneWay,
+                Source = this,
+                NotifyOnTargetUpdated = true,
+            };
             BindingOperations.SetBinding(this.mediaElement, targetProperty, binding);
         }
 
@@ -391,10 +419,6 @@
                 {
                     this.mediaElement.Play();
                 }
-            }
-            else if (e.Property == MediaElement.VolumeProperty)
-            {
-                this.SetCurrentValue(IsMutedProperty, this.Volume <= 0);
             }
         }
     }

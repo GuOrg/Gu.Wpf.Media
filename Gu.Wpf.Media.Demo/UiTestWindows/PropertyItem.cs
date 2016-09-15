@@ -12,9 +12,8 @@
     public class PropertyItem : INotifyPropertyChanged
     {
         private static readonly Dictionary<DependencyProperty, DependencyProperty> ProxyMap = new Dictionary<DependencyProperty, DependencyProperty>();
-        private static readonly Dictionary<DependencyProperty, List<Action<object>>> InvocationList = new Dictionary<DependencyProperty, List<Action<object>>>();
+        private static readonly Dictionary<DependencyProperty, List<Action>> InvocationList = new Dictionary<DependencyProperty, List<Action>>();
         private readonly MediaElementWrapper wrapper;
-        private object value;
         private readonly DependencyProperty proxyProperty;
 
         public PropertyItem(MediaElementWrapper wrapper, DependencyProperty property)
@@ -22,7 +21,7 @@
             this.wrapper = wrapper;
             this.Property = property;
             this.proxyProperty = GetProxy(property);
-            InvocationList[this.proxyProperty].Add(this.OnProxyPropertyChanged);
+            InvocationList[this.proxyProperty].Add(() => this.OnPropertyChanged(nameof(this.Value)));
             if (property.ReadOnly)
             {
                 var binding = new Binding(property.Name) { Source = wrapper, Mode = BindingMode.OneWay };
@@ -43,12 +42,10 @@
         {
             get
             {
-                return this.value;
+                return this.wrapper.GetValue(this.Property);
             }
             set
             {
-                if (Equals(value, this.value)) return;
-                this.value = value;
                 this.wrapper.SetCurrentValue(this.proxyProperty, value);
                 this.OnPropertyChanged();
             }
@@ -69,13 +66,8 @@
         {
             foreach (var action in InvocationList[e.Property])
             {
-                action(e.NewValue);
+                action();
             }
-        }
-
-        private void OnProxyPropertyChanged(object newValue)
-        {
-            this.Value = newValue;
         }
 
         private static DependencyProperty GetProxy(DependencyProperty property)
@@ -89,7 +81,7 @@
                  typeof(PropertyItem),
                  new PropertyMetadata(null, OnProxyPropertyChanged));
                 ProxyMap[property] = proxy;
-                InvocationList[proxy] = new List<Action<object>>();
+                InvocationList[proxy] = new List<Action>();
             }
 
             return proxy;

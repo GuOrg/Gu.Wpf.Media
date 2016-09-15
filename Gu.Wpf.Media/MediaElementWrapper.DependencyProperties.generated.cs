@@ -21,7 +21,7 @@
         /// <returns>
         /// The identifier for the <see cref="MediaElementWrapper.Volume" /> dependency property.
         /// </returns>
-        public static readonly DependencyProperty VolumeProperty = MediaElement.VolumeProperty.AddOwner(typeof(MediaElementWrapper));
+        public static readonly DependencyProperty VolumeProperty = MediaElement.VolumeProperty.AddOwner(typeof(MediaElementWrapper), new FrameworkPropertyMetadata(0.5, FrameworkPropertyMetadataOptions.None, OnVolumeChanged));
 
         /// <summary>
         /// Identifies the <see cref="MediaElementWrapper.Balance" /> dependency property.
@@ -37,7 +37,9 @@
         /// <returns>
         /// The identifier for the <see cref="MediaElementWrapper.IsMuted" /> dependency property.
         /// </returns>
-        public static readonly DependencyProperty IsMutedProperty = MediaElement.IsMutedProperty.AddOwner(typeof(MediaElementWrapper));
+        public static readonly DependencyProperty IsMutedProperty = MediaElement.IsMutedProperty.AddOwner(
+            typeof(MediaElementWrapper),
+            new FrameworkPropertyMetadata(false,FrameworkPropertyMetadataOptions.None, null, OnIsMutedCoerce));
 
         /// <summary>
         /// Identifies the <see cref="MediaElementWrapper.ScrubbingEnabled" /> dependency property.

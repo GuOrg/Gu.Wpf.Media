@@ -49,6 +49,7 @@
     </When>
   </Choose>
   <ItemGroup>
+    <Compile Include="MediaElementWrapperTests.Volume.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TimeSpanToStringConverterTests.cs" />
   </ItemGroup>

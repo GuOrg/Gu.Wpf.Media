@@ -74,7 +74,12 @@
                         <DataGridTextColumn Binding="{Binding Property.ReadOnly}"
                                             Header="ReadOnly"
                                             IsReadOnly="True" />
-                        <DataGridTemplateColumn MaxWidth="100" Header="Value">
+                        <DataGridTextColumn MaxWidth="100"
+                                            Binding="{Binding Value,
+                                                              Converter={x:Static local:NullConverter.Default}}"
+                                            Header="Value"
+                                            IsReadOnly="False" />
+                        <!--<DataGridTemplateColumn MaxWidth="100" Header="Value">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate DataType="{x:Type local:PropertyItem}">
                                     <TextBox IsReadOnly="{Binding Property.ReadOnly}"
@@ -84,16 +89,17 @@
                                                             Converter={x:Static local:NullConverter.Default}}" />
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
-                            
-                            <!--<DataGridTemplateColumn.CellEditingTemplate>
+
+
+                        <DataGridTemplateColumn.CellEditingTemplate>
                                 <DataTemplate DataType="{x:Type local:PropertyItem}">
                                     <TextBox IsReadOnly="{Binding Property.ReadOnly}"
                                              IsReadOnlyCaretVisible="True"
                                              Text="{Binding Value,
                                                             Converter={x:Static local:NullConverter.Default}}" />
                                 </DataTemplate>
-                            </DataGridTemplateColumn.CellEditingTemplate>-->
-                        </DataGridTemplateColumn>
+                            </DataGridTemplateColumn.CellEditingTemplate>
+                        </DataGridTemplateColumn>-->
                     </DataGrid.Columns>
                 </DataGrid>
             </Grid>

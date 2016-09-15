@@ -42,7 +42,7 @@
             nameof(Position),
             typeof(TimeSpan?),
             typeof(MediaElementWrapper),
-            new PropertyMetadata(default(TimeSpan?), OnPositionChanged));
+            new PropertyMetadata(default(TimeSpan?), OnPositionChanged, OnPositionCoerce));
 
         private static readonly DependencyPropertyKey LengthPropertyKey = DependencyProperty.RegisterReadOnly(
             "Length",
@@ -395,17 +395,42 @@
             var wrapper = (MediaElementWrapper)d;
             if ((bool)e.NewValue)
             {
-                wrapper.State = MediaState.Play;
+                wrapper.SetCurrentValue(StateProperty, MediaState.Play);
             }
             else if (wrapper.State == MediaState.Play)
             {
-                wrapper.State = MediaState.Pause;
+                wrapper.SetCurrentValue(StateProperty, MediaState.Pause);
             }
         }
 
         private static void OnSpeedRatioChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             ((MediaElementWrapper)d).mediaElement.SpeedRatio = (double)e.NewValue;
+        }
+
+        private static void OnVolumeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var wrapper = (MediaElementWrapper)d;
+            var newValue = (double)e.NewValue;
+            if (newValue <= 0)
+            {
+                wrapper.SetCurrentValue(IsMutedProperty, true);
+            }
+            else if (wrapper.IsMuted && newValue >= 0)
+            {
+                wrapper.SetCurrentValue(IsMutedProperty, false);
+            }
+        }
+
+        private static object OnIsMutedCoerce(DependencyObject d, object basevalue)
+        {
+            var wrapper = (MediaElementWrapper)d;
+            if (wrapper.Volume <= 0)
+            {
+                return true;
+            }
+
+            return basevalue;
         }
     }
 }

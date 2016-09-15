@@ -7,7 +7,7 @@ namespace Gu.Wpf.Media.UiTests.Helpers
     using TestStack.White.UIItems;
     using TestStack.White.UIItems.Finders;
 
-    public static class UIItemExt
+    public static class UiItemExt
     {
         public static string ItemStatus(this IUIItem item)
         {

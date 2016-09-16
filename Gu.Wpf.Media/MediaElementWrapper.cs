@@ -69,6 +69,7 @@
                         break;
                     case MediaState.Pause:
                         this.Pause();
+                        this.SetCurrentValue(PositionProperty, TimeSpan.Zero);
                         break;
                     default:
                         throw new ArgumentOutOfRangeException();
@@ -378,7 +379,7 @@
         {
             var wrapper = (MediaElementWrapper)d;
             var newValue = (MediaState)e.NewValue;
-            wrapper.IsPlaying = newValue == MediaState.Play;
+            wrapper.SetCurrentValue(IsPlayingProperty, newValue == MediaState.Play);
             if (wrapper.mediaElement.Source == null)
             {
                 return;

@@ -1,4 +1,8 @@
 #### 0.3.1
+* BUGFIX: Use SetCurrentValue
+* USABILITY: Tweaked styles a bit
+
+#### 0.3.1
 * USABILITY: BeginFullScreen & EndFullScreen command.
 * USABILITY: LoadedBehavior
 * BREAKING CHANGE: Use custom MediaState.

@@ -8,6 +8,11 @@
         Title="TestPlayerWindow"
         d:DataContext="{d:DesignInstance local:TestPlayerViewModel}"
         mc:Ignorable="d">
+    <Window.Resources>
+        <Style TargetType="{x:Type ButtonBase}">
+            <Setter Property="AutomationProperties.AutomationId" Value="{Binding RelativeSource={RelativeSource Self}, Path=Content}" />
+        </Style>
+    </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
@@ -178,7 +183,7 @@
 
                 <Button x:Name="IncreaseVolumeByZeroPointOne"
                         Command="IncreaseVolume"
-                        CommandParameter="1"
+                        CommandParameter="0.1"
                         CommandTarget="{Binding ElementName=MediaElement}"
                         Content="IncreaseVolumeByZeroPointOne" />
             </StackPanel>

@@ -8,25 +8,25 @@ namespace Gu.Wpf.Media.UiTests
 
     public partial class TestPlayerWindowTests
     {
-        public Button ToggleMuteButton => this.Window.Get<Button>("ToggleMute");
+        public Button ToggleMuteButton => this.GetCachedButton("ToggleMute");
 
-        public Button BoundToggleMuteButton => this.Window.Get<Button>("BoundToggleMute");
+        public Button BoundToggleMuteButton => this.GetCachedButton("BoundToggleMute");
 
-        public Button MuteVolumeButton => this.Window.Get<Button>("MuteVolume");
+        public Button MuteVolumeButton => this.GetCachedButton("MuteVolume");
 
-        public Button UnmuteVolumeButton => this.Window.Get<Button>("UnmuteVolume");
+        public Button UnmuteVolumeButton => this.GetCachedButton("UnmuteVolume");
 
-        public Button DecreaseVolumeButton => this.Window.Get<Button>("DecreaseVolume");
+        public Button DecreaseVolumeButton => this.GetCachedButton("DecreaseVolume");
 
-        public Button DecreaseVolumeByOneButton => this.Window.Get<Button>("DecreaseVolumeByOne");
+        public Button DecreaseVolumeByOneButton => this.GetCachedButton("DecreaseVolumeByOne");
 
-        public Button DecreaseVolumeByZeroPointOneButton => this.Window.Get<Button>("DecreaseVolumeByZeroPointOne");
+        public Button DecreaseVolumeByZeroPointOneButton => this.GetCachedButton("DecreaseVolumeByZeroPointOne");
 
-        public Button IncreaseVolumeButton => this.Window.Get<Button>("IncreaseVolume");
+        public Button IncreaseVolumeButton => this.GetCachedButton("IncreaseVolume");
 
-        public Button IncreaseVolumeByOneButton => this.Window.Get<Button>("IncreaseVolumeByOne");
+        public Button IncreaseVolumeByOneButton => this.GetCachedButton("IncreaseVolumeByOne");
 
-        public Button IncreaseVolumeByZeroPointOneButton => this.Window.Get<Button>("IncreaseVolumeByZeroPointOne");
+        public Button IncreaseVolumeByZeroPointOneButton => this.GetCachedButton("IncreaseVolumeByZeroPointOne");
 
         [Test]
         public void ClickMuteThenIncreaseVolume()
@@ -188,7 +188,7 @@ namespace Gu.Wpf.Media.UiTests
             this.SetValue(MediaElementWrapper.SourceProperty, Info.CoffeeClipFileName());
             this.AreEqual("0.5", MediaElementWrapper.VolumeProperty);
             this.IncreaseVolumeByOneButton.Click();
-            this.AreEqual("0", MediaElementWrapper.VolumeProperty);
+            this.AreEqual("1", MediaElementWrapper.VolumeProperty);
         }
 
         [Test]
@@ -197,7 +197,7 @@ namespace Gu.Wpf.Media.UiTests
             this.SetValue(MediaElementWrapper.SourceProperty, Info.CoffeeClipFileName());
             this.AreEqual("0.5", MediaElementWrapper.VolumeProperty);
             this.IncreaseVolumeByZeroPointOneButton.Click();
-            this.AreEqual("0", MediaElementWrapper.VolumeProperty);
+            this.AreEqual("0.6", MediaElementWrapper.VolumeProperty);
         }
 
         [Test]

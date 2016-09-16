@@ -1,5 +1,6 @@
 namespace Gu.Wpf.Media.UiTests
 {
+    using System.Collections.Concurrent;
     using System.Windows;
 
     using Gu.Wpf.Media.UiTests.Helpers;
@@ -10,6 +11,8 @@ namespace Gu.Wpf.Media.UiTests
 
     public partial class TestPlayerWindowTests : WindowTests
     {
+        private readonly ConcurrentDictionary<string, IUIItem> itemCache = new ConcurrentDictionary<string, IUIItem>();
+
         protected override string WindowName { get; } = "TestPlayerWindow";
 
         [SetUp]
@@ -24,9 +27,8 @@ namespace Gu.Wpf.Media.UiTests
 
         public void AreEqual(string expected, bool @readonly, DependencyProperty property)
         {
-            var groupBox = this.Window.GetByText<GroupBox>("SelectedProperty");
-            groupBox.Get<TextBox>("SelectedPropertyNameTextBox").Text = property.Name;
-            var textBox = groupBox.Get<TextBox>("ValueTextBox");
+            this.GetCachedTextBox("SelectedPropertyNameTextBox").Text = property.Name;
+            var textBox = this.GetCachedTextBox("ValueTextBox");
             var readonlyText = @readonly
                         ? "readonly"
                         : "editabl";
@@ -36,33 +38,45 @@ namespace Gu.Wpf.Media.UiTests
 
         public void AreEqual(string expected, DependencyProperty property)
         {
-            var groupBox = this.Window.GetByText<GroupBox>("SelectedProperty");
-            groupBox.Get<TextBox>("SelectedPropertyNameTextBox").Text = property.Name;
-            var textBox = groupBox.Get<TextBox>("ValueTextBox");
-            Assert.AreEqual(expected, textBox.Text, $"Expected the value of {property.Name} to be {expected} was: {textBox.Text}");
+            this.GetCachedTextBox("SelectedPropertyNameTextBox").Text = property.Name;
+            var valueBox = this.GetCachedTextBox("ValueTextBox");
+            Assert.AreEqual(expected, valueBox.Text, $"Expected the value of {property.Name} to be {expected} was: {valueBox.Text}");
         }
 
         private void SetValue(DependencyProperty property, string value)
         {
-            var groupBox = this.Window.GetByText<GroupBox>("SelectedProperty");
-            groupBox.Get<TextBox>("SelectedPropertyNameTextBox").Text = property.Name;
-            var textBox = groupBox.Get<TextBox>("ValueTextBox");
+            this.GetCachedTextBox("SelectedPropertyNameTextBox").Text = property.Name;
+            var valueBox = this.GetCachedTextBox("ValueTextBox");
 
-            if (textBox.Text != value)
+            if (valueBox.Text != value)
             {
-                textBox.BulkText = value;
+                valueBox.BulkText = value;
                 this.Window.WaitWhileBusy();
-                groupBox.Get<Button>("LoseFocusButton")
+                this.GetCachedButton("LoseFocusButton")
                         .Click();
             }
         }
 
         private string GetValue(DependencyProperty property)
         {
-            var groupBox = this.Window.GetByText<GroupBox>("SelectedProperty");
-            groupBox.Get<TextBox>("SelectedPropertyNameTextBox").Text = property.Name;
-            var textBox = groupBox.Get<TextBox>("ValueTextBox");
-            return textBox.Text;
+            this.GetCachedTextBox("SelectedPropertyNameTextBox").Text = property.Name;
+            var valueBox = this.GetCachedTextBox("ValueTextBox");
+            return valueBox.Text;
+        }
+
+        public TextBox GetCachedTextBox(string name)
+        {
+            return this.GetCached<TextBox>(name);
+        }
+
+        public Button GetCachedButton(string name)
+        {
+            return this.GetCached<Button>(name);
+        }
+
+        public T GetCached<T>(string name) where T : IUIItem
+        {
+            return (T)this.itemCache.GetOrAdd(name, n => this.Window.Get<T>(n));
         }
     }
 }

@@ -440,6 +440,9 @@ public partial class MainWindow : Window
 }
 ```
 
+![image](https://cloud.githubusercontent.com/assets/1640096/18583461/fa5dd2e8-7c0a-11e6-988c-e4a1bc692039.png)
+
+
 Check out the demo project for more samples.
 Sample video from https://pixabay.com/
 

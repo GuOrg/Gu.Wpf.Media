@@ -9,13 +9,24 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ButtonBase}">
                     <Border Background="Transparent">
-                        <Path Margin="{TemplateBinding Padding}"
+                        <Path x:Name="Path"
+                              Margin="{TemplateBinding Padding}"
                               HorizontalAlignment="Center"
                               Data="{Binding RelativeSource={RelativeSource TemplatedParent},
                                              Path=(media:Icon.Geometry)}"
                               Fill="{TemplateBinding Foreground}"
+                              RenderTransformOrigin="0.5,0.5"
                               Stretch="Uniform" />
                     </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Path" Property="RenderTransform">
+                                <Setter.Value>
+                                    <ScaleTransform ScaleX="1.08" ScaleY="1.08" />
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

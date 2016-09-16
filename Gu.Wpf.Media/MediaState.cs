@@ -3,7 +3,7 @@
     /// <summary>
     /// States that can be applied to the <see cref="MediaElementWrapper"/>
     /// </summary>
-    public enum MediaState : int
+    public enum MediaState
     {
         /// <summary>
         /// The media element should play.

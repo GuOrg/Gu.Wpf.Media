@@ -1,113 +1,26 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
-	<s:Boolean x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=328C5B1C2CB8844C8B84B77EEFF07CCB/@KeyIndexDefined">True</s:Boolean>
-	<s:Boolean x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=328C5B1C2CB8844C8B84B77EEFF07CCB/CustomPatternPlaceholder/=source/@KeyIndexDefined">True</s:Boolean>
-	<s:Boolean x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=328C5B1C2CB8844C8B84B77EEFF07CCB/CustomPatternPlaceholder/=Source/@KeyIndexDefined">True</s:Boolean>
-	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=328C5B1C2CB8844C8B84B77EEFF07CCB/CustomPatternPlaceholder/=Source/Properties/=CaseSensitive/@EntryIndexedValue">False</s:String>
-	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=328C5B1C2CB8844C8B84B77EEFF07CCB/CustomPatternPlaceholder/=source/Properties/=ExactType/@EntryIndexedValue">False</s:String>
-	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=328C5B1C2CB8844C8B84B77EEFF07CCB/CustomPatternPlaceholder/=Source/Properties/=ExactType/@EntryIndexedValue">False</s:String>
-	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=328C5B1C2CB8844C8B84B77EEFF07CCB/CustomPatternPlaceholder/=source/Properties/=ExpressionType/@EntryIndexedValue"></s:String>
-	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=328C5B1C2CB8844C8B84B77EEFF07CCB/CustomPatternPlaceholder/=Source/Properties/=RegEx/@EntryIndexedValue">Source</s:String>
-	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=328C5B1C2CB8844C8B84B77EEFF07CCB/CustomPatternPlaceholder/=source/Type/@EntryValue">ExpressionPlaceholder</s:String>
-	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=328C5B1C2CB8844C8B84B77EEFF07CCB/CustomPatternPlaceholder/=Source/Type/@EntryValue">IdentifierPlaceholder</s:String>
-	<s:Boolean x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=328C5B1C2CB8844C8B84B77EEFF07CCB/CustomPatternPlaceholder/=wrapper/@KeyIndexDefined">True</s:Boolean>
-	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=328C5B1C2CB8844C8B84B77EEFF07CCB/CustomPatternPlaceholder/=wrapper/Properties/=ExactType/@EntryIndexedValue">False</s:String>
-	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=328C5B1C2CB8844C8B84B77EEFF07CCB/CustomPatternPlaceholder/=wrapper/Properties/=ExpressionType/@EntryIndexedValue"></s:String>
-	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=328C5B1C2CB8844C8B84B77EEFF07CCB/CustomPatternPlaceholder/=wrapper/Type/@EntryValue">ExpressionPlaceholder</s:String>
-	<s:Boolean x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=328C5B1C2CB8844C8B84B77EEFF07CCB/FormatAfterReplace/@EntryValue">False</s:Boolean>
-	<s:Boolean x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=328C5B1C2CB8844C8B84B77EEFF07CCB/IsReplacePattern/@EntryValue">True</s:Boolean>
-	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=328C5B1C2CB8844C8B84B77EEFF07CCB/LanguageName/@EntryValue">CSHARP</s:String>
-	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=328C5B1C2CB8844C8B84B77EEFF07CCB/ReplacePattern/@EntryValue">$wrapper$.SetCurrentValue(MediaElementWrapper.$Source$Property, $source$)</s:String>
-	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=328C5B1C2CB8844C8B84B77EEFF07CCB/SearchPattern/@EntryValue">$wrapper$.$Source$ = $source$</s:String>
-	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=328C5B1C2CB8844C8B84B77EEFF07CCB/Severity/@EntryValue">ERROR</s:String>
-	<s:Boolean x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=328C5B1C2CB8844C8B84B77EEFF07CCB/ShortenReferences/@EntryValue">False</s:Boolean>
-	<s:Boolean x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=4F5EB8242BDDC144A80CE07BD4A3685B/@KeyIndexDefined">True</s:Boolean>
-	<s:Boolean x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=4F5EB8242BDDC144A80CE07BD4A3685B/CustomPatternPlaceholder/=IsMuted/@KeyIndexDefined">True</s:Boolean>
-	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=4F5EB8242BDDC144A80CE07BD4A3685B/CustomPatternPlaceholder/=IsMuted/Properties/=CaseSensitive/@EntryIndexedValue">False</s:String>
-	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=4F5EB8242BDDC144A80CE07BD4A3685B/CustomPatternPlaceholder/=IsMuted/Properties/=ExactType/@EntryIndexedValue">False</s:String>
-	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=4F5EB8242BDDC144A80CE07BD4A3685B/CustomPatternPlaceholder/=IsMuted/Properties/=RegEx/@EntryIndexedValue">IsMuted</s:String>
-	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=4F5EB8242BDDC144A80CE07BD4A3685B/CustomPatternPlaceholder/=IsMuted/Type/@EntryValue">IdentifierPlaceholder</s:String>
-	<s:Boolean x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=4F5EB8242BDDC144A80CE07BD4A3685B/CustomPatternPlaceholder/=wrapper/@KeyIndexDefined">True</s:Boolean>
-	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=4F5EB8242BDDC144A80CE07BD4A3685B/CustomPatternPlaceholder/=wrapper/Properties/=ExactType/@EntryIndexedValue">False</s:String>
-	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=4F5EB8242BDDC144A80CE07BD4A3685B/CustomPatternPlaceholder/=wrapper/Properties/=ExpressionType/@EntryIndexedValue"></s:String>
-	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=4F5EB8242BDDC144A80CE07BD4A3685B/CustomPatternPlaceholder/=wrapper/Type/@EntryValue">ExpressionPlaceholder</s:String>
-	<s:Boolean x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=4F5EB8242BDDC144A80CE07BD4A3685B/CustomPatternPlaceholder/=muted/@KeyIndexDefined">True</s:Boolean>
-	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=4F5EB8242BDDC144A80CE07BD4A3685B/CustomPatternPlaceholder/=muted/Properties/=ExactType/@EntryIndexedValue">False</s:String>
-	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=4F5EB8242BDDC144A80CE07BD4A3685B/CustomPatternPlaceholder/=muted/Properties/=ExpressionType/@EntryIndexedValue"></s:String>
-	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=4F5EB8242BDDC144A80CE07BD4A3685B/CustomPatternPlaceholder/=muted/Type/@EntryValue">ExpressionPlaceholder</s:String>
-	<s:Boolean x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=4F5EB8242BDDC144A80CE07BD4A3685B/FormatAfterReplace/@EntryValue">False</s:Boolean>
-	<s:Boolean x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=4F5EB8242BDDC144A80CE07BD4A3685B/IsReplacePattern/@EntryValue">True</s:Boolean>
-	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=4F5EB8242BDDC144A80CE07BD4A3685B/LanguageName/@EntryValue">CSHARP</s:String>
-	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=4F5EB8242BDDC144A80CE07BD4A3685B/ReplacePattern/@EntryValue">$wrapper$.SetCurrentValue(MediaElementWrapper.$IsMuted$Property, $muted$)</s:String>
-	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=4F5EB8242BDDC144A80CE07BD4A3685B/SearchPattern/@EntryValue">$wrapper$.$IsMuted$ = $muted$</s:String>
-	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=4F5EB8242BDDC144A80CE07BD4A3685B/Severity/@EntryValue">ERROR</s:String>
-	<s:Boolean x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=4F5EB8242BDDC144A80CE07BD4A3685B/ShortenReferences/@EntryValue">False</s:Boolean>
-	<s:Boolean x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=76927C1C28B0F04D90B15C26F2803667/@KeyIndexDefined">True</s:Boolean>
-	<s:Boolean x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=76927C1C28B0F04D90B15C26F2803667/CustomPatternPlaceholder/=wrapper/@KeyIndexDefined">True</s:Boolean>
-	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=76927C1C28B0F04D90B15C26F2803667/CustomPatternPlaceholder/=wrapper/Properties/=ExactType/@EntryIndexedValue">True</s:String>
-	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=76927C1C28B0F04D90B15C26F2803667/CustomPatternPlaceholder/=wrapper/Properties/=ExpressionType/@EntryIndexedValue">Gu.Wpf.Media.MediaElementWrapper</s:String>
-	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=76927C1C28B0F04D90B15C26F2803667/CustomPatternPlaceholder/=wrapper/Type/@EntryValue">ExpressionPlaceholder</s:String>
-	<s:Boolean x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=76927C1C28B0F04D90B15C26F2803667/CustomPatternPlaceholder/=volume/@KeyIndexDefined">True</s:Boolean>
-	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=76927C1C28B0F04D90B15C26F2803667/CustomPatternPlaceholder/=volume/Properties/=ExactType/@EntryIndexedValue">False</s:String>
-	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=76927C1C28B0F04D90B15C26F2803667/CustomPatternPlaceholder/=volume/Properties/=ExpressionType/@EntryIndexedValue"></s:String>
-	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=76927C1C28B0F04D90B15C26F2803667/CustomPatternPlaceholder/=volume/Type/@EntryValue">ExpressionPlaceholder</s:String>
-	<s:Boolean x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=76927C1C28B0F04D90B15C26F2803667/FormatAfterReplace/@EntryValue">False</s:Boolean>
-	<s:Boolean x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=76927C1C28B0F04D90B15C26F2803667/IsReplacePattern/@EntryValue">True</s:Boolean>
-	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=76927C1C28B0F04D90B15C26F2803667/LanguageName/@EntryValue">CSHARP</s:String>
-	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=76927C1C28B0F04D90B15C26F2803667/ReplacePattern/@EntryValue">$wrapper$.SetCurrentValue(MediaElementWrapper.VolumeProperty, $volume$)</s:String>
-	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=76927C1C28B0F04D90B15C26F2803667/SearchPattern/@EntryValue">$wrapper$.Volume = $volume$</s:String>
-	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=76927C1C28B0F04D90B15C26F2803667/Severity/@EntryValue">ERROR</s:String>
-	<s:Boolean x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=76927C1C28B0F04D90B15C26F2803667/ShortenReferences/@EntryValue">False</s:Boolean>
-	<s:Boolean x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=95A7A22FC4554F46BBB5A1B0EC36F252/@KeyIndexDefined">True</s:Boolean>
-	<s:Boolean x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=95A7A22FC4554F46BBB5A1B0EC36F252/FormatAfterReplace/@EntryValue">False</s:Boolean>
-	<s:Boolean x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=95A7A22FC4554F46BBB5A1B0EC36F252/IsReplacePattern/@EntryValue">True</s:Boolean>
-	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=95A7A22FC4554F46BBB5A1B0EC36F252/LanguageName/@EntryValue">CSHARP</s:String>
-	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=95A7A22FC4554F46BBB5A1B0EC36F252/ReplacePattern/@EntryValue">$wrapper$.SetCurrentValue(MediaElementWrapper.StateProperty, $MediaState$)</s:String>
-	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=95A7A22FC4554F46BBB5A1B0EC36F252/SearchPattern/@EntryValue">$wrapper$.State = $MediaState$</s:String>
-	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=95A7A22FC4554F46BBB5A1B0EC36F252/Severity/@EntryValue">ERROR</s:String>
-	<s:Boolean x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=95A7A22FC4554F46BBB5A1B0EC36F252/ShortenReferences/@EntryValue">False</s:Boolean>
-	<s:Boolean x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=95A7A22FC4554F46BBB5A1B0EC36F252/CustomPatternPlaceholder/=wrapper/@KeyIndexDefined">True</s:Boolean>
-	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=95A7A22FC4554F46BBB5A1B0EC36F252/CustomPatternPlaceholder/=wrapper/Properties/=ExactType/@EntryIndexedValue">True</s:String>
-	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=95A7A22FC4554F46BBB5A1B0EC36F252/CustomPatternPlaceholder/=wrapper/Properties/=ExpressionType/@EntryIndexedValue">Gu.Wpf.Media.MediaElementWrapper</s:String>
-	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=95A7A22FC4554F46BBB5A1B0EC36F252/CustomPatternPlaceholder/=wrapper/Type/@EntryValue">ExpressionPlaceholder</s:String>
-	<s:Boolean x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=95A7A22FC4554F46BBB5A1B0EC36F252/CustomPatternPlaceholder/=MediaState/@KeyIndexDefined">True</s:Boolean>
-	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=95A7A22FC4554F46BBB5A1B0EC36F252/CustomPatternPlaceholder/=MediaState/Properties/=ExactType/@EntryIndexedValue">False</s:String>
-	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=95A7A22FC4554F46BBB5A1B0EC36F252/CustomPatternPlaceholder/=MediaState/Properties/=ExpressionType/@EntryIndexedValue">System.Windows.Controls.MediaState</s:String>
-	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=95A7A22FC4554F46BBB5A1B0EC36F252/CustomPatternPlaceholder/=MediaState/Type/@EntryValue">ExpressionPlaceholder</s:String>
-	<s:Boolean x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=B65879BC5948084AA98F7CC56AF08C58/@KeyIndexDefined">True</s:Boolean>
-	<s:Boolean x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=B65879BC5948084AA98F7CC56AF08C58/CustomPatternPlaceholder/=wrapper/@KeyIndexDefined">True</s:Boolean>
-	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=B65879BC5948084AA98F7CC56AF08C58/CustomPatternPlaceholder/=wrapper/Properties/=ExactType/@EntryIndexedValue">True</s:String>
-	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=B65879BC5948084AA98F7CC56AF08C58/CustomPatternPlaceholder/=wrapper/Properties/=ExpressionType/@EntryIndexedValue">Gu.Wpf.Media.MediaElementWrapper</s:String>
-	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=B65879BC5948084AA98F7CC56AF08C58/CustomPatternPlaceholder/=wrapper/Type/@EntryValue">ExpressionPlaceholder</s:String>
-	<s:Boolean x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=B65879BC5948084AA98F7CC56AF08C58/CustomPatternPlaceholder/=MediaState/@KeyIndexDefined">True</s:Boolean>
-	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=B65879BC5948084AA98F7CC56AF08C58/CustomPatternPlaceholder/=MediaState/Properties/=ExactType/@EntryIndexedValue">False</s:String>
-	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=B65879BC5948084AA98F7CC56AF08C58/CustomPatternPlaceholder/=MediaState/Properties/=ExpressionType/@EntryIndexedValue">System.Windows.Controls.MediaState</s:String>
-	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=B65879BC5948084AA98F7CC56AF08C58/CustomPatternPlaceholder/=MediaState/Type/@EntryValue">ExpressionPlaceholder</s:String>
-	<s:Boolean x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=B65879BC5948084AA98F7CC56AF08C58/FormatAfterReplace/@EntryValue">False</s:Boolean>
-	<s:Boolean x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=B65879BC5948084AA98F7CC56AF08C58/IsReplacePattern/@EntryValue">True</s:Boolean>
-	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=B65879BC5948084AA98F7CC56AF08C58/LanguageName/@EntryValue">CSHARP</s:String>
-	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=B65879BC5948084AA98F7CC56AF08C58/ReplacePattern/@EntryValue">$wrapper$.SetCurrentValue(MediaElementWrapper.StateProperty, $MediaState$)</s:String>
-	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=B65879BC5948084AA98F7CC56AF08C58/SearchPattern/@EntryValue">$wrapper$.State = $MediaState$</s:String>
-	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=B65879BC5948084AA98F7CC56AF08C58/Severity/@EntryValue">ERROR</s:String>
-	<s:Boolean x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=B65879BC5948084AA98F7CC56AF08C58/ShortenReferences/@EntryValue">False</s:Boolean>
-	<s:Boolean x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=B79EB45C33C6A1478A4C22CE67BC88E6/@KeyIndexDefined">True</s:Boolean>
-	<s:Boolean x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=B79EB45C33C6A1478A4C22CE67BC88E6/CustomPatternPlaceholder/=wrapper/@KeyIndexDefined">False</s:Boolean>
-	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=B79EB45C33C6A1478A4C22CE67BC88E6/CustomPatternPlaceholder/=wrapper/Properties/=ExactType/@EntryIndexedValue">False</s:String>
-	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=B79EB45C33C6A1478A4C22CE67BC88E6/CustomPatternPlaceholder/=wrapper/Properties/=ExpressionType/@EntryIndexedValue"></s:String>
-	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=B79EB45C33C6A1478A4C22CE67BC88E6/CustomPatternPlaceholder/=wrapper/Type/@EntryValue"></s:String>
-	<s:Boolean x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=B79EB45C33C6A1478A4C22CE67BC88E6/CustomPatternPlaceholder/=MediaState/@KeyIndexDefined">False</s:Boolean>
-	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=B79EB45C33C6A1478A4C22CE67BC88E6/CustomPatternPlaceholder/=MediaState/Properties/=ExactType/@EntryIndexedValue"></s:String>
-	<s:Boolean x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=B79EB45C33C6A1478A4C22CE67BC88E6/CustomPatternPlaceholder/=MediaState/Properties/=ExactType/@EntryIndexRemoved">True</s:Boolean>
-	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=B79EB45C33C6A1478A4C22CE67BC88E6/CustomPatternPlaceholder/=MediaState/Properties/=ExpressionType/@EntryIndexedValue"></s:String>
-	<s:Boolean x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=B79EB45C33C6A1478A4C22CE67BC88E6/CustomPatternPlaceholder/=MediaState/Properties/=ExpressionType/@EntryIndexRemoved">True</s:Boolean>
-	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=B79EB45C33C6A1478A4C22CE67BC88E6/CustomPatternPlaceholder/=MediaState/Type/@EntryValue"></s:String>
-	<s:Boolean x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=B79EB45C33C6A1478A4C22CE67BC88E6/CustomPatternPlaceholder/=Position/@KeyIndexDefined">True</s:Boolean>
-	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=B79EB45C33C6A1478A4C22CE67BC88E6/CustomPatternPlaceholder/=Position/Properties/=ExactType/@EntryIndexedValue">False</s:String>
-	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=B79EB45C33C6A1478A4C22CE67BC88E6/CustomPatternPlaceholder/=Position/Properties/=ExpressionType/@EntryIndexedValue"></s:String>
-	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=B79EB45C33C6A1478A4C22CE67BC88E6/CustomPatternPlaceholder/=Position/Type/@EntryValue">ExpressionPlaceholder</s:String>
-	<s:Boolean x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=B79EB45C33C6A1478A4C22CE67BC88E6/CustomPatternPlaceholder/=wrapper/@KeyIndexDefined">True</s:Boolean>
-	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=B79EB45C33C6A1478A4C22CE67BC88E6/CustomPatternPlaceholder/=wrapper/Properties/=ExactType/@EntryIndexedValue">True</s:String>
-	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=B79EB45C33C6A1478A4C22CE67BC88E6/CustomPatternPlaceholder/=wrapper/Properties/=ExpressionType/@EntryIndexedValue">Gu.Wpf.Media.MediaElementWrapper</s:String>
-	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=B79EB45C33C6A1478A4C22CE67BC88E6/CustomPatternPlaceholder/=wrapper/Type/@EntryValue">ExpressionPlaceholder</s:String>
-	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=B79EB45C33C6A1478A4C22CE67BC88E6/ReplacePattern/@EntryValue">$wrapper$.SetCurrentValue(MediaElementWrapper.PositionProperty, $Position$)</s:String>
-	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=B79EB45C33C6A1478A4C22CE67BC88E6/SearchPattern/@EntryValue">$wrapper$.Position = $Position$</s:String>
-	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=B79EB45C33C6A1478A4C22CE67BC88E6/Severity/@EntryValue">ERROR</s:String></wpf:ResourceDictionary>
+
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=3427EA757BF64CA784CCF7F90980EA97/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=3427EA757BF64CA784CCF7F90980EA97/Comment/@EntryValue">This can make sense in unit tests</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=3427EA757BF64CA784CCF7F90980EA97/CustomPatternPlaceholder/=MutablePropertyName/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=3427EA757BF64CA784CCF7F90980EA97/CustomPatternPlaceholder/=MutablePropertyName/Properties/=CaseSensitive/@EntryIndexedValue">True</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=3427EA757BF64CA784CCF7F90980EA97/CustomPatternPlaceholder/=MutablePropertyName/Properties/=ExactType/@EntryIndexedValue">False</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=3427EA757BF64CA784CCF7F90980EA97/CustomPatternPlaceholder/=MutablePropertyName/Properties/=RegEx/@EntryIndexedValue">(AudioFormats|Balance|IsMuted|IsPlaying|LoadedBehavior|Position|ScrubbingEnabled|Source|SpeedRatio|State|Stretch|StretchDirection|VideoFormats|Volume|VolumeIncrement)</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=3427EA757BF64CA784CCF7F90980EA97/CustomPatternPlaceholder/=MutablePropertyName/Type/@EntryValue">IdentifierPlaceholder</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=3427EA757BF64CA784CCF7F90980EA97/CustomPatternPlaceholder/=value/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=3427EA757BF64CA784CCF7F90980EA97/CustomPatternPlaceholder/=value/Properties/=ExactType/@EntryIndexedValue">False</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=3427EA757BF64CA784CCF7F90980EA97/CustomPatternPlaceholder/=value/Properties/=ExpressionType/@EntryIndexedValue"></s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=3427EA757BF64CA784CCF7F90980EA97/CustomPatternPlaceholder/=value/Type/@EntryValue">ExpressionPlaceholder</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=3427EA757BF64CA784CCF7F90980EA97/CustomPatternPlaceholder/=mediaElementWrapper/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=3427EA757BF64CA784CCF7F90980EA97/CustomPatternPlaceholder/=mediaElementWrapper/Properties/=ExactType/@EntryIndexedValue">True</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=3427EA757BF64CA784CCF7F90980EA97/CustomPatternPlaceholder/=mediaElementWrapper/Properties/=ExpressionType/@EntryIndexedValue">Gu.Wpf.Media.MediaElementWrapper</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=3427EA757BF64CA784CCF7F90980EA97/CustomPatternPlaceholder/=mediaElementWrapper/Type/@EntryValue">ExpressionPlaceholder</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=3427EA757BF64CA784CCF7F90980EA97/FormatAfterReplace/@EntryValue">False</s:Boolean>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=3427EA757BF64CA784CCF7F90980EA97/IsReplacePattern/@EntryValue">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=3427EA757BF64CA784CCF7F90980EA97/LanguageName/@EntryValue">CSHARP</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=3427EA757BF64CA784CCF7F90980EA97/ReplacePattern/@EntryValue">$mediaElementWrapper$.SetCurrentValue(Gu.Wpf.Media.MediaElementWrapper.$MutablePropertyName$Property, $value$)</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=3427EA757BF64CA784CCF7F90980EA97/SearchPattern/@EntryValue">$mediaElementWrapper$.$MutablePropertyName$ = $value$</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=3427EA757BF64CA784CCF7F90980EA97/Severity/@EntryValue">ERROR</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=3427EA757BF64CA784CCF7F90980EA97/ShortenReferences/@EntryValue">False</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=3427EA757BF64CA784CCF7F90980EA97/SuppressionKey/@EntryValue">SuppressSetMutable</s:String>
+</wpf:ResourceDictionary>

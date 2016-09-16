@@ -1,4 +1,5 @@
-﻿namespace Gu.Wpf.Media.Tests
+﻿// ReSharper disable SuppressSetMutable
+namespace Gu.Wpf.Media.Tests
 {
     using System.Threading;
     using NUnit.Framework;
@@ -13,9 +14,9 @@
             {
                 var wrapper = new MediaElementWrapper();
                 Assert.AreEqual(false, wrapper.IsMuted);
-                wrapper.SetCurrentValue(MediaElementWrapper.VolumeProperty, 0.0);
+                wrapper.Volume = 0;
                 Assert.AreEqual(true, wrapper.IsMuted);
-                wrapper.SetCurrentValue(MediaElementWrapper.VolumeProperty, 0.5);
+                wrapper.Volume = 0.5;
                 Assert.AreEqual(false, wrapper.IsMuted);
             }
 
@@ -24,11 +25,11 @@
             {
                 var wrapper = new MediaElementWrapper();
                 Assert.AreEqual(false, wrapper.IsMuted);
-                wrapper.SetCurrentValue(MediaElementWrapper.VolumeProperty, 0.0);
+                wrapper.Volume = 0.0;
                 Assert.AreEqual(true, wrapper.IsMuted);
-                wrapper.SetCurrentValue(MediaElementWrapper.IsMutedProperty, false);
+                wrapper.IsMuted = false;
                 Assert.AreEqual(true, wrapper.IsMuted);
-                wrapper.SetCurrentValue(MediaElementWrapper.VolumeProperty, 0.5);
+                wrapper.Volume = 0.5;
                 Assert.AreEqual(false, wrapper.IsMuted);
             }
         }

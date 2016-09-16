@@ -31,6 +31,7 @@ Wrapper for System.Windows.Controls.MediaElement.
     - [1.1.20. ScrubbingEnabled (`bool`)](#1120-scrubbingenabled--bool)
     - [1.1.21. Stretch (`Stretch`)](#1121-stretch--stretch)
     - [1.1.22. StretchDirection (`StretchDirection`)](#1122-stretchdirection--stretchdirection)
+    - [1.1.23. LoadedBehavior (`MediaState`)](#1122-loadedbehavior--mediastate)
   - [1.2. Events](#12-events)
     - [1.2.1. MediaFailed](#121-mediafailed)
     - [1.2.2. MediaOpened](#122-mediaopened)
@@ -156,6 +157,9 @@ Mapped to System.Windows.Controls.MediaElement.Stretch.
 ### 1.1.22. StretchDirection (`StretchDirection`)
 Mapped to System.Windows.Controls.MediaElement.StretchDirection.
 
+### 1.1.22. LoadedBehavior (`MediaState`)
+Set initial state after media is loaded. This is very unlike MediaElement.LoadedBehavior where setting it to paused will throw if touching play.
+
 ## 1.2. Events
 
 ### 1.2.1. MediaFailed
@@ -251,17 +255,22 @@ MediaElementWrapper has a command bindings for:
                     Command="TogglePlayPause"
                     CommandTarget="{Binding ElementName=MediaElement}" />
         <KeyBinding Key="F11" Command="media:Commands.ToggleFullScreen" />
+        <KeyBinding Key="Escape" Command="media:Commands.EndFullScreen" />
     </Window.InputBindings>
     <Window.CommandBindings>
         <CommandBinding Command="ApplicationCommands.Open" Executed="OpenExecuted" />
         <CommandBinding Command="media:Commands.ToggleFullScreen" Executed="OnToggleFullScreenExecuted" />
+        <CommandBinding CanExecute="OnEndFullScreenCanExecute"
+                        Command="media:Commands.EndFullScreen"
+                        Executed="OnEndFullScreenExecuted" />
     </Window.CommandBindings>
     <Grid>
         <media:MediaElementWrapper x:Name="MediaElement"
+                                   LoadedBehavior="Play"
                                    ScrubbingEnabled="True"
                                    Stretch="None" />
 
-        <Grid VerticalAlignment="Bottom">
+        <Grid VerticalAlignment="Bottom" Background="#19000000">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
@@ -277,7 +286,7 @@ MediaElementWrapper has a command bindings for:
                     Value="{Binding ElementName=MediaElement,
                                     Path=Position,
                                     Converter={x:Static media:NullableTimeSpanToSecondsConverter.Default}}" />
-            
+
             <Grid Grid.Row="1">
                 <Grid.Resources>
                     <Style BasedOn="{StaticResource {x:Static media:Styles.PlayerButtonBaseStyleKey}}" TargetType="{x:Type Button}" />
@@ -390,7 +399,7 @@ public partial class MainWindow : Window
 
         if (openFileDialog.ShowDialog() == true)
         {
-            this.MediaElement.Source = new Uri(openFileDialog.FileName);
+            this.MediaElement.SetCurrentValue(MediaElementWrapper.SourceProperty, new Uri(openFileDialog.FileName));
         }
     }
 
@@ -411,6 +420,22 @@ public partial class MainWindow : Window
             this.SizeToContent = SizeToContent.WidthAndHeight;
             this.WindowState = WindowState.Normal;
         }
+
+        e.Handled = true;
+    }
+
+    private void OnEndFullScreenCanExecute(object sender, CanExecuteRoutedEventArgs e)
+    {
+        e.CanExecute = this.WindowState == WindowState.Maximized && this.WindowStyle == WindowStyle.None;
+    }
+
+    private void OnEndFullScreenExecuted(object sender, ExecutedRoutedEventArgs e)
+    {
+        this.MediaElement.Stretch = this.stretch;
+        this.WindowStyle = WindowStyle.SingleBorderWindow;
+        this.SizeToContent = SizeToContent.WidthAndHeight;
+        this.WindowState = WindowState.Normal;
+        e.Handled = true;
     }
 }
 ```

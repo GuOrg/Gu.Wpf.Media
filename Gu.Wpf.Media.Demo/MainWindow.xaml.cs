@@ -1,4 +1,5 @@
-﻿namespace Gu.Wpf.Media.Demo
+﻿// ReSharper disable SuppressSetMutable
+namespace Gu.Wpf.Media.Demo
 {
     using System;
     using System.Windows;

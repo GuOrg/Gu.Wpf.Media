@@ -99,8 +99,8 @@
             this.CommandBindings.Add(new CommandBinding(MediaCommands.Stop, HandleExecute(this.Stop), HandleCanExecute(this.CanStop)));
             this.CommandBindings.Add(new CommandBinding(MediaCommands.TogglePlayPause, HandleExecute(this.TogglePlayPause), HandleCanExecute(() => this.CanPlay() || this.CanPause())));
             this.CommandBindings.Add(new CommandBinding(MediaCommands.Rewind, HandleExecute(this.Rewind), HandleCanExecute(this.CanRewind)));
-            this.CommandBindings.Add(new CommandBinding(MediaCommands.IncreaseVolume, HandleExecute(() => this.IncreaseVolume(this.VolumeIncrement)), HandleCanExecute(this.CanIncreaseVolume)));
-            this.CommandBindings.Add(new CommandBinding(MediaCommands.DecreaseVolume, HandleExecute(() => this.DecreaseVolume(this.VolumeIncrement)), HandleCanExecute(this.CanDecreaseVolume)));
+            this.CommandBindings.Add(new CommandBinding(MediaCommands.IncreaseVolume, HandleExecute(parameter => this.IncreaseVolume(this.GetVolumeIncrementOrDefault(parameter))), HandleCanExecute(this.CanIncreaseVolume)));
+            this.CommandBindings.Add(new CommandBinding(MediaCommands.DecreaseVolume, HandleExecute(parameter => this.DecreaseVolume(this.GetVolumeIncrementOrDefault(parameter))), HandleCanExecute(this.CanDecreaseVolume)));
             this.CommandBindings.Add(new CommandBinding(MediaCommands.MuteVolume, HandleExecute(this.MuteVolume), HandleCanExecute(this.CanMuteVolume)));
             this.CommandBindings.Add(new CommandBinding(Commands.UnmuteVolume, HandleExecute(this.UnmuteVolume), HandleCanExecute(this.CanUnmuteVolume)));
             this.CommandBindings.Add(new CommandBinding(Commands.ToggleMute, HandleExecute(this.ToggleMute), HandleCanExecute(this.CanToggleMute)));
@@ -219,7 +219,10 @@
         /// Decreases <see cref="Volume"/> by <paramref name="increment"/>
         /// Truncates to between 0 and 1 if overflow.
         /// </summary>
-        /// <param name="increment">A value between 0 and 1. Typical value is 0.05.</param>
+        /// <param name="increment">
+        /// A value between 0 and 1. Typical value is 0.05.
+        /// If null <see cref="VolumeIncrement"/> is used.
+        /// </param>
         public void DecreaseVolume(double increment)
         {
             this.SetCurrentValue(VolumeProperty, Clamp.Between(this.mediaElement.Volume - increment, 0, 1, 3));
@@ -240,7 +243,10 @@
         /// Increases <see cref="Volume"/> by <paramref name="increment"/>
         /// Truncates to between 0 and 1 if overflow.
         /// </summary>
-        /// <param name="increment">A value between 0 and 1. Typical value is 0.05.</param>
+        /// <param name="increment">
+        /// A value between 0 and 1. Typical value is 0.05.
+        /// If null <see cref="VolumeIncrement"/> is used.
+        /// </param>
         public void IncreaseVolume(double increment)
         {
             if (this.IsMuted)
@@ -413,6 +419,15 @@
                 };
         }
 
+        private static ExecutedRoutedEventHandler HandleExecute(Action<object> action)
+        {
+            return (o, e) =>
+            {
+                action(e.Parameter);
+                e.Handled = true;
+            };
+        }
+
         private static CanExecuteRoutedEventHandler HandleCanExecute(Func<bool> canExecute)
         {
             return (o, e) =>
@@ -459,6 +474,16 @@
                     }
                 }
             }
+        }
+
+        private double GetVolumeIncrementOrDefault(object parameter)
+        {
+            if (parameter == null)
+            {
+                return this.VolumeIncrement;
+            }
+
+            return parameter as double? ?? 0;
         }
     }
 }

@@ -21,7 +21,13 @@
         /// <returns>
         /// The identifier for the <see cref="MediaElementWrapper.Volume" /> dependency property.
         /// </returns>
-        public static readonly DependencyProperty VolumeProperty = MediaElement.VolumeProperty.AddOwner(typeof(MediaElementWrapper), new FrameworkPropertyMetadata(0.5, FrameworkPropertyMetadataOptions.None, OnVolumeChanged));
+        public static readonly DependencyProperty VolumeProperty = MediaElement.VolumeProperty.AddOwner(
+            typeof(MediaElementWrapper),
+            new FrameworkPropertyMetadata(
+                0.5,
+                FrameworkPropertyMetadataOptions.None,
+                OnVolumeChanged,
+                OnVolumeCoerce));
 
         /// <summary>
         /// Identifies the <see cref="MediaElementWrapper.Balance" /> dependency property.

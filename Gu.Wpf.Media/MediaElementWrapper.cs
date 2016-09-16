@@ -225,7 +225,7 @@
         /// </param>
         public void DecreaseVolume(double increment)
         {
-            this.SetCurrentValue(VolumeProperty, Clamp.Between(this.mediaElement.Volume - increment, 0, 1, 3));
+            this.SetCurrentValue(VolumeProperty, this.mediaElement.Volume - increment);
             this.SetCurrentValue(IsMutedProperty, this.Volume <= 0);
         }
 
@@ -251,12 +251,12 @@
         {
             if (this.IsMuted)
             {
-                this.SetCurrentValue(VolumeProperty, Clamp.Between(increment, 0, 1, 3));
+                this.SetCurrentValue(VolumeProperty, increment);
                 this.SetCurrentValue(IsMutedProperty, this.Volume <= 0);
                 return;
             }
 
-            this.SetCurrentValue(VolumeProperty, Clamp.Between(this.mediaElement.Volume + increment, 0, 1, 3));
+            this.SetCurrentValue(VolumeProperty, this.mediaElement.Volume + increment);
         }
 
         /// <summary>
@@ -483,7 +483,13 @@
                 return this.VolumeIncrement;
             }
 
-            return parameter as double? ?? 0;
+            double result;
+            if (ObjectExt.TryConvertToDouble(parameter, out result))
+            {
+                return result;
+            }
+
+            return 0;
         }
     }
 }

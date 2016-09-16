@@ -35,10 +35,16 @@ namespace Gu.Wpf.Media.Tests
                 Assert.AreEqual(false, wrapper.IsMuted);
             }
 
-            [TestCase(0.1, 0.5)]
+            [TestCase(0.1, 0.6)]
             [TestCase(-0.1, 0.4)]
-            [TestCase("", 0.50)]
+            [TestCase("", 0.5)]
+            [TestCase("0.1", 0.6)]
+            [TestCase("abc", 0.5)]
             [TestCase(null, 0.55)]
+            [TestCase(true, 0.5)]
+            [TestCase(1, 1)]
+            [TestCase(1u, 1)]
+            [TestCase(-1, 0)]
             public void IncreaseVolumeWithParameter(object increment, double expected)
             {
                 var wrapper = new MediaElementWrapper();
@@ -50,8 +56,13 @@ namespace Gu.Wpf.Media.Tests
 
             [TestCase(0.1, 0.4)]
             [TestCase(-0.1, 0.6)]
-            [TestCase("", 0.45)]
+            [TestCase("", 0.5)]
+            [TestCase("0.1", 0.4)]
+            [TestCase("abc", 0.5)]
+            [TestCase(true, 0.5)]
             [TestCase(null, 0.45)]
+            [TestCase(1, 0)]
+            [TestCase(-1, 1)]
             public void DecreaseVolumeWithParameter(object increment, double expected)
             {
                 var wrapper = new MediaElementWrapper();

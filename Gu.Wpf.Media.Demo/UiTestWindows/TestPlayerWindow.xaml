@@ -15,6 +15,7 @@
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <media:MediaElementWrapper x:Name="MediaElement"
+                                   LoadedBehavior="Pause"
                                    ScrubbingEnabled="True"
                                    Stretch="None" />
         <GroupBox Grid.Column="1" Header="Properties">
@@ -153,9 +154,33 @@
                         CommandTarget="{Binding ElementName=MediaElement}"
                         Content="DecreaseVolume" />
 
+                <Button x:Name="DecreaseVolumeByOne"
+                        Command="DecreaseVolume"
+                        CommandParameter="1"
+                        CommandTarget="{Binding ElementName=MediaElement}"
+                        Content="DecreaseVolumeByOne" />
+
+                <Button x:Name="DecreaseVolumeByZeroPointOne"
+                        Command="DecreaseVolume"
+                        CommandParameter="1"
+                        CommandTarget="{Binding ElementName=MediaElement}"
+                        Content="DecreaseVolumeByZeroPointOne" />
+
                 <Button Command="IncreaseVolume"
                         CommandTarget="{Binding ElementName=MediaElement}"
                         Content="IncreaseVolume" />
+
+                <Button x:Name="IncreaseVolumeByOne"
+                        Command="IncreaseVolume"
+                        CommandParameter="1"
+                        CommandTarget="{Binding ElementName=MediaElement}"
+                        Content="IncreaseVolumeByOne" />
+
+                <Button x:Name="IncreaseVolumeByZeroPointOne"
+                        Command="IncreaseVolume"
+                        CommandParameter="1"
+                        CommandTarget="{Binding ElementName=MediaElement}"
+                        Content="IncreaseVolumeByZeroPointOne" />
             </StackPanel>
         </GroupBox>
     </Grid>

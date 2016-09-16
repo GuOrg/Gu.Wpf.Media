@@ -71,6 +71,7 @@
     <Compile Include="AttachedProperties\Icon.cs" />
     <Compile Include="Internals\Clamp.cs" />
     <Compile Include="Internals\Is.cs" />
+    <Compile Include="Internals\ObjectExt.cs" />
     <Compile Include="Internals\StringExt.cs" />
     <Compile Include="MediaElementWrapper.cs" />
     <Compile Include="MediaElementWrapper.DependencyProperties.cs" />

@@ -440,6 +440,11 @@
             }
         }
 
+        private static object OnVolumeCoerce(DependencyObject d, object basevalue)
+        {
+            return Clamp.Between((double)basevalue, 0, 1, 3);
+        }
+
         private static object OnIsMutedCoerce(DependencyObject d, object basevalue)
         {
             var wrapper = (MediaElementWrapper)d;

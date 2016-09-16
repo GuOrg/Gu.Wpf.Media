@@ -18,7 +18,15 @@ namespace Gu.Wpf.Media.UiTests
 
         public Button DecreaseVolumeButton => this.Window.Get<Button>("DecreaseVolume");
 
+        public Button DecreaseVolumeByOneButton => this.Window.Get<Button>("DecreaseVolumeByOne");
+
+        public Button DecreaseVolumeByZeroPointOneButton => this.Window.Get<Button>("DecreaseVolumeByZeroPointOne");
+
         public Button IncreaseVolumeButton => this.Window.Get<Button>("IncreaseVolume");
+
+        public Button IncreaseVolumeByOneButton => this.Window.Get<Button>("IncreaseVolumeByOne");
+
+        public Button IncreaseVolumeByZeroPointOneButton => this.Window.Get<Button>("IncreaseVolumeByZeroPointOne");
 
         [Test]
         public void ClickMuteThenIncreaseVolume()
@@ -175,6 +183,24 @@ namespace Gu.Wpf.Media.UiTests
         }
 
         [Test]
+        public void IncreaseVolumeByOne()
+        {
+            this.SetValue(MediaElementWrapper.SourceProperty, Info.CoffeeClipFileName());
+            this.AreEqual("0.5", MediaElementWrapper.VolumeProperty);
+            this.IncreaseVolumeByOneButton.Click();
+            this.AreEqual("0", MediaElementWrapper.VolumeProperty);
+        }
+
+        [Test]
+        public void IncreaseVolumeByZeroPointOne()
+        {
+            this.SetValue(MediaElementWrapper.SourceProperty, Info.CoffeeClipFileName());
+            this.AreEqual("0.5", MediaElementWrapper.VolumeProperty);
+            this.IncreaseVolumeByZeroPointOneButton.Click();
+            this.AreEqual("0", MediaElementWrapper.VolumeProperty);
+        }
+
+        [Test]
         public void DecreaseVolume()
         {
             this.SetValue(MediaElementWrapper.SourceProperty, Info.CoffeeClipFileName());
@@ -198,6 +224,24 @@ namespace Gu.Wpf.Media.UiTests
             this.AreEqual("0.2", MediaElementWrapper.VolumeProperty);
             Assert.AreEqual(true, this.IncreaseVolumeButton.Enabled);
             this.AreEqual("False", MediaElementWrapper.IsMutedProperty);
+        }
+
+        [Test]
+        public void DecreaseVolumeByOne()
+        {
+            this.SetValue(MediaElementWrapper.SourceProperty, Info.CoffeeClipFileName());
+            this.AreEqual("0.5", MediaElementWrapper.VolumeProperty);
+            this.DecreaseVolumeByOneButton.Click();
+            this.AreEqual("0", MediaElementWrapper.VolumeProperty);
+        }
+
+        [Test]
+        public void DecreaseVolumeByZeroPointOne()
+        {
+            this.SetValue(MediaElementWrapper.SourceProperty, Info.CoffeeClipFileName());
+            this.AreEqual("0.5", MediaElementWrapper.VolumeProperty);
+            this.DecreaseVolumeByZeroPointOneButton.Click();
+            this.AreEqual("0", MediaElementWrapper.VolumeProperty);
         }
 
         [Test]

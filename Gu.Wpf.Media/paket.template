@@ -1,8 +1,7 @@
 ﻿type project
 
 releasenotes
-  BUGFIX: Use SetCurrentValue
-  USABILITY: Tweaked styles a bit
+  Use converterparameter in increase & decrease volume command bindings.
 
 tags wpf xaml media mediaelement
 projectUrl https://github.com/JohanLarsson/Gu.Wpf.Media

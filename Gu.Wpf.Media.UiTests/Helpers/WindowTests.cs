@@ -49,7 +49,7 @@ namespace Gu.Wpf.Media.UiTests.Helpers
         private void SaveScreenshotToArtifacsDir(string suffix)
         {
             var fileName = System.IO.Path.Combine(Info.ArtifactsDirectory(), $"{this.WindowName}_{suffix}.png");
-            using (var image = new TestStack.White.ScreenCapture().CaptureDesktop())
+            using (var image = new ScreenCapture().CaptureDesktop())
             {
                 image.Save(fileName);
             }

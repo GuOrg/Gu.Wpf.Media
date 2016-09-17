@@ -1,4 +1,7 @@
-#### 0.3.1
+#### 0.3.2
+* Use converterparameter in increase & decrease volume command bindings.
+
+#### 0.3.2
 * BUGFIX: Use SetCurrentValue
 * USABILITY: Tweaked styles a bit
 

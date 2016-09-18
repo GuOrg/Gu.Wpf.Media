@@ -1,27 +1,33 @@
 ﻿namespace Gu.Wpf.Media.Demo.UiTestWindows
 {
-    using System;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.Reflection;
     using System.Runtime.CompilerServices;
     using System.Windows;
+    using System.Windows.Controls;
     using System.Windows.Data;
 
     using JetBrains.Annotations;
 
     public class PropertyItem : INotifyPropertyChanged
     {
-        private static readonly Dictionary<DependencyProperty, DependencyProperty> ProxyMap = new Dictionary<DependencyProperty, DependencyProperty>();
-        private static readonly Dictionary<DependencyProperty, List<Action>> InvocationList = new Dictionary<DependencyProperty, List<Action>>();
+        private static readonly Dictionary<DependencyProperty, PropertyItem> Cache = new Dictionary<DependencyProperty, PropertyItem>();
+
+        private static readonly FieldInfo MediaElementField = typeof(MediaElementWrapper).GetField("mediaElement", BindingFlags.NonPublic | BindingFlags.Instance);
         private readonly MediaElementWrapper wrapper;
+        private readonly MediaElement mediaElement;
+        private readonly PropertyInfo mediaElementProperty;
+
         private readonly DependencyProperty proxyProperty;
 
-        public PropertyItem(MediaElementWrapper wrapper, DependencyProperty property)
+        private PropertyItem(MediaElementWrapper wrapper, DependencyProperty property, DependencyProperty proxyProperty)
         {
             this.wrapper = wrapper;
+            this.mediaElement = (MediaElement)MediaElementField.GetValue(wrapper);
             this.Property = property;
-            this.proxyProperty = GetProxy(property);
-            InvocationList[this.proxyProperty].Add(() => this.OnPropertyChanged(nameof(this.Value)));
+            this.mediaElementProperty = typeof(MediaElement).GetProperty(property.Name);
+            this.proxyProperty = proxyProperty;
             if (property.ReadOnly)
             {
                 var binding = new Binding(property.Name) { Source = wrapper, Mode = BindingMode.OneWay };
@@ -48,7 +54,30 @@
             {
                 this.wrapper.SetCurrentValue(this.proxyProperty, value);
                 this.OnPropertyChanged();
+                if (this.mediaElementProperty != null)
+                {
+                    this.OnPropertyChanged(nameof(this.MediaElementValue));
+                }
             }
+        }
+
+        public object MediaElementValue => this.mediaElementProperty?.GetValue(this.mediaElement) ?? "-";
+
+        public static PropertyItem GetOrCreate(MediaElementWrapper wrapper, DependencyProperty property)
+        {
+            PropertyItem item;
+            if (!Cache.TryGetValue(property, out item))
+            {
+                var proxy = DependencyProperty.RegisterAttached(
+                    property.Name + "Proxy",
+                    typeof(object),
+                    typeof(PropertyItem),
+                    new PropertyMetadata(null, OnProxyPropertyChanged));
+                item = new PropertyItem(wrapper, property, proxy);
+                Cache[property] = item;
+            }
+
+            return item;
         }
 
         public override string ToString()
@@ -64,27 +93,12 @@
 
         private static void OnProxyPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            foreach (var action in InvocationList[e.Property])
+            foreach (var kvp in Cache)
             {
-                action();
+                var item = kvp.Value;
+                item.OnPropertyChanged(nameof(Value));
+                item.OnPropertyChanged(nameof(MediaElementValue));
             }
-        }
-
-        private static DependencyProperty GetProxy(DependencyProperty property)
-        {
-            DependencyProperty proxy;
-            if (!ProxyMap.TryGetValue(property, out proxy))
-            {
-                proxy = DependencyProperty.RegisterAttached(
-                 property.Name + "Proxy",
-                 typeof(object),
-                 typeof(PropertyItem),
-                 new PropertyMetadata(null, OnProxyPropertyChanged));
-                ProxyMap[property] = proxy;
-                InvocationList[proxy] = new List<Action>();
-            }
-
-            return proxy;
         }
     }
 }

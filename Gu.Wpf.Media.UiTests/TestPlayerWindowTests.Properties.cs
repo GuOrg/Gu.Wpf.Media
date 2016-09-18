@@ -9,8 +9,9 @@ namespace Gu.Wpf.Media.UiTests
     public partial class TestPlayerWindowTests
     {
         [Test]
-        public void Loads()
+        public void DefaultValues()
         {
+            this.RestartApplication();
             this.AreEqual("0", false, MediaElementWrapper.BalanceProperty);
             this.AreEqual(FileFormats.DefaultAudioFormats, false, MediaElementWrapper.AudioFormatsProperty);
             this.AreEqual("0", true, MediaElementWrapper.BufferingProgressProperty);
@@ -26,10 +27,11 @@ namespace Gu.Wpf.Media.UiTests
             this.AreEqual("null", true, MediaElementWrapper.NaturalVideoHeightProperty);
             this.AreEqual("null", true, MediaElementWrapper.NaturalVideoWidthProperty);
             this.AreEqual("null", false, MediaElementWrapper.PositionProperty);
-            this.AreEqual("True", false, MediaElementWrapper.ScrubbingEnabledProperty);
-            this.AreEqual("", false, MediaElementWrapper.SourceProperty);
+            this.AreEqual("False", false, MediaElementWrapper.ScrubbingEnabledProperty);
+            this.AreEqual("null", false, MediaElementWrapper.SourceProperty);
             this.AreEqual("0", false, MediaElementWrapper.SpeedRatioProperty);
-            this.AreEqual("Pause", false, MediaElementWrapper.StateProperty);
+            this.AreEqual("Play", false, MediaElementWrapper.LoadedBehaviorProperty);
+            this.AreEqual("Play", false, MediaElementWrapper.StateProperty);
             this.AreEqual("None", false, MediaElementWrapper.StretchProperty);
             this.AreEqual("Both", false, MediaElementWrapper.StretchDirectionProperty);
             this.AreEqual(FileFormats.DefaultVideoFormats, false, MediaElementWrapper.VideoFormatsProperty);

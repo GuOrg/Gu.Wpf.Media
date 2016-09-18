@@ -17,7 +17,7 @@ namespace Gu.Wpf.Media.UiTests.Helpers
 
         protected abstract string WindowName { get; }
 
-        public void RestartApplication()
+        public virtual void RestartApplication()
         {
             this.OneTimeTearDown();
             this.OneTimeSetUp();

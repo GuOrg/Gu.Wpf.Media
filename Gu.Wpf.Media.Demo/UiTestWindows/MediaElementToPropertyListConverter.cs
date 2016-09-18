@@ -31,7 +31,7 @@
                                                  .OfType<DependencyProperty>()
                                                  .OrderBy(x => x.Name)
                                                  .ToArray();
-            var props = dps.Select(dp => new PropertyItem(wrapper, dp))
+            var props = dps.Select(dp => PropertyItem.GetOrCreate(wrapper, dp))
                       .ToArray();
             return new ReadOnlyObservableCollection<PropertyItem>(new ObservableCollection<PropertyItem>(props));
         }

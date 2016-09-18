@@ -25,6 +25,12 @@ namespace Gu.Wpf.Media.UiTests
             this.SetValue(MediaElementWrapper.VolumeIncrementProperty, "0.05");
         }
 
+        public override void RestartApplication()
+        {
+            this.itemCache.Clear();
+            base.RestartApplication();
+        }
+
         public void AreEqual(string expected, bool @readonly, DependencyProperty property)
         {
             this.GetCachedTextBox("SelectedPropertyNameTextBox").Text = property.Name;

@@ -15,8 +15,8 @@
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition></RowDefinition>
-            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Grid>
             <Grid.ColumnDefinitions>
@@ -44,49 +44,56 @@
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
                             <TextBlock Grid.Row="0"
-                                   Grid.Column="0"
-                                   Text="Selected" />
+                                       Grid.Column="0"
+                                       Text="Selected" />
                             <TextBox x:Name="SelectedPropertyNameTextBox"
-                                 Grid.Row="0"
-                                 Grid.Column="1"
-                                 Text="{Binding SelectedPropertyName,
-                                                UpdateSourceTrigger=PropertyChanged}" />
+                                     Grid.Row="0"
+                                     Grid.Column="1"
+                                     Text="{Binding SelectedPropertyName,
+                                                    UpdateSourceTrigger=PropertyChanged}" />
 
                             <TextBlock Grid.Row="1"
-                                   Grid.Column="0"
-                                   Text="Value" />
+                                       Grid.Column="0"
+                                       Text="Value" />
                             <TextBox x:Name="ValueTextBox"
-                                 Grid.Row="1"
-                                 Grid.Column="1"
-                                 IsEnabled="{Binding SelectedProperty.Property.ReadOnly,
-                                                     Converter={x:Static local:InvertBoolConverter.Default}}"
-                                 Text="{Binding SelectedProperty.Value,
-                                                Converter={x:Static local:NullConverter.Default}}" />
+                                     Grid.Row="1"
+                                     Grid.Column="1"
+                                     IsEnabled="{Binding SelectedProperty.Property.ReadOnly,
+                                                         Converter={x:Static local:InvertBoolConverter.Default}}"
+                                     Text="{Binding SelectedProperty.Value,
+                                                    Converter={x:Static local:NullConverter.Default}}" />
 
                             <TextBlock Grid.Row="2"
-                                   Grid.Column="0"
-                                   Text="Value" />
+                                       Grid.Column="0"
+                                       Text="Value" />
                             <Button x:Name="LoseFocusButton"
-                                Grid.Row="2"
-                                Grid.Column="1"
-                                Content="Lose focus" />
+                                    Grid.Row="2"
+                                    Grid.Column="1"
+                                    Content="Lose focus" />
                         </Grid>
                     </GroupBox>
                     <DataGrid Grid.Row="1"
-                          AutoGenerateColumns="False"
-                          ItemsSource="{Binding Properties}">
+                              AutoGenerateColumns="False"
+                              ItemsSource="{Binding Properties}"
+                              SelectionMode="Extended"
+                              SelectionUnit="Cell">
                         <DataGrid.Columns>
                             <DataGridTextColumn Binding="{Binding Property.Name}"
-                                            Header="Property"
-                                            IsReadOnly="True" />
+                                                Header="Property"
+                                                IsReadOnly="True" />
                             <DataGridTextColumn Binding="{Binding Property.ReadOnly}"
-                                            Header="ReadOnly"
-                                            IsReadOnly="True" />
+                                                Header="ReadOnly"
+                                                IsReadOnly="True" />
                             <DataGridTextColumn MaxWidth="100"
-                                            Binding="{Binding Value,
-                                                              Converter={x:Static local:NullConverter.Default}}"
-                                            Header="Value"
-                                            IsReadOnly="False" />
+                                                Binding="{Binding Value,
+                                                                  Converter={x:Static local:NullConverter.Default}}"
+                                                Header="Value"
+                                                IsReadOnly="False" />
+                            <DataGridTextColumn MaxWidth="100"
+                                                Binding="{Binding MediaElementValue,
+                                                                  Converter={x:Static local:NullConverter.Default}}"
+                                                Header="Media element value"
+                                                IsReadOnly="True" />
                             <!--<DataGridTemplateColumn MaxWidth="100" Header="Value">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate DataType="{x:Type local:PropertyItem}">
@@ -116,82 +123,86 @@
             <GroupBox Grid.Column="2" Header="Commands">
                 <StackPanel>
                     <Button Command="Play"
-                        CommandTarget="{Binding ElementName=MediaElement}"
-                        Content="Play" />
+                            CommandTarget="{Binding ElementName=MediaElement}"
+                            Content="Play" />
 
                     <Button Command="Pause"
-                        CommandTarget="{Binding ElementName=MediaElement}"
-                        Content="Pause" />
+                            CommandTarget="{Binding ElementName=MediaElement}"
+                            Content="Pause" />
 
                     <Button Command="TogglePlayPause"
-                        CommandTarget="{Binding ElementName=MediaElement}"
-                        Content="TogglePlayPause" />
+                            CommandTarget="{Binding ElementName=MediaElement}"
+                            Content="TogglePlayPause" />
 
                     <ToggleButton x:Name="BoundPlayPause"
-                              Content="BoundPlayPause"
-                              IsChecked="{Binding ElementName=MediaElement,
-                                                  Path=IsPlaying}" />
+                                  Content="BoundPlayPause"
+                                  IsChecked="{Binding ElementName=MediaElement,
+                                                      Path=IsPlaying}" />
 
                     <Button Command="MediaCommands.Stop"
-                        CommandTarget="{Binding ElementName=MediaElement}"
-                        Content="Stop" />
+                            CommandTarget="{Binding ElementName=MediaElement}"
+                            Content="Stop" />
 
                     <Button Command="Rewind"
-                        CommandTarget="{Binding ElementName=MediaElement}"
-                        Content="Rewind" />
+                            CommandTarget="{Binding ElementName=MediaElement}"
+                            Content="Rewind" />
 
                     <Button Command="media:Commands.ToggleMute"
-                        CommandTarget="{Binding ElementName=MediaElement}"
-                        Content="ToggleMute" />
+                            CommandTarget="{Binding ElementName=MediaElement}"
+                            Content="ToggleMute" />
 
                     <ToggleButton x:Name="BoundToggleMute"
-                              Content="BoundToggleMute"
-                              IsChecked="{Binding ElementName=MediaElement,
-                                                  Path=IsMuted}" />
+                                  Content="BoundToggleMute"
+                                  IsChecked="{Binding ElementName=MediaElement,
+                                                      Path=IsMuted}" />
 
                     <Button Command="MuteVolume"
-                        CommandTarget="{Binding ElementName=MediaElement}"
-                        Content="MuteVolume" />
+                            CommandTarget="{Binding ElementName=MediaElement}"
+                            Content="MuteVolume" />
 
                     <Button Command="media:Commands.UnmuteVolume"
-                        CommandTarget="{Binding ElementName=MediaElement}"
-                        Content="UnmuteVolume" />
+                            CommandTarget="{Binding ElementName=MediaElement}"
+                            Content="UnmuteVolume" />
 
                     <Button Command="DecreaseVolume"
-                        CommandTarget="{Binding ElementName=MediaElement}"
-                        Content="DecreaseVolume" />
+                            CommandTarget="{Binding ElementName=MediaElement}"
+                            Content="DecreaseVolume" />
 
                     <Button x:Name="DecreaseVolumeByOne"
-                        Command="DecreaseVolume"
-                        CommandParameter="1"
-                        CommandTarget="{Binding ElementName=MediaElement}"
-                        Content="DecreaseVolumeByOne" />
+                            Command="DecreaseVolume"
+                            CommandParameter="1"
+                            CommandTarget="{Binding ElementName=MediaElement}"
+                            Content="DecreaseVolumeByOne" />
 
                     <Button x:Name="DecreaseVolumeByZeroPointOne"
-                        Command="DecreaseVolume"
-                        CommandParameter="1"
-                        CommandTarget="{Binding ElementName=MediaElement}"
-                        Content="DecreaseVolumeByZeroPointOne" />
+                            Command="DecreaseVolume"
+                            CommandParameter="1"
+                            CommandTarget="{Binding ElementName=MediaElement}"
+                            Content="DecreaseVolumeByZeroPointOne" />
 
                     <Button Command="IncreaseVolume"
-                        CommandTarget="{Binding ElementName=MediaElement}"
-                        Content="IncreaseVolume" />
+                            CommandTarget="{Binding ElementName=MediaElement}"
+                            Content="IncreaseVolume" />
 
                     <Button x:Name="IncreaseVolumeByOne"
-                        Command="IncreaseVolume"
-                        CommandParameter="1"
-                        CommandTarget="{Binding ElementName=MediaElement}"
-                        Content="IncreaseVolumeByOne" />
+                            Command="IncreaseVolume"
+                            CommandParameter="1"
+                            CommandTarget="{Binding ElementName=MediaElement}"
+                            Content="IncreaseVolumeByOne" />
 
                     <Button x:Name="IncreaseVolumeByZeroPointOne"
-                        Command="IncreaseVolume"
-                        CommandParameter="0.1"
-                        CommandTarget="{Binding ElementName=MediaElement}"
-                        Content="IncreaseVolumeByZeroPointOne" />
+                            Command="IncreaseVolume"
+                            CommandParameter="0.1"
+                            CommandTarget="{Binding ElementName=MediaElement}"
+                            Content="IncreaseVolumeByZeroPointOne" />
                 </StackPanel>
             </GroupBox>
         </Grid>
-        <TextBox Grid.Row="1" Text="{Binding CoffeClipFileName, Mode=OneWay}" IsReadOnly="True" IsReadOnlyCaretVisible="True"></TextBox>
+        <TextBox Grid.Row="1"
+                 IsReadOnly="True"
+                 IsReadOnlyCaretVisible="True"
+                 Text="{Binding CoffeClipFileName,
+                                Mode=OneWay}" />
     </Grid>
 
 </Window>

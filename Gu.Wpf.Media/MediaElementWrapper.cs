@@ -345,9 +345,7 @@
                 return;
             }
 
-            var newTime = (this.Position.Value + time).TotalSeconds;
-            newTime = Math.Max(0, Math.Min(this.Length.Value.TotalSeconds, newTime));
-            this.SetCurrentValue(PositionProperty, TimeSpan.FromSeconds(newTime));
+            this.SetCurrentValue(PositionProperty, this.Position.Value + time);
         }
 
         private static void OnPositionChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)

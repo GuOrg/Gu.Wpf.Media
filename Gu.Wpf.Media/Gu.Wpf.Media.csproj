@@ -78,6 +78,11 @@
     <Compile Include="MediaElementWrapper.DependencyProperties.generated.cs" />
     <Compile Include="MediaElementWrapper.Events.cs" />
     <Compile Include="MediaState.cs" />
+    <Compile Include="MouseWheel\MouseWheelGestureValueSerializer.cs" />
+    <Compile Include="MouseWheel\MouseWheelGestureConverter.cs" />
+    <Compile Include="MouseWheel\MouseWheelGesture.cs" />
+    <Compile Include="MouseWheel\MouseWheelDirection.cs" />
+    <Compile Include="MouseWheel\MouseWheelExtension.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

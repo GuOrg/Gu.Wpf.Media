@@ -6,7 +6,6 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:media="https://github.com/JohanLarsson/Gu.Wpf.Media"
         Title="TestPlayerWindow"
-        d:DataContext="{d:DesignInstance local:TestPlayerViewModel}"
         mc:Ignorable="d">
     <Window.Resources>
         <Style x:Key="ContentAsIdButtonStyle" TargetType="{x:Type ButtonBase}">
@@ -23,112 +22,23 @@
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
-                <ColumnDefinition />
-                <ColumnDefinition />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
             <media:MediaElementWrapper x:Name="MediaElement" />
             <GroupBox Grid.Column="1" Header="Properties">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="*" />
-                    </Grid.RowDefinitions>
-                    <GroupBox Header="SelectedProperty">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Row="0"
-                                       Grid.Column="0"
-                                       Text="Selected" />
-                            <TextBox x:Name="SelectedPropertyNameTextBox"
-                                     Grid.Row="0"
-                                     Grid.Column="1"
-                                     Text="{Binding SelectedPropertyName,
-                                                    UpdateSourceTrigger=PropertyChanged}" />
-
-                            <TextBlock Grid.Row="1"
-                                       Grid.Column="0"
-                                       Text="Value" />
-                            <TextBox x:Name="ValueTextBox"
-                                     Grid.Row="1"
-                                     Grid.Column="1"
-                                     IsEnabled="{Binding SelectedProperty.Property.ReadOnly,
-                                                         Converter={x:Static local:InvertBoolConverter.Default}}"
-                                     Text="{Binding SelectedProperty.Value,
-                                                    Converter={x:Static local:NullConverter.Default}}" />
-
-                            <TextBlock Grid.Row="2"
-                                       Grid.Column="0"
-                                       Text="Value" />
-                            <Button x:Name="LoseFocus"
-                                    Grid.Row="2"
-                                    Grid.Column="1"
-                                    Content="Lose focus" />
-                        </Grid>
-                    </GroupBox>
-                    <DataGrid Grid.Row="1"
-                              AutoGenerateColumns="False"
-                              ItemsSource="{Binding Properties}"
-                              SelectionMode="Extended"
-                              SelectionUnit="Cell">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Binding="{Binding Property.Name}"
-                                                Header="Property"
-                                                IsReadOnly="True" />
-                            <DataGridTextColumn Binding="{Binding Property.ReadOnly}"
-                                                Header="ReadOnly"
-                                                IsReadOnly="True" />
-                            <DataGridTextColumn MaxWidth="100"
-                                                Binding="{Binding Value,
-                                                                  Converter={x:Static local:NullConverter.Default}}"
-                                                Header="Value"
-                                                IsReadOnly="False" />
-                            <DataGridTextColumn MaxWidth="100"
-                                                Binding="{Binding MediaElementWrapperValue,
-                                                                  Converter={x:Static local:NullConverter.Default}}"
-                                                Header="Wrapper value"
-                                                IsReadOnly="True" />
-                            <DataGridTextColumn MaxWidth="100"
-                                                Binding="{Binding MediaElementValue,
-                                                                  Converter={x:Static local:NullConverter.Default}}"
-                                                Header="Media element value"
-                                                IsReadOnly="True" />
-                            <!--<DataGridTemplateColumn MaxWidth="100" Header="Value">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate DataType="{x:Type local:PropertyItem}">
-                                    <TextBox IsReadOnly="{Binding Property.ReadOnly}"
-                                             IsReadOnlyCaretVisible="True"
-                                             BorderThickness="0"
-                                             Text="{Binding Value,
-                                                            Converter={x:Static local:NullConverter.Default}}" />
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-
-
-                        <DataGridTemplateColumn.CellEditingTemplate>
-                                <DataTemplate DataType="{x:Type local:PropertyItem}">
-                                    <TextBox IsReadOnly="{Binding Property.ReadOnly}"
-                                             IsReadOnlyCaretVisible="True"
-                                             Text="{Binding Value,
-                                                            Converter={x:Static local:NullConverter.Default}}" />
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellEditingTemplate>
-                        </DataGridTemplateColumn>-->
-                        </DataGrid.Columns>
-                    </DataGrid>
+                <Grid x:Name="PropertyGrid">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="100" />
+                    </Grid.ColumnDefinitions>
                 </Grid>
             </GroupBox>
 
             <GroupBox Grid.Column="2" Header="Commands">
                 <StackPanel>
+                    <Button Content="Lose focus" />
+
                     <Button Command="Play"
                             CommandTarget="{Binding ElementName=MediaElement}"
                             Content="Play" />
@@ -236,8 +146,6 @@
         <TextBox Grid.Row="1"
                  IsReadOnly="True"
                  IsReadOnlyCaretVisible="True"
-                 Text="{Binding CoffeClipFileName,
-                                Mode=OneWay}" />
+                 Text="{x:Static local:Files.CoffeeClip}" />
     </Grid>
-
 </Window>

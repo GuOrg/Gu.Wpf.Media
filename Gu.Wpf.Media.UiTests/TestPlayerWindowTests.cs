@@ -32,33 +32,29 @@ namespace Gu.Wpf.Media.UiTests
             base.RestartApplication();
         }
 
-        public void AreEqual(string expected, bool @readonly, DependencyProperty property)
+        public void AssertReadOnly(bool expected, DependencyProperty property)
         {
-            this.GetCachedTextBox("SelectedPropertyNameTextBox").Text = property.Name;
-            var textBox = this.GetCachedTextBox("ValueTextBox");
-            var readonlyText = @readonly
-                        ? "readonly"
-                        : "editabl";
-            Assert.AreEqual(@readonly, !textBox.Enabled, $"Expected the property {property.Name} to be {readonlyText}");
-            Assert.AreEqual(expected, textBox.Text, $"Expected the value of {property.Name} to be {expected} was: {textBox.Text}");
+            var textBox = this.GetCachedTextBox(property.Name);
+            var readonlyText = expected
+                ? "readonly"
+                : "editable";
+            Assert.AreEqual(expected, !textBox.Enabled, $"Expected the property {property.Name} to be {readonlyText}");
         }
 
         public void AreEqual(string expected, DependencyProperty property)
         {
-            this.GetCachedTextBox("SelectedPropertyNameTextBox").Text = property.Name;
-            var valueBox = this.GetCachedTextBox("ValueTextBox");
+            var valueBox = this.GetCachedTextBox(property.Name);
             Assert.AreEqual(expected, valueBox.Text, $"Expected the value of {property.Name} to be {expected} was: {valueBox.Text}");
         }
 
         private void SetValue(DependencyProperty property, string value)
         {
-            this.GetCachedTextBox("SelectedPropertyNameTextBox").Text = property.Name;
-            var valueBox = this.GetCachedTextBox("ValueTextBox");
+            var valueBox = this.GetCachedTextBox(property.Name);
 
             if (valueBox.Text != value)
             {
                 valueBox.BulkText = value;
-                this.Window.WaitWhileBusy();
+                //this.Window.WaitWhileBusy();
                 // ReSharper disable once ExplicitCallerInfoArgument
                 this.GetCachedButton("Lose focus")
                     .Click();
@@ -67,8 +63,7 @@ namespace Gu.Wpf.Media.UiTests
 
         private string GetValue(DependencyProperty property)
         {
-            this.GetCachedTextBox("SelectedPropertyNameTextBox").Text = property.Name;
-            var valueBox = this.GetCachedTextBox("ValueTextBox");
+            var valueBox = this.GetCachedTextBox(property.Name);
             return valueBox.Text;
         }
 

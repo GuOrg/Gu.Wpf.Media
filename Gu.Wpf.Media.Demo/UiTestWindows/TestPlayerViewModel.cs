@@ -2,7 +2,6 @@
 {
     using System.Collections.ObjectModel;
     using System.ComponentModel;
-    using System.IO;
     using System.Linq;
     using System.Runtime.CompilerServices;
 
@@ -51,7 +50,8 @@
                 this.OnPropertyChanged();
             }
         }
-        public string CoffeClipFileName=> Path.Combine(Directory.GetCurrentDirectory(), "Samples", "coffee.mp4");
+
+        public string CoffeeClipFileName => Files.CoffeeClip;
 
         [NotifyPropertyChangedInvocator]
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)

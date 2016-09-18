@@ -51,6 +51,7 @@
     </ApplicationDefinition>
     <Compile Include="Converters\SecondsToTimeSpanConverter.cs" />
     <Compile Include="UiTestWindows\ContentToIdConverter.cs" />
+    <Compile Include="UiTestWindows\Files.cs" />
     <Compile Include="UiTestWindows\InvertBoolConverter.cs" />
     <Compile Include="UiTestWindows\MediaElementToPropertyListConverter.cs" />
     <Compile Include="UiTestWindows\NullConverter.cs" />

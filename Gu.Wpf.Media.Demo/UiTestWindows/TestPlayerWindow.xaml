@@ -14,46 +14,48 @@
         </Style>
     </Window.Resources>
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition />
-            <ColumnDefinition />
-            <ColumnDefinition />
-        </Grid.ColumnDefinitions>
-        <media:MediaElementWrapper x:Name="MediaElement"
-                                   LoadedBehavior="Pause"
-                                   ScrubbingEnabled="True"
-                                   Stretch="None" />
-        <GroupBox Grid.Column="1" Header="Properties">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
-                <GroupBox Header="SelectedProperty">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Row="0"
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <media:MediaElementWrapper x:Name="MediaElement" />
+            <GroupBox Grid.Column="1" Header="Properties">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <GroupBox Header="SelectedProperty">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Row="0"
                                    Grid.Column="0"
                                    Text="Selected" />
-                        <TextBox x:Name="SelectedPropertyNameTextBox"
+                            <TextBox x:Name="SelectedPropertyNameTextBox"
                                  Grid.Row="0"
                                  Grid.Column="1"
                                  Text="{Binding SelectedPropertyName,
                                                 UpdateSourceTrigger=PropertyChanged}" />
 
-                        <TextBlock Grid.Row="1"
+                            <TextBlock Grid.Row="1"
                                    Grid.Column="0"
                                    Text="Value" />
-                        <TextBox x:Name="ValueTextBox"
+                            <TextBox x:Name="ValueTextBox"
                                  Grid.Row="1"
                                  Grid.Column="1"
                                  IsEnabled="{Binding SelectedProperty.Property.ReadOnly,
@@ -61,31 +63,31 @@
                                  Text="{Binding SelectedProperty.Value,
                                                 Converter={x:Static local:NullConverter.Default}}" />
 
-                        <TextBlock Grid.Row="2"
+                            <TextBlock Grid.Row="2"
                                    Grid.Column="0"
                                    Text="Value" />
-                        <Button x:Name="LoseFocusButton"
+                            <Button x:Name="LoseFocusButton"
                                 Grid.Row="2"
                                 Grid.Column="1"
                                 Content="Lose focus" />
-                    </Grid>
-                </GroupBox>
-                <DataGrid Grid.Row="1"
+                        </Grid>
+                    </GroupBox>
+                    <DataGrid Grid.Row="1"
                           AutoGenerateColumns="False"
                           ItemsSource="{Binding Properties}">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Binding="{Binding Property.Name}"
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding Property.Name}"
                                             Header="Property"
                                             IsReadOnly="True" />
-                        <DataGridTextColumn Binding="{Binding Property.ReadOnly}"
+                            <DataGridTextColumn Binding="{Binding Property.ReadOnly}"
                                             Header="ReadOnly"
                                             IsReadOnly="True" />
-                        <DataGridTextColumn MaxWidth="100"
+                            <DataGridTextColumn MaxWidth="100"
                                             Binding="{Binding Value,
                                                               Converter={x:Static local:NullConverter.Default}}"
                                             Header="Value"
                                             IsReadOnly="False" />
-                        <!--<DataGridTemplateColumn MaxWidth="100" Header="Value">
+                            <!--<DataGridTemplateColumn MaxWidth="100" Header="Value">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate DataType="{x:Type local:PropertyItem}">
                                     <TextBox IsReadOnly="{Binding Property.ReadOnly}"
@@ -106,87 +108,90 @@
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellEditingTemplate>
                         </DataGridTemplateColumn>-->
-                    </DataGrid.Columns>
-                </DataGrid>
-            </Grid>
-        </GroupBox>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </GroupBox>
 
-        <GroupBox Grid.Column="2" Header="Commands">
-            <StackPanel>
-                <Button Command="Play"
+            <GroupBox Grid.Column="2" Header="Commands">
+                <StackPanel>
+                    <Button Command="Play"
                         CommandTarget="{Binding ElementName=MediaElement}"
                         Content="Play" />
 
-                <Button Command="Pause"
+                    <Button Command="Pause"
                         CommandTarget="{Binding ElementName=MediaElement}"
                         Content="Pause" />
 
-                <Button Command="TogglePlayPause"
+                    <Button Command="TogglePlayPause"
                         CommandTarget="{Binding ElementName=MediaElement}"
                         Content="TogglePlayPause" />
 
-                <ToggleButton x:Name="BoundPlayPause"
+                    <ToggleButton x:Name="BoundPlayPause"
                               Content="BoundPlayPause"
                               IsChecked="{Binding ElementName=MediaElement,
                                                   Path=IsPlaying}" />
 
-                <Button Command="MediaCommands.Stop"
+                    <Button Command="MediaCommands.Stop"
                         CommandTarget="{Binding ElementName=MediaElement}"
                         Content="Stop" />
 
-                <Button Command="Rewind"
+                    <Button Command="Rewind"
                         CommandTarget="{Binding ElementName=MediaElement}"
                         Content="Rewind" />
 
-                <Button Command="media:Commands.ToggleMute"
+                    <Button Command="media:Commands.ToggleMute"
                         CommandTarget="{Binding ElementName=MediaElement}"
                         Content="ToggleMute" />
 
-                <ToggleButton x:Name="BoundToggleMute"
+                    <ToggleButton x:Name="BoundToggleMute"
                               Content="BoundToggleMute"
                               IsChecked="{Binding ElementName=MediaElement,
                                                   Path=IsMuted}" />
 
-                <Button Command="MuteVolume"
+                    <Button Command="MuteVolume"
                         CommandTarget="{Binding ElementName=MediaElement}"
                         Content="MuteVolume" />
 
-                <Button Command="media:Commands.UnmuteVolume"
+                    <Button Command="media:Commands.UnmuteVolume"
                         CommandTarget="{Binding ElementName=MediaElement}"
                         Content="UnmuteVolume" />
 
-                <Button Command="DecreaseVolume"
+                    <Button Command="DecreaseVolume"
                         CommandTarget="{Binding ElementName=MediaElement}"
                         Content="DecreaseVolume" />
 
-                <Button x:Name="DecreaseVolumeByOne"
+                    <Button x:Name="DecreaseVolumeByOne"
                         Command="DecreaseVolume"
                         CommandParameter="1"
                         CommandTarget="{Binding ElementName=MediaElement}"
                         Content="DecreaseVolumeByOne" />
 
-                <Button x:Name="DecreaseVolumeByZeroPointOne"
+                    <Button x:Name="DecreaseVolumeByZeroPointOne"
                         Command="DecreaseVolume"
                         CommandParameter="1"
                         CommandTarget="{Binding ElementName=MediaElement}"
                         Content="DecreaseVolumeByZeroPointOne" />
 
-                <Button Command="IncreaseVolume"
+                    <Button Command="IncreaseVolume"
                         CommandTarget="{Binding ElementName=MediaElement}"
                         Content="IncreaseVolume" />
 
-                <Button x:Name="IncreaseVolumeByOne"
+                    <Button x:Name="IncreaseVolumeByOne"
                         Command="IncreaseVolume"
                         CommandParameter="1"
                         CommandTarget="{Binding ElementName=MediaElement}"
                         Content="IncreaseVolumeByOne" />
 
-                <Button x:Name="IncreaseVolumeByZeroPointOne"
+                    <Button x:Name="IncreaseVolumeByZeroPointOne"
                         Command="IncreaseVolume"
                         CommandParameter="0.1"
                         CommandTarget="{Binding ElementName=MediaElement}"
                         Content="IncreaseVolumeByZeroPointOne" />
-            </StackPanel>
-        </GroupBox>
+                </StackPanel>
+            </GroupBox>
+        </Grid>
+        <TextBox Grid.Row="1" Text="{Binding CoffeClipFileName, Mode=OneWay}" IsReadOnly="True" IsReadOnlyCaretVisible="True"></TextBox>
     </Grid>
+
 </Window>

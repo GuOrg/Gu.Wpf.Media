@@ -1,19 +1,29 @@
-﻿namespace Gu.Wpf.Media.MouseWheel
+﻿namespace Gu.Wpf.Media
 {
     using System;
     using System.ComponentModel;
     using System.Windows.Input;
+    using System.Windows.Markup;
 
     /// <inheritdoc />
     [TypeConverter(typeof(MouseWheelGestureConverter))]
+    [ValueSerializer(typeof(MouseWheelGestureValueSerializer))]
     public class MouseWheelGesture : MouseGesture
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="MouseWheelGesture"/> class.
         /// </summary>
+        public MouseWheelGesture()
+            : this(MouseWheelDirection.None, ModifierKeys.None)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MouseWheelGesture"/> class.
+        /// </summary>
         /// <param name="direction">The <see cref="MouseWheelDirection"/></param>
         public MouseWheelGesture(MouseWheelDirection direction)
-            // ReSharper disable once IntroduceOptionalParameters.Global
+            //// ReSharper disable once IntroduceOptionalParameters.Global
             : this(direction, ModifierKeys.None)
         {
         }
@@ -33,6 +43,11 @@
         /// Direction <see cref="MouseWheelDirection"/>
         /// </summary>
         public MouseWheelDirection Direction { get; set; }
+
+        /// <summary>
+        /// Hiding <see cref="MouseGesture.MouseAction"/> here.
+        /// </summary>
+        public new MouseAction MouseAction => base.MouseAction;
 
         /// <inheritdoc />
         public override bool Matches(object targetElement, InputEventArgs inputEventArgs)

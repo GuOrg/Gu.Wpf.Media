@@ -18,19 +18,46 @@
         <KeyBinding Key="Left"
                     Command="media:Commands.SkipBack"
                     CommandTarget="{Binding ElementName=MediaElement}" />
+        <MouseBinding Command="media:Commands.SkipBack" CommandTarget="{Binding ElementName=MediaElement}">
+            <MouseBinding.Gesture>
+                <media:MouseWheelGesture Direction="Down" />
+            </MouseBinding.Gesture>
+        </MouseBinding>
+
         <KeyBinding Key="Left"
                     Command="media:Commands.SkipBack"
                     CommandParameter="60"
                     CommandTarget="{Binding ElementName=MediaElement}"
                     Modifiers="Control" />
+        <MouseBinding Command="media:Commands.SkipBack"
+                      CommandParameter="60"
+                      CommandTarget="{Binding ElementName=MediaElement}">
+            <MouseBinding.Gesture>
+                <media:MouseWheelGesture Direction="Down" Modifiers="Control" />
+            </MouseBinding.Gesture>
+        </MouseBinding>
+
         <KeyBinding Key="Right"
                     Command="media:Commands.SkipForward"
                     CommandTarget="{Binding ElementName=MediaElement}" />
+        <MouseBinding Command="media:Commands.SkipForward" CommandTarget="{Binding ElementName=MediaElement}">
+            <MouseBinding.Gesture>
+                <media:MouseWheelGesture Direction="Up" />
+            </MouseBinding.Gesture>
+        </MouseBinding>
+
         <KeyBinding Key="Right"
                     Command="media:Commands.SkipForward"
                     CommandParameter="60"
                     CommandTarget="{Binding ElementName=MediaElement}"
                     Modifiers="Control" />
+        <MouseBinding Command="media:Commands.SkipForward"
+                      CommandParameter="60"
+                      CommandTarget="{Binding ElementName=MediaElement}">
+            <MouseBinding.Gesture>
+                <media:MouseWheelGesture Direction="Up" Modifiers="Control" />
+            </MouseBinding.Gesture>
+        </MouseBinding>
     </Window.InputBindings>
     <Window.CommandBindings>
         <CommandBinding Command="ApplicationCommands.Open" Executed="OpenExecuted" />

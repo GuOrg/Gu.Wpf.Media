@@ -78,6 +78,7 @@
     <Compile Include="MediaElementWrapper.DependencyProperties.generated.cs" />
     <Compile Include="MediaElementWrapper.Events.cs" />
     <Compile Include="MediaState.cs" />
+    <Compile Include="MouseWheel\MouseWheelDirectionExt.cs" />
     <Compile Include="MouseWheel\MouseWheelGestureValueSerializer.cs" />
     <Compile Include="MouseWheel\MouseWheelGestureConverter.cs" />
     <Compile Include="MouseWheel\MouseWheelGesture.cs" />

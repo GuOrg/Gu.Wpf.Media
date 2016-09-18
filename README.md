@@ -208,9 +208,28 @@ If parameter is `double` `TimeSpan.FromSeconds(parameter) is used.
 If parameter is TimeSpan it is used.
 Values can be negative.
 
+# 2. MouseWheelGesture
+For using mousewheel in inputbindings
+```xaml
+<MouseBinding Command="media:Commands.SkipBack" CommandTarget="{Binding ElementName=MediaElement}">
+    <MouseBinding.Gesture>
+        <media:MouseWheelGesture Direction="Down" />
+    </MouseBinding.Gesture>
+</MouseBinding>
+```
 
+And with modifier
+```xaml
+<MouseBinding Command="media:Commands.SkipBack"
+                CommandParameter="60"
+                CommandTarget="{Binding ElementName=MediaElement}">
+    <MouseBinding.Gesture>
+        <media:MouseWheelGesture Direction="Down" Modifiers="Control" />
+    </MouseBinding.Gesture>
+</MouseBinding>
+```
 
-# 2. Icon
+# 3. Icon
 Exposes a `Gemoetry` attached property.
 ```xaml
 <Button media:Icon.Geometry="{StaticResource {x:Static media:Geometries.PlayGeometryKey}}"
@@ -218,7 +237,7 @@ Exposes a `Gemoetry` attached property.
         CommandTarget="{Binding ElementName=MediaElement}" />
 ```
 
-# 3. Drag
+# 4. Drag
 Exposes a `PauseWhileDragging` attached property.
 When binidng this to a `MediaElementWrapper`playback is paused while dragging.
 
@@ -236,7 +255,7 @@ When binidng this to a `MediaElementWrapper`playback is paused while dragging.
                         Converter={x:Static demo:TimeSpanToSecondsConverter.Default}}" />
 ```
 
-# 4. TimeSpanToStringConverter
+# 5. TimeSpanToStringConverter
 Converts Timespans like this:
 |Time|Result|
 |---|---|
@@ -247,7 +266,7 @@ Converts Timespans like this:
 |00:12:34|12:23|
 |01:23:45|1:23:45|
 
-# 5. Commands
+# 6. Commands
 - Commands.ToggleMute
 - Commands.UnmuteVolume
 - Commands.ToggleFullScreen
@@ -264,7 +283,7 @@ MediaElementWrapper has a command bindings for:
 - Commands.SkipForward
 - Commands.SkipBack
 
-# 6. Sample
+# 7. Sample
 
 ```xaml
 <Window x:Class="Gu.Wpf.Media.Demo.MainWindow"
@@ -287,19 +306,46 @@ MediaElementWrapper has a command bindings for:
         <KeyBinding Key="Left"
                     Command="media:Commands.SkipBack"
                     CommandTarget="{Binding ElementName=MediaElement}" />
+        <MouseBinding Command="media:Commands.SkipBack" CommandTarget="{Binding ElementName=MediaElement}">
+            <MouseBinding.Gesture>
+                <media:MouseWheelGesture Direction="Down" />
+            </MouseBinding.Gesture>
+        </MouseBinding>
+
         <KeyBinding Key="Left"
                     Command="media:Commands.SkipBack"
                     CommandParameter="60"
                     CommandTarget="{Binding ElementName=MediaElement}"
                     Modifiers="Control" />
+        <MouseBinding Command="media:Commands.SkipBack"
+                      CommandParameter="60"
+                      CommandTarget="{Binding ElementName=MediaElement}">
+            <MouseBinding.Gesture>
+                <media:MouseWheelGesture Direction="Down" Modifiers="Control" />
+            </MouseBinding.Gesture>
+        </MouseBinding>
+
         <KeyBinding Key="Right"
                     Command="media:Commands.SkipForward"
                     CommandTarget="{Binding ElementName=MediaElement}" />
+        <MouseBinding Command="media:Commands.SkipForward" CommandTarget="{Binding ElementName=MediaElement}">
+            <MouseBinding.Gesture>
+                <media:MouseWheelGesture Direction="Up" />
+            </MouseBinding.Gesture>
+        </MouseBinding>
+
         <KeyBinding Key="Right"
                     Command="media:Commands.SkipForward"
                     CommandParameter="60"
                     CommandTarget="{Binding ElementName=MediaElement}"
                     Modifiers="Control" />
+        <MouseBinding Command="media:Commands.SkipForward"
+                      CommandParameter="60"
+                      CommandTarget="{Binding ElementName=MediaElement}">
+            <MouseBinding.Gesture>
+                <media:MouseWheelGesture Direction="Up" Modifiers="Control" />
+            </MouseBinding.Gesture>
+        </MouseBinding>
     </Window.InputBindings>
     <Window.CommandBindings>
         <CommandBinding Command="ApplicationCommands.Open" Executed="OpenExecuted" />

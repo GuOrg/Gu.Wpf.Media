@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.Media.MouseWheel
+﻿namespace Gu.Wpf.Media
 {
     using System;
     using System.ComponentModel;
@@ -65,14 +65,19 @@
             if (destinationType == typeof(string))
             {
                 // When invoked by the serialization engine we can convert to string only for known type
-                var mouseGesture = context?.Instance as MouseGesture;
-                if (mouseGesture != null)
+                var gesture = context?.Instance as MouseWheelGesture;
+                if (gesture != null)
                 {
-                    return true;
+                    if (System.Windows.Input.ModifierKeysConverter.IsDefinedModifierKeys(gesture.Modifiers) &&
+                        gesture.MouseAction == MouseAction.WheelClick &&
+                        MouseWheelDirectionExt.IsDefined(gesture.Direction))
+                    {
+                        return true;
+                    }
                 }
             }
 
-            return false;
+            return base.CanConvertTo(context, destinationType);
         }
 
         /// <inheritdoc />
@@ -95,10 +100,10 @@
                 {
                     if (gesture.Modifiers == ModifierKeys.None)
                     {
-                        return gesture.Direction.ToString();
+                        return gesture.Direction.ToName();
                     }
 
-                    return $"{ModifierKeysConverter.ConvertTo(context, culture, gesture.Modifiers, destinationType)}+{gesture.Direction}";
+                    return $"{ModifierKeysConverter.ConvertTo(context, culture, gesture.Modifiers, destinationType)}+{gesture.Direction.ToName()}";
                 }
             }
 

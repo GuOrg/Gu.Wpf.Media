@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.Media.MouseWheel
+﻿namespace Gu.Wpf.Media
 {
     using System.ComponentModel;
     using System.Windows.Input;
@@ -25,8 +25,9 @@
 
             if (gesture != null)
             {
-                if (ModifierKeysConverter.IsDefinedModifierKeys(gesture.Modifiers)
-                    && MouseActionConverter.IsDefinedMouseAction(gesture.MouseAction))
+                if (ModifierKeysConverter.IsDefinedModifierKeys(gesture.Modifiers) &&
+                    gesture.MouseAction == MouseAction.WheelClick &&
+                    MouseWheelDirectionExt.IsDefined(gesture.Direction))
                 {
                     result = true;
                 }

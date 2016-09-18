@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.Media.MouseWheel
+﻿namespace Gu.Wpf.Media
 {
     /// <summary>
     /// A set of possible states for <see cref="MouseWheelGesture"/>

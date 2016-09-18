@@ -5,7 +5,7 @@
     using System.Windows.Markup;
 
     /// <summary>
-    /// MouseWheelGesture - Converter class for converting between a string and the Type of a MouseWheelGesture 
+    /// MouseWheelGesture - Converter class for converting between a string and the Type of a MouseWheelGesture
     /// </summary>
     public class MouseWheelGestureValueSerializer : ValueSerializer
     {

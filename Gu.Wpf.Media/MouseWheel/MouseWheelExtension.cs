@@ -1,10 +1,10 @@
-﻿namespace Gu.Wpf.Media
+﻿// not sure about exposing this
+namespace Gu.Wpf.Media
 {
     using System;
     using System.Windows.Input;
     using System.Windows.Markup;
 
-    // not sure about exposing this
     /// <inheritdoc />
     [MarkupExtensionReturnType(typeof(MouseWheelGesture))]
     internal class MouseWheelExtension : MarkupExtension
@@ -31,11 +31,15 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="MouseWheelExtension"/> class.
         /// </summary>
+        /// <param name="gesture"><see cref="MouseWheelGesture"/></param>
         public MouseWheelExtension(MouseWheelGesture gesture)
         {
             this.Gesture = gesture;
         }
 
+        /// <summary>
+        /// The gesture se <see cref="MouseWheelGesture"/>
+        /// </summary>
         public MouseWheelGesture Gesture { get; set; }
 
         /// <summary>

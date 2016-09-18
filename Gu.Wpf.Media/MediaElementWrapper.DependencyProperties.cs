@@ -394,7 +394,7 @@
         }
 
         /// <summary>
-        /// The increment by which the <see cref="IncreaseVolume"/> and <see cref="DecreaseVolume"/> changes current volume if null is passed in.
+        /// The increment by which the <see cref="IncreaseVolume(object)"/> and <see cref="DecreaseVolume(object)"/> changes current volume if null is passed in.
         /// </summary>
         public double VolumeIncrement
         {

@@ -547,7 +547,7 @@
             };
         }
 
-        private static CanExecuteRoutedEventHandler HandleCanExecute(Func<object,bool> canExecute)
+        private static CanExecuteRoutedEventHandler HandleCanExecute(Func<object, bool> canExecute)
         {
             return (o, e) =>
             {

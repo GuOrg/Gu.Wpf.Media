@@ -3,7 +3,7 @@
     using System.Windows.Input;
 
     /// <summary>
-    /// A set of Standard Commands
+    /// A set of commands
     /// </summary>
     public static class Commands
     {

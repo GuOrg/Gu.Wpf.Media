@@ -1,6 +1,9 @@
+#### 0.4.2
+* USABILITY: Skip commands.
+
 #### 0.4.0
-* BUGFIX handle source updated with LoadedBehavior
-* BREAKING CHANGES Tweaked default values & BindsTwoWayByDefault
+* BUGFIX: handle source updated with LoadedBehavior
+* BREAKING CHANGES: Tweaked default values & BindsTwoWayByDefault
 
 #### 0.3.3
 * Use converterparameter in increase & decrease volume command bindings.

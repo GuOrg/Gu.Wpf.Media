@@ -1,8 +1,7 @@
 ﻿type project
 
 releasenotes
-  BUGFIX handle source updated with LoadedBehavior
-  BREAKING CHANGES Tweaked default values & BindsTwoWayByDefault
+  USABILITY: Skip commands.
 
 tags wpf xaml media mediaelement
 projectUrl https://github.com/JohanLarsson/Gu.Wpf.Media

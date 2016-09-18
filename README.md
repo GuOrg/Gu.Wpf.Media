@@ -31,7 +31,7 @@ Wrapper for System.Windows.Controls.MediaElement.
     - [1.1.20. ScrubbingEnabled (`bool`)](#1120-scrubbingenabled-bool)
     - [1.1.21. Stretch (`Stretch`)](#1121-stretch-stretch)
     - [1.1.22. StretchDirection (`StretchDirection`)](#1122-stretchdirection-stretchdirection)
-    - [1.1.23. LoadedBehavior (`MediaState`)](#1122-loadedbehavior-mediastate)
+    - [1.1.22. LoadedBehavior (`MediaState`)](#1122-loadedbehavior-mediastate)
   - [1.2. Events](#12-events)
     - [1.2.1. MediaFailed](#121-mediafailed)
     - [1.2.2. MediaOpened](#122-mediaopened)
@@ -39,7 +39,9 @@ Wrapper for System.Windows.Controls.MediaElement.
     - [1.2.4. BufferingEnded](#124-bufferingended)
     - [1.2.5. ScriptCommand](#125-scriptcommand)
     - [1.2.6. MediaEnded](#126-mediaended)
-- [1.3. MediaCommands](#13-mediacommands)
+  - [1.3. CommandBindings](#13-commandbindings)
+    - [1.3.1 IncreaseVolume & DecreaseVolume](#131-increasevolume--decreasevolume)
+    - [1.3.2 Skip, SkipForward & SkipBack](#132-skip--skipforward--skipback)
 - [2. Icon](#2-icon)
 - [3. Drag](#3-drag)
 - [4. TimeSpanToStringConverter](#4-timespantostringconverter)
@@ -180,8 +182,8 @@ Mapped to System.Windows.Controls.MediaElement.ScriptCommand.
 ### 1.2.6. MediaEnded
 Mapped to System.Windows.Controls.MediaElement.MediaEnded.
 
-# 1.3. MediaCommands
-Has command bindings for:
+## 1.3. CommandBindings
+Command bindings for:
   - MediaCommands.Play
   - MediaCommands.Pause
   - MediaCommands.Stop
@@ -190,6 +192,23 @@ Has command bindings for:
   - MediaCommands.IncreaseVolume
   - MediaCommands.DecreaseVolume
   - MediaCommands.MuteVolume
+  - Commands.ToggleMute
+  - Commands.UnmuteVolume
+  - Commands.Skip
+  - Commands.SkipForward
+  - Commands.SkipBack
+
+### 1.3.1 IncreaseVolume & DecreaseVolume
+If parameter is null the value of VolumeIncrement is used.
+
+### 1.3.2 Skip, SkipForward & SkipBack
+If parameter is `null` the value of SkipIncrement is used.
+If parameter is an `int` the value of parameter*SkipIncrement is used.
+If parameter is `double` `TimeSpan.FromSeconds(parameter) is used.
+If parameter is TimeSpan it is used.
+Values can be negative.
+
+
 
 # 2. Icon
 Exposes a `Gemoetry` attached property.
@@ -228,13 +247,22 @@ Converts Timespans like this:
 |00:12:34|12:23|
 |01:23:45|1:23:45|
 
-
 # 5. Commands
 - Commands.ToggleMute
+- Commands.UnmuteVolume
 - Commands.ToggleFullScreen
+- Commands.BeginFullScreen
+- Commands.EndFullScreen
+- Commands.Skip
+- Commands.SkipForward
+- Commands.SkipBack
 
 MediaElementWrapper has a command bindings for:
-  - Commands.ToggleMute
+- Commands.ToggleMute
+- Commands.UnmuteVolume
+- Commands.Skip
+- Commands.SkipForward
+- Commands.SkipBack
 
 # 6. Sample
 
@@ -256,6 +284,22 @@ MediaElementWrapper has a command bindings for:
                     CommandTarget="{Binding ElementName=MediaElement}" />
         <KeyBinding Key="F11" Command="media:Commands.ToggleFullScreen" />
         <KeyBinding Key="Escape" Command="media:Commands.EndFullScreen" />
+        <KeyBinding Key="Left"
+                    Command="media:Commands.SkipBack"
+                    CommandTarget="{Binding ElementName=MediaElement}" />
+        <KeyBinding Key="Left"
+                    Command="media:Commands.SkipBack"
+                    CommandParameter="60"
+                    CommandTarget="{Binding ElementName=MediaElement}"
+                    Modifiers="Control" />
+        <KeyBinding Key="Right"
+                    Command="media:Commands.SkipForward"
+                    CommandTarget="{Binding ElementName=MediaElement}" />
+        <KeyBinding Key="Right"
+                    Command="media:Commands.SkipForward"
+                    CommandParameter="60"
+                    CommandTarget="{Binding ElementName=MediaElement}"
+                    Modifiers="Control" />
     </Window.InputBindings>
     <Window.CommandBindings>
         <CommandBinding Command="ApplicationCommands.Open" Executed="OpenExecuted" />
@@ -263,6 +307,7 @@ MediaElementWrapper has a command bindings for:
         <CommandBinding CanExecute="OnEndFullScreenCanExecute"
                         Command="media:Commands.EndFullScreen"
                         Executed="OnEndFullScreenExecuted" />
+
     </Window.CommandBindings>
     <Grid>
         <media:MediaElementWrapper x:Name="MediaElement"

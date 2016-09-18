@@ -100,8 +100,13 @@
             this.CommandBindings.Add(new CommandBinding(MediaCommands.IncreaseVolume, HandleExecute(parameter => this.IncreaseVolume(this.GetVolumeIncrementOrDefault(parameter))), HandleCanExecute(this.CanIncreaseVolume)));
             this.CommandBindings.Add(new CommandBinding(MediaCommands.DecreaseVolume, HandleExecute(parameter => this.DecreaseVolume(this.GetVolumeIncrementOrDefault(parameter))), HandleCanExecute(this.CanDecreaseVolume)));
             this.CommandBindings.Add(new CommandBinding(MediaCommands.MuteVolume, HandleExecute(this.MuteVolume), HandleCanExecute(this.CanMuteVolume)));
+
             this.CommandBindings.Add(new CommandBinding(Commands.UnmuteVolume, HandleExecute(this.UnmuteVolume), HandleCanExecute(this.CanUnmuteVolume)));
             this.CommandBindings.Add(new CommandBinding(Commands.ToggleMute, HandleExecute(this.ToggleMute), HandleCanExecute(this.CanToggleMute)));
+            this.CommandBindings.Add(new CommandBinding(Commands.Skip, HandleExecute(this.Skip), HandleCanExecute(this.CanSkip)));
+            this.CommandBindings.Add(new CommandBinding(Commands.SkipForward, HandleExecute(this.SkipForward), HandleCanExecute(this.CanSkipForward)));
+            this.CommandBindings.Add(new CommandBinding(Commands.SkipBack, HandleExecute(this.SkipBack), HandleCanExecute(this.CanSkipBack)));
+
             this.updatePositionTimer.Tick += (o, e) => this.SetCurrentValue(PositionProperty, this.mediaElement.Position);
             this.updateProgressTimer.Tick += (o, e) =>
                 {
@@ -316,6 +321,84 @@
         }
 
         /// <summary>
+        /// Check if skip can be performed.
+        /// </summary>
+        /// <param name="parameter">The command parameter</param>
+        /// <returns>True if <see cref="Length"/> is not null</returns>
+        public bool CanSkip(object parameter)
+        {
+            return this.Length != null && this.GetSkipIncrement(parameter) != TimeSpan.Zero;
+        }
+
+        /// <summary>
+        /// Changes current position by <paramref name="parameter"/>
+        /// </summary>
+        /// <param name="parameter">
+        /// If null <see cref="SkipIncrement"/> is used.
+        /// If a <see cref="TimeSpan"/> it is used.
+        /// If an <see cref="int"/> it is <see cref="SkipIncrement"/> is multiplied by this.
+        /// If a <see cref="double"/> position is skippedthis amount of seconds.
+        ///  If else no skip is performed.
+        /// Negative values are allowed.
+        /// </param>
+        public void Skip(object parameter)
+        {
+            this.Skip(this.GetSkipIncrement(parameter));
+        }
+
+        /// <summary>
+        /// Check if skip can be performed.
+        /// </summary>
+        /// <param name="parameter">The command parameter</param>
+        /// <returns>True if <see cref="Length"/> is not null</returns>
+        public bool CanSkipBack(object parameter)
+        {
+            return this.CanSkip(parameter) && this.Position > TimeSpan.Zero;
+        }
+
+        /// <summary>
+        /// Changes current position by <paramref name="parameter"/>
+        /// </summary>
+        /// <param name="parameter">
+        /// If null <see cref="SkipIncrement"/> is used.
+        /// If a <see cref="TimeSpan"/> it is used.
+        /// If an <see cref="int"/> it is <see cref="SkipIncrement"/> is multiplied by this.
+        /// If a <see cref="double"/> position is skippedthis amount of seconds.
+        ///  If else no skip is performed.
+        /// Negative values are allowed.
+        /// </param>
+        public void SkipBack(object parameter)
+        {
+            this.Skip(TimeSpan.FromSeconds(-1 * this.GetSkipIncrement(parameter).TotalSeconds));
+        }
+
+        /// <summary>
+        /// Check if skip can be performed.
+        /// </summary>
+        /// <param name="parameter">The command parameter</param>
+        /// <returns>True if <see cref="Length"/> is not null</returns>
+        public bool CanSkipForward(object parameter)
+        {
+            return this.CanSkip(parameter) && this.Position < this.Length;
+        }
+
+        /// <summary>
+        /// Changes current position by <paramref name="parameter"/>
+        /// </summary>
+        /// <param name="parameter">
+        /// If null <see cref="SkipIncrement"/> is used.
+        /// If a <see cref="TimeSpan"/> it is used.
+        /// If an <see cref="int"/> it is <see cref="SkipIncrement"/> is multiplied by this.
+        /// If a <see cref="double"/> position is skippedthis amount of seconds.
+        ///  If else no skip is performed.
+        /// Negative values are allowed.
+        /// </param>
+        public void SkipForward(object parameter)
+        {
+            this.Skip(this.GetSkipIncrement(parameter));
+        }
+
+        /// <summary>
         /// Pauses the player without changing the <see cref="State"/> and <see cref="IsPlaying"/> properties.
         /// </summary>
         public void Break()
@@ -433,6 +516,15 @@
             };
         }
 
+        private static CanExecuteRoutedEventHandler HandleCanExecute(Func<object,bool> canExecute)
+        {
+            return (o, e) =>
+            {
+                e.CanExecute = canExecute(e.Parameter);
+                e.Handled = true;
+            };
+        }
+
         private void ReRaiseEvent(object sender, RoutedEventArgs e)
         {
             this.RaiseEvent(e);
@@ -529,6 +621,31 @@
             }
 
             return 0;
+        }
+
+        private TimeSpan GetSkipIncrement(object parameter)
+        {
+            if (parameter == null)
+            {
+                return this.SkipIncrement;
+            }
+
+            if (parameter is TimeSpan)
+            {
+                return (TimeSpan)parameter;
+            }
+
+            if (parameter is double)
+            {
+                return TimeSpan.FromSeconds((double)parameter);
+            }
+
+            if (parameter is int)
+            {
+                return TimeSpan.FromSeconds((int)parameter * this.SkipIncrement.TotalSeconds);
+            }
+
+            return TimeSpan.Zero;
         }
     }
 }

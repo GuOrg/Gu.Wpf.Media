@@ -46,5 +46,29 @@
             "Turn sound on.",
             nameof(UnmuteVolume),
             typeof(Commands));
+
+        /// <summary>
+        /// Change current position.
+        /// </summary>
+        public static RoutedUICommand Skip { get; } = new RoutedUICommand(
+            "Skip.",
+            nameof(Skip),
+            typeof(Commands));
+
+        /// <summary>
+        /// Change current position.
+        /// </summary>
+        public static RoutedUICommand SkipForward { get; } = new RoutedUICommand(
+            "Skip forward.",
+            nameof(SkipForward),
+            typeof(Commands));
+
+        /// <summary>
+        /// Change current position.
+        /// </summary>
+        public static RoutedUICommand SkipBack { get; } = new RoutedUICommand(
+            "Skip forward.",
+            nameof(SkipBack),
+            typeof(Commands));
     }
 }

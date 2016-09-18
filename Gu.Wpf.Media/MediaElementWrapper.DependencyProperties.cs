@@ -218,6 +218,18 @@
             new PropertyMetadata(0.05));
 
         /// <summary>
+        /// Identifies the <see cref="MediaElementWrapper.SkipIncrement" /> dependency property.
+        /// </summary>
+        /// <returns>
+        /// The identifier for the <see cref="MediaElementWrapper.SkipIncrement" /> dependency property.
+        /// </returns>
+        public static readonly DependencyProperty SkipIncrementProperty = DependencyProperty.Register(
+            "SkipIncrement",
+            typeof(TimeSpan),
+            typeof(MediaElementWrapper),
+            new PropertyMetadata(TimeSpan.FromSeconds(1)));
+
+        /// <summary>
         /// Gets or sets a list with video file formats.
         /// This is a convenience for use in <see cref="Microsoft.Win32.OpenFileDialog"/>
         /// https://support.microsoft.com/en-us/kb/316992
@@ -382,12 +394,22 @@
         }
 
         /// <summary>
-        /// The increment by which the IncreaseVolume
+        /// The increment by which the <see cref="IncreaseVolume"/> and <see cref="DecreaseVolume"/> changes current volume if null is passed in.
         /// </summary>
         public double VolumeIncrement
         {
             get { return (double)this.GetValue(VolumeIncrementProperty); }
             set { this.SetValue(VolumeIncrementProperty, value); }
+        }
+
+        /// <summary>
+        /// The increment by which the skip commands changes current position if null is passed in.
+        /// If an integer is passed in the <see cref="SkipIncrement"/> is multiplied by this value.
+        /// </summary>
+        public TimeSpan SkipIncrement
+        {
+            get { return (TimeSpan)this.GetValue(SkipIncrementProperty); }
+            set { this.SetValue(SkipIncrementProperty, value); }
         }
 
         /// <summary>

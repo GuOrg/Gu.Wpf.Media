@@ -1,4 +1,8 @@
-#### 0.3.2
+#### 0.4.0
+* BUGFIX handle source updated with LoadedBehavior
+* BREAKING CHANGES Tweaked default values & BindsTwoWayByDefault
+
+#### 0.3.3
 * Use converterparameter in increase & decrease volume command bindings.
 
 #### 0.3.2

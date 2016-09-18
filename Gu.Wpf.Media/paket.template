@@ -1,7 +1,8 @@
 ﻿type project
 
 releasenotes
-  Use converterparameter in increase & decrease volume command bindings.
+  BUGFIX handle source updated with LoadedBehavior
+  BREAKING CHANGES Tweaked default values & BindsTwoWayByDefault
 
 tags wpf xaml media mediaelement
 projectUrl https://github.com/JohanLarsson/Gu.Wpf.Media

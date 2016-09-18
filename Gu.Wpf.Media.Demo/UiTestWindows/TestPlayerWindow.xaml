@@ -9,9 +9,11 @@
         d:DataContext="{d:DesignInstance local:TestPlayerViewModel}"
         mc:Ignorable="d">
     <Window.Resources>
-        <Style TargetType="{x:Type ButtonBase}">
-            <Setter Property="AutomationProperties.AutomationId" Value="{Binding RelativeSource={RelativeSource Self}, Path=Content}" />
+        <Style x:Key="ContentAsIdButtonStyle" TargetType="{x:Type ButtonBase}">
+            <Setter Property="AutomationProperties.AutomationId" Value="{Binding RelativeSource={RelativeSource Self}, Path=Content, Converter={x:Static local:ContentToIdConverter.Default}, Mode=OneTime}" />
         </Style>
+        <Style BasedOn="{StaticResource ContentAsIdButtonStyle}" TargetType="{x:Type Button}" />
+        <Style BasedOn="{StaticResource ContentAsIdButtonStyle}" TargetType="{x:Type ToggleButton}" />
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -66,7 +68,7 @@
                             <TextBlock Grid.Row="2"
                                        Grid.Column="0"
                                        Text="Value" />
-                            <Button x:Name="LoseFocusButton"
+                            <Button x:Name="LoseFocus"
                                     Grid.Row="2"
                                     Grid.Column="1"
                                     Content="Lose focus" />
@@ -89,6 +91,11 @@
                                                                   Converter={x:Static local:NullConverter.Default}}"
                                                 Header="Value"
                                                 IsReadOnly="False" />
+                            <DataGridTextColumn MaxWidth="100"
+                                                Binding="{Binding MediaElementWrapperValue,
+                                                                  Converter={x:Static local:NullConverter.Default}}"
+                                                Header="Wrapper value"
+                                                IsReadOnly="True" />
                             <DataGridTextColumn MaxWidth="100"
                                                 Binding="{Binding MediaElementValue,
                                                                   Converter={x:Static local:NullConverter.Default}}"
@@ -195,6 +202,34 @@
                             CommandParameter="0.1"
                             CommandTarget="{Binding ElementName=MediaElement}"
                             Content="IncreaseVolumeByZeroPointOne" />
+
+                    <Button Command="media:Commands.SkipForward"
+                            CommandTarget="{Binding ElementName=MediaElement}"
+                            Content="SkipForward" />
+
+                    <Button Command="media:Commands.SkipForward"
+                            CommandParameter="2"
+                            CommandTarget="{Binding ElementName=MediaElement}"
+                            Content="SkipForwardTwo" />
+
+                    <Button Command="media:Commands.SkipForward"
+                            CommandParameter="0.1"
+                            CommandTarget="{Binding ElementName=MediaElement}"
+                            Content="SkipForwardZeroPointOne" />
+
+                    <Button Command="media:Commands.SkipBack"
+                            CommandTarget="{Binding ElementName=MediaElement}"
+                            Content="SkipBack" />
+
+                    <Button Command="media:Commands.SkipBack"
+                            CommandParameter="2"
+                            CommandTarget="{Binding ElementName=MediaElement}"
+                            Content="SkipBackTwo" />
+
+                    <Button Command="media:Commands.SkipBack"
+                            CommandParameter="0.1"
+                            CommandTarget="{Binding ElementName=MediaElement}"
+                            Content="SkipBackZeroPointOne" />
                 </StackPanel>
             </GroupBox>
         </Grid>

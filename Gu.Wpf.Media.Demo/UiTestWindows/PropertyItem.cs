@@ -48,18 +48,16 @@
         {
             get
             {
-                return this.wrapper.GetValue(this.Property);
+                return this.wrapper.GetValue(this.proxyProperty);
             }
             set
             {
                 this.wrapper.SetCurrentValue(this.proxyProperty, value);
                 this.OnPropertyChanged();
-                if (this.mediaElementProperty != null)
-                {
-                    this.OnPropertyChanged(nameof(this.MediaElementValue));
-                }
             }
         }
+
+        public object MediaElementWrapperValue => this.wrapper.GetValue(this.Property) ?? "null";
 
         public object MediaElementValue => this.mediaElementProperty?.GetValue(this.mediaElement) ?? "-";
 
@@ -97,7 +95,11 @@
             {
                 var item = kvp.Value;
                 item.OnPropertyChanged(nameof(Value));
-                item.OnPropertyChanged(nameof(MediaElementValue));
+                item.OnPropertyChanged(nameof(MediaElementWrapperValue));
+                if (item.mediaElementProperty != null)
+                {
+                    item.OnPropertyChanged(nameof(item.MediaElementValue));
+                }
             }
         }
     }

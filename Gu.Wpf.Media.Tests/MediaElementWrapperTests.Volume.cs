@@ -7,7 +7,7 @@ namespace Gu.Wpf.Media.Tests
 
     using NUnit.Framework;
 
-    public class MediaElementWrapperTests
+    public partial class MediaElementWrapperTests
     {
         [Apartment(ApartmentState.STA)]
         public class Volume

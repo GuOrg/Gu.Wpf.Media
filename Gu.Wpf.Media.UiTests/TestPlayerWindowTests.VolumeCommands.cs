@@ -8,25 +8,25 @@ namespace Gu.Wpf.Media.UiTests
 
     public partial class TestPlayerWindowTests
     {
-        public Button ToggleMuteButton => this.GetCachedButton("ToggleMute");
+        public Button ToggleMuteButton => this.GetCachedButton();
 
-        public Button BoundToggleMuteButton => this.GetCachedButton("BoundToggleMute");
+        public Button BoundToggleMuteButton => this.GetCachedButton();
 
-        public Button MuteVolumeButton => this.GetCachedButton("MuteVolume");
+        public Button MuteVolumeButton => this.GetCachedButton();
 
-        public Button UnmuteVolumeButton => this.GetCachedButton("UnmuteVolume");
+        public Button UnmuteVolumeButton => this.GetCachedButton();
 
-        public Button DecreaseVolumeButton => this.GetCachedButton("DecreaseVolume");
+        public Button DecreaseVolumeButton => this.GetCachedButton();
 
-        public Button DecreaseVolumeByOneButton => this.GetCachedButton("DecreaseVolumeByOne");
+        public Button DecreaseVolumeByOneButton => this.GetCachedButton();
 
-        public Button DecreaseVolumeByZeroPointOneButton => this.GetCachedButton("DecreaseVolumeByZeroPointOne");
+        public Button DecreaseVolumeByZeroPointOneButton => this.GetCachedButton();
 
-        public Button IncreaseVolumeButton => this.GetCachedButton("IncreaseVolume");
+        public Button IncreaseVolumeButton => this.GetCachedButton();
 
-        public Button IncreaseVolumeByOneButton => this.GetCachedButton("IncreaseVolumeByOne");
+        public Button IncreaseVolumeByOneButton => this.GetCachedButton();
 
-        public Button IncreaseVolumeByZeroPointOneButton => this.GetCachedButton("IncreaseVolumeByZeroPointOne");
+        public Button IncreaseVolumeByZeroPointOneButton => this.GetCachedButton();
 
         [Test]
         public void ClickMuteThenIncreaseVolume()

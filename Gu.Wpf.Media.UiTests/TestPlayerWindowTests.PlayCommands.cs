@@ -11,17 +11,17 @@ namespace Gu.Wpf.Media.UiTests
 
     public partial class TestPlayerWindowTests
     {
-        public Button PlayButton => this.GetCachedButton("Play");
+        public Button PlayButton => this.GetCachedButton();
 
-        public Button PauseButton => this.GetCachedButton("Pause");
+        public Button PauseButton => this.GetCachedButton();
 
-        public Button StopButton => this.GetCachedButton("Stop");
+        public Button StopButton => this.GetCachedButton();
 
-        public Button PlayPauseButton => this.GetCachedButton("TogglePlayPause");
+        public Button TogglePlayPauseButton => this.GetCachedButton();
 
-        public Button BoundPlayPauseButton => this.GetCachedButton("BoundPlayPause");
+        public Button BoundPlayPauseButton => this.GetCachedButton();
 
-        public Button RewindButton => this.GetCachedButton("Rewind");
+        public Button RewindButton => this.GetCachedButton();
 
         [Test]
         public void ClickPlayThenClickPause()
@@ -53,7 +53,7 @@ namespace Gu.Wpf.Media.UiTests
             var position = this.GetValue(MediaElementWrapper.PositionProperty);
             Assert.AreEqual(true, this.PlayButton.Enabled);
             Assert.AreEqual(false, this.PauseButton.Enabled);
-            this.PlayPauseButton.Click();
+            this.TogglePlayPauseButton.Click();
             Assert.AreEqual(false, this.PlayButton.Enabled);
             Assert.AreEqual(true, this.PauseButton.Enabled);
             this.AreEqual("True", MediaElementWrapper.IsPlayingProperty);
@@ -61,7 +61,7 @@ namespace Gu.Wpf.Media.UiTests
 
             Thread.Sleep(TimeSpan.FromSeconds(0.2));
 
-            this.PlayPauseButton.Click();
+            this.TogglePlayPauseButton.Click();
             Assert.AreEqual(true, this.PlayButton.Enabled);
             Assert.AreEqual(false, this.PauseButton.Enabled);
             this.AreEqual("False", MediaElementWrapper.IsPlayingProperty);

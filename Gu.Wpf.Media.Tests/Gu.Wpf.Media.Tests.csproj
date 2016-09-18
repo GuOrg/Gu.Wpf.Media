@@ -50,6 +50,8 @@
   </Choose>
   <ItemGroup>
     <Compile Include="CodeGen\ResharperPattern.cs" />
+    <Compile Include="Helpers\Clips.cs" />
+    <Compile Include="MediaElementWrapperTests.Skip.cs" />
     <Compile Include="MediaElementWrapperTests.Volume.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -96,6 +98,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="..\Gu.Wpf.Media.Demo\Samples\coffee.mp4">
+      <Link>Samples\coffee.mp4</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="CodeGen\Pattern.txt" />
   </ItemGroup>
   <ItemGroup>

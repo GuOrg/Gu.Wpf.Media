@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Markup;
@@ -19,7 +20,8 @@ using System.Windows.Markup;
 [assembly: ComVisible(false)]
 
 [assembly:ThemeInfo(ResourceDictionaryLocation.None, ResourceDictionaryLocation.SourceAssembly)]
-
+[assembly: InternalsVisibleTo("Gu.Wpf.Media.Tests")]
+[assembly:InternalsVisibleTo("Gu.Wpf.Media.UiTests")]
 [assembly: AssemblyVersion("0.4.0.0")]
 [assembly: AssemblyFileVersion("0.4.0.0")]
 [assembly: XmlnsDefinition("https://github.com/JohanLarsson/Gu.Wpf.Media", "Gu.Wpf.Media")]

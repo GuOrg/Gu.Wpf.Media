@@ -15,6 +15,22 @@
                     CommandTarget="{Binding ElementName=MediaElement}" />
         <KeyBinding Key="F11" Command="media:Commands.ToggleFullScreen" />
         <KeyBinding Key="Escape" Command="media:Commands.EndFullScreen" />
+        <KeyBinding Key="Left"
+                    Command="media:Commands.SkipBack"
+                    CommandTarget="{Binding ElementName=MediaElement}" />
+        <KeyBinding Key="Left"
+                    Command="media:Commands.SkipBack"
+                    CommandParameter="60"
+                    CommandTarget="{Binding ElementName=MediaElement}"
+                    Modifiers="Control" />
+        <KeyBinding Key="Right"
+                    Command="media:Commands.SkipForward"
+                    CommandTarget="{Binding ElementName=MediaElement}" />
+        <KeyBinding Key="Right"
+                    Command="media:Commands.SkipForward"
+                    CommandParameter="60"
+                    CommandTarget="{Binding ElementName=MediaElement}"
+                    Modifiers="Control" />
     </Window.InputBindings>
     <Window.CommandBindings>
         <CommandBinding Command="ApplicationCommands.Open" Executed="OpenExecuted" />
@@ -22,6 +38,7 @@
         <CommandBinding CanExecute="OnEndFullScreenCanExecute"
                         Command="media:Commands.EndFullScreen"
                         Executed="OnEndFullScreenExecuted" />
+
     </Window.CommandBindings>
     <Grid>
         <media:MediaElementWrapper x:Name="MediaElement"

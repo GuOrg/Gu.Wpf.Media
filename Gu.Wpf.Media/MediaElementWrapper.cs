@@ -1,6 +1,7 @@
 ﻿namespace Gu.Wpf.Media
 {
     using System;
+    using System.Globalization;
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Data;
@@ -97,7 +98,7 @@
             this.CommandBindings.Add(new CommandBinding(MediaCommands.Stop, HandleExecute(this.Stop), HandleCanExecute(this.CanStop)));
             this.CommandBindings.Add(new CommandBinding(MediaCommands.TogglePlayPause, HandleExecute(this.TogglePlayPause), HandleCanExecute(() => this.CanPlay() || this.CanPause())));
             this.CommandBindings.Add(new CommandBinding(MediaCommands.Rewind, HandleExecute(this.Rewind), HandleCanExecute(this.CanRewind)));
-            this.CommandBindings.Add(new CommandBinding(MediaCommands.IncreaseVolume, HandleExecute(parameter => this.IncreaseVolume(parameter)), HandleCanExecute(this.CanIncreaseVolume)));
+            this.CommandBindings.Add(new CommandBinding(MediaCommands.IncreaseVolume, HandleExecute(this.IncreaseVolume), HandleCanExecute(this.CanIncreaseVolume)));
             this.CommandBindings.Add(new CommandBinding(MediaCommands.DecreaseVolume, HandleExecute(this.DecreaseVolume), HandleCanExecute(this.CanDecreaseVolume)));
             this.CommandBindings.Add(new CommandBinding(MediaCommands.MuteVolume, HandleExecute(this.MuteVolume), HandleCanExecute(this.CanMuteVolume)));
 
@@ -674,6 +675,33 @@
             if (parameter is int)
             {
                 return TimeSpan.FromSeconds((int)parameter * this.SkipIncrement.TotalSeconds);
+            }
+
+            var text = parameter as string;
+            if (text != null)
+            {
+                if (text == string.Empty)
+                {
+                    return this.SkipIncrement;
+                }
+
+                int intResult;
+                if (int.TryParse(text, NumberStyles.Integer, CultureInfo.InvariantCulture, out intResult))
+                {
+                    return this.GetSkipIncrement(intResult);
+                }
+
+                double doubleResult;
+                if (double.TryParse(text, NumberStyles.Float, CultureInfo.InvariantCulture, out doubleResult))
+                {
+                    return this.GetSkipIncrement(doubleResult);
+                }
+
+                TimeSpan timeResult;
+                if (TimeSpan.TryParse(text, CultureInfo.InvariantCulture, out timeResult))
+                {
+                    return this.GetSkipIncrement(timeResult);
+                }
             }
 
             return TimeSpan.Zero;

@@ -1,6 +1,7 @@
 namespace Gu.Wpf.Media.UiTests
 {
     using System.Collections.Concurrent;
+    using System.Runtime.CompilerServices;
     using System.Windows;
 
     using Gu.Wpf.Media.UiTests.Helpers;
@@ -58,8 +59,9 @@ namespace Gu.Wpf.Media.UiTests
             {
                 valueBox.BulkText = value;
                 this.Window.WaitWhileBusy();
-                this.GetCachedButton("LoseFocusButton")
-                        .Click();
+                // ReSharper disable once ExplicitCallerInfoArgument
+                this.GetCachedButton("Lose focus")
+                    .Click();
             }
         }
 
@@ -75,9 +77,10 @@ namespace Gu.Wpf.Media.UiTests
             return this.GetCached<TextBox>(name);
         }
 
-        public Button GetCachedButton(string name)
+        public Button GetCachedButton([CallerMemberName]string name = null)
         {
-            return this.GetCached<Button>(name);
+            Assert.NotNull(name);
+            return this.GetCached<Button>(name.EndsWith("Button") ? name.TrimEnd("Button") : name);
         }
 
         public T GetCached<T>(string name) where T : IUIItem

@@ -76,7 +76,11 @@
                 this.NaturalVideoHeight = this.mediaElement.NaturalVideoHeight;
                 this.NaturalVideoWidth = this.mediaElement.NaturalVideoWidth;
                 this.Length = this.mediaElement.NaturalDuration.TimeSpan;
-                this.SetCurrentValue(PositionProperty, this.mediaElement.Position);
+                if (this.State == MediaState.Pause || this.State == MediaState.Stop)
+                {
+                    this.SetCurrentValue(PositionProperty, TimeSpan.Zero);
+                }
+
                 this.ReRaiseEvent(o, e);
                 CommandManager.InvalidateRequerySuggested();
             };

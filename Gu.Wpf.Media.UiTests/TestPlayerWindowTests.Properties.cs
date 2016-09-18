@@ -41,7 +41,7 @@ namespace Gu.Wpf.Media.UiTests
         }
 
         [Test]
-        public void SetSourceToCoffeeClipPause()
+        public void SetSourceToCoffeeClipLoadedBehaviorPause()
         {
             this.SetValue(MediaElementWrapper.LoadedBehaviorProperty, "Pause");
             this.SetValue(MediaElementWrapper.SourceProperty, Info.CoffeeClipFileName());

@@ -483,6 +483,7 @@
                             {
                                 this.mediaElement.Pause();
                                 this.updatePositionTimer.Stop();
+                                this.SetCurrentValue(PositionProperty, TimeSpan.Zero);
                             }
                             else
                             {
@@ -495,6 +496,7 @@
                             {
                                 this.mediaElement.Stop();
                                 this.updatePositionTimer.Stop();
+                                this.SetCurrentValue(PositionProperty, TimeSpan.Zero);
                             }
                             else
                             {

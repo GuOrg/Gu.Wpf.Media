@@ -2,6 +2,7 @@
 namespace Gu.Wpf.Media.Tests
 {
     using System.Threading;
+    using System.Windows.Controls;
     using System.Windows.Input;
 
     using NUnit.Framework;
@@ -11,6 +12,14 @@ namespace Gu.Wpf.Media.Tests
         [Apartment(ApartmentState.STA)]
         public class Volume
         {
+            [Test]
+            public void DefaultValue()
+            {
+                var wrapper = new MediaElementWrapper();
+                var element = new MediaElement();
+                Assert.AreEqual(element.Volume, wrapper.Volume);
+            }
+
             [Test]
             public void SetVolumeToZeroSetsIsMutedToTrue()
             {

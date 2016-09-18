@@ -17,7 +17,10 @@
             nameof(State),
             typeof(MediaState),
             typeof(MediaElementWrapper),
-            new PropertyMetadata(default(MediaState), OnStateChanged));
+            new FrameworkPropertyMetadata(
+                default(MediaState),
+                FrameworkPropertyMetadataOptions.BindsTwoWayByDefault,
+                OnStateChanged));
 
         /// <summary>
         /// Identifies the <see cref="MediaElementWrapper.IsPlaying" /> dependency property.
@@ -29,7 +32,10 @@
             nameof(IsPlaying),
             typeof(bool),
             typeof(MediaElementWrapper),
-            new PropertyMetadata(default(bool), OnIsPlayingChanged));
+            new FrameworkPropertyMetadata(
+                default(bool),
+                FrameworkPropertyMetadataOptions.BindsTwoWayByDefault,
+                OnIsPlayingChanged));
 
         /// <summary>
         /// Identifies the <see cref="MediaElementWrapper.Position" /> dependency property.
@@ -41,7 +47,11 @@
             nameof(Position),
             typeof(TimeSpan?),
             typeof(MediaElementWrapper),
-            new PropertyMetadata(default(TimeSpan?), OnPositionChanged, OnPositionCoerce));
+            new FrameworkPropertyMetadata(
+                default(TimeSpan?),
+                FrameworkPropertyMetadataOptions.BindsTwoWayByDefault,
+                OnPositionChanged,
+                OnPositionCoerce));
 
         private static readonly DependencyPropertyKey LengthPropertyKey = DependencyProperty.RegisterReadOnly(
             "Length",

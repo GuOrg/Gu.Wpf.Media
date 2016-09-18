@@ -24,8 +24,8 @@
         public static readonly DependencyProperty VolumeProperty = MediaElement.VolumeProperty.AddOwner(
             typeof(MediaElementWrapper),
             new FrameworkPropertyMetadata(
-                0.5,
-                FrameworkPropertyMetadataOptions.None,
+                MediaElement.VolumeProperty.DefaultMetadata.DefaultValue,
+                FrameworkPropertyMetadataOptions.BindsTwoWayByDefault,
                 OnVolumeChanged,
                 OnVolumeCoerce));
 
@@ -35,7 +35,11 @@
         /// <returns>
         /// The identifier for the <see cref="MediaElementWrapper.Balance" /> dependency property.
         /// </returns>
-        public static readonly DependencyProperty BalanceProperty = MediaElement.BalanceProperty.AddOwner(typeof(MediaElementWrapper));
+        public static readonly DependencyProperty BalanceProperty = MediaElement.BalanceProperty.AddOwner(
+            typeof(MediaElementWrapper),
+            new FrameworkPropertyMetadata(
+                 MediaElement.BalanceProperty.DefaultMetadata.DefaultValue,
+                 FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
         /// <summary>
         /// Identifies the <see cref="MediaElementWrapper.IsMuted" /> dependency property.
@@ -45,7 +49,11 @@
         /// </returns>
         public static readonly DependencyProperty IsMutedProperty = MediaElement.IsMutedProperty.AddOwner(
             typeof(MediaElementWrapper),
-            new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.None, null, OnIsMutedCoerce));
+            new FrameworkPropertyMetadata(
+                MediaElement.IsMutedProperty.DefaultMetadata.DefaultValue,
+                FrameworkPropertyMetadataOptions.BindsTwoWayByDefault,
+                null,
+                OnIsMutedCoerce));
 
         /// <summary>
         /// Identifies the <see cref="MediaElementWrapper.ScrubbingEnabled" /> dependency property.
@@ -60,7 +68,11 @@
         /// </summary>
         /// <seealso cref="MediaElement.Stretch" />
         /// This property is cached and grouped (AspectRatioGroup)
-        public static readonly DependencyProperty StretchProperty = Viewbox.StretchProperty.AddOwner(typeof(MediaElementWrapper));
+        public static readonly DependencyProperty StretchProperty = Viewbox.StretchProperty.AddOwner(
+            typeof(MediaElementWrapper),
+            new FrameworkPropertyMetadata(
+                 System.Windows.Media.Stretch.None,
+                 FrameworkPropertyMetadataOptions.AffectsMeasure));
 
         /// <summary>
         /// DependencyProperty for StretchDirection property.

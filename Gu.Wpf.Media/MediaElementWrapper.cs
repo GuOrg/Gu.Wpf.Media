@@ -97,8 +97,8 @@
             this.CommandBindings.Add(new CommandBinding(MediaCommands.Stop, HandleExecute(this.Stop), HandleCanExecute(this.CanStop)));
             this.CommandBindings.Add(new CommandBinding(MediaCommands.TogglePlayPause, HandleExecute(this.TogglePlayPause), HandleCanExecute(() => this.CanPlay() || this.CanPause())));
             this.CommandBindings.Add(new CommandBinding(MediaCommands.Rewind, HandleExecute(this.Rewind), HandleCanExecute(this.CanRewind)));
-            this.CommandBindings.Add(new CommandBinding(MediaCommands.IncreaseVolume, HandleExecute(parameter => this.IncreaseVolume(this.GetVolumeIncrementOrDefault(parameter))), HandleCanExecute(this.CanIncreaseVolume)));
-            this.CommandBindings.Add(new CommandBinding(MediaCommands.DecreaseVolume, HandleExecute(parameter => this.DecreaseVolume(this.GetVolumeIncrementOrDefault(parameter))), HandleCanExecute(this.CanDecreaseVolume)));
+            this.CommandBindings.Add(new CommandBinding(MediaCommands.IncreaseVolume, HandleExecute(parameter => this.IncreaseVolume(parameter)), HandleCanExecute(this.CanIncreaseVolume)));
+            this.CommandBindings.Add(new CommandBinding(MediaCommands.DecreaseVolume, HandleExecute(this.DecreaseVolume), HandleCanExecute(this.CanDecreaseVolume)));
             this.CommandBindings.Add(new CommandBinding(MediaCommands.MuteVolume, HandleExecute(this.MuteVolume), HandleCanExecute(this.CanMuteVolume)));
 
             this.CommandBindings.Add(new CommandBinding(Commands.UnmuteVolume, HandleExecute(this.UnmuteVolume), HandleCanExecute(this.CanUnmuteVolume)));
@@ -211,10 +211,27 @@
         /// <summary>
         /// Check if <see cref="Volume"/> can be decreased.
         /// </summary>
+        /// <param name="parameter">The command parameter</param>
         /// <returns>True if <see cref="Volume"/> can be decreased.</returns>
-        public bool CanDecreaseVolume()
+        public bool CanDecreaseVolume(object parameter)
         {
-            return this.Volume > 0 && !this.IsMuted;
+            // ReSharper disable once CompareOfFloatsByEqualityOperator
+            return this.Volume > 0 && !this.IsMuted && this.GetVolumeIncrementOrDefault(parameter) != 0;
+        }
+
+        /// <summary>
+        /// <see cref="Volume"/> is a value between 0 and 1.
+        /// Decreases <see cref="Volume"/> by <paramref name="parameter"/>
+        /// Truncates to between 0 and 1 if overflow.
+        /// </summary>
+        /// <param name="parameter">
+        /// The command parameter
+        /// A value between 0 and 1. Typical value is 0.05.
+        /// If null <see cref="VolumeIncrement"/> is used.
+        /// </param>
+        public void DecreaseVolume(object parameter)
+        {
+            this.DecreaseVolume(this.GetVolumeIncrementOrDefault(parameter));
         }
 
         /// <summary>
@@ -224,7 +241,6 @@
         /// </summary>
         /// <param name="increment">
         /// A value between 0 and 1. Typical value is 0.05.
-        /// If null <see cref="VolumeIncrement"/> is used.
         /// </param>
         public void DecreaseVolume(double increment)
         {
@@ -235,10 +251,26 @@
         /// <summary>
         /// Check if <see cref="Volume"/> can be increased.
         /// </summary>
+        /// <param name="parameter">The command parameter</param>
         /// <returns>True if <see cref="Volume"/> can be increased.</returns>
-        public bool CanIncreaseVolume()
+        public bool CanIncreaseVolume(object parameter)
         {
-            return this.Volume < 1;
+            // ReSharper disable once CompareOfFloatsByEqualityOperator
+            return this.Volume < 1 && this.GetVolumeIncrementOrDefault(parameter) != 0;
+        }
+
+        /// <summary>
+        /// <see cref="Volume"/> is a value between 0 and 1.
+        /// Increases <see cref="Volume"/> by <paramref name="parameter"/>
+        /// Truncates to between 0 and 1 if overflow.
+        /// </summary>
+        /// <param name="parameter">
+        /// A value between 0 and 1. Typical value is 0.05.
+        /// If null <see cref="VolumeIncrement"/> is used.
+        /// </param>
+        public void IncreaseVolume(object parameter)
+        {
+            this.IncreaseVolume(this.GetVolumeIncrementOrDefault(parameter));
         }
 
         /// <summary>
@@ -248,7 +280,6 @@
         /// </summary>
         /// <param name="increment">
         /// A value between 0 and 1. Typical value is 0.05.
-        /// If null <see cref="VolumeIncrement"/> is used.
         /// </param>
         public void IncreaseVolume(double increment)
         {

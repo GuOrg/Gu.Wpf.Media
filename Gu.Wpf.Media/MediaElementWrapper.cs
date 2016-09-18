@@ -24,6 +24,16 @@
 
             this.mediaElement.MediaFailed += (o, e) =>
                 {
+                    if (this.State == MediaState.Stop)
+                    {
+                        this.mediaElement.Stop();
+                        this.updatePositionTimer.Stop();
+                    }
+                    else
+                    {
+                        this.Stop();
+                    }
+
                     this.HasMedia = false;
                     this.HasAudio = null;
                     this.HasVideo = null;
@@ -59,22 +69,6 @@
             this.mediaElement.ScriptCommand += this.ReRaiseEvent;
             this.mediaElement.MediaOpened += (o, e) =>
             {
-                switch (this.LoadedBehavior)
-                {
-                    case MediaState.Stop:
-                        this.Stop();
-                        break;
-                    case MediaState.Play:
-                        this.Play();
-                        break;
-                    case MediaState.Pause:
-                        this.Pause();
-                        this.SetCurrentValue(PositionProperty, TimeSpan.Zero);
-                        break;
-                    default:
-                        throw new ArgumentOutOfRangeException();
-                }
-
                 this.HasMedia = true;
                 this.HasAudio = this.mediaElement.HasAudio;
                 this.HasVideo = this.mediaElement.HasVideo;
@@ -384,7 +378,7 @@
             var wrapper = (MediaElementWrapper)d;
             var newValue = (MediaState)e.NewValue;
             wrapper.SetCurrentValue(IsPlayingProperty, newValue == MediaState.Play);
-            if (wrapper.mediaElement.Source == null)
+            if (string.IsNullOrEmpty(wrapper.mediaElement.Source?.OriginalString))
             {
                 return;
             }
@@ -456,16 +450,57 @@
         {
             if (e.Property == MediaElement.SourceProperty)
             {
-                if (this.mediaElement.Source != null)
+                if (string.IsNullOrEmpty(this.mediaElement.Source?.OriginalString))
+                {
+                    if (this.State == MediaState.Stop)
+                    {
+                        this.mediaElement.Stop();
+                        this.updatePositionTimer.Stop();
+                    }
+                    else
+                    {
+                        this.Stop();
+                    }
+                }
+                else
                 {
                     switch (this.LoadedBehavior)
                     {
                         case MediaState.Play:
+                            if (this.State == MediaState.Play)
+                            {
+                                this.mediaElement.Play();
+                                this.updatePositionTimer.Start();
+                            }
+                            else
+                            {
+                                this.Play();
+                            }
+
+                            break;
                         case MediaState.Pause:
+                            if (this.State == MediaState.Pause)
+                            {
+                                this.mediaElement.Pause();
+                                this.updatePositionTimer.Stop();
+                            }
+                            else
+                            {
+                                this.Pause();
+                            }
+
+                            break;
                         case MediaState.Stop:
-                            // this gets stopped or paused in the loaded event
-                            // we do this to load so we get data like length.
-                            this.mediaElement.Play();
+                            if (this.State == MediaState.Stop)
+                            {
+                                this.mediaElement.Stop();
+                                this.updatePositionTimer.Stop();
+                            }
+                            else
+                            {
+                                this.Stop();
+                            }
+
                             break;
                         default:
                             throw new ArgumentOutOfRangeException();

@@ -18,7 +18,7 @@
             typeof(MediaState),
             typeof(MediaElementWrapper),
             new FrameworkPropertyMetadata(
-                default(MediaState),
+                MediaState.Stop,
                 FrameworkPropertyMetadataOptions.BindsTwoWayByDefault,
                 OnStateChanged));
 

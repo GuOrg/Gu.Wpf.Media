@@ -1,6 +1,7 @@
 namespace Gu.Wpf.Media.UiTests
 {
     using System;
+    using System.IO;
     using System.Threading;
     using Gu.Wpf.Media.UiTests.Helpers;
 
@@ -31,7 +32,7 @@ namespace Gu.Wpf.Media.UiTests
             this.AreEqual("null", false, MediaElementWrapper.SourceProperty);
             this.AreEqual("0", false, MediaElementWrapper.SpeedRatioProperty);
             this.AreEqual("Play", false, MediaElementWrapper.LoadedBehaviorProperty);
-            this.AreEqual("Play", false, MediaElementWrapper.StateProperty);
+            this.AreEqual("Stop", false, MediaElementWrapper.StateProperty);
             this.AreEqual("None", false, MediaElementWrapper.StretchProperty);
             this.AreEqual("Both", false, MediaElementWrapper.StretchDirectionProperty);
             this.AreEqual(FileFormats.DefaultVideoFormats, false, MediaElementWrapper.VideoFormatsProperty);
@@ -58,12 +59,81 @@ namespace Gu.Wpf.Media.UiTests
             this.AreEqual("540", true, MediaElementWrapper.NaturalVideoHeightProperty);
             this.AreEqual("960", true, MediaElementWrapper.NaturalVideoWidthProperty);
             this.AreEqual("00:00:00", false, MediaElementWrapper.PositionProperty);
-            this.AreEqual("True", false, MediaElementWrapper.ScrubbingEnabledProperty);
+            this.AreEqual("False", false, MediaElementWrapper.ScrubbingEnabledProperty);
             this.AreEqual(Info.CoffeeClipFileName(), false, MediaElementWrapper.SourceProperty);
             this.AreEqual("0", false, MediaElementWrapper.SpeedRatioProperty);
             this.AreEqual("Pause", false, MediaElementWrapper.StateProperty);
             this.AreEqual("None", false, MediaElementWrapper.StretchProperty);
             this.AreEqual("Both", false, MediaElementWrapper.StretchDirectionProperty);
+            this.AreEqual("0.5", false, MediaElementWrapper.VolumeProperty);
+            this.AreEqual("0.05", false, MediaElementWrapper.VolumeIncrementProperty);
+        }
+
+        [Test]
+        public void SetSourceToCoffeeClipThenToOther()
+        {
+            this.SetValue(MediaElementWrapper.LoadedBehaviorProperty, "Pause");
+            this.SetValue(MediaElementWrapper.SourceProperty, Info.CoffeeClipFileName());
+            this.PlayButton.Click();
+            var otherFile = Info.CoffeeClipFileName().Replace("coffee.mp4", "other.mp4");
+            if (!File.Exists(otherFile))
+            {
+                File.Copy(Info.CoffeeClipFileName(), otherFile);
+            }
+
+            this.SetValue(MediaElementWrapper.SourceProperty, otherFile);
+            this.AreEqual("0", false, MediaElementWrapper.BalanceProperty);
+            this.AreEqual("0", true, MediaElementWrapper.BufferingProgressProperty);
+            this.AreEqual("True", true, MediaElementWrapper.CanPauseMediaProperty);
+            this.AreEqual("0", true, MediaElementWrapper.DownloadProgressProperty);
+            this.AreEqual("True", true, MediaElementWrapper.HasAudioProperty);
+            this.AreEqual("True", true, MediaElementWrapper.HasMediaProperty);
+            this.AreEqual("True", true, MediaElementWrapper.HasVideoProperty);
+            this.AreEqual("False", true, MediaElementWrapper.IsBufferingProperty);
+            this.AreEqual("False", false, MediaElementWrapper.IsMutedProperty);
+            this.AreEqual("False", false, MediaElementWrapper.IsPlayingProperty);
+            this.AreEqual("00:00:11", true, MediaElementWrapper.LengthProperty);
+            this.AreEqual("540", true, MediaElementWrapper.NaturalVideoHeightProperty);
+            this.AreEqual("960", true, MediaElementWrapper.NaturalVideoWidthProperty);
+            this.AreEqual("00:00:00", false, MediaElementWrapper.PositionProperty);
+            this.AreEqual("False", false, MediaElementWrapper.ScrubbingEnabledProperty);
+            this.AreEqual(otherFile, false, MediaElementWrapper.SourceProperty);
+            this.AreEqual("0", false, MediaElementWrapper.SpeedRatioProperty);
+            this.AreEqual("Pause", false, MediaElementWrapper.StateProperty);
+            this.AreEqual("None", false, MediaElementWrapper.StretchProperty);
+            this.AreEqual("Both", false, MediaElementWrapper.StretchDirectionProperty);
+            this.AreEqual("0.5", false, MediaElementWrapper.VolumeProperty);
+            this.AreEqual("0.05", false, MediaElementWrapper.VolumeIncrementProperty);
+        }
+
+        [Test]
+        public void SetSourceToError()
+        {
+            this.SetValue(MediaElementWrapper.LoadedBehaviorProperty, "Play");
+            var missingFile = Path.ChangeExtension(Info.CoffeeClipFileName(), ".error");
+            this.SetValue(MediaElementWrapper.SourceProperty, missingFile);
+            this.AreEqual(FileFormats.DefaultAudioFormats, false, MediaElementWrapper.AudioFormatsProperty);
+            this.AreEqual("0", true, MediaElementWrapper.BufferingProgressProperty);
+            this.AreEqual("null", true, MediaElementWrapper.CanPauseMediaProperty);
+            this.AreEqual("0", true, MediaElementWrapper.DownloadProgressProperty);
+            this.AreEqual("null", true, MediaElementWrapper.HasAudioProperty);
+            this.AreEqual("False", true, MediaElementWrapper.HasMediaProperty);
+            this.AreEqual("null", true, MediaElementWrapper.HasVideoProperty);
+            this.AreEqual("False", true, MediaElementWrapper.IsBufferingProperty);
+            this.AreEqual("False", false, MediaElementWrapper.IsMutedProperty);
+            this.AreEqual("False", false, MediaElementWrapper.IsPlayingProperty);
+            this.AreEqual("null", true, MediaElementWrapper.LengthProperty);
+            this.AreEqual("null", true, MediaElementWrapper.NaturalVideoHeightProperty);
+            this.AreEqual("null", true, MediaElementWrapper.NaturalVideoWidthProperty);
+            this.AreEqual("null", false, MediaElementWrapper.PositionProperty);
+            this.AreEqual("False", false, MediaElementWrapper.ScrubbingEnabledProperty);
+            this.AreEqual(missingFile, false, MediaElementWrapper.SourceProperty);
+            this.AreEqual("0", false, MediaElementWrapper.SpeedRatioProperty);
+            this.AreEqual("Play", false, MediaElementWrapper.LoadedBehaviorProperty);
+            this.AreEqual("Stop", false, MediaElementWrapper.StateProperty);
+            this.AreEqual("None", false, MediaElementWrapper.StretchProperty);
+            this.AreEqual("Both", false, MediaElementWrapper.StretchDirectionProperty);
+            this.AreEqual(FileFormats.DefaultVideoFormats, false, MediaElementWrapper.VideoFormatsProperty);
             this.AreEqual("0.5", false, MediaElementWrapper.VolumeProperty);
             this.AreEqual("0.05", false, MediaElementWrapper.VolumeIncrementProperty);
         }

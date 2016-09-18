@@ -1,7 +1,7 @@
 ﻿type project
 
 releasenotes
-  USABILITY: Skip commands.
+  USABILITY: MouseWheelGesture.
 
 tags wpf xaml media mediaelement
 projectUrl https://github.com/JohanLarsson/Gu.Wpf.Media

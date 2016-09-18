@@ -1,4 +1,7 @@
 #### 0.4.2
+* USABILITY: MouseWheelGesture
+
+#### 0.4.1
 * USABILITY: Skip commands.
 
 #### 0.4.0

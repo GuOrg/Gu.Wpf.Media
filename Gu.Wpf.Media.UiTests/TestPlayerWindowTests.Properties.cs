@@ -71,7 +71,6 @@ namespace Gu.Wpf.Media.UiTests
             this.AssertReadOnly(false, MediaElementWrapper.VolumeIncrementProperty);
         }
 
-
         [Test]
         public void SetSourceToCoffeeClipLoadedBehaviorPause()
         {

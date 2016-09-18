@@ -21,7 +21,7 @@
             int row = 0;
             foreach (var dp in dps)
             {
-                this.PropertyGrid.RowDefinitions.Add(new RowDefinition());
+                this.PropertyGrid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
                 var label = new TextBox { Text = dp.Name, IsReadOnly = true, IsReadOnlyCaretVisible = true };
                 Grid.SetRow(label, row);
                 Grid.SetColumn(label, 0);
@@ -58,6 +58,8 @@
                 this.PropertyGrid.Children.Add(value);
                 row++;
             }
+
+            this.PropertyGrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
         }
     }
 }

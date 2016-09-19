@@ -20,6 +20,8 @@ namespace Gu.Wpf.Media
 
         public static ResourceKey ToolTipStyleKey { get; } = Create();
 
+        public static ResourceKey SystemButtonStyleKey { get; } = Create();
+
         private static ComponentResourceKey Create([CallerMemberName]string name = null)
         {
             return new ComponentResourceKey(typeof(Styles), name.TrimEnd("Key"));

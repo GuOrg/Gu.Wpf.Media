@@ -32,6 +32,10 @@ namespace Gu.Wpf.Media
 
         public static ResourceKey MediaGeometryKey { get; } = Create();
 
+        public static ResourceKey CloseGeometryKey { get; } = Create();
+
+        public static ResourceKey MinimizeWindowGeometryKey { get; } = Create();
+
         private static ComponentResourceKey Create([CallerMemberName]string name = null)
         {
             return new ComponentResourceKey(typeof(Geometries), name.TrimEnd("Key"));

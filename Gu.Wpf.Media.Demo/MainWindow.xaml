@@ -59,21 +59,60 @@
             </MouseBinding.Gesture>
         </MouseBinding>
     </Window.InputBindings>
+
     <Window.CommandBindings>
         <CommandBinding Command="ApplicationCommands.Open" Executed="OpenExecuted" />
         <CommandBinding Command="media:Commands.ToggleFullScreen" Executed="OnToggleFullScreenExecuted" />
         <CommandBinding CanExecute="OnEndFullScreenCanExecute"
                         Command="media:Commands.EndFullScreen"
                         Executed="OnEndFullScreenExecuted" />
-
+        <!--<CommandBinding Command="SystemCommands.CloseWindowCommand" Executed="OnCloseExecuted" />
+        <CommandBinding Command="SystemCommands.MinimizeWindowCommand" Executed="OnMinimizeExecuted" CanExecute="OnMinimizeCanExecute"/>
+        <CommandBinding Command="SystemCommands.MaximizeWindowCommand" Executed="OnMaximizeExecuted" CanExecute="OnMaximizeCanExecute"/>
+        <CommandBinding Command="SystemCommands.RestoreWindowCommand" Executed="OnRestoreExecuted" CanExecute="OnRestoreCanExecute"/>-->
     </Window.CommandBindings>
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <!--<Grid Grid.Row="0"
+              HorizontalAlignment="Right"
+              WindowChrome.IsHitTestVisibleInChrome="True">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0"
+                    media:Icon.Geometry="{StaticResource {x:Static media:Geometries.MinimizeWindowGeometryKey}}"
+                    Command="SystemCommands.MinimizeWindowCommand"
+                    Style="{StaticResource {x:Static media:Styles.SystemButtonBaseStyleKey}}" />
+            <Button Grid.Column="1"
+                    media:Icon.Geometry="{StaticResource {x:Static media:Geometries.WindowGeometryKey}}"
+                    Command="SystemCommands.MaximizeWindowCommand"
+                    Style="{StaticResource {x:Static media:Styles.SystemButtonBaseStyleKey}}" />
+            <Button Grid.Column="1"
+                    media:Icon.Geometry="{StaticResource {x:Static media:Geometries.WindowGeometryKey}}"
+                    Command="SystemCommands.RestoreWindowCommand"
+                    Style="{StaticResource {x:Static media:Styles.SystemButtonBaseStyleKey}}" />
+            <Button Grid.Column="2"
+                    media:Icon.Geometry="{StaticResource {x:Static media:Geometries.CloseGeometryKey}}"
+                    Command="SystemCommands.CloseWindowCommand"
+                    Style="{StaticResource {x:Static media:Styles.SystemButtonBaseStyleKey}}" />
+        </Grid>-->
+
         <media:MediaElementWrapper x:Name="MediaElement"
+                                   Grid.Row="0"
+                                   Grid.RowSpan="3"
                                    LoadedBehavior="Play"
                                    ScrubbingEnabled="True"
                                    Stretch="None" />
 
-        <Grid VerticalAlignment="Bottom" Background="{DynamicResource {x:Static media:Brushes.SemiTransparentBackgroundBrushKey}}">
+        <Grid Grid.Row="2"
+              VerticalAlignment="Bottom"
+              Background="{DynamicResource {x:Static media:Brushes.SemiTransparentBackgroundBrushKey}}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />

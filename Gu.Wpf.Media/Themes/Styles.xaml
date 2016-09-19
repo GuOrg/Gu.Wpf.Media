@@ -3,7 +3,7 @@
                     xmlns:media="clr-namespace:Gu.Wpf.Media">
     <Style x:Key="{x:Static media:Styles.PlayerButtonBaseStyleKey}" TargetType="{x:Type ButtonBase}">
         <Setter Property="Height" Value="25" />
-        <Setter Property="Foreground" Value="White" />
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static media:Brushes.EnabledForegroundBrushKey}}" />
         <Setter Property="Padding" Value="24,6" />
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
         <Setter Property="Template">
@@ -34,7 +34,7 @@
 
         <Style.Triggers>
             <Trigger Property="IsEnabled" Value="False">
-                <Setter Property="Opacity" Value="0.6" />
+                <Setter Property="Foreground" Value="{DynamicResource {x:Static media:Brushes.DisabledForegroundBrushKey}}" />
             </Trigger>
         </Style.Triggers>
     </Style>
@@ -75,7 +75,7 @@
     <Style x:Key="{x:Static media:Styles.ProgressSliderStyleKey}" TargetType="{x:Type Slider}">
         <Setter Property="SnapsToDevicePixels" Value="true" />
         <Setter Property="OverridesDefaultStyle" Value="true" />
-        <Setter Property="Background" Value="White" />
+        <Setter Property="Background" Value="{DynamicResource {x:Static media:Brushes.EnabledForegroundBrushKey}}" />
         <Setter Property="Height" Value="14" />
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
         <Setter Property="Template">
@@ -98,10 +98,9 @@
                         </Track.Thumb>
                         <Track.IncreaseRepeatButton>
                             <RepeatButton x:Name="IncreaseButton"
-                                          Background="{TemplateBinding Background}"
+                                          Background="{DynamicResource {x:Static media:Brushes.DisabledForegroundBrushKey}}"
                                           ClipToBounds="False"
                                           Command="Slider.IncreaseLarge"
-                                          Opacity="0.4"
                                           Style="{StaticResource {x:Static media:Styles.ProgressRepeatButtonStyleKey}}" />
                         </Track.IncreaseRepeatButton>
                     </Track>
@@ -141,5 +140,11 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+        
+        <Style.Triggers>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Background" Value="{DynamicResource {x:Static media:Brushes.DisabledForegroundBrushKey}}" />
+            </Trigger>
+        </Style.Triggers>
     </Style>
 </ResourceDictionary>

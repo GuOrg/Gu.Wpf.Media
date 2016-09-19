@@ -50,6 +50,10 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Themes\Brushes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Themes\Generic.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -88,6 +92,7 @@
       <SubType>Code</SubType>
     </Compile>
     <AppDesigner Include="Properties\" />
+    <Compile Include="ResourceKeys\Brushes.cs" />
     <Compile Include="ResourceKeys\Geometries.cs" />
     <Compile Include="ResourceKeys\Styles.cs" />
     <Compile Include="Converters\NullableTimeSpanToSecondsConverter.cs" />

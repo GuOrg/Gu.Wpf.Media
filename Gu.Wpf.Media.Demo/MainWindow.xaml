@@ -81,6 +81,8 @@
             <Slider x:Name="ProgressSlider"
                     Grid.Row="0"
                     media:Drag.PauseWhileDragging="{Binding ElementName=MediaElement}"
+                    IsEnabled="{Binding ElementName=MediaElement,
+                                        Path=HasMedia}"
                     Maximum="{Binding ElementName=MediaElement,
                                       Path=Length,
                                       Converter={x:Static media:NullableTimeSpanToSecondsConverter.Default}}"

@@ -14,6 +14,10 @@ namespace Gu.Wpf.Media
 
         public static ResourceKey DisabledForegroundBrushKey { get; } = Create();
 
+        public static ResourceKey BackgroundBrushKey { get; } = Create();
+
+        public static ResourceKey SemiTransparentBackgroundBrushKey { get; } = Create();
+
         private static ComponentResourceKey Create([CallerMemberName]string name = null)
         {
             return new ComponentResourceKey(typeof(Brushes), name.TrimEnd("Key"));

@@ -6,10 +6,11 @@
         <Setter Property="Foreground" Value="{DynamicResource {x:Static media:Brushes.EnabledForegroundBrushKey}}" />
         <Setter Property="Padding" Value="24,6" />
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="Background" Value="Transparent" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ButtonBase}">
-                    <Border Background="Transparent">
+                    <Border Background="{TemplateBinding Background}">
                         <Path x:Name="Path"
                               Margin="{TemplateBinding Padding}"
                               HorizontalAlignment="Center"
@@ -140,11 +141,25 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-        
+
         <Style.Triggers>
             <Trigger Property="IsEnabled" Value="False">
                 <Setter Property="Background" Value="{DynamicResource {x:Static media:Brushes.DisabledForegroundBrushKey}}" />
             </Trigger>
         </Style.Triggers>
+    </Style>
+
+    <Style x:Key="{x:Static media:Styles.ToolTipStyleKey}" TargetType="{x:Type ToolTip}">
+        <Setter Property="Background" Value="{DynamicResource {x:Static media:Brushes.BackgroundBrushKey}}" />
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static media:Brushes.EnabledForegroundBrushKey}}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ToolTip}">
+                    <Border Background="{TemplateBinding Background}" CornerRadius="2">
+                        <ContentPresenter Margin="{TemplateBinding Padding}" />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
 </ResourceDictionary>

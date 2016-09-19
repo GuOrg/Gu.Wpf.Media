@@ -6,7 +6,7 @@
         xmlns:media="https://github.com/JohanLarsson/Gu.Wpf.Media"
         Title="MainWindow"
         MinWidth="300"
-        Background="Black"
+        Background="{DynamicResource {x:Static media:Brushes.BackgroundBrushKey}}"
         SizeToContent="WidthAndHeight"
         mc:Ignorable="d">
     <Window.InputBindings>
@@ -73,7 +73,7 @@
                                    ScrubbingEnabled="True"
                                    Stretch="None" />
 
-        <Grid VerticalAlignment="Bottom" Background="#19000000">
+        <Grid VerticalAlignment="Bottom" Background="{DynamicResource {x:Static media:Brushes.SemiTransparentBackgroundBrushKey}}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
@@ -162,7 +162,13 @@
 
                 <Button Grid.Column="4"
                         media:Icon.Geometry="{StaticResource {x:Static media:Geometries.FolderOpenGeometryKey}}"
-                        Command="ApplicationCommands.Open" />
+                        Command="ApplicationCommands.Open">
+                    <Button.ToolTip>
+                        <ToolTip Placement="Top" Style="{DynamicResource {x:Static media:Styles.ToolTipStyleKey}}">
+                            Open a file
+                        </ToolTip>
+                    </Button.ToolTip>
+                </Button>
 
                 <Button Grid.Column="5"
                         HorizontalAlignment="Right"
@@ -170,7 +176,13 @@
                         Command="media:Commands.ToggleFullScreen"
                         IsEnabled="{Binding ElementName=MediaElement,
                                             Path=HasMedia}"
-                        Padding="12,6,6,6" />
+                        Padding="12,6,6,6">
+                    <Button.ToolTip>
+                        <ToolTip Placement="Top" Style="{DynamicResource {x:Static media:Styles.ToolTipStyleKey}}">
+                            Full screen
+                        </ToolTip>
+                    </Button.ToolTip>
+                </Button>
             </Grid>
         </Grid>
     </Grid>

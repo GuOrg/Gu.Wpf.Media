@@ -18,13 +18,19 @@ namespace Gu.Wpf.Media
 
         public static ResourceKey RewindGeometryKey { get; } = Create();
 
+        public static ResourceKey MuteGeometryKey { get; } = Create();
+
+        public static ResourceKey UnMuteGeometryKey { get; } = Create();
+
         public static ResourceKey FolderOpenGeometryKey { get; } = Create();
 
         public static ResourceKey FullScreenGeometryKey { get; } = Create();
 
-        public static ResourceKey MuteGeometryKey { get; } = Create();
+        public static ResourceKey WindowGeometryKey { get; } = Create();
 
-        public static ResourceKey UnMuteGeometryKey { get; } = Create();
+        public static ResourceKey DownArrowGeometryKey { get; } = Create();
+
+        public static ResourceKey MediaGeometryKey { get; } = Create();
 
         private static ComponentResourceKey Create([CallerMemberName]string name = null)
         {

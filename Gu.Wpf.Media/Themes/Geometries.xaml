@@ -12,4 +12,7 @@
 
     <StreamGeometry x:Key="{x:Static local:Geometries.FolderOpenGeometryKey}">M20,23L100,23 80,59 0,59z M68,0C69,0,70,2,70,3L70,9 80,9 80,18 18,18 0,51 0,9 36,9C39,2,42,0,42,0z</StreamGeometry>
     <StreamGeometry x:Key="{x:Static local:Geometries.FullScreenGeometryKey}">F1M100,73L100,100 73,100 100,73z M0,73L27,100 0,100 0,73z M73,0L100,0 100,27 73,0z M0,0L27,0 0,27 0,0z</StreamGeometry>
+    <StreamGeometry x:Key="{x:Static local:Geometries.WindowGeometryKey}">F1M10,20L10,65 90,65 90,20 10,20z M0,0L100,0 100,75 0,75 0,0z</StreamGeometry>
+    <StreamGeometry x:Key="{x:Static local:Geometries.DownArrowGeometryKey}">F1M25,0L46,0 46,64 71,64 36,100 0,64 25,64 25,0z</StreamGeometry>
+    <StreamGeometry x:Key="{x:Static local:Geometries.MediaGeometryKey}">F1M33,13L33,63 68,38 33,13z M0,0L100,0 100,75 0,75 0,0z</StreamGeometry>
 </ResourceDictionary>

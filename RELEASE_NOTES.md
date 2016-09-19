@@ -1,4 +1,7 @@
-#### 0.4.2
+#### 0.4.3.1
+* BUGFIX: Handle paths with #
+
+#### 0.4.3
 * USABILITY: Brushes as DynamicResources and keys in media:Brushes.
 
 #### 0.4.2

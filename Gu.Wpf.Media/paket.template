@@ -1,7 +1,7 @@
 ﻿type project
 
 releasenotes
-  USABILITY: Brushes as DynamicResources and keys in media:Brushes.
+  BUGFIX: Handle paths with #
 
 tags wpf xaml media mediaelement
 projectUrl https://github.com/JohanLarsson/Gu.Wpf.Media

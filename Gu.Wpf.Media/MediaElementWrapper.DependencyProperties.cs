@@ -458,20 +458,6 @@
             ((MediaElementWrapper)d).mediaElement.SpeedRatio = (double)e.NewValue;
         }
 
-        private static void OnVolumeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            var wrapper = (MediaElementWrapper)d;
-            var newValue = (double)e.NewValue;
-            if (newValue <= 0)
-            {
-                wrapper.SetCurrentValue(IsMutedProperty, true);
-            }
-            else if (wrapper.IsMuted && newValue >= 0)
-            {
-                wrapper.SetCurrentValue(IsMutedProperty, false);
-            }
-        }
-
         private static object OnVolumeCoerce(DependencyObject d, object basevalue)
         {
             return Clamp.Between((double)basevalue, 0, 1, 3);

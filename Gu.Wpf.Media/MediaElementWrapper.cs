@@ -1,10 +1,10 @@
 ﻿namespace Gu.Wpf.Media
 {
     using System;
+    using System.ComponentModel;
     using System.Globalization;
     using System.Windows;
     using System.Windows.Controls;
-    using System.Windows.Data;
     using System.Windows.Input;
     using System.Windows.Threading;
 
@@ -25,26 +25,8 @@
 
             this.mediaElement.MediaFailed += (o, e) =>
                 {
-                    if (this.State == MediaState.Stop)
-                    {
-                        this.mediaElement.Stop();
-                        this.updatePositionTimer.Stop();
-                    }
-                    else
-                    {
-                        this.Stop();
-                    }
-
-                    this.HasMedia = false;
-                    this.HasAudio = null;
-                    this.HasVideo = null;
-                    this.CanPauseMedia = null;
-                    this.NaturalVideoHeight = null;
-                    this.NaturalVideoWidth = null;
-                    this.Length = null;
-                    this.SetCurrentValue(PositionProperty, null);
+                    this.ResetToNoSource();
                     this.ReRaiseEvent(o, e);
-                    CommandManager.InvalidateRequerySuggested();
                 };
 
             this.mediaElement.MediaEnded += (o, e) =>
@@ -86,13 +68,6 @@
                 CommandManager.InvalidateRequerySuggested();
             };
 
-            this.Bind(SourceProperty, MediaElement.SourceProperty);
-            this.Bind(VolumeProperty, MediaElement.VolumeProperty);
-            this.Bind(BalanceProperty, MediaElement.BalanceProperty);
-            this.Bind(IsMutedProperty, MediaElement.IsMutedProperty);
-            this.Bind(ScrubbingEnabledProperty, MediaElement.ScrubbingEnabledProperty);
-            this.Bind(StretchProperty, MediaElement.StretchProperty);
-            this.Bind(StretchDirectionProperty, MediaElement.StretchDirectionProperty);
             this.CommandBindings.Add(new CommandBinding(MediaCommands.Play, HandleExecute(this.Play), HandleCanExecute(this.CanPlay)));
             this.CommandBindings.Add(new CommandBinding(MediaCommands.Pause, HandleExecute(this.Pause), HandleCanExecute(this.CanPause)));
             this.CommandBindings.Add(new CommandBinding(MediaCommands.Stop, HandleExecute(this.Stop), HandleCanExecute(this.CanStop)));
@@ -114,7 +89,12 @@
                     this.DownloadProgress = this.mediaElement.DownloadProgress;
                     this.BufferingProgress = this.mediaElement.BufferingProgress;
                 };
-            Binding.AddTargetUpdatedHandler(this.mediaElement, this.OnTargetUpdated);
+            this.mediaElement.IsMuted = this.IsMuted;
+            this.mediaElement.Volume = this.Volume;
+            this.mediaElement.Balance = this.Balance;
+            this.mediaElement.ScrubbingEnabled = this.ScrubbingEnabled;
+            this.mediaElement.Stretch = this.Stretch;
+            this.mediaElement.StretchDirection = this.StretchDirection;
         }
 
         /// <inheritdoc/>
@@ -461,6 +441,75 @@
             this.SetCurrentValue(PositionProperty, this.Position.Value + time);
         }
 
+        /// <summary>
+        /// This is invoked when <see cref="Source"/> changes.
+        /// </summary>
+        /// <param name="source">The new source.</param>
+        protected virtual void OnSourceChanged(Uri source)
+        {
+            if (source == null || string.IsNullOrWhiteSpace(source.OriginalString))
+            {
+                this.mediaElement.Source = null;
+                this.ResetToNoSource();
+            }
+            else
+            {
+                if (source.Scheme == Uri.UriSchemeFile)
+                {
+                    // this looks really strange but it is for handling #  in paths.
+                    this.mediaElement.Source = (Uri)TypeDescriptor.GetConverter(typeof(Uri)).ConvertFrom(source.LocalPath);
+                }
+                else
+                {
+                    this.mediaElement.Source = source;
+                }
+
+                switch (this.LoadedBehavior)
+                {
+                    case MediaState.Play:
+                        if (this.State == MediaState.Play)
+                        {
+                            this.mediaElement.Play();
+                            this.updatePositionTimer.Start();
+                        }
+                        else
+                        {
+                            this.Play();
+                        }
+
+                        break;
+                    case MediaState.Pause:
+                        if (this.State == MediaState.Pause)
+                        {
+                            this.mediaElement.Pause();
+                            this.updatePositionTimer.Stop();
+                            this.SetCurrentValue(PositionProperty, TimeSpan.Zero);
+                        }
+                        else
+                        {
+                            this.Pause();
+                        }
+
+                        break;
+                    case MediaState.Stop:
+                        if (this.State == MediaState.Stop)
+                        {
+                            this.mediaElement.Stop();
+                            this.updatePositionTimer.Stop();
+                            this.SetCurrentValue(PositionProperty, TimeSpan.Zero);
+                        }
+                        else
+                        {
+                            this.Stop();
+                        }
+
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
+            }
+        }
+
         private static void OnPositionChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var wrapper = (MediaElementWrapper)d;
@@ -557,86 +606,36 @@
             };
         }
 
+        private void ResetToNoSource()
+        {
+            if (this.State == MediaState.Stop)
+            {
+                this.mediaElement.Stop();
+                this.updatePositionTimer.Stop();
+            }
+            else
+            {
+                this.Stop();
+            }
+
+            this.HasMedia = false;
+            this.HasAudio = null;
+            this.HasVideo = null;
+            this.IsBuffering = false;
+            this.BufferingProgress = 0;
+            this.DownloadProgress = 0;
+            this.CanPauseMedia = null;
+            this.NaturalVideoHeight = null;
+            this.NaturalVideoWidth = null;
+            this.Length = null;
+            this.SetCurrentValue(PositionProperty, null);
+            CommandManager.InvalidateRequerySuggested();
+        }
+
         private void ReRaiseEvent(object sender, RoutedEventArgs e)
         {
             this.RaiseEvent(e);
             e.Handled = true;
-        }
-
-        private void Bind(DependencyProperty sourceProperty, DependencyProperty targetProperty)
-        {
-            var binding = new Binding(sourceProperty.Name)
-            {
-                Mode = BindingMode.OneWay,
-                Source = this,
-                NotifyOnTargetUpdated = true,
-            };
-            BindingOperations.SetBinding(this.mediaElement, targetProperty, binding);
-        }
-
-        private void OnTargetUpdated(object sender, DataTransferEventArgs e)
-        {
-            if (e.Property == MediaElement.SourceProperty)
-            {
-                if (string.IsNullOrEmpty(this.mediaElement.Source?.OriginalString))
-                {
-                    if (this.State == MediaState.Stop)
-                    {
-                        this.mediaElement.Stop();
-                        this.updatePositionTimer.Stop();
-                    }
-                    else
-                    {
-                        this.Stop();
-                    }
-                }
-                else
-                {
-                    switch (this.LoadedBehavior)
-                    {
-                        case MediaState.Play:
-                            if (this.State == MediaState.Play)
-                            {
-                                this.mediaElement.Play();
-                                this.updatePositionTimer.Start();
-                            }
-                            else
-                            {
-                                this.Play();
-                            }
-
-                            break;
-                        case MediaState.Pause:
-                            if (this.State == MediaState.Pause)
-                            {
-                                this.mediaElement.Pause();
-                                this.updatePositionTimer.Stop();
-                                this.SetCurrentValue(PositionProperty, TimeSpan.Zero);
-                            }
-                            else
-                            {
-                                this.Pause();
-                            }
-
-                            break;
-                        case MediaState.Stop:
-                            if (this.State == MediaState.Stop)
-                            {
-                                this.mediaElement.Stop();
-                                this.updatePositionTimer.Stop();
-                                this.SetCurrentValue(PositionProperty, TimeSpan.Zero);
-                            }
-                            else
-                            {
-                                this.Stop();
-                            }
-
-                            break;
-                        default:
-                            throw new ArgumentOutOfRangeException();
-                    }
-                }
-            }
         }
 
         private double GetVolumeIncrementOrDefault(object parameter)

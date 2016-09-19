@@ -64,45 +64,45 @@ namespace Gu.Wpf.Media.Demo
             e.Handled = true;
         }
 
-        private void OnCloseExecuted(object sender, ExecutedRoutedEventArgs e)
-        {
-            this.Close();
-            e.Handled = true;
-        }
+        ////private void OnCloseExecuted(object sender, ExecutedRoutedEventArgs e)
+        ////{
+        ////    this.Close();
+        ////    e.Handled = true;
+        ////}
 
-        private void OnMinimizeCanExecute(object sender, CanExecuteRoutedEventArgs e)
-        {
-            e.CanExecute = this.WindowState != WindowState.Minimized;
-            e.Handled = true;
-        }
+        ////private void OnMinimizeCanExecute(object sender, CanExecuteRoutedEventArgs e)
+        ////{
+        ////    e.CanExecute = this.WindowState != WindowState.Minimized;
+        ////    e.Handled = true;
+        ////}
 
-        private void OnMinimizeExecuted(object sender, ExecutedRoutedEventArgs e)
-        {
-            this.WindowState = WindowState.Minimized;
-        }
+        ////private void OnMinimizeExecuted(object sender, ExecutedRoutedEventArgs e)
+        ////{
+        ////    this.WindowState = WindowState.Minimized;
+        ////}
 
-        private void OnMaximizeCanExecute(object sender, CanExecuteRoutedEventArgs e)
-        {
-            e.CanExecute = this.WindowState != WindowState.Maximized;
-            e.Handled = true;
-        }
+        ////private void OnMaximizeCanExecute(object sender, CanExecuteRoutedEventArgs e)
+        ////{
+        ////    e.CanExecute = this.WindowState != WindowState.Maximized;
+        ////    e.Handled = true;
+        ////}
 
-        private void OnMaximizeExecuted(object sender, ExecutedRoutedEventArgs e)
-        {
-            this.SizeToContent = SizeToContent.Manual;
-            this.WindowState = WindowState.Maximized;
-        }
+        ////private void OnMaximizeExecuted(object sender, ExecutedRoutedEventArgs e)
+        ////{
+        ////    this.SizeToContent = SizeToContent.Manual;
+        ////    this.WindowState = WindowState.Maximized;
+        ////}
 
-        private void OnRestoreCanExecute(object sender, CanExecuteRoutedEventArgs e)
-        {
-            e.CanExecute = this.WindowState != WindowState.Normal;
-            e.Handled = true;
-        }
+        ////private void OnRestoreCanExecute(object sender, CanExecuteRoutedEventArgs e)
+        ////{
+        ////    e.CanExecute = this.WindowState != WindowState.Normal;
+        ////    e.Handled = true;
+        ////}
 
-        private void OnRestoreExecuted(object sender, ExecutedRoutedEventArgs e)
-        {
-            this.SizeToContent = SizeToContent.WidthAndHeight;
-            this.WindowState = WindowState.Normal;
-        }
+        ////private void OnRestoreExecuted(object sender, ExecutedRoutedEventArgs e)
+        ////{
+        ////    this.SizeToContent = SizeToContent.WidthAndHeight;
+        ////    this.WindowState = WindowState.Normal;
+        ////}
     }
 }

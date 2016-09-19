@@ -138,6 +138,46 @@ namespace Gu.Wpf.Media.UiTests
         }
 
         [Test]
+        public void SetSourceToClipWithHashInPath()
+        {
+            var otherFile = Info.CoffeeClipFileName().Replace(@"Samples\coffee.mp4", @"# Samples #\coffee.mp4");
+            var directoryName = Path.GetDirectoryName(otherFile);
+            if (!Directory.Exists(directoryName))
+            {
+                // ReSharper disable once AssignNullToNotNullAttribute
+                Directory.CreateDirectory(directoryName);
+            }
+            if (!File.Exists(otherFile))
+            {
+                File.Copy(Info.CoffeeClipFileName(), otherFile);
+            }
+
+            this.SetValue(MediaElementWrapper.SourceProperty, otherFile);
+            this.AreEqual("0", MediaElementWrapper.BalanceProperty);
+            this.AreEqual("0", MediaElementWrapper.BufferingProgressProperty);
+            this.AreEqual("True", MediaElementWrapper.CanPauseMediaProperty);
+            this.AreEqual("0", MediaElementWrapper.DownloadProgressProperty);
+            this.AreEqual("True", MediaElementWrapper.HasAudioProperty);
+            this.AreEqual("True", MediaElementWrapper.HasMediaProperty);
+            this.AreEqual("True", MediaElementWrapper.HasVideoProperty);
+            this.AreEqual("False", MediaElementWrapper.IsBufferingProperty);
+            this.AreEqual("False", MediaElementWrapper.IsMutedProperty);
+            this.AreEqual("False", MediaElementWrapper.IsPlayingProperty);
+            this.AreEqual("00:00:11", MediaElementWrapper.LengthProperty);
+            this.AreEqual("540", MediaElementWrapper.NaturalVideoHeightProperty);
+            this.AreEqual("960", MediaElementWrapper.NaturalVideoWidthProperty);
+            this.AreEqual("00:00:00", MediaElementWrapper.PositionProperty);
+            this.AreEqual("False", MediaElementWrapper.ScrubbingEnabledProperty);
+            this.AreEqual(otherFile, MediaElementWrapper.SourceProperty);
+            this.AreEqual("0", MediaElementWrapper.SpeedRatioProperty);
+            this.AreEqual("Pause", MediaElementWrapper.StateProperty);
+            this.AreEqual("None", MediaElementWrapper.StretchProperty);
+            this.AreEqual("Both", MediaElementWrapper.StretchDirectionProperty);
+            this.AreEqual("0.5", MediaElementWrapper.VolumeProperty);
+            this.AreEqual("0.05", MediaElementWrapper.VolumeIncrementProperty);
+        }
+
+        [Test]
         public void SetSourceToError()
         {
             this.SetValue(MediaElementWrapper.LoadedBehaviorProperty, "Play");

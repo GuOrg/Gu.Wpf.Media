@@ -13,7 +13,12 @@
         /// <returns>
         /// The identifier for the <see cref="MediaElementWrapper.Source" /> dependency property.
         /// </returns>
-        public static readonly DependencyProperty SourceProperty = MediaElement.SourceProperty.AddOwner(typeof(MediaElementWrapper));
+        public static readonly DependencyProperty SourceProperty = MediaElement.SourceProperty.AddOwner(
+            typeof(MediaElementWrapper),
+            new FrameworkPropertyMetadata(
+                null,
+                FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender,
+                OnSourceChanged));
 
         /// <summary>
         /// Identifies the <see cref="P:MediaElementWrapper.Volume" /> dependency property.
@@ -39,7 +44,8 @@
             typeof(MediaElementWrapper),
             new FrameworkPropertyMetadata(
                  MediaElement.BalanceProperty.DefaultMetadata.DefaultValue,
-                 FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
+                 FrameworkPropertyMetadataOptions.BindsTwoWayByDefault,
+                 OnBalanceChanged));
 
         /// <summary>
         /// Identifies the <see cref="MediaElementWrapper.IsMuted" /> dependency property.
@@ -52,7 +58,7 @@
             new FrameworkPropertyMetadata(
                 MediaElement.IsMutedProperty.DefaultMetadata.DefaultValue,
                 FrameworkPropertyMetadataOptions.BindsTwoWayByDefault,
-                null,
+                OnIsMutedChanged,
                 OnIsMutedCoerce));
 
         /// <summary>
@@ -61,7 +67,11 @@
         /// <returns>
         /// The identifier for the <see cref="MediaElementWrapper.ScrubbingEnabled" /> dependency property.
         /// </returns>
-        public static readonly DependencyProperty ScrubbingEnabledProperty = MediaElement.ScrubbingEnabledProperty.AddOwner(typeof(MediaElementWrapper));
+        public static readonly DependencyProperty ScrubbingEnabledProperty = MediaElement.ScrubbingEnabledProperty.AddOwner(
+            typeof(MediaElementWrapper),
+            new PropertyMetadata(
+                MediaElement.ScrubbingEnabledProperty.DefaultMetadata.DefaultValue,
+                OnIsScrubbingEnabledChanged));
 
         /// <summary>
         /// DependencyProperty for Stretch property.
@@ -72,13 +82,19 @@
             typeof(MediaElementWrapper),
             new FrameworkPropertyMetadata(
                  System.Windows.Media.Stretch.None,
-                 FrameworkPropertyMetadataOptions.AffectsMeasure));
+                 FrameworkPropertyMetadataOptions.AffectsMeasure,
+                 OnStretchChanged));
 
         /// <summary>
         /// DependencyProperty for StretchDirection property.
         /// </summary>
         /// <seealso cref="Viewbox.Stretch" />
-        public static readonly DependencyProperty StretchDirectionProperty = Viewbox.StretchDirectionProperty.AddOwner(typeof(MediaElementWrapper));
+        public static readonly DependencyProperty StretchDirectionProperty = Viewbox.StretchDirectionProperty.AddOwner(
+            typeof(MediaElementWrapper),
+             new FrameworkPropertyMetadata(
+                 StretchDirection.Both,
+                 FrameworkPropertyMetadataOptions.AffectsMeasure,
+                 OnStretchDirectionChanged));
 
         /// <summary>
         /// Gets or sets a media source on the <see cref="MediaElementWrapper" />.
@@ -162,6 +178,57 @@
         {
             get { return (StretchDirection)this.GetValue(StretchDirectionProperty); }
             set { this.SetValue(StretchDirectionProperty, value); }
+        }
+
+        private static void OnSourceChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var wrapper = (MediaElementWrapper)d;
+            wrapper.OnSourceChanged(e.NewValue as Uri);
+        }
+
+        private static void OnVolumeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var wrapper = (MediaElementWrapper)d;
+            wrapper.mediaElement.SetCurrentValue(MediaElement.VolumeProperty, e.NewValue);
+            var newValue = (double)e.NewValue;
+            if (newValue <= 0)
+            {
+                wrapper.SetCurrentValue(IsMutedProperty, true);
+            }
+            else if (wrapper.IsMuted && newValue >= 0)
+            {
+                wrapper.SetCurrentValue(IsMutedProperty, false);
+            }
+        }
+
+        private static void OnBalanceChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var wrapper = (MediaElementWrapper)d;
+            wrapper.mediaElement.SetCurrentValue(MediaElement.BalanceProperty, e.NewValue);
+        }
+
+        private static void OnIsMutedChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var wrapper = (MediaElementWrapper)d;
+            wrapper.mediaElement.SetCurrentValue(MediaElement.IsMutedProperty, e.NewValue);
+        }
+
+        private static void OnIsScrubbingEnabledChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var wrapper = (MediaElementWrapper)d;
+            wrapper.mediaElement.SetCurrentValue(MediaElement.ScrubbingEnabledProperty, e.NewValue);
+        }
+
+        private static void OnStretchChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var wrapper = (MediaElementWrapper)d;
+            wrapper.mediaElement.SetCurrentValue(MediaElement.StretchProperty, e.NewValue);
+        }
+
+        private static void OnStretchDirectionChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var wrapper = (MediaElementWrapper)d;
+            wrapper.mediaElement.SetCurrentValue(MediaElement.StretchDirectionProperty, e.NewValue);
         }
     }
 }

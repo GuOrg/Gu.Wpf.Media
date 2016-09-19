@@ -88,19 +88,19 @@
             <Button Grid.Column="0"
                     media:Icon.Geometry="{StaticResource {x:Static media:Geometries.MinimizeWindowGeometryKey}}"
                     Command="SystemCommands.MinimizeWindowCommand"
-                    Style="{StaticResource {x:Static media:Styles.SystemButtonBaseStyleKey}}" />
+                    Style="{StaticResource {x:Static media:Styles.SystemButtonStyleKey}}" />
             <Button Grid.Column="1"
                     media:Icon.Geometry="{StaticResource {x:Static media:Geometries.WindowGeometryKey}}"
                     Command="SystemCommands.MaximizeWindowCommand"
-                    Style="{StaticResource {x:Static media:Styles.SystemButtonBaseStyleKey}}" />
+                    Style="{StaticResource {x:Static media:Styles.SystemButtonStyleKey}}" />
             <Button Grid.Column="1"
-                    media:Icon.Geometry="{StaticResource {x:Static media:Geometries.WindowGeometryKey}}"
+                    media:Icon.Geometry="{StaticResource {x:Static media:Geometries.RestoreWindowGeometryKey}}"
                     Command="SystemCommands.RestoreWindowCommand"
-                    Style="{StaticResource {x:Static media:Styles.SystemButtonBaseStyleKey}}" />
+                    Style="{StaticResource {x:Static media:Styles.SystemButtonStyleKey}}" />
             <Button Grid.Column="2"
                     media:Icon.Geometry="{StaticResource {x:Static media:Geometries.CloseGeometryKey}}"
                     Command="SystemCommands.CloseWindowCommand"
-                    Style="{StaticResource {x:Static media:Styles.SystemButtonBaseStyleKey}}" />
+                    Style="{StaticResource {x:Static media:Styles.SystemButtonStyleKey}}" />
         </Grid>-->
 
         <media:MediaElementWrapper x:Name="MediaElement"

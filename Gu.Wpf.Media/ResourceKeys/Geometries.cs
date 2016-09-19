@@ -36,6 +36,8 @@ namespace Gu.Wpf.Media
 
         public static ResourceKey MinimizeWindowGeometryKey { get; } = Create();
 
+        public static ResourceKey RestoreWindowGeometryKey { get; } = Create();
+
         private static ComponentResourceKey Create([CallerMemberName]string name = null)
         {
             return new ComponentResourceKey(typeof(Geometries), name.TrimEnd("Key"));

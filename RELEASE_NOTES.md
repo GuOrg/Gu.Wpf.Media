@@ -1,4 +1,7 @@
 #### 0.4.2
+* USABILITY: Brushes as DynamicResources and keys in media:Brushes.
+
+#### 0.4.2
 * USABILITY: MouseWheelGesture
 
 #### 0.4.1

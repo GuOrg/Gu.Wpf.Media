@@ -1,7 +1,6 @@
 ﻿namespace Gu.Wpf.Media
 {
     using System;
-    using System.ComponentModel;
     using System.Globalization;
     using System.Windows;
     using System.Windows.Controls;
@@ -447,23 +446,14 @@
         /// <param name="source">The new source.</param>
         protected virtual void OnSourceChanged(Uri source)
         {
-            if (source == null || string.IsNullOrWhiteSpace(source.OriginalString))
+            if (source == null)
             {
                 this.mediaElement.Source = null;
                 this.ResetToNoSource();
             }
             else
             {
-                if (source.Scheme == Uri.UriSchemeFile)
-                {
-                    // this looks really strange but it is for handling #  in paths.
-                    this.mediaElement.Source = (Uri)TypeDescriptor.GetConverter(typeof(Uri)).ConvertFrom(source.LocalPath);
-                }
-                else
-                {
-                    this.mediaElement.Source = source;
-                }
-
+                this.mediaElement.Source = source;
                 switch (this.LoadedBehavior)
                 {
                     case MediaState.Play:

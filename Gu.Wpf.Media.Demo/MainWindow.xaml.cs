@@ -11,10 +11,78 @@ namespace Gu.Wpf.Media.Demo
     {
         private Stretch stretch;
 
+        private static readonly DependencyPropertyKey MediaFileNamePropertyKey = DependencyProperty.RegisterReadOnly(
+            "MediaFileName",
+            typeof(string),
+            typeof(MainWindow),
+            new PropertyMetadata(default(string)));
+
+        public static readonly DependencyProperty MediaFileNameProperty = MediaFileNamePropertyKey.DependencyProperty;
+
+        private static readonly DependencyPropertyKey MediaUriPropertyKey = DependencyProperty.RegisterReadOnly(
+            "MediaUri",
+            typeof(Uri),
+            typeof(MainWindow),
+            new PropertyMetadata(default(Uri)));
+
+        public static readonly DependencyProperty MediaUriProperty = MediaUriPropertyKey.DependencyProperty;
+
         public MainWindow()
         {
             this.InitializeComponent();
         }
+
+        public Uri MediaUri
+        {
+            get { return (Uri)this.GetValue(MediaUriProperty); }
+            protected set { this.SetValue(MediaUriPropertyKey, value); }
+        }
+
+        public string MediaFileName
+        {
+            get { return (string)this.GetValue(MediaFileNameProperty); }
+            protected set { this.SetValue(MediaFileNamePropertyKey, value); }
+        }
+
+        private void OnDrop(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                var files = (string[])e.Data.GetData(DataFormats.FileDrop);
+                if (files == null)
+                {
+                    return;
+                }
+
+                if (files.Length > 1)
+                {
+                    MessageBox.Show(
+                        this,
+                        "Only onde file at the time can be dropped.",
+                        "Error",
+                        MessageBoxButton.OK,
+                        MessageBoxImage.Error);
+
+                    return;
+                }
+
+                try
+                {
+                    this.MediaFileName = files[0];
+                    this.MediaUri = new Uri(this.MediaFileName);
+                }
+                catch (Exception exception)
+                {
+                    MessageBox.Show(
+                        this,
+                        exception.Message,
+                        "Error",
+                        MessageBoxButton.OK,
+                        MessageBoxImage.Error);
+                }
+            }
+        }
+
 
         private void OpenExecuted(object sender, ExecutedRoutedEventArgs e)
         {
@@ -25,7 +93,8 @@ namespace Gu.Wpf.Media.Demo
 
             if (openFileDialog.ShowDialog() == true)
             {
-                this.MediaElement.SetCurrentValue(MediaElementWrapper.SourceProperty, new Uri(openFileDialog.FileName));
+                this.MediaFileName = openFileDialog.FileName;
+                this.MediaUri = new Uri(this.MediaFileName);
             }
         }
 

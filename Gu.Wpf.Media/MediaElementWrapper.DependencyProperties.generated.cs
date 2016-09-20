@@ -1,6 +1,7 @@
 ﻿namespace Gu.Wpf.Media
 {
     using System;
+    using System.ComponentModel;
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Media;
@@ -18,7 +19,8 @@
             new FrameworkPropertyMetadata(
                 null,
                 FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender,
-                OnSourceChanged));
+                OnSourceChanged,
+                OnSourceCoerce));
 
         /// <summary>
         /// Identifies the <see cref="P:MediaElementWrapper.Volume" /> dependency property.
@@ -178,6 +180,23 @@
         {
             get { return (StretchDirection)this.GetValue(StretchDirectionProperty); }
             set { this.SetValue(StretchDirectionProperty, value); }
+        }
+
+        private static object OnSourceCoerce(DependencyObject d, object baseValue)
+        {
+            var uri = baseValue as Uri;
+            if (string.IsNullOrWhiteSpace(uri?.OriginalString))
+            {
+                return null;
+            }
+
+            if (uri.Scheme == Uri.UriSchemeFile)
+            {
+                // this looks really strange but it is for handling # in paths.
+                baseValue = (Uri)TypeDescriptor.GetConverter(typeof(Uri)).ConvertFrom(uri.LocalPath);
+            }
+
+            return baseValue;
         }
 
         private static void OnSourceChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)

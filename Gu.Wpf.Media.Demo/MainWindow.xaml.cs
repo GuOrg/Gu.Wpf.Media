@@ -133,6 +133,11 @@ namespace Gu.Wpf.Media.Demo
             e.Handled = true;
         }
 
+        private void OnMediaFailed(object sender, ExceptionRoutedEventArgs e)
+        {
+            MessageBox.Show(this, e.ErrorException.Message, "Media failed");
+        }
+
         ////private void OnCloseExecuted(object sender, ExecutedRoutedEventArgs e)
         ////{
         ////    this.Close();

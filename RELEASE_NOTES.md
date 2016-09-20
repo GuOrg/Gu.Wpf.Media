@@ -1,3 +1,6 @@
+#### 0.4.3.2
+* Use coerce for source property.
+
 #### 0.4.3.1
 * BUGFIX: Handle paths with #
 

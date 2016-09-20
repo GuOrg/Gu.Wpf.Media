@@ -1,7 +1,7 @@
 ﻿type project
 
 releasenotes
-  BUGFIX: Handle paths with #
+  Use coerce for source property.
 
 tags wpf xaml media mediaelement
 projectUrl https://github.com/JohanLarsson/Gu.Wpf.Media

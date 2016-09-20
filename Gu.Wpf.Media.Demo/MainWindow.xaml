@@ -111,6 +111,7 @@
                                    Grid.RowSpan="3"
                                    LoadedBehavior="Play"
                                    ScrubbingEnabled="True"
+                                   MediaFailed="OnMediaFailed"
                                    Source="{Binding RelativeSource={RelativeSource FindAncestor,
                                                                                    AncestorType={x:Type demo:MainWindow}},
                                                     Path=MediaFileName}"

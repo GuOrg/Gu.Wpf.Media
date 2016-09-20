@@ -190,12 +190,6 @@
                 return null;
             }
 
-            if (uri.Scheme == Uri.UriSchemeFile)
-            {
-                // this looks really strange but it is for handling # in paths.
-                baseValue = (Uri)TypeDescriptor.GetConverter(typeof(Uri)).ConvertFrom(uri.LocalPath);
-            }
-
             return baseValue;
         }
 

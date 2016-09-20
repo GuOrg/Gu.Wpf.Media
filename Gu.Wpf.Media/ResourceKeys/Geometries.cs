@@ -18,6 +18,8 @@ namespace Gu.Wpf.Media
 
         public static ResourceKey RewindGeometryKey { get; } = Create();
 
+        public static ResourceKey RepeatGeometryKey { get; } = Create();
+
         public static ResourceKey MuteGeometryKey { get; } = Create();
 
         public static ResourceKey UnMuteGeometryKey { get; } = Create();

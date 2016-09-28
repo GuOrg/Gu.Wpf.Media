@@ -1,7 +1,7 @@
 ﻿type project
 
 releasenotes
-  Use coerce for source property.
+  Rename CanPause property and CanPausePlayback and PausePlayback
 
 tags wpf xaml media mediaelement
 projectUrl https://github.com/JohanLarsson/Gu.Wpf.Media

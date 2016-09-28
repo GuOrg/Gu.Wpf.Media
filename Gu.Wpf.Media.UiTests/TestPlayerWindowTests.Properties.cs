@@ -16,7 +16,7 @@ namespace Gu.Wpf.Media.UiTests
             this.AreEqual("0", MediaElementWrapper.BalanceProperty);
             this.AreEqual(FileFormats.DefaultAudioFormats, MediaElementWrapper.AudioFormatsProperty);
             this.AreEqual("0", MediaElementWrapper.BufferingProgressProperty);
-            this.AreEqual("null", MediaElementWrapper.CanPauseMediaProperty);
+            this.AreEqual("null", MediaElementWrapper.CanPauseProperty);
             this.AreEqual("0", MediaElementWrapper.DownloadProgressProperty);
             this.AreEqual("null", MediaElementWrapper.HasAudioProperty);
             this.AreEqual("False", MediaElementWrapper.HasMediaProperty);
@@ -47,7 +47,7 @@ namespace Gu.Wpf.Media.UiTests
             this.AssertReadOnly(false, MediaElementWrapper.BalanceProperty);
             this.AssertReadOnly(false, MediaElementWrapper.AudioFormatsProperty);
             this.AssertReadOnly(true, MediaElementWrapper.BufferingProgressProperty);
-            this.AssertReadOnly(true, MediaElementWrapper.CanPauseMediaProperty);
+            this.AssertReadOnly(true, MediaElementWrapper.CanPauseProperty);
             this.AssertReadOnly(true, MediaElementWrapper.DownloadProgressProperty);
             this.AssertReadOnly(true, MediaElementWrapper.HasAudioProperty);
             this.AssertReadOnly(true, MediaElementWrapper.HasMediaProperty);
@@ -78,7 +78,7 @@ namespace Gu.Wpf.Media.UiTests
             this.SetValue(MediaElementWrapper.SourceProperty, Info.CoffeeClipFileName());
             this.AreEqual("0", MediaElementWrapper.BalanceProperty);
             this.AreEqual("0", MediaElementWrapper.BufferingProgressProperty);
-            this.AreEqual("True", MediaElementWrapper.CanPauseMediaProperty);
+            this.AreEqual("True", MediaElementWrapper.CanPauseProperty);
             this.AreEqual("0", MediaElementWrapper.DownloadProgressProperty);
             this.AreEqual("True", MediaElementWrapper.HasAudioProperty);
             this.AreEqual("True", MediaElementWrapper.HasMediaProperty);
@@ -115,7 +115,7 @@ namespace Gu.Wpf.Media.UiTests
             this.SetValue(MediaElementWrapper.SourceProperty, otherFile);
             this.AreEqual("0", MediaElementWrapper.BalanceProperty);
             this.AreEqual("0", MediaElementWrapper.BufferingProgressProperty);
-            this.AreEqual("True", MediaElementWrapper.CanPauseMediaProperty);
+            this.AreEqual("True", MediaElementWrapper.CanPauseProperty);
             this.AreEqual("0", MediaElementWrapper.DownloadProgressProperty);
             this.AreEqual("True", MediaElementWrapper.HasAudioProperty);
             this.AreEqual("True", MediaElementWrapper.HasMediaProperty);
@@ -155,7 +155,7 @@ namespace Gu.Wpf.Media.UiTests
             this.SetValue(MediaElementWrapper.SourceProperty, otherFile);
             this.AreEqual("0", MediaElementWrapper.BalanceProperty);
             this.AreEqual("0", MediaElementWrapper.BufferingProgressProperty);
-            this.AreEqual("True", MediaElementWrapper.CanPauseMediaProperty);
+            this.AreEqual("True", MediaElementWrapper.CanPauseProperty);
             this.AreEqual("0", MediaElementWrapper.DownloadProgressProperty);
             this.AreEqual("True", MediaElementWrapper.HasAudioProperty);
             this.AreEqual("True", MediaElementWrapper.HasMediaProperty);
@@ -185,7 +185,7 @@ namespace Gu.Wpf.Media.UiTests
             this.SetValue(MediaElementWrapper.SourceProperty, missingFile);
             this.AreEqual(FileFormats.DefaultAudioFormats, MediaElementWrapper.AudioFormatsProperty);
             this.AreEqual("0", MediaElementWrapper.BufferingProgressProperty);
-            this.AreEqual("null", MediaElementWrapper.CanPauseMediaProperty);
+            this.AreEqual("null", MediaElementWrapper.CanPauseProperty);
             this.AreEqual("0", MediaElementWrapper.DownloadProgressProperty);
             this.AreEqual("null", MediaElementWrapper.HasAudioProperty);
             this.AreEqual("False", MediaElementWrapper.HasMediaProperty);

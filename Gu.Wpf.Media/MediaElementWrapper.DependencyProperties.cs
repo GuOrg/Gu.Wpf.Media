@@ -74,12 +74,12 @@
             new PropertyMetadata(default(bool?)));
 
         /// <summary>
-        /// Identifies the <see cref="MediaElementWrapper.CanPauseMedia" /> dependency property.
+        /// Identifies the <see cref="MediaElementWrapper.CanPause" /> dependency property.
         /// </summary>
         /// <returns>
-        /// The identifier for the <see cref="MediaElementWrapper.CanPauseMedia" /> dependency property.
+        /// The identifier for the <see cref="MediaElementWrapper.CanPause" /> dependency property.
         /// </returns>
-        public static readonly DependencyProperty CanPauseMediaProperty = CanPausePropertyKey.DependencyProperty;
+        public static readonly DependencyProperty CanPauseProperty = CanPausePropertyKey.DependencyProperty;
 
         private static readonly DependencyPropertyKey NaturalVideoHeightPropertyKey = DependencyProperty.RegisterAttachedReadOnly(
             nameof(NaturalVideoHeight),
@@ -303,9 +303,9 @@
         /// Returns whether the given media can be paused. This is only valid
         /// after the MediaOpened event has fired.
         /// </summary>
-        public bool? CanPauseMedia
+        public bool? CanPause
         {
-            get { return (bool?)this.GetValue(CanPauseMediaProperty); }
+            get { return (bool?)this.GetValue(CanPauseProperty); }
             protected set { this.SetValue(CanPausePropertyKey, value); }
         }
 

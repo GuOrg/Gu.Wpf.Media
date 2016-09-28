@@ -1,3 +1,6 @@
+#### 0.5.0
+* Rename CanPause property and CanPausePlayback and PausePlayback
+
 #### 0.4.3.2
 * Use coerce for source property.
 

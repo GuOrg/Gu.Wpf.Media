@@ -54,7 +54,7 @@
                 this.HasMedia = true;
                 this.HasAudio = this.mediaElement.HasAudio;
                 this.HasVideo = this.mediaElement.HasVideo;
-                this.CanPauseMedia = this.mediaElement.CanPause;
+                this.CanPause = this.mediaElement.CanPause;
                 this.NaturalVideoHeight = this.mediaElement.NaturalVideoHeight;
                 this.NaturalVideoWidth = this.mediaElement.NaturalVideoWidth;
                 this.Length = this.mediaElement.NaturalDuration.TimeSpan;
@@ -68,9 +68,9 @@
             };
 
             this.CommandBindings.Add(new CommandBinding(MediaCommands.Play, HandleExecute(this.Play), HandleCanExecute(this.CanPlay)));
-            this.CommandBindings.Add(new CommandBinding(MediaCommands.Pause, HandleExecute(this.Pause), HandleCanExecute(this.CanPause)));
+            this.CommandBindings.Add(new CommandBinding(MediaCommands.Pause, HandleExecute(this.PausePlayback), HandleCanExecute(this.CanPausePlayback)));
             this.CommandBindings.Add(new CommandBinding(MediaCommands.Stop, HandleExecute(this.Stop), HandleCanExecute(this.CanStop)));
-            this.CommandBindings.Add(new CommandBinding(MediaCommands.TogglePlayPause, HandleExecute(this.TogglePlayPause), HandleCanExecute(() => this.CanPlay() || this.CanPause())));
+            this.CommandBindings.Add(new CommandBinding(MediaCommands.TogglePlayPause, HandleExecute(this.TogglePlayPause), HandleCanExecute(() => this.CanPlay() || this.CanPausePlayback())));
             this.CommandBindings.Add(new CommandBinding(MediaCommands.Rewind, HandleExecute(this.Rewind), HandleCanExecute(this.CanRewind)));
             this.CommandBindings.Add(new CommandBinding(MediaCommands.IncreaseVolume, HandleExecute(this.IncreaseVolume), HandleCanExecute(this.CanIncreaseVolume)));
             this.CommandBindings.Add(new CommandBinding(MediaCommands.DecreaseVolume, HandleExecute(this.DecreaseVolume), HandleCanExecute(this.CanDecreaseVolume)));
@@ -124,15 +124,15 @@
         /// Check if current playback, if any, can be paused.
         /// </summary>
         /// <returns>True if media can be paused.</returns>
-        public bool CanPause()
+        public bool CanPausePlayback()
         {
-            return this.mediaElement.Source != null && this.CanPauseMedia == true && this.State == MediaState.Play;
+            return this.mediaElement.Source != null && this.CanPause == true && this.State == MediaState.Play;
         }
 
         /// <summary>
         /// Sets <see cref="State"/> to <see cref="MediaState.Pause"/>
         /// </summary>
-        public void Pause()
+        public void PausePlayback()
         {
             this.SetCurrentValue(StateProperty, MediaState.Pause);
         }
@@ -477,7 +477,7 @@
                         }
                         else
                         {
-                            this.Pause();
+                            this.PausePlayback();
                         }
 
                         break;
@@ -614,7 +614,7 @@
             this.IsBuffering = false;
             this.BufferingProgress = 0;
             this.DownloadProgress = 0;
-            this.CanPauseMedia = null;
+            this.CanPause = null;
             this.NaturalVideoHeight = null;
             this.NaturalVideoWidth = null;
             this.Length = null;

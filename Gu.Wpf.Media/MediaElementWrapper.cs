@@ -16,11 +16,19 @@
         /// <summary>Initializes a new instance of the <see cref="MediaElementWrapper"/> class.</summary>
         public MediaElementWrapper()
         {
+#pragma warning disable WPF0041 // Set mutable dependency properties using SetCurrentValue.
             this.mediaElement = new MediaElement
             {
                 LoadedBehavior = System.Windows.Controls.MediaState.Manual,
                 UnloadedBehavior = System.Windows.Controls.MediaState.Manual,
+                IsMuted = this.IsMuted,
+                Volume = this.Volume,
+                Balance = this.Balance,
+                ScrubbingEnabled = this.ScrubbingEnabled,
+                Stretch = this.Stretch,
+                StretchDirection = this.StretchDirection,
             };
+#pragma warning restore WPF0041 // Set mutable dependency properties using SetCurrentValue.
 
             this.mediaElement.MediaFailed += (o, e) =>
                 {
@@ -50,50 +58,88 @@
 
             this.mediaElement.ScriptCommand += this.ReRaiseEvent;
             this.mediaElement.MediaOpened += (o, e) =>
-            {
-                this.HasMedia = true;
-                this.HasAudio = this.mediaElement.HasAudio;
-                this.HasVideo = this.mediaElement.HasVideo;
-                this.CanPause = this.mediaElement.CanPause;
-                this.NaturalVideoHeight = this.mediaElement.NaturalVideoHeight;
-                this.NaturalVideoWidth = this.mediaElement.NaturalVideoWidth;
-                this.Length = this.mediaElement.NaturalDuration.TimeSpan;
-                if (this.State == MediaState.Pause || this.State == MediaState.Stop)
                 {
-                    this.SetCurrentValue(PositionProperty, TimeSpan.Zero);
-                }
+                    this.HasMedia = true;
+                    this.HasAudio = this.mediaElement.HasAudio;
+                    this.HasVideo = this.mediaElement.HasVideo;
+                    this.CanPause = this.mediaElement.CanPause;
+                    this.NaturalVideoHeight = this.mediaElement.NaturalVideoHeight;
+                    this.NaturalVideoWidth = this.mediaElement.NaturalVideoWidth;
+                    this.Length = this.mediaElement.NaturalDuration.TimeSpan;
+                    if (this.State == MediaState.Pause || this.State == MediaState.Stop)
+                    {
+                        this.SetCurrentValue(PositionProperty, TimeSpan.Zero);
+                    }
 
-                this.ReRaiseEvent(o, e);
-                CommandManager.InvalidateRequerySuggested();
-            };
+                    this.ReRaiseEvent(o, e);
+                    CommandManager.InvalidateRequerySuggested();
+                };
 
-            this.CommandBindings.Add(new CommandBinding(MediaCommands.Play, HandleExecute(this.Play), HandleCanExecute(this.CanPlay)));
-            this.CommandBindings.Add(new CommandBinding(MediaCommands.Pause, HandleExecute(this.PausePlayback), HandleCanExecute(this.CanPausePlayback)));
-            this.CommandBindings.Add(new CommandBinding(MediaCommands.Stop, HandleExecute(this.Stop), HandleCanExecute(this.CanStop)));
-            this.CommandBindings.Add(new CommandBinding(MediaCommands.TogglePlayPause, HandleExecute(this.TogglePlayPause), HandleCanExecute(() => this.CanPlay() || this.CanPausePlayback())));
-            this.CommandBindings.Add(new CommandBinding(MediaCommands.Rewind, HandleExecute(this.Rewind), HandleCanExecute(this.CanRewind)));
-            this.CommandBindings.Add(new CommandBinding(MediaCommands.IncreaseVolume, HandleExecute(this.IncreaseVolume), HandleCanExecute(this.CanIncreaseVolume)));
-            this.CommandBindings.Add(new CommandBinding(MediaCommands.DecreaseVolume, HandleExecute(this.DecreaseVolume), HandleCanExecute(this.CanDecreaseVolume)));
-            this.CommandBindings.Add(new CommandBinding(MediaCommands.MuteVolume, HandleExecute(this.MuteVolume), HandleCanExecute(this.CanMuteVolume)));
+            this.CommandBindings.Add(
+                    new CommandBinding(MediaCommands.Play, HandleExecute(this.Play), HandleCanExecute(this.CanPlay)));
+            this.CommandBindings.Add(
+                    new CommandBinding(
+                        MediaCommands.Pause,
+                        HandleExecute(this.PausePlayback),
+                        HandleCanExecute(this.CanPausePlayback)));
+            this.CommandBindings.Add(
+                    new CommandBinding(MediaCommands.Stop, HandleExecute(this.Stop), HandleCanExecute(this.CanStop)));
+            this.CommandBindings.Add(
+                    new CommandBinding(
+                        MediaCommands.TogglePlayPause,
+                        HandleExecute(this.TogglePlayPause),
+                        HandleCanExecute(() => this.CanPlay() || this.CanPausePlayback())));
+            this.CommandBindings.Add(
+                    new CommandBinding(
+                        MediaCommands.Rewind,
+                        HandleExecute(this.Rewind),
+                        HandleCanExecute(this.CanRewind)));
+            this.CommandBindings.Add(
+                    new CommandBinding(
+                        MediaCommands.IncreaseVolume,
+                        HandleExecute(this.IncreaseVolume),
+                        HandleCanExecute(this.CanIncreaseVolume)));
+            this.CommandBindings.Add(
+                    new CommandBinding(
+                        MediaCommands.DecreaseVolume,
+                        HandleExecute(this.DecreaseVolume),
+                        HandleCanExecute(this.CanDecreaseVolume)));
+            this.CommandBindings.Add(
+                    new CommandBinding(
+                        MediaCommands.MuteVolume,
+                        HandleExecute(this.MuteVolume),
+                        HandleCanExecute(this.CanMuteVolume)));
 
-            this.CommandBindings.Add(new CommandBinding(Commands.UnmuteVolume, HandleExecute(this.UnmuteVolume), HandleCanExecute(this.CanUnmuteVolume)));
-            this.CommandBindings.Add(new CommandBinding(Commands.ToggleMute, HandleExecute(this.ToggleMute), HandleCanExecute(this.CanToggleMute)));
-            this.CommandBindings.Add(new CommandBinding(Commands.Skip, HandleExecute(this.Skip), HandleCanExecute(this.CanSkip)));
-            this.CommandBindings.Add(new CommandBinding(Commands.SkipForward, HandleExecute(this.SkipForward), HandleCanExecute(this.CanSkipForward)));
-            this.CommandBindings.Add(new CommandBinding(Commands.SkipBack, HandleExecute(this.SkipBack), HandleCanExecute(this.CanSkipBack)));
+            this.CommandBindings.Add(
+                    new CommandBinding(
+                        Commands.UnmuteVolume,
+                        HandleExecute(this.UnmuteVolume),
+                        HandleCanExecute(this.CanUnmuteVolume)));
+            this.CommandBindings.Add(
+                    new CommandBinding(
+                        Commands.ToggleMute,
+                        HandleExecute(this.ToggleMute),
+                        HandleCanExecute(this.CanToggleMute)));
+            this.CommandBindings.Add(
+                    new CommandBinding(Commands.Skip, HandleExecute(this.Skip), HandleCanExecute(this.CanSkip)));
+            this.CommandBindings.Add(
+                    new CommandBinding(
+                        Commands.SkipForward,
+                        HandleExecute(this.SkipForward),
+                        HandleCanExecute(this.CanSkipForward)));
+            this.CommandBindings.Add(
+                    new CommandBinding(
+                        Commands.SkipBack,
+                        HandleExecute(this.SkipBack),
+                        HandleCanExecute(this.CanSkipBack)));
 
-            this.updatePositionTimer.Tick += (o, e) => this.SetCurrentValue(PositionProperty, this.mediaElement.Position);
+            this.updatePositionTimer.Tick +=
+                (o, e) => this.SetCurrentValue(PositionProperty, this.mediaElement.Position);
             this.updateProgressTimer.Tick += (o, e) =>
                 {
                     this.DownloadProgress = this.mediaElement.DownloadProgress;
                     this.BufferingProgress = this.mediaElement.BufferingProgress;
                 };
-            this.mediaElement.IsMuted = this.IsMuted;
-            this.mediaElement.Volume = this.Volume;
-            this.mediaElement.Balance = this.Balance;
-            this.mediaElement.ScrubbingEnabled = this.ScrubbingEnabled;
-            this.mediaElement.Stretch = this.Stretch;
-            this.mediaElement.StretchDirection = this.StretchDirection;
         }
 
         /// <inheritdoc/>
@@ -448,12 +494,12 @@
         {
             if (source == null)
             {
-                this.mediaElement.Source = null;
+                this.mediaElement.SetCurrentValue(MediaElement.SourceProperty, null);
                 this.ResetToNoSource();
             }
             else
             {
-                this.mediaElement.Source = source;
+                this.mediaElement.SetCurrentValue(MediaElement.SourceProperty, source);
                 switch (this.LoadedBehavior)
                 {
                     case MediaState.Play:

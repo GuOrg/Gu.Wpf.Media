@@ -98,7 +98,9 @@
     <Compile Include="Converters\NullableTimeSpanToSecondsConverter.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Gu.Wpf.Media.ruleset" />
+    <None Include="Gu.Wpf.Media.ruleset">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="paket.references" />
     <None Include="paket.template" />
   </ItemGroup>

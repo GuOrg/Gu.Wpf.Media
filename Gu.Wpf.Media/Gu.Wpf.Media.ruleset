@@ -74,7 +74,6 @@
     <Rule Id="SA1623" Action="None" />
     <Rule Id="SA1633" Action="None" />
   </Rules>
-
   <Rules AnalyzerId="WpfAnalyzers.Analyzers" RuleNamespace="WpfAnalyzers">
     <Rule Id="WPF0001" Action="Error" />
     <Rule Id="WPF0002" Action="Error" />
@@ -91,5 +90,6 @@
     <Rule Id="WPF0040" Action="Error" />
     <Rule Id="WPF0041" Action="Error" />
     <Rule Id="WPF1001" Action="Error" />
+    <Rule Id="WPF0015" Action="Error" />
   </Rules>
 </RuleSet>

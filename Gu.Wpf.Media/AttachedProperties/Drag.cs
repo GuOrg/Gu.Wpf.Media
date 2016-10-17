@@ -22,7 +22,7 @@
         static Drag()
         {
             EventManager.RegisterClassHandler(typeof(Slider), Thumb.DragStartedEvent, new DragStartedEventHandler(OnDragStarted));
-            EventManager.RegisterClassHandler(typeof(Slider), Thumb.DragCompletedEvent, new DragCompletedEventHandler(OnDragComplated));
+            EventManager.RegisterClassHandler(typeof(Slider), Thumb.DragCompletedEvent, new DragCompletedEventHandler(OnDragCompleted));
         }
 
         /// <summary>
@@ -59,7 +59,7 @@
             wrapper.Break();
         }
 
-        private static void OnDragComplated(object sender, DragCompletedEventArgs e)
+        private static void OnDragCompleted(object sender, DragCompletedEventArgs e)
         {
             var wrapper = GetPauseWhileDragging((Slider)sender);
             if (wrapper?.IsPlaying == true)

@@ -50,6 +50,7 @@
         private static void OnDragStarted(object sender, DragStartedEventArgs e)
         {
             var wrapper = GetPauseWhileDragging((Slider)sender);
+
             if (wrapper?.HasMedia != true)
             {
                 return;
@@ -61,7 +62,7 @@
         private static void OnDragComplated(object sender, DragCompletedEventArgs e)
         {
             var wrapper = GetPauseWhileDragging((Slider)sender);
-            if (wrapper.IsPlaying)
+            if (wrapper?.IsPlaying == true)
             {
                 wrapper.Resume();
             }

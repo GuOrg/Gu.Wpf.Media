@@ -28,14 +28,14 @@ namespace Gu.Wpf.Media.UiTests.Helpers
         {
             this.application = Application.AttachOrLaunch(Info.CreateStartInfo(this.WindowName));
             StaticWindow = this.application.GetWindow(this.WindowName);
-            //this.SaveScreenshotToArtifacsDir("start");
+            //this.SaveScreenshotToArtifactsDir("start");
         }
 
         [OneTimeTearDown]
         public void OneTimeTearDown()
         {
             Keyboard.Instance.LeaveAllKeys();
-            //this.SaveScreenshotToArtifacsDir("finish");
+            //this.SaveScreenshotToArtifactsDir("finish");
             this.application?.Dispose();
             StaticWindow = null;
         }
@@ -46,7 +46,7 @@ namespace Gu.Wpf.Media.UiTests.Helpers
         }
 
         // ReSharper disable once UnusedMember.Local
-        private void SaveScreenshotToArtifacsDir(string suffix)
+        private void SaveScreenshotToArtifactsDir(string suffix)
         {
             var fileName = System.IO.Path.Combine(Info.ArtifactsDirectory(), $"{this.WindowName}_{suffix}.png");
             using (var image = new ScreenCapture().CaptureDesktop())

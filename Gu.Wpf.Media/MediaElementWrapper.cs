@@ -519,26 +519,26 @@
                         {
                             this.mediaElement.Pause();
                             this.updatePositionTimer.Stop();
-                            this.SetCurrentValue(PositionProperty, TimeSpan.Zero);
                         }
                         else
                         {
                             this.PausePlayback();
                         }
 
+                        this.SetCurrentValue(PositionProperty, TimeSpan.Zero);
                         break;
                     case MediaState.Stop:
                         if (this.State == MediaState.Stop)
                         {
                             this.mediaElement.Stop();
                             this.updatePositionTimer.Stop();
-                            this.SetCurrentValue(PositionProperty, TimeSpan.Zero);
                         }
                         else
                         {
                             this.Stop();
                         }
 
+                        this.SetCurrentValue(PositionProperty, TimeSpan.Zero);
                         break;
                     default:
                         throw new ArgumentOutOfRangeException();

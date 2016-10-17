@@ -92,7 +92,6 @@ namespace Gu.Wpf.Media.UiTests
             Assert.AreNotEqual(position, this.GetValue(MediaElementWrapper.PositionProperty));
         }
 
-
         [Test]
         public void ClickPlayThenClickStop()
         {

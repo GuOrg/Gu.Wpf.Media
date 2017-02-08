@@ -50,6 +50,7 @@
             {
                 return this.wrapper.GetValue(this.proxyProperty);
             }
+
             set
             {
                 this.wrapper.SetCurrentValue(this.proxyProperty, value);

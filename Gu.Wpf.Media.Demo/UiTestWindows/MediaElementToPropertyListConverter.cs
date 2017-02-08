@@ -12,17 +12,6 @@
     {
         public static readonly MediaElementToPropertyListConverter Default = new MediaElementToPropertyListConverter();
 
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            var wrapper = (MediaElementWrapper)value;
-            return GetPropertyItems(wrapper);
-        }
-
-        object IValueConverter.ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
-        }
-
         public static ReadOnlyObservableCollection<PropertyItem> GetPropertyItems(MediaElementWrapper wrapper)
         {
             var dps = typeof(MediaElementWrapper).GetFields(BindingFlags.Static | BindingFlags.Public)
@@ -34,6 +23,17 @@
             var props = dps.Select(dp => PropertyItem.GetOrCreate(wrapper, dp))
                       .ToArray();
             return new ReadOnlyObservableCollection<PropertyItem>(new ObservableCollection<PropertyItem>(props));
+        }
+
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            var wrapper = (MediaElementWrapper)value;
+            return GetPropertyItems(wrapper);
+        }
+
+        object IValueConverter.ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
         }
     }
 }

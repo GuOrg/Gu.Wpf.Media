@@ -55,6 +55,7 @@
                     BindingOperations.SetBinding(value, TextBox.TextProperty, binding);
                     value.IsEnabled = true;
                 }
+
                 this.PropertyGrid.Children.Add(value);
                 row++;
             }

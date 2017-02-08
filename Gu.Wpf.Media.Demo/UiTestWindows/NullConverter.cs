@@ -3,6 +3,7 @@
     using System;
     using System.Globalization;
     using System.Windows.Data;
+
     public class NullConverter : IValueConverter
     {
         public static readonly NullConverter Default = new NullConverter();

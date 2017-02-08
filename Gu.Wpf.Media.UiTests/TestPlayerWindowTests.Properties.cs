@@ -147,6 +147,7 @@ namespace Gu.Wpf.Media.UiTests
                 // ReSharper disable once AssignNullToNotNullAttribute
                 Directory.CreateDirectory(directoryName);
             }
+
             if (!File.Exists(otherFile))
             {
                 File.Copy(Info.CoffeeClipFileName(), otherFile);

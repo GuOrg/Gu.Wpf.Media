@@ -23,12 +23,14 @@ namespace Gu.Wpf.Media.UiTests.Helpers
                             .ToList();
         }
 
-        public static T GetByText<T>(this UIItemContainer container, string text) where T : UIItem
+        public static T GetByText<T>(this UIItemContainer container, string text)
+            where T : UIItem
         {
             return container.Get<T>(SearchCriteria.ByText(text));
         }
 
-        public static T GetByIndex<T>(this UIItemContainer container, int index) where T : UIItem
+        public static T GetByIndex<T>(this UIItemContainer container, int index)
+            where T : UIItem
         {
             return container.Get<T>(SearchCriteria.Indexed(index));
         }

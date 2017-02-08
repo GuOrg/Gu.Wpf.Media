@@ -40,14 +40,14 @@
         }
 
         /// <summary>
-        /// Direction <see cref="MouseWheelDirection"/>
-        /// </summary>
-        public MouseWheelDirection Direction { get; set; }
-
-        /// <summary>
         /// Hiding <see cref="MouseGesture.MouseAction"/> here.
         /// </summary>
         public new MouseAction MouseAction => base.MouseAction;
+
+        /// <summary>
+        /// Direction <see cref="MouseWheelDirection"/>
+        /// </summary>
+        public MouseWheelDirection Direction { get; set; }
 
         /// <inheritdoc />
         public override bool Matches(object targetElement, InputEventArgs inputEventArgs)

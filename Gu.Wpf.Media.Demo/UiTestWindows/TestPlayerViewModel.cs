@@ -22,20 +22,7 @@
 
         public ReadOnlyObservableCollection<PropertyItem> Properties { get; }
 
-        public string SelectedPropertyName
-        {
-            get
-            {
-                return this.selectedPropertyName;
-            }
-            set
-            {
-                if (value == this.selectedPropertyName) return;
-                this.selectedPropertyName = value;
-                this.SelectedProperty = this.Properties.SingleOrDefault(x => x.Property.Name == value);
-                this.OnPropertyChanged();
-            }
-        }
+        public string CoffeeClipFileName => Files.CoffeeClip;
 
         public PropertyItem SelectedProperty
         {
@@ -43,15 +30,38 @@
             {
                 return this.selectedProperty;
             }
+
             private set
             {
-                if (Equals(value, this.selectedProperty)) return;
+                if (Equals(value, this.selectedProperty))
+                {
+                    return;
+                }
+
                 this.selectedProperty = value;
                 this.OnPropertyChanged();
             }
         }
 
-        public string CoffeeClipFileName => Files.CoffeeClip;
+        public string SelectedPropertyName
+        {
+            get
+            {
+                return this.selectedPropertyName;
+            }
+
+            set
+            {
+                if (value == this.selectedPropertyName)
+                {
+                    return;
+                }
+
+                this.selectedPropertyName = value;
+                this.SelectedProperty = this.Properties.SingleOrDefault(x => x.Property.Name == value);
+                this.OnPropertyChanged();
+            }
+        }
 
         [NotifyPropertyChangedInvocator]
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)

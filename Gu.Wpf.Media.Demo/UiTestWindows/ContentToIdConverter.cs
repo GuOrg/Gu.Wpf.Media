@@ -4,7 +4,7 @@
     using System.Globalization;
     using System.Windows.Data;
 
-    public class ContentToIdConverter: IValueConverter
+    public class ContentToIdConverter : IValueConverter
     {
         public static readonly ContentToIdConverter Default = new ContentToIdConverter();
 

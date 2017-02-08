@@ -9,7 +9,7 @@ namespace Gu.Wpf.Media.Demo
 
     public partial class MainWindow : Window
     {
-        private Stretch stretch;
+#pragma warning disable SA1202 // Elements must be ordered by access
 
         private static readonly DependencyPropertyKey MediaFileNamePropertyKey = DependencyProperty.RegisterReadOnly(
             "MediaFileName",
@@ -26,6 +26,9 @@ namespace Gu.Wpf.Media.Demo
             new PropertyMetadata(default(Uri)));
 
         public static readonly DependencyProperty MediaUriProperty = MediaUriPropertyKey.DependencyProperty;
+#pragma warning restore SA1202 // Elements must be ordered by access
+
+        private Stretch stretch;
 
         public MainWindow()
         {
@@ -83,7 +86,6 @@ namespace Gu.Wpf.Media.Demo
             }
         }
 
-
         private void OpenExecuted(object sender, ExecutedRoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog
@@ -103,17 +105,17 @@ namespace Gu.Wpf.Media.Demo
             if (this.WindowStyle == WindowStyle.SingleBorderWindow)
             {
                 this.stretch = this.MediaElement.Stretch;
-                this.MediaElement.Stretch = Stretch.Uniform;
-                this.WindowStyle = WindowStyle.None;
-                this.SizeToContent = SizeToContent.Manual;
-                this.WindowState = WindowState.Maximized;
+                this.MediaElement.SetCurrentValue(Media.MediaElementWrapper.StretchProperty, Stretch.Uniform);
+                this.SetCurrentValue(WindowStyleProperty, WindowStyle.None);
+                this.SetCurrentValue(SizeToContentProperty, SizeToContent.Manual);
+                this.SetCurrentValue(WindowStateProperty, WindowState.Maximized);
             }
             else
             {
-                this.MediaElement.Stretch = this.stretch;
-                this.WindowStyle = WindowStyle.SingleBorderWindow;
-                this.SizeToContent = SizeToContent.WidthAndHeight;
-                this.WindowState = WindowState.Normal;
+                this.MediaElement.SetCurrentValue(Media.MediaElementWrapper.StretchProperty, this.stretch);
+                this.SetCurrentValue(WindowStyleProperty, WindowStyle.SingleBorderWindow);
+                this.SetCurrentValue(SizeToContentProperty, SizeToContent.WidthAndHeight);
+                this.SetCurrentValue(WindowStateProperty, WindowState.Normal);
             }
 
             e.Handled = true;
@@ -126,10 +128,10 @@ namespace Gu.Wpf.Media.Demo
 
         private void OnEndFullScreenExecuted(object sender, ExecutedRoutedEventArgs e)
         {
-            this.MediaElement.Stretch = this.stretch;
-            this.WindowStyle = WindowStyle.SingleBorderWindow;
-            this.SizeToContent = SizeToContent.WidthAndHeight;
-            this.WindowState = WindowState.Normal;
+            this.MediaElement.SetCurrentValue(Media.MediaElementWrapper.StretchProperty, this.stretch);
+            this.SetCurrentValue(WindowStyleProperty, WindowStyle.SingleBorderWindow);
+            this.SetCurrentValue(SizeToContentProperty, SizeToContent.WidthAndHeight);
+            this.SetCurrentValue(WindowStateProperty, WindowState.Normal);
             e.Handled = true;
         }
 

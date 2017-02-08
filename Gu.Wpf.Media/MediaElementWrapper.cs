@@ -555,7 +555,7 @@
             }
         }
 
-        private static object OnPositionCoerce(DependencyObject d, object basevalue)
+        private static object CoercePosition(DependencyObject d, object basevalue)
         {
             var wrapper = (MediaElementWrapper)d;
             if (wrapper.Length == null || basevalue == null)

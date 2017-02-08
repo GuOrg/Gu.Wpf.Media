@@ -1,10 +1,12 @@
 ﻿namespace Gu.Wpf.Media.Tests
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
 
     using NUnit.Framework;
 
+    [SuppressMessage("ReSharper", "PossibleNullReferenceException")]
     public class TimeSpanToStringConverterTests
     {
         [TestCase("00:00:01", "0:01")]

@@ -10,4 +10,5 @@ licenseUrl http://opensource.org/licenses/MIT
 excludeddependencies
   JetBrains.Annotations
   StyleCop.Analyzers
+  Gu.Analyzers
   WpfAnalyzers

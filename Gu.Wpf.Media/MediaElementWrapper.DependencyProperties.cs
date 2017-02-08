@@ -51,7 +51,7 @@
                 default(TimeSpan?),
                 FrameworkPropertyMetadataOptions.BindsTwoWayByDefault,
                 OnPositionChanged,
-                OnPositionCoerce));
+                CoercePosition));
 
         private static readonly DependencyPropertyKey LengthPropertyKey = DependencyProperty.RegisterReadOnly(
             "Length",

@@ -1,9 +1,11 @@
 ﻿namespace Gu.Wpf.Media.Demo
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
     using System.Windows.Data;
 
+    [SuppressMessage("ReSharper", "PossibleNullReferenceException")]
     public class SecondsToTimeSpanConverter : IValueConverter
     {
         public static readonly SecondsToTimeSpanConverter Default = new SecondsToTimeSpanConverter();

@@ -1,7 +1,7 @@
 ﻿type project
 
 releasenotes
-  Rename CanPause property and CanPausePlayback and PausePlayback
+  BUGFIX Check HasTimeSpan
 
 tags wpf xaml media mediaelement
 projectUrl https://github.com/JohanLarsson/Gu.Wpf.Media

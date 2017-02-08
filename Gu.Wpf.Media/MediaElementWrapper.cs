@@ -65,7 +65,9 @@
                     this.CanPause = this.mediaElement.CanPause;
                     this.NaturalVideoHeight = this.mediaElement.NaturalVideoHeight;
                     this.NaturalVideoWidth = this.mediaElement.NaturalVideoWidth;
-                    this.Length = this.mediaElement.NaturalDuration.TimeSpan;
+                    this.Length = this.mediaElement.NaturalDuration.HasTimeSpan
+                                      ? this.mediaElement.NaturalDuration.TimeSpan
+                                      : (TimeSpan?)null;
                     if (this.State == MediaState.Pause || this.State == MediaState.Stop)
                     {
                         this.SetCurrentValue(PositionProperty, TimeSpan.Zero);

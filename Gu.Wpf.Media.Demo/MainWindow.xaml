@@ -1,62 +1,71 @@
-﻿<Window x:Class="Gu.Wpf.Media.Demo.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:demo="clr-namespace:Gu.Wpf.Media.Demo"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:media="https://github.com/JohanLarsson/Gu.Wpf.Media"
-        Title="MainWindow"
-        MinWidth="300"
-        Background="{DynamicResource {x:Static media:Brushes.BackgroundBrushKey}}"
-        AllowDrop="True"
-        Drop="OnDrop"
-        SizeToContent="WidthAndHeight"
-        mc:Ignorable="d">
+﻿<Window
+    x:Class="Gu.Wpf.Media.Demo.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:demo="clr-namespace:Gu.Wpf.Media.Demo"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:media="https://github.com/JohanLarsson/Gu.Wpf.Media"
+    xmlns:uiTestWindows="clr-namespace:Gu.Wpf.Media.Demo.UiTestWindows"
+    Title="MainWindow"
+    MinWidth="300"
+    AllowDrop="True"
+    Background="{DynamicResource {x:Static media:Brushes.BackgroundBrushKey}}"
+    Drop="OnDrop"
+    SizeToContent="WidthAndHeight"
+    mc:Ignorable="d">
     <Window.InputBindings>
-        <KeyBinding Key="Space"
-                    Command="TogglePlayPause"
-                    CommandTarget="{Binding ElementName=MediaElement}" />
+        <KeyBinding
+            Key="Space"
+            Command="TogglePlayPause"
+            CommandTarget="{Binding ElementName=MediaElement}" />
         <KeyBinding Key="F11" Command="media:Commands.ToggleFullScreen" />
         <KeyBinding Key="Escape" Command="media:Commands.EndFullScreen" />
-        <KeyBinding Key="Left"
-                    Command="media:Commands.SkipBack"
-                    CommandTarget="{Binding ElementName=MediaElement}" />
+        <KeyBinding
+            Key="Left"
+            Command="media:Commands.SkipBack"
+            CommandTarget="{Binding ElementName=MediaElement}" />
         <MouseBinding Command="media:Commands.SkipBack" CommandTarget="{Binding ElementName=MediaElement}">
             <MouseBinding.Gesture>
                 <media:MouseWheelGesture Direction="Down" />
             </MouseBinding.Gesture>
         </MouseBinding>
 
-        <KeyBinding Key="Left"
-                    Command="media:Commands.SkipBack"
-                    CommandParameter="60"
-                    CommandTarget="{Binding ElementName=MediaElement}"
-                    Modifiers="Control" />
-        <MouseBinding Command="media:Commands.SkipBack"
-                      CommandParameter="60"
-                      CommandTarget="{Binding ElementName=MediaElement}">
+        <KeyBinding
+            Key="Left"
+            Command="media:Commands.SkipBack"
+            CommandParameter="60"
+            CommandTarget="{Binding ElementName=MediaElement}"
+            Modifiers="Control" />
+        <MouseBinding
+            Command="media:Commands.SkipBack"
+            CommandParameter="60"
+            CommandTarget="{Binding ElementName=MediaElement}">
             <MouseBinding.Gesture>
                 <media:MouseWheelGesture Direction="Down" Modifiers="Control" />
             </MouseBinding.Gesture>
         </MouseBinding>
 
-        <KeyBinding Key="Right"
-                    Command="media:Commands.SkipForward"
-                    CommandTarget="{Binding ElementName=MediaElement}" />
+        <KeyBinding
+            Key="Right"
+            Command="media:Commands.SkipForward"
+            CommandTarget="{Binding ElementName=MediaElement}" />
         <MouseBinding Command="media:Commands.SkipForward" CommandTarget="{Binding ElementName=MediaElement}">
             <MouseBinding.Gesture>
                 <media:MouseWheelGesture Direction="Up" />
             </MouseBinding.Gesture>
         </MouseBinding>
 
-        <KeyBinding Key="Right"
-                    Command="media:Commands.SkipForward"
-                    CommandParameter="60"
-                    CommandTarget="{Binding ElementName=MediaElement}"
-                    Modifiers="Control" />
-        <MouseBinding Command="media:Commands.SkipForward"
-                      CommandParameter="60"
-                      CommandTarget="{Binding ElementName=MediaElement}">
+        <KeyBinding
+            Key="Right"
+            Command="media:Commands.SkipForward"
+            CommandParameter="60"
+            CommandTarget="{Binding ElementName=MediaElement}"
+            Modifiers="Control" />
+        <MouseBinding
+            Command="media:Commands.SkipForward"
+            CommandParameter="60"
+            CommandTarget="{Binding ElementName=MediaElement}">
             <MouseBinding.Gesture>
                 <media:MouseWheelGesture Direction="Up" Modifiers="Control" />
             </MouseBinding.Gesture>
@@ -66,9 +75,10 @@
     <Window.CommandBindings>
         <CommandBinding Command="ApplicationCommands.Open" Executed="OpenExecuted" />
         <CommandBinding Command="media:Commands.ToggleFullScreen" Executed="OnToggleFullScreenExecuted" />
-        <CommandBinding CanExecute="OnEndFullScreenCanExecute"
-                        Command="media:Commands.EndFullScreen"
-                        Executed="OnEndFullScreenExecuted" />
+        <CommandBinding
+            CanExecute="OnEndFullScreenCanExecute"
+            Command="media:Commands.EndFullScreen"
+            Executed="OnEndFullScreenExecuted" />
         <!--<CommandBinding Command="SystemCommands.CloseWindowCommand" Executed="OnCloseExecuted" />
         <CommandBinding Command="SystemCommands.MinimizeWindowCommand" Executed="OnMinimizeExecuted" CanExecute="OnMinimizeCanExecute"/>
         <CommandBinding Command="SystemCommands.MaximizeWindowCommand" Executed="OnMaximizeExecuted" CanExecute="OnMaximizeCanExecute"/>
@@ -106,37 +116,33 @@
                     Style="{StaticResource {x:Static media:Styles.SystemButtonStyleKey}}" />
         </Grid>-->
 
-        <media:MediaElementWrapper x:Name="MediaElement"
-                                   Grid.Row="0"
-                                   Grid.RowSpan="3"
-                                   LoadedBehavior="Play"
-                                   ScrubbingEnabled="True"
-                                   MediaFailed="OnMediaFailed"
-                                   Source="{Binding RelativeSource={RelativeSource FindAncestor,
-                                                                                   AncestorType={x:Type demo:MainWindow}},
-                                                    Path=MediaFileName}"
-                                   Stretch="None" />
+        <media:MediaElementWrapper
+            x:Name="MediaElement"
+            Grid.Row="0"
+            Grid.RowSpan="3"
+            LoadedBehavior="Play"
+            MediaFailed="OnMediaFailed"
+            ScrubbingEnabled="True"
+            Source="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type demo:MainWindow}}, Path=MediaFileName}"
+            Stretch="None" />
 
-        <Grid Grid.Row="2"
-              VerticalAlignment="Bottom"
-              Background="{DynamicResource {x:Static media:Brushes.SemiTransparentBackgroundBrushKey}}">
+        <Grid
+            Grid.Row="2"
+            VerticalAlignment="Bottom"
+            Background="{DynamicResource {x:Static media:Brushes.SemiTransparentBackgroundBrushKey}}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-            <Slider x:Name="ProgressSlider"
-                    Grid.Row="0"
-                    media:Drag.PauseWhileDragging="{Binding ElementName=MediaElement}"
-                    IsEnabled="{Binding ElementName=MediaElement,
-                                        Path=HasMedia}"
-                    Maximum="{Binding ElementName=MediaElement,
-                                      Path=Length,
-                                      Converter={x:Static media:NullableTimeSpanToSecondsConverter.Default}}"
-                    Minimum="0"
-                    Style="{StaticResource {x:Static media:Styles.ProgressSliderStyleKey}}"
-                    Value="{Binding ElementName=MediaElement,
-                                    Path=Position,
-                                    Converter={x:Static media:NullableTimeSpanToSecondsConverter.Default}}" />
+            <Slider
+                x:Name="ProgressSlider"
+                Grid.Row="0"
+                media:Drag.PauseWhileDragging="{Binding ElementName=MediaElement}"
+                IsEnabled="{Binding ElementName=MediaElement, Path=HasMedia}"
+                Maximum="{Binding ElementName=MediaElement, Path=Length, Converter={x:Static media:NullableTimeSpanToSecondsConverter.Default}}"
+                Minimum="0"
+                Style="{StaticResource {x:Static media:Styles.ProgressSliderStyleKey}}"
+                Value="{Binding ElementName=MediaElement, Path=Position, Converter={x:Static media:NullableTimeSpanToSecondsConverter.Default}}" />
 
             <Grid Grid.Row="1">
                 <Grid.Resources>
@@ -151,12 +157,11 @@
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
 
-                <ToggleButton x:Name="PlayPauseButton"
-                              Grid.Column="0"
-                              IsChecked="{Binding ElementName=MediaElement,
-                                                  Path=IsPlaying}"
-                              IsEnabled="{Binding ElementName=MediaElement,
-                                                  Path=HasMedia}">
+                <ToggleButton
+                    x:Name="PlayPauseButton"
+                    Grid.Column="0"
+                    IsChecked="{Binding ElementName=MediaElement, Path=IsPlaying}"
+                    IsEnabled="{Binding ElementName=MediaElement, Path=HasMedia}">
                     <ToggleButton.Style>
                         <Style BasedOn="{StaticResource {x:Static media:Styles.PlayerButtonBaseStyleKey}}" TargetType="{x:Type ToggleButton}">
                             <Setter Property="media:Icon.Geometry" Value="{StaticResource {x:Static media:Geometries.PauseGeometryKey}}" />
@@ -169,12 +174,11 @@
                     </ToggleButton.Style>
                 </ToggleButton>
 
-                <ToggleButton x:Name="ToggleMutedButton"
-                              Grid.Column="1"
-                              IsChecked="{Binding ElementName=MediaElement,
-                                                  Path=IsMuted}"
-                              IsEnabled="{Binding ElementName=MediaElement,
-                                                  Path=HasMedia}">
+                <ToggleButton
+                    x:Name="ToggleMutedButton"
+                    Grid.Column="1"
+                    IsChecked="{Binding ElementName=MediaElement, Path=IsMuted, Converter={x:Static uiTestWindows:InvertBoolConverter.Default}}"
+                    IsEnabled="{Binding ElementName=MediaElement, Path=HasMedia}">
                     <ToggleButton.Style>
                         <Style BasedOn="{StaticResource {x:Static media:Styles.PlayerButtonBaseStyleKey}}" TargetType="{x:Type ToggleButton}">
                             <Setter Property="media:Icon.Geometry" Value="{StaticResource {x:Static media:Geometries.UnMuteGeometryKey}}" />
@@ -187,28 +191,30 @@
                     </ToggleButton.Style>
                 </ToggleButton>
 
-                <TextBlock x:Name="ProgressTextBlock"
-                           Grid.Column="2"
-                           VerticalAlignment="Center"
-                           Foreground="{Binding ElementName=ToggleMutedButton,
-                                                Path=Foreground}"
-                           Opacity="{Binding ElementName=ToggleMutedButton,
-                                             Path=Opacity}">
+                <TextBlock
+                    x:Name="ProgressTextBlock"
+                    Grid.Column="2"
+                    VerticalAlignment="Center"
+                    Foreground="{Binding ElementName=ToggleMutedButton, Path=Foreground}"
+                    Opacity="{Binding ElementName=ToggleMutedButton, Path=Opacity}">
                     <TextBlock.Text>
                         <MultiBinding StringFormat="{}{0} / {1}">
-                            <Binding Converter="{x:Static media:TimeSpanToStringConverter.Default}"
-                                     ElementName="MediaElement"
-                                     Path="Position" />
-                            <Binding Converter="{x:Static media:TimeSpanToStringConverter.Default}"
-                                     ElementName="MediaElement"
-                                     Path="Length" />
+                            <Binding
+                                Converter="{x:Static media:TimeSpanToStringConverter.Default}"
+                                ElementName="MediaElement"
+                                Path="Position" />
+                            <Binding
+                                Converter="{x:Static media:TimeSpanToStringConverter.Default}"
+                                ElementName="MediaElement"
+                                Path="Length" />
                         </MultiBinding>
                     </TextBlock.Text>
                 </TextBlock>
 
-                <Button Grid.Column="4"
-                        media:Icon.Geometry="{StaticResource {x:Static media:Geometries.FolderOpenGeometryKey}}"
-                        Command="ApplicationCommands.Open">
+                <Button
+                    Grid.Column="4"
+                    media:Icon.Geometry="{StaticResource {x:Static media:Geometries.FolderOpenGeometryKey}}"
+                    Command="ApplicationCommands.Open">
                     <Button.ToolTip>
                         <ToolTip Placement="Top" Style="{DynamicResource {x:Static media:Styles.ToolTipStyleKey}}">
                             Open a file
@@ -216,13 +222,13 @@
                     </Button.ToolTip>
                 </Button>
 
-                <Button Grid.Column="5"
-                        HorizontalAlignment="Right"
-                        media:Icon.Geometry="{StaticResource {x:Static media:Geometries.FullScreenGeometryKey}}"
-                        Command="media:Commands.ToggleFullScreen"
-                        IsEnabled="{Binding ElementName=MediaElement,
-                                            Path=HasMedia}"
-                        Padding="12,6,6,6">
+                <Button
+                    Grid.Column="5"
+                    Padding="12,6,6,6"
+                    HorizontalAlignment="Right"
+                    media:Icon.Geometry="{StaticResource {x:Static media:Geometries.FullScreenGeometryKey}}"
+                    Command="media:Commands.ToggleFullScreen"
+                    IsEnabled="{Binding ElementName=MediaElement, Path=HasMedia}">
                     <Button.ToolTip>
                         <ToolTip Placement="Top" Style="{DynamicResource {x:Static media:Styles.ToolTipStyleKey}}">
                             Full screen

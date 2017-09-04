@@ -256,7 +256,7 @@ namespace Gu.Wpf.Media.UiTests
             this.AreEqual("Play", MediaElementWrapper.StateProperty);
             Thread.Sleep(TimeSpan.FromSeconds(0.2));
             this.SetValue(MediaElementWrapper.StateProperty, nextState);
-            this.Window.WaitWhileBusy();
+            this.Window.WaitUntilResponsive();
             this.AreEqual("False", MediaElementWrapper.IsPlayingProperty);
             this.AreEqual(nextState, MediaElementWrapper.StateProperty);
             Assert.AreNotEqual(position, this.GetValue(MediaElementWrapper.PositionProperty));

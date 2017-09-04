@@ -1,12 +1,8 @@
 namespace Gu.Wpf.Media.UiTests.Helpers
 {
     using System;
+    using Gu.Wpf.UiAutomation;
     using NUnit.Framework;
-
-    using TestStack.White;
-    using TestStack.White.InputDevices;
-    using TestStack.White.UIItems.WindowItems;
-    using TestStack.White.WindowsAPI;
 
     public abstract class WindowTests : IDisposable
     {
@@ -30,14 +26,13 @@ namespace Gu.Wpf.Media.UiTests.Helpers
         {
             this.application?.Dispose();
             this.application = Application.AttachOrLaunch(Info.CreateStartInfo(this.WindowName));
-            StaticWindow = this.application.GetWindow(this.WindowName);
+            StaticWindow = this.application.MainWindow;
             ////this.SaveScreenshotToArtifactsDir("start");
         }
 
         [OneTimeTearDown]
         public void OneTimeTearDown()
         {
-            Keyboard.Instance.LeaveAllKeys();
             ////this.SaveScreenshotToArtifactsDir("finish");
             this.application?.Dispose();
             StaticWindow = null;
@@ -62,24 +57,11 @@ namespace Gu.Wpf.Media.UiTests.Helpers
             }
         }
 
-        protected void PressTab()
-        {
-            this.Window.Keyboard.PressSpecialKey(KeyboardInput.SpecialKeys.TAB);
-        }
-
-        protected void ThrowIfDisposed()
-        {
-            if (this.disposed)
-            {
-                throw new ObjectDisposedException(this.GetType().FullName);
-            }
-        }
-
         // ReSharper disable once UnusedMember.Local
         private void SaveScreenshotToArtifactsDir(string suffix)
         {
             var fileName = System.IO.Path.Combine(Info.ArtifactsDirectory(), $"{this.WindowName}_{suffix}.png");
-            using (var image = new ScreenCapture().CaptureDesktop())
+            using (var image = ScreenCapture.CaptureScreen())
             {
                 image.Save(fileName);
             }

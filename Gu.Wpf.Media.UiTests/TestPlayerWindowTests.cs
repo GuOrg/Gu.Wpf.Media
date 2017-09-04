@@ -5,14 +5,12 @@ namespace Gu.Wpf.Media.UiTests
     using System.Windows;
 
     using Gu.Wpf.Media.UiTests.Helpers;
-
+    using Gu.Wpf.UiAutomation;
     using NUnit.Framework;
-
-    using TestStack.White.UIItems;
 
     public partial class TestPlayerWindowTests : WindowTests
     {
-        private readonly ConcurrentDictionary<string, IUIItem> itemCache = new ConcurrentDictionary<string, IUIItem>();
+        private readonly ConcurrentDictionary<string, AutomationElement> itemCache = new ConcurrentDictionary<string, AutomationElement>();
 
         protected override string WindowName { get; } = "TestPlayerWindow";
 
@@ -38,7 +36,7 @@ namespace Gu.Wpf.Media.UiTests
             var readonlyText = expected
                 ? "readonly"
                 : "editable";
-            Assert.AreEqual(expected, !textBox.Enabled, $"Expected the property {property.Name} to be {readonlyText}");
+            Assert.AreEqual(expected, !textBox.IsEnabled, $"Expected the property {property.Name} to be {readonlyText}");
         }
 
         public void AreEqual(string expected, DependencyProperty property)
@@ -49,19 +47,14 @@ namespace Gu.Wpf.Media.UiTests
 
         public TextBox GetCachedTextBox(string name)
         {
-            return this.GetCached<TextBox>(name);
+            return (TextBox)this.itemCache.GetOrAdd(name, n => this.Window.FindTextBox(n));
         }
 
         public Button GetCachedButton([CallerMemberName]string name = null)
         {
             Assert.NotNull(name);
-            return this.GetCached<Button>(name.EndsWith("Button") ? name.TrimEnd("Button") : name);
-        }
-
-        public T GetCached<T>(string name)
-            where T : IUIItem
-        {
-            return (T)this.itemCache.GetOrAdd(name, n => this.Window.Get<T>(n));
+            name  = name.EndsWith("Button") ? name.TrimEnd("Button") : name;
+            return (Button)this.itemCache.GetOrAdd(name, n => this.Window.FindButton(n));
         }
 
         private void SetValue(DependencyProperty property, string value)
@@ -70,7 +63,7 @@ namespace Gu.Wpf.Media.UiTests
 
             if (valueBox.Text != value)
             {
-                valueBox.BulkText = value;
+                valueBox.Text = value;
                 ////this.Window.WaitWhileBusy();
                 //// ReSharper disable once ExplicitCallerInfoArgument
                 this.GetCachedButton("Lose focus")

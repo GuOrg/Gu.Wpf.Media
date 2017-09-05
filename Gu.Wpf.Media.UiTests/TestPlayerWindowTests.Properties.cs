@@ -1,3 +1,4 @@
+#pragma warning disable GU0009 // Name the boolean parameter.
 namespace Gu.Wpf.Media.UiTests
 {
     using System;

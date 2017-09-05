@@ -53,7 +53,7 @@ namespace Gu.Wpf.Media.UiTests
         public Button GetCachedButton([CallerMemberName]string name = null)
         {
             Assert.NotNull(name);
-            name  = name.EndsWith("Button") ? name.TrimEnd("Button") : name;
+            name = name.EndsWith("Button") ? name.TrimEnd("Button") : name;
             return (Button)this.itemCache.GetOrAdd(name, n => this.Window.FindButton(n));
         }
 

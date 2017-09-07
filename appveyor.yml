@@ -7,5 +7,5 @@ cache:
 build:
   verbosity: minimal
 
-  on_failure:
+on_failure:
   - ps: Get-ChildItem $env:temp\*.png | % { Push-AppveyorArtifact $_.FullName -FileName $_.Name }

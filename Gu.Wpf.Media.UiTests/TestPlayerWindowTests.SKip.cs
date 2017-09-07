@@ -7,17 +7,17 @@ namespace Gu.Wpf.Media.UiTests
 
     public partial class TestPlayerWindowTests
     {
-        public Button SkipForwardButton => this.GetCachedButton();
+        public Button SkipForwardButton => this.FindButton();
 
-        public Button SkipForwardTwoButton => this.GetCachedButton();
+        public Button SkipForwardTwoButton => this.FindButton();
 
-        public Button SkipForwardZeroPointOneButton => this.GetCachedButton();
+        public Button SkipForwardZeroPointOneButton => this.FindButton();
 
-        public Button SkipBackButton => this.GetCachedButton();
+        public Button SkipBackButton => this.FindButton();
 
-        public Button SkipBackTwoButton => this.GetCachedButton();
+        public Button SkipBackTwoButton => this.FindButton();
 
-        public Button SkipBackZeroPointOneButton => this.GetCachedButton();
+        public Button SkipBackZeroPointOneButton => this.FindButton();
 
         [Test]
         public void SkipForward()

@@ -1,7 +1,7 @@
 namespace Gu.Wpf.Media.UiTests.Helpers
 {
     using System;
-    using System.Collections.Concurrent;
+    using System.IO;
     using System.Runtime.CompilerServices;
     using System.Windows;
     using Gu.Wpf.UiAutomation;
@@ -11,7 +11,6 @@ namespace Gu.Wpf.Media.UiTests.Helpers
 
     public abstract class WindowTests : IDisposable
     {
-        private readonly ConcurrentDictionary<string, AutomationElement> itemCache = new ConcurrentDictionary<string, AutomationElement>();
         private Application application;
         private bool disposed;
 
@@ -22,7 +21,6 @@ namespace Gu.Wpf.Media.UiTests.Helpers
         public virtual void RestartApplication()
         {
             this.OneTimeTearDown();
-            this.itemCache.Clear();
             this.OneTimeSetUp();
         }
 
@@ -31,19 +29,19 @@ namespace Gu.Wpf.Media.UiTests.Helpers
         {
             this.application?.Dispose();
             this.application = Application.AttachOrLaunch(Info.CreateStartInfo(this.WindowName));
-            ////this.SaveScreenshotToArtifactsDir("start");
+            Capture.ScreenToFile(System.IO.Path.Combine(Path.GetTempPath(), $"{this.WindowName}_start.png"));
         }
 
         [OneTimeTearDown]
         public void OneTimeTearDown()
         {
-            ////this.SaveScreenshotToArtifactsDir("finish");
+            Capture.ScreenToFile(System.IO.Path.Combine(Path.GetTempPath(), $"{this.WindowName}_finish.png"));
             this.application?.Dispose();
         }
 
         public void AssertReadOnly(bool expected, DependencyProperty property)
         {
-            var textBox = this.GetCachedTextBox(property.Name);
+            var textBox = this.Window.FindTextBox(property.Name);
             var readonlyText = expected
                 ? "readonly"
                 : "editable";
@@ -52,39 +50,39 @@ namespace Gu.Wpf.Media.UiTests.Helpers
 
         public void AreEqual(string expected, DependencyProperty property)
         {
-            var valueBox = this.GetCachedTextBox(property.Name);
+            var valueBox = this.Window.FindTextBox(property.Name);
             Assert.AreEqual(expected, valueBox.Text, $"Expected the value of {property.Name} to be {expected} was: {valueBox.Text}");
         }
 
-        public TextBox GetCachedTextBox(string name)
+        public TextBox FindTextBox(string name)
         {
-            return (TextBox)this.itemCache.GetOrAdd(name, n => this.Window.FindTextBox(n));
+            return this.Window.FindTextBox(name);
         }
 
-        public Button GetCachedButton([CallerMemberName]string name = null)
+        public Button FindButton([CallerMemberName]string name = null)
         {
             Assert.NotNull(name);
             name = name.EndsWith("Button") ? name.TrimEnd("Button") : name;
-            return (Button)this.itemCache.GetOrAdd(name, n => this.Window.FindButton(n));
+            return this.Window.FindButton(name);
         }
 
         public void SetValue(DependencyProperty property, string value)
         {
-            var valueBox = this.GetCachedTextBox(property.Name);
+            var valueBox = this.FindTextBox(property.Name);
 
             if (valueBox.Text != value)
             {
                 valueBox.Text = value;
                 ////this.Window.WaitWhileBusy();
                 //// ReSharper disable once ExplicitCallerInfoArgument
-                this.GetCachedButton("Lose focus")
+                this.FindButton("Lose focus")
                     .Click();
             }
         }
 
         public string GetValue(DependencyProperty property)
         {
-            var valueBox = this.GetCachedTextBox(property.Name);
+            var valueBox = this.FindTextBox(property.Name);
             return valueBox.Text;
         }
 
@@ -104,16 +102,6 @@ namespace Gu.Wpf.Media.UiTests.Helpers
             if (disposing)
             {
                 this.application?.Dispose();
-            }
-        }
-
-        // ReSharper disable once UnusedMember.Local
-        private void SaveScreenshotToArtifactsDir(string suffix)
-        {
-            var fileName = System.IO.Path.Combine(Info.ArtifactsDirectory(), $"{this.WindowName}_{suffix}.png");
-            using (var image = Capture.Screen())
-            {
-                image.Save(fileName);
             }
         }
     }

@@ -52,16 +52,6 @@
             return fileName;
         }
 
-        internal static string ArtifactsDirectory()
-        {
-            //// ReSharper disable PossibleNullReferenceException
-            var root = new DirectoryInfo(TestAssemblyFullFileName()).Parent.Parent.Parent.Parent.FullName;
-            //// ReSharper restore PossibleNullReferenceException
-            var artifacts = Path.Combine(root, "artifacts");
-            Directory.CreateDirectory(artifacts);
-            return artifacts;
-        }
-
         private static string GetExeFileName()
         {
             //// ReSharper disable once PossibleNullReferenceException

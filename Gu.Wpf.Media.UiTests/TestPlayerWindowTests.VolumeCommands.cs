@@ -6,25 +6,25 @@ namespace Gu.Wpf.Media.UiTests
 
     public partial class TestPlayerWindowTests
     {
-        private Button ToggleMuteButton => this.GetCachedButton();
+        private Button ToggleMuteButton => this.FindButton();
 
-        private Button BoundToggleMuteButton => this.GetCachedButton();
+        private Button BoundToggleMuteButton => this.FindButton();
 
-        private Button MuteVolumeButton => this.GetCachedButton();
+        private Button MuteVolumeButton => this.FindButton();
 
-        private Button UnmuteVolumeButton => this.GetCachedButton();
+        private Button UnmuteVolumeButton => this.FindButton();
 
-        private Button DecreaseVolumeButton => this.GetCachedButton();
+        private Button DecreaseVolumeButton => this.FindButton();
 
-        private Button DecreaseVolumeByOneButton => this.GetCachedButton();
+        private Button DecreaseVolumeByOneButton => this.FindButton();
 
-        private Button DecreaseVolumeByZeroPointOneButton => this.GetCachedButton();
+        private Button DecreaseVolumeByZeroPointOneButton => this.FindButton();
 
-        private Button IncreaseVolumeButton => this.GetCachedButton();
+        private Button IncreaseVolumeButton => this.FindButton();
 
-        private Button IncreaseVolumeByOneButton => this.GetCachedButton();
+        private Button IncreaseVolumeByOneButton => this.FindButton();
 
-        private Button IncreaseVolumeByZeroPointOneButton => this.GetCachedButton();
+        private Button IncreaseVolumeByZeroPointOneButton => this.FindButton();
 
         [Test]
         public void ClickMuteThenIncreaseVolume()

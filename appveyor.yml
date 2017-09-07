@@ -6,3 +6,6 @@ cache:
 - packages -> paket.lock
 build:
   verbosity: minimal
+
+  on_failure:
+  - ps: Get-ChildItem $env:temp\*.png | % { Push-AppveyorArtifact $_.FullName -FileName $_.Name }

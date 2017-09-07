@@ -9,17 +9,17 @@ namespace Gu.Wpf.Media.UiTests
 
     public partial class TestPlayerWindowTests
     {
-        public Button PlayButton => this.GetCachedButton();
+        public Button PlayButton => this.FindButton();
 
-        public Button PauseButton => this.GetCachedButton();
+        public Button PauseButton => this.FindButton();
 
-        public Button StopButton => this.GetCachedButton();
+        public Button StopButton => this.FindButton();
 
-        public Button TogglePlayPauseButton => this.GetCachedButton();
+        public Button TogglePlayPauseButton => this.FindButton();
 
-        public Button BoundPlayPauseButton => this.GetCachedButton();
+        public Button BoundPlayPauseButton => this.FindButton();
 
-        public Button RewindButton => this.GetCachedButton();
+        public Button RewindButton => this.FindButton();
 
         [Test]
         public void ClickPlayThenClickPause()

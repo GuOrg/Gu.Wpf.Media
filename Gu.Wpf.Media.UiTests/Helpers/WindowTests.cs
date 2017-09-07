@@ -111,7 +111,7 @@ namespace Gu.Wpf.Media.UiTests.Helpers
         private void SaveScreenshotToArtifactsDir(string suffix)
         {
             var fileName = System.IO.Path.Combine(Info.ArtifactsDirectory(), $"{this.WindowName}_{suffix}.png");
-            using (var image = ScreenCapture.CaptureScreen())
+            using (var image = Capture.Screen())
             {
                 image.Save(fileName);
             }

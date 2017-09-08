@@ -28,7 +28,7 @@ namespace Gu.Wpf.Media.UiTests.Helpers
         public virtual void OneTimeSetUp()
         {
             this.application?.Dispose();
-            this.application = Application.AttachOrLaunch(Info.CreateStartInfo(this.WindowName));
+            this.application = Application.Launch(Info.CreateStartInfo(this.WindowName));
             Capture.ScreenToFile(System.IO.Path.Combine(Path.GetTempPath(), $"{this.WindowName}_start.png"));
         }
 

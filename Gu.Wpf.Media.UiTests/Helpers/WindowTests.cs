@@ -28,14 +28,12 @@ namespace Gu.Wpf.Media.UiTests.Helpers
         public virtual void OneTimeSetUp()
         {
             this.application?.Dispose();
-            this.application = Application.Launch(Info.CreateStartInfo(this.WindowName));
-            Capture.ScreenToFile(System.IO.Path.Combine(Path.GetTempPath(), $"{this.WindowName}_start.png"));
+            this.application = Application.Launch(Application.FindExe("Gu.Wpf.Media.Demo.exe"), this.WindowName);
         }
 
         [OneTimeTearDown]
         public void OneTimeTearDown()
         {
-            Capture.ScreenToFile(System.IO.Path.Combine(Path.GetTempPath(), $"{this.WindowName}_finish.png"));
             this.application?.Dispose();
         }
 

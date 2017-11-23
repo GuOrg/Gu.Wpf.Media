@@ -8,9 +8,8 @@
     using System.Windows.Data;
     using System.Windows.Markup;
 
-    /// <inheritdoc />
     [ValueConversion(typeof(TimeSpan?), typeof(string), ParameterType = typeof(string))]
-    [MarkupExtensionReturnType(typeof(IValueConverter))]
+    [MarkupExtensionReturnType(typeof(TimeSpanToStringConverter))]
     public class TimeSpanToStringConverter : MarkupExtension, IValueConverter
     {
         /// <summary>
@@ -121,8 +120,7 @@
                 return message;
             }
 
-            TimeSpan result;
-            if (TryParse(value, out result))
+            if (TryParse(value, out var result))
             {
                 return result;
             }

@@ -6,9 +6,8 @@
     using System.Windows.Data;
     using System.Windows.Markup;
 
-    /// <inheritdoc/>
     [ValueConversion(typeof(TimeSpan?), typeof(double?))]
-    [MarkupExtensionReturnType(typeof(IValueConverter))]
+    [MarkupExtensionReturnType(typeof(NullableTimeSpanToSecondsConverter))]
     public class NullableTimeSpanToSecondsConverter : MarkupExtension, IValueConverter
     {
         /// <summary>

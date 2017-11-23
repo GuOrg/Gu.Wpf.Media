@@ -26,10 +26,7 @@
 
         public PropertyItem SelectedProperty
         {
-            get
-            {
-                return this.selectedProperty;
-            }
+            get => this.selectedProperty;
 
             private set
             {
@@ -45,10 +42,7 @@
 
         public string SelectedPropertyName
         {
-            get
-            {
-                return this.selectedPropertyName;
-            }
+            get => this.selectedPropertyName;
 
             set
             {

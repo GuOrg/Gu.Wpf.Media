@@ -21,8 +21,8 @@
         /// </summary>
         public event EventHandler<ExceptionRoutedEventArgs> MediaFailed
         {
-            add { this.AddHandler(MediaFailedEvent, value); }
-            remove { this.RemoveHandler(MediaFailedEvent, value); }
+            add => this.AddHandler(MediaFailedEvent, value);
+            remove => this.RemoveHandler(MediaFailedEvent, value);
         }
 
         /// <summary>
@@ -35,8 +35,8 @@
         /// </summary>
         public event RoutedEventHandler MediaOpened
         {
-            add { this.AddHandler(MediaOpenedEvent, value); }
-            remove { this.RemoveHandler(MediaOpenedEvent, value); }
+            add => this.AddHandler(MediaOpenedEvent, value);
+            remove => this.RemoveHandler(MediaOpenedEvent, value);
         }
 
         /// <summary>
@@ -49,8 +49,8 @@
         /// </summary>
         public event RoutedEventHandler BufferingStarted
         {
-            add { this.AddHandler(BufferingStartedEvent, value); }
-            remove { this.RemoveHandler(BufferingStartedEvent, value); }
+            add => this.AddHandler(BufferingStartedEvent, value);
+            remove => this.RemoveHandler(BufferingStartedEvent, value);
         }
 
         /// <summary>
@@ -63,8 +63,8 @@
         /// </summary>
         public event RoutedEventHandler BufferingEnded
         {
-            add { this.AddHandler(BufferingEndedEvent, value); }
-            remove { this.RemoveHandler(BufferingEndedEvent, value); }
+            add => this.AddHandler(BufferingEndedEvent, value);
+            remove => this.RemoveHandler(BufferingEndedEvent, value);
         }
 
         /// <summary>
@@ -77,8 +77,8 @@
         /// </summary>
         public event EventHandler<MediaScriptCommandRoutedEventArgs> ScriptCommand
         {
-            add { this.AddHandler(ScriptCommandEvent, value); }
-            remove { this.RemoveHandler(ScriptCommandEvent, value); }
+            add => this.AddHandler(ScriptCommandEvent, value);
+            remove => this.RemoveHandler(ScriptCommandEvent, value);
         }
 
         /// <summary>
@@ -91,8 +91,8 @@
         /// </summary>
         public event RoutedEventHandler MediaEnded
         {
-            add { this.AddHandler(MediaEndedEvent, value); }
-            remove { this.RemoveHandler(MediaEndedEvent, value); }
+            add => this.AddHandler(MediaEndedEvent, value);
+            remove => this.RemoveHandler(MediaEndedEvent, value);
         }
 
 #pragma warning restore SA1201 // Elements must appear in the correct order

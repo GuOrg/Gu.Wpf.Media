@@ -1,14 +1,10 @@
 ﻿type project
-
-releasenotes
-  BUGFIX Check HasTimeSpan
-
 tags wpf xaml media mediaelement
 projectUrl https://github.com/JohanLarsson/Gu.Wpf.Media
 licenseUrl http://opensource.org/licenses/MIT
 
-excludeddependencies
-  JetBrains.Annotations
-  StyleCop.Analyzers
-  Gu.Analyzers
-  WpfAnalyzers
+releasenotes
+  BUGFIX Check HasTimeSpan
+
+excludedgroups
+  Analyzers

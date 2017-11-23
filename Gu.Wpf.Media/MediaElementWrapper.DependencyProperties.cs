@@ -54,7 +54,7 @@
                 CoercePosition));
 
         private static readonly DependencyPropertyKey LengthPropertyKey = DependencyProperty.RegisterReadOnly(
-            "Length",
+            nameof(Length),
             typeof(TimeSpan?),
             typeof(MediaElementWrapper),
             new PropertyMetadata(default(TimeSpan?)));
@@ -68,7 +68,7 @@
         public static readonly DependencyProperty LengthProperty = LengthPropertyKey.DependencyProperty;
 
         private static readonly DependencyPropertyKey CanPausePropertyKey = DependencyProperty.RegisterReadOnly(
-            "CanPause",
+            nameof(CanPause),
             typeof(bool?),
             typeof(MediaElementWrapper),
             new PropertyMetadata(default(bool?)));
@@ -110,7 +110,7 @@
         public static readonly DependencyProperty NaturalVideoWidthProperty = NaturalVideoWidthPropertyKey.DependencyProperty;
 
         private static readonly DependencyPropertyKey HasAudioPropertyKey = DependencyProperty.RegisterReadOnly(
-            "HasAudio",
+            nameof(HasAudio),
             typeof(bool?),
             typeof(MediaElementWrapper),
             new PropertyMetadata(default(bool?)));
@@ -124,7 +124,7 @@
         public static readonly DependencyProperty HasAudioProperty = HasAudioPropertyKey.DependencyProperty;
 
         private static readonly DependencyPropertyKey HasVideoPropertyKey = DependencyProperty.RegisterReadOnly(
-            "HasVideo",
+            nameof(HasVideo),
             typeof(bool?),
             typeof(MediaElementWrapper),
             new PropertyMetadata(default(bool?)));
@@ -138,7 +138,7 @@
         public static readonly DependencyProperty HasVideoProperty = HasVideoPropertyKey.DependencyProperty;
 
         private static readonly DependencyPropertyKey HasMediaPropertyKey = DependencyProperty.RegisterReadOnly(
-            "HasMedia",
+            nameof(HasMedia),
             typeof(bool),
             typeof(MediaElementWrapper),
             new PropertyMetadata(default(bool)));
@@ -164,7 +164,7 @@
             new PropertyMetadata(default(double), OnSpeedRatioChanged));
 
         private static readonly DependencyPropertyKey IsBufferingPropertyKey = DependencyProperty.RegisterReadOnly(
-            "IsBuffering",
+            nameof(IsBuffering),
             typeof(bool),
             typeof(MediaElementWrapper),
             new PropertyMetadata(default(bool)));
@@ -178,7 +178,7 @@
         public static readonly DependencyProperty IsBufferingProperty = IsBufferingPropertyKey.DependencyProperty;
 
         private static readonly DependencyPropertyKey DownloadProgressPropertyKey = DependencyProperty.RegisterReadOnly(
-            "DownloadProgress",
+            nameof(DownloadProgress),
             typeof(double),
             typeof(MediaElementWrapper),
             new PropertyMetadata(default(double)));
@@ -192,7 +192,7 @@
         public static readonly DependencyProperty DownloadProgressProperty = DownloadProgressPropertyKey.DependencyProperty;
 
         private static readonly DependencyPropertyKey BufferingProgressPropertyKey = DependencyProperty.RegisterReadOnly(
-            "BufferingProgress",
+            nameof(BufferingProgress),
             typeof(double),
             typeof(MediaElementWrapper),
             new PropertyMetadata(default(double)));
@@ -224,7 +224,7 @@
         /// The identifier for the <see cref="MediaElementWrapper.SkipIncrement" /> dependency property.
         /// </returns>
         public static readonly DependencyProperty SkipIncrementProperty = DependencyProperty.Register(
-            "SkipIncrement",
+            nameof(SkipIncrement),
             typeof(TimeSpan),
             typeof(MediaElementWrapper),
             new PropertyMetadata(TimeSpan.FromSeconds(1)));
@@ -267,8 +267,8 @@
         /// </summary>
         public MediaState State
         {
-            get { return (MediaState)this.GetValue(StateProperty); }
-            set { this.SetValue(StateProperty, value); }
+            get => (MediaState)this.GetValue(StateProperty);
+            set => this.SetValue(StateProperty, value);
         }
 
         /// <summary>
@@ -276,8 +276,8 @@
         /// </summary>
         public bool IsPlaying
         {
-            get { return (bool)this.GetValue(IsPlayingProperty); }
-            set { this.SetValue(IsPlayingProperty, value); }
+            get => (bool)this.GetValue(IsPlayingProperty);
+            set => this.SetValue(IsPlayingProperty, value);
         }
 
         /// <summary>
@@ -286,8 +286,8 @@
         /// </summary>
         public TimeSpan? Position
         {
-            get { return (TimeSpan?)this.GetValue(PositionProperty); }
-            set { this.SetValue(PositionProperty, value); }
+            get => (TimeSpan?)this.GetValue(PositionProperty);
+            set => this.SetValue(PositionProperty, value);
         }
 
         /// <summary>
@@ -295,8 +295,8 @@
         /// </summary>
         public TimeSpan? Length
         {
-            get { return (TimeSpan?)this.GetValue(LengthProperty); }
-            protected set { this.SetValue(LengthPropertyKey, value); }
+            get => (TimeSpan?)this.GetValue(LengthProperty);
+            protected set => this.SetValue(LengthPropertyKey, value);
         }
 
         /// <summary>
@@ -305,8 +305,8 @@
         /// </summary>
         public bool? CanPause
         {
-            get { return (bool?)this.GetValue(CanPauseProperty); }
-            protected set { this.SetValue(CanPausePropertyKey, value); }
+            get => (bool?)this.GetValue(CanPauseProperty);
+            protected set => this.SetValue(CanPausePropertyKey, value);
         }
 
         /// <summary>
@@ -315,8 +315,8 @@
         /// </summary>
         public int? NaturalVideoHeight
         {
-            get { return (int?)this.GetValue(NaturalVideoHeightProperty); }
-            protected set { this.SetValue(NaturalVideoHeightPropertyKey, value); }
+            get => (int?)this.GetValue(NaturalVideoHeightProperty);
+            protected set => this.SetValue(NaturalVideoHeightPropertyKey, value);
         }
 
         /// <summary>
@@ -325,8 +325,8 @@
         /// </summary>
         public int? NaturalVideoWidth
         {
-            get { return (int?)this.GetValue(NaturalVideoWidthProperty); }
-            protected set { this.SetValue(NaturalVideoWidthPropertyKey, value); }
+            get => (int?)this.GetValue(NaturalVideoWidthProperty);
+            protected set => this.SetValue(NaturalVideoWidthPropertyKey, value);
         }
 
         /// <summary>
@@ -334,8 +334,8 @@
         /// </summary>
         public bool? HasAudio
         {
-            get { return (bool?)this.GetValue(HasAudioProperty); }
-            protected set { this.SetValue(HasAudioPropertyKey, value); }
+            get => (bool?)this.GetValue(HasAudioProperty);
+            protected set => this.SetValue(HasAudioPropertyKey, value);
         }
 
         /// <summary>
@@ -343,8 +343,8 @@
         /// </summary>
         public bool? HasVideo
         {
-            get { return (bool?)this.GetValue(HasVideoProperty); }
-            protected set { this.SetValue(HasVideoPropertyKey, value); }
+            get => (bool?)this.GetValue(HasVideoProperty);
+            protected set => this.SetValue(HasVideoPropertyKey, value);
         }
 
         /// <summary>
@@ -352,8 +352,8 @@
         /// </summary>
         public bool HasMedia
         {
-            get { return (bool)this.GetValue(HasMediaProperty); }
-            protected set { this.SetValue(HasMediaPropertyKey, value); }
+            get => (bool)this.GetValue(HasMediaProperty);
+            protected set => this.SetValue(HasMediaPropertyKey, value);
         }
 
         /// <summary>
@@ -361,8 +361,8 @@
         /// </summary>
         public double SpeedRatio
         {
-            get { return (double)this.GetValue(SpeedRatioProperty); }
-            set { this.SetValue(SpeedRatioProperty, value); }
+            get => (double)this.GetValue(SpeedRatioProperty);
+            set => this.SetValue(SpeedRatioProperty, value);
         }
 
         /// <summary>
@@ -371,8 +371,8 @@
         /// </summary>
         public bool IsBuffering
         {
-            get { return (bool)this.GetValue(IsBufferingProperty); }
-            protected set { this.SetValue(IsBufferingPropertyKey, value); }
+            get => (bool)this.GetValue(IsBufferingProperty);
+            protected set => this.SetValue(IsBufferingPropertyKey, value);
         }
 
         /// <summary>
@@ -380,8 +380,8 @@
         /// </summary>
         public double DownloadProgress
         {
-            get { return (double)this.GetValue(DownloadProgressProperty); }
-            protected set { this.SetValue(DownloadProgressPropertyKey, value); }
+            get => (double)this.GetValue(DownloadProgressProperty);
+            protected set => this.SetValue(DownloadProgressPropertyKey, value);
         }
 
         /// <summary>
@@ -389,8 +389,8 @@
         /// </summary>
         public double BufferingProgress
         {
-            get { return (double)this.GetValue(BufferingProgressProperty); }
-            protected set { this.SetValue(BufferingProgressPropertyKey, value); }
+            get => (double)this.GetValue(BufferingProgressProperty);
+            protected set => this.SetValue(BufferingProgressPropertyKey, value);
         }
 
         /// <summary>
@@ -398,8 +398,8 @@
         /// </summary>
         public double VolumeIncrement
         {
-            get { return (double)this.GetValue(VolumeIncrementProperty); }
-            set { this.SetValue(VolumeIncrementProperty, value); }
+            get => (double)this.GetValue(VolumeIncrementProperty);
+            set => this.SetValue(VolumeIncrementProperty, value);
         }
 
         /// <summary>
@@ -408,8 +408,8 @@
         /// </summary>
         public TimeSpan SkipIncrement
         {
-            get { return (TimeSpan)this.GetValue(SkipIncrementProperty); }
-            set { this.SetValue(SkipIncrementProperty, value); }
+            get => (TimeSpan)this.GetValue(SkipIncrementProperty);
+            set => this.SetValue(SkipIncrementProperty, value);
         }
 
         /// <summary>
@@ -417,8 +417,8 @@
         /// </summary>
         public string VideoFormats
         {
-            get { return (string)this.GetValue(VideoFormatsProperty); }
-            set { this.SetValue(VideoFormatsProperty, value); }
+            get => (string)this.GetValue(VideoFormatsProperty);
+            set => this.SetValue(VideoFormatsProperty, value);
         }
 
         /// <summary>
@@ -426,8 +426,8 @@
         /// </summary>
         public string AudioFormats
         {
-            get { return (string)this.GetValue(AudioFormatsProperty); }
-            set { this.SetValue(AudioFormatsProperty, value); }
+            get => (string)this.GetValue(AudioFormatsProperty);
+            set => this.SetValue(AudioFormatsProperty, value);
         }
 
         /// <summary>
@@ -436,8 +436,8 @@
         /// </summary>
         public MediaState LoadedBehavior
         {
-            get { return (MediaState)this.GetValue(LoadedBehaviorProperty); }
-            set { this.SetValue(LoadedBehaviorProperty, value); }
+            get => (MediaState)this.GetValue(LoadedBehaviorProperty);
+            set => this.SetValue(LoadedBehaviorProperty, value);
         }
 
         private static void OnIsPlayingChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)

@@ -47,8 +47,8 @@ namespace Gu.Wpf.Media
         /// </summary>
         public MouseWheelDirection Direction
         {
-            get { return this.Gesture.Direction; }
-            set { this.Gesture.Direction = value; }
+            get => this.Gesture.Direction;
+            set => this.Gesture.Direction = value;
         }
 
         /// <summary>
@@ -56,8 +56,8 @@ namespace Gu.Wpf.Media
         /// </summary>
         public ModifierKeys Modifiers
         {
-            get { return this.Gesture.Modifiers; }
-            set { this.Gesture.Modifiers = value; }
+            get => this.Gesture.Modifiers;
+            set => this.Gesture.Modifiers = value;
         }
 
         /// <inheritdoc />

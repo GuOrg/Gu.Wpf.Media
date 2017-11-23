@@ -683,8 +683,7 @@
                 return this.VolumeIncrement;
             }
 
-            double result;
-            if (ObjectExt.TryConvertToDouble(parameter, out result))
+            if (ObjectExt.TryConvertToDouble(parameter, out var result))
             {
                 return result;
             }
@@ -722,20 +721,17 @@
                     return this.SkipIncrement;
                 }
 
-                int intResult;
-                if (int.TryParse(text, NumberStyles.Integer, CultureInfo.InvariantCulture, out intResult))
+                if (int.TryParse(text, NumberStyles.Integer, CultureInfo.InvariantCulture, out var intResult))
                 {
                     return this.GetSkipIncrement(intResult);
                 }
 
-                double doubleResult;
-                if (double.TryParse(text, NumberStyles.Float, CultureInfo.InvariantCulture, out doubleResult))
+                if (double.TryParse(text, NumberStyles.Float, CultureInfo.InvariantCulture, out var doubleResult))
                 {
                     return this.GetSkipIncrement(doubleResult);
                 }
 
-                TimeSpan timeResult;
-                if (TimeSpan.TryParse(text, CultureInfo.InvariantCulture, out timeResult))
+                if (TimeSpan.TryParse(text, CultureInfo.InvariantCulture, out var timeResult))
                 {
                     return this.GetSkipIncrement(timeResult);
                 }

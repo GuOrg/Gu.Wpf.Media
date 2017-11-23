@@ -46,10 +46,7 @@
 
         public object Value
         {
-            get
-            {
-                return this.wrapper.GetValue(this.proxyProperty);
-            }
+            get => this.wrapper.GetValue(this.proxyProperty);
 
             set
             {

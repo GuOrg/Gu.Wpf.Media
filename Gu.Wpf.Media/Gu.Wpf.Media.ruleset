@@ -94,5 +94,19 @@
     <Rule Id="WPF0016" Action="Error" />
     <Rule Id="WPF0050" Action="Error" />
     <Rule Id="WPF0051" Action="Error" />
+    <Rule Id="WPF0005" Action="Error" />
+    <Rule Id="WPF0006" Action="Error" />
+    <Rule Id="WPF0007" Action="Error" />
+    <Rule Id="WPF0017" Action="Error" />
+    <Rule Id="WPF0042" Action="Error" />
+    <Rule Id="WPF0043" Action="Error" />
+    <Rule Id="WPF0052" Action="Error" />
+    <Rule Id="WPF0060" Action="Error" />
+    <Rule Id="WPF0061" Action="Error" />
+    <Rule Id="WPF0070" Action="Error" />
+    <Rule Id="WPF0071" Action="Error" />
+    <Rule Id="WPF0072" Action="Error" />
+    <Rule Id="WPF0080" Action="Error" />
+    <Rule Id="WPF0081" Action="Error" />
   </Rules>
 </RuleSet>

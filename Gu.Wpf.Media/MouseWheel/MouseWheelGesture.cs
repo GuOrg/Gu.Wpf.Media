@@ -8,7 +8,9 @@
     /// <inheritdoc />
     [TypeConverter(typeof(MouseWheelGestureConverter))]
     [ValueSerializer(typeof(MouseWheelGestureValueSerializer))]
+#pragma warning disable INPC001 // Implement INotifyPropertyChanged.
     public class MouseWheelGesture : MouseGesture
+#pragma warning restore INPC001 // Implement INotifyPropertyChanged.
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="MouseWheelGesture"/> class.

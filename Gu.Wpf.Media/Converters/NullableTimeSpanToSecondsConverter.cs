@@ -6,6 +6,9 @@
     using System.Windows.Data;
     using System.Windows.Markup;
 
+    /// <summary>
+    /// An <see cref="IValueConverter"/> that returns <see cref="TimeSpan.TotalSeconds"/>
+    /// </summary>
     [ValueConversion(typeof(TimeSpan?), typeof(double?))]
     [MarkupExtensionReturnType(typeof(NullableTimeSpanToSecondsConverter))]
     public class NullableTimeSpanToSecondsConverter : MarkupExtension, IValueConverter
@@ -34,9 +37,9 @@
                 return this.WhenNull;
             }
 
-            if (value is TimeSpan)
+            if (value is TimeSpan timeSpan)
             {
-                return ((TimeSpan)value).TotalSeconds;
+                return timeSpan.TotalSeconds;
             }
 
             if (Is.InDesignMode)
@@ -57,9 +60,9 @@
                 return null;
             }
 
-            if (value is double)
+            if (value is double d)
             {
-                return TimeSpan.FromSeconds((double)value);
+                return TimeSpan.FromSeconds(d);
             }
 
             if (Is.InDesignMode)

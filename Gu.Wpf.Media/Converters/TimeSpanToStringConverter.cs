@@ -8,6 +8,9 @@
     using System.Windows.Data;
     using System.Windows.Markup;
 
+    /// <summary>
+    /// An <see cref="IValueConverter"/> that returns a formatted string of a <see cref="TimeSpan"/>
+    /// </summary>
     [ValueConversion(typeof(TimeSpan?), typeof(string), ParameterType = typeof(string))]
     [MarkupExtensionReturnType(typeof(TimeSpanToStringConverter))]
     public class TimeSpanToStringConverter : MarkupExtension, IValueConverter
@@ -58,7 +61,39 @@
                 return message;
             }
 
-            if (!(value is TimeSpan))
+            if (value is TimeSpan timeSpan)
+            {
+                StringBuilder.Clear();
+                if (timeSpan.Hours > 0)
+                {
+                    StringBuilder.Append(timeSpan.Hours.ToString(CultureInfo.InvariantCulture))
+                                 .Append(':')
+                                 .Append(timeSpan.Minutes.ToString("00"))
+                                 .Append(':')
+                                 .Append(timeSpan.Seconds.ToString("00"));
+                }
+                else
+                {
+                    StringBuilder.Append(timeSpan.Minutes)
+                                 .Append(':')
+                                 .Append(timeSpan.Seconds.ToString("00"));
+                }
+
+                var format = parameter as string;
+                if (!string.IsNullOrEmpty(format))
+                {
+                    var fraction = timeSpan.ToString(format);
+                    if (fraction != string.Empty)
+                    {
+                        StringBuilder.Append('.')
+                                     .Append(fraction);
+                    }
+                }
+
+                var formatted = StringBuilder.ToString();
+                return formatted;
+            }
+            else
             {
                 var message = this.CreateErrorMessage($"Expected a timespan, was {value}");
                 if (Is.InDesignMode)
@@ -68,37 +103,6 @@
 
                 return message;
             }
-
-            StringBuilder.Clear();
-            var timeSpan = (TimeSpan)value;
-            if (timeSpan.Hours > 0)
-            {
-                StringBuilder.Append(timeSpan.Hours.ToString(CultureInfo.InvariantCulture))
-                    .Append(':')
-                    .Append(timeSpan.Minutes.ToString("00"))
-                    .Append(':')
-                    .Append(timeSpan.Seconds.ToString("00"));
-            }
-            else
-            {
-                StringBuilder.Append(timeSpan.Minutes)
-                    .Append(':')
-                    .Append(timeSpan.Seconds.ToString("00"));
-            }
-
-            var format = parameter as string;
-            if (!string.IsNullOrEmpty(format))
-            {
-                var fraction = timeSpan.ToString(format);
-                if (fraction != string.Empty)
-                {
-                    StringBuilder.Append('.')
-                        .Append(fraction);
-                }
-            }
-
-            var formatted = StringBuilder.ToString();
-            return formatted;
         }
 
         /// <inheritdoc/>

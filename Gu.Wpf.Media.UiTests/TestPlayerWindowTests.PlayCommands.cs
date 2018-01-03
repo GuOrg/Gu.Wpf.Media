@@ -15,9 +15,9 @@ namespace Gu.Wpf.Media.UiTests
 
         public Button StopButton => this.FindButton();
 
-        public Button TogglePlayPauseButton => this.FindButton();
+        public ToggleButton TogglePlayPauseButton => this.FindToggleButton();
 
-        public Button BoundPlayPauseButton => this.FindButton();
+        public ToggleButton BoundPlayPauseButton => this.FindToggleButton();
 
         public Button RewindButton => this.FindButton();
 

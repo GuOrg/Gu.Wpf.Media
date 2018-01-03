@@ -77,10 +77,9 @@ namespace Gu.Wpf.Media.UiTests.Helpers
             if (valueBox.Text != value)
             {
                 valueBox.Text = value;
-                ////this.Window.WaitWhileBusy();
                 //// ReSharper disable once ExplicitCallerInfoArgument
-                this.FindButton("Lose focus")
-                    .Click();
+                this.FindButton("Lose focus").Click();
+                this.Window.WaitUntilResponsive();
             }
         }
 

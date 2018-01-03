@@ -8,7 +8,7 @@ namespace Gu.Wpf.Media.UiTests
     {
         private Button ToggleMuteButton => this.FindButton();
 
-        private Button BoundToggleMuteButton => this.FindButton();
+        private ToggleButton BoundToggleMuteButton => this.FindToggleButton();
 
         private Button MuteVolumeButton => this.FindButton();
 

@@ -63,6 +63,13 @@ namespace Gu.Wpf.Media.UiTests.Helpers
             return this.Window.FindButton(name);
         }
 
+        public ToggleButton FindToggleButton([CallerMemberName]string name = null)
+        {
+            Assert.NotNull(name);
+            name = name.EndsWith("Button") ? name.TrimEnd("Button") : name;
+            return this.Window.FindToggleButton(name);
+        }
+
         public void SetValue(DependencyProperty property, string value)
         {
             var valueBox = this.FindTextBox(property.Name);

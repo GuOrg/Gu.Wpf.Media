@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.Media
+namespace Gu.Wpf.Media
 {
     using System;
     using System.Globalization;
@@ -11,7 +11,7 @@
     /// <summary>
     /// An <see cref="IValueConverter"/> that returns a formatted string of a <see cref="TimeSpan"/>
     /// </summary>
-    [ValueConversion(typeof(TimeSpan?), typeof(string), ParameterType = typeof(string))]
+    [ValueConversion(typeof(TimeSpan), typeof(string), ParameterType = typeof(string))]
     [MarkupExtensionReturnType(typeof(TimeSpanToStringConverter))]
     public class TimeSpanToStringConverter : MarkupExtension, IValueConverter
     {

@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.Media.Demo.UiTestWindows
+namespace Gu.Wpf.Media.Demo.UiTestWindows
 {
     using System.Collections.Generic;
     using System.ComponentModel;
@@ -31,12 +31,12 @@
             if (property.ReadOnly)
             {
                 var binding = new Binding(property.Name) { Source = wrapper, Mode = BindingMode.OneWay };
-                BindingOperations.SetBinding(wrapper, this.proxyProperty, binding);
+                _ = BindingOperations.SetBinding(wrapper, this.proxyProperty, binding);
             }
             else
             {
                 var binding = new Binding(property.Name) { Source = wrapper, Mode = BindingMode.TwoWay };
-                BindingOperations.SetBinding(wrapper, this.proxyProperty, binding);
+                _ = BindingOperations.SetBinding(wrapper, this.proxyProperty, binding);
             }
         }
 

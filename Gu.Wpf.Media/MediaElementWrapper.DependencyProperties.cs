@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.Media
+namespace Gu.Wpf.Media
 {
     using System;
     using System.Windows;
@@ -7,12 +7,7 @@
     {
 #pragma warning disable SA1202 // Elements must be ordered by access
 
-        /// <summary>
-        /// Identifies the <see cref="MediaElementWrapper.State" /> dependency property.
-        /// </summary>
-        /// <returns>
-        /// The identifier for the <see cref="MediaElementWrapper.State" /> dependency property.
-        /// </returns>
+        /// <summary>Identifies the <see cref="State"/> dependency property.</summary>
         public static readonly DependencyProperty StateProperty = DependencyProperty.Register(
             nameof(State),
             typeof(MediaState),
@@ -22,12 +17,7 @@
                 FrameworkPropertyMetadataOptions.BindsTwoWayByDefault,
                 OnStateChanged));
 
-        /// <summary>
-        /// Identifies the <see cref="MediaElementWrapper.IsPlaying" /> dependency property.
-        /// </summary>
-        /// <returns>
-        /// The identifier for the <see cref="MediaElementWrapper.IsPlaying" /> dependency property.
-        /// </returns>
+        /// <summary>Identifies the <see cref="IsPlaying"/> dependency property.</summary>
         public static readonly DependencyProperty IsPlayingProperty = DependencyProperty.Register(
             nameof(IsPlaying),
             typeof(bool),
@@ -37,12 +27,7 @@
                 FrameworkPropertyMetadataOptions.BindsTwoWayByDefault,
                 OnIsPlayingChanged));
 
-        /// <summary>
-        /// Identifies the <see cref="MediaElementWrapper.Position" /> dependency property.
-        /// </summary>
-        /// <returns>
-        /// The identifier for the <see cref="MediaElementWrapper.Position" /> dependency property.
-        /// </returns>
+        /// <summary>Identifies the <see cref="Position"/> dependency property.</summary>
         public static readonly DependencyProperty PositionProperty = DependencyProperty.Register(
             nameof(Position),
             typeof(TimeSpan?),
@@ -59,12 +44,7 @@
             typeof(MediaElementWrapper),
             new PropertyMetadata(default(TimeSpan?)));
 
-        /// <summary>
-        /// Identifies the <see cref="MediaElementWrapper.Length" /> dependency property.
-        /// </summary>
-        /// <returns>
-        /// The identifier for the <see cref="MediaElementWrapper.Length" /> dependency property.
-        /// </returns>
+        /// <summary>Identifies the <see cref="Length"/> dependency property.</summary>
         public static readonly DependencyProperty LengthProperty = LengthPropertyKey.DependencyProperty;
 
         private static readonly DependencyPropertyKey CanPausePropertyKey = DependencyProperty.RegisterReadOnly(
@@ -73,12 +53,7 @@
             typeof(MediaElementWrapper),
             new PropertyMetadata(default(bool?)));
 
-        /// <summary>
-        /// Identifies the <see cref="MediaElementWrapper.CanPause" /> dependency property.
-        /// </summary>
-        /// <returns>
-        /// The identifier for the <see cref="MediaElementWrapper.CanPause" /> dependency property.
-        /// </returns>
+        /// <summary>Identifies the <see cref="CanPause"/> dependency property.</summary>
         public static readonly DependencyProperty CanPauseProperty = CanPausePropertyKey.DependencyProperty;
 
         private static readonly DependencyPropertyKey NaturalVideoHeightPropertyKey = DependencyProperty.RegisterAttachedReadOnly(
@@ -87,12 +62,7 @@
             typeof(MediaElementWrapper),
             new PropertyMetadata(default(int?)));
 
-        /// <summary>
-        /// Identifies the <see cref="MediaElementWrapper.NaturalVideoHeight" /> dependency property.
-        /// </summary>
-        /// <returns>
-        /// The identifier for the <see cref="MediaElementWrapper.NaturalVideoHeight" /> dependency property.
-        /// </returns>
+        /// <summary>Identifies the <see cref="NaturalVideoHeight"/> dependency property.</summary>
         public static readonly DependencyProperty NaturalVideoHeightProperty = NaturalVideoHeightPropertyKey.DependencyProperty;
 
         private static readonly DependencyPropertyKey NaturalVideoWidthPropertyKey = DependencyProperty.RegisterReadOnly(
@@ -101,12 +71,7 @@
             typeof(MediaElementWrapper),
             new PropertyMetadata(default(int?)));
 
-        /// <summary>
-        /// Identifies the <see cref="MediaElementWrapper.NaturalVideoWidth" /> dependency property.
-        /// </summary>
-        /// <returns>
-        /// The identifier for the <see cref="MediaElementWrapper.NaturalVideoWidth" /> dependency property.
-        /// </returns>
+        /// <summary>Identifies the <see cref="NaturalVideoWidth"/> dependency property.</summary>
         public static readonly DependencyProperty NaturalVideoWidthProperty = NaturalVideoWidthPropertyKey.DependencyProperty;
 
         private static readonly DependencyPropertyKey HasAudioPropertyKey = DependencyProperty.RegisterReadOnly(
@@ -115,12 +80,7 @@
             typeof(MediaElementWrapper),
             new PropertyMetadata(default(bool?)));
 
-        /// <summary>
-        /// Identifies the <see cref="MediaElementWrapper.HasAudio" /> dependency property.
-        /// </summary>
-        /// <returns>
-        /// The identifier for the <see cref="MediaElementWrapper.HasAudio" /> dependency property.
-        /// </returns>
+        /// <summary>Identifies the <see cref="HasAudio"/> dependency property.</summary>
         public static readonly DependencyProperty HasAudioProperty = HasAudioPropertyKey.DependencyProperty;
 
         private static readonly DependencyPropertyKey HasVideoPropertyKey = DependencyProperty.RegisterReadOnly(
@@ -129,12 +89,7 @@
             typeof(MediaElementWrapper),
             new PropertyMetadata(default(bool?)));
 
-        /// <summary>
-        /// Identifies the <see cref="MediaElementWrapper.HasVideo" /> dependency property.
-        /// </summary>
-        /// <returns>
-        /// The identifier for the <see cref="MediaElementWrapper.HasVideo" /> dependency property.
-        /// </returns>
+        /// <summary>Identifies the <see cref="HasVideo"/> dependency property.</summary>
         public static readonly DependencyProperty HasVideoProperty = HasVideoPropertyKey.DependencyProperty;
 
         private static readonly DependencyPropertyKey HasMediaPropertyKey = DependencyProperty.RegisterReadOnly(
@@ -143,25 +98,15 @@
             typeof(MediaElementWrapper),
             new PropertyMetadata(default(bool)));
 
-        /// <summary>
-        /// Identifies the <see cref="MediaElementWrapper.HasMedia" /> dependency property.
-        /// </summary>
-        /// <returns>
-        /// The identifier for the <see cref="MediaElementWrapper.HasMedia" /> dependency property.
-        /// </returns>
+        /// <summary>Identifies the <see cref="HasMedia"/> dependency property.</summary>
         public static readonly DependencyProperty HasMediaProperty = HasMediaPropertyKey.DependencyProperty;
 
-        /// <summary>
-        /// Identifies the <see cref="MediaElementWrapper.SpeedRatio" /> dependency property.
-        /// </summary>
-        /// <returns>
-        /// The identifier for the <see cref="MediaElementWrapper.SpeedRatio" /> dependency property.
-        /// </returns>
+        /// <summary>Identifies the <see cref="SpeedRatio"/> dependency property.</summary>
         public static readonly DependencyProperty SpeedRatioProperty = DependencyProperty.Register(
             nameof(SpeedRatio),
             typeof(double),
             typeof(MediaElementWrapper),
-            new PropertyMetadata(default(double), OnSpeedRatioChanged));
+            new PropertyMetadata(default(double), (d, e) => ((MediaElementWrapper)d).mediaElement.SpeedRatio = (double)e.NewValue));
 
         private static readonly DependencyPropertyKey IsBufferingPropertyKey = DependencyProperty.RegisterReadOnly(
             nameof(IsBuffering),
@@ -169,12 +114,7 @@
             typeof(MediaElementWrapper),
             new PropertyMetadata(default(bool)));
 
-        /// <summary>
-        /// Identifies the <see cref="MediaElementWrapper.IsBuffering" /> dependency property.
-        /// </summary>
-        /// <returns>
-        /// The identifier for the <see cref="MediaElementWrapper.IsBuffering" /> dependency property.
-        /// </returns>
+        /// <summary>Identifies the <see cref="IsBuffering"/> dependency property.</summary>
         public static readonly DependencyProperty IsBufferingProperty = IsBufferingPropertyKey.DependencyProperty;
 
         private static readonly DependencyPropertyKey DownloadProgressPropertyKey = DependencyProperty.RegisterReadOnly(
@@ -183,12 +123,7 @@
             typeof(MediaElementWrapper),
             new PropertyMetadata(default(double)));
 
-        /// <summary>
-        /// Identifies the <see cref="MediaElementWrapper.DownloadProgress" /> dependency property.
-        /// </summary>
-        /// <returns>
-        /// The identifier for the <see cref="MediaElementWrapper.DownloadProgress" /> dependency property.
-        /// </returns>
+        /// <summary>Identifies the <see cref="DownloadProgress"/> dependency property.</summary>
         public static readonly DependencyProperty DownloadProgressProperty = DownloadProgressPropertyKey.DependencyProperty;
 
         private static readonly DependencyPropertyKey BufferingProgressPropertyKey = DependencyProperty.RegisterReadOnly(
@@ -197,63 +132,38 @@
             typeof(MediaElementWrapper),
             new PropertyMetadata(default(double)));
 
-        /// <summary>
-        /// Identifies the <see cref="MediaElementWrapper.BufferingProgress" /> dependency property.
-        /// </summary>
-        /// <returns>
-        /// The identifier for the <see cref="MediaElementWrapper.BufferingProgress" /> dependency property.
-        /// </returns>
+        /// <summary>Identifies the <see cref="BufferingProgress"/> dependency property.</summary>
         public static readonly DependencyProperty BufferingProgressProperty = BufferingProgressPropertyKey.DependencyProperty;
 
-        /// <summary>
-        /// Identifies the <see cref="MediaElementWrapper.VolumeIncrement" /> dependency property.
-        /// </summary>
-        /// <returns>
-        /// The identifier for the <see cref="MediaElementWrapper.VolumeIncrement" /> dependency property.
-        /// </returns>
+        /// <summary>Identifies the <see cref="VolumeIncrement"/> dependency property.</summary>
         public static readonly DependencyProperty VolumeIncrementProperty = DependencyProperty.Register(
             nameof(VolumeIncrement),
             typeof(double),
             typeof(MediaElementWrapper),
             new PropertyMetadata(0.05));
 
-        /// <summary>
-        /// Identifies the <see cref="MediaElementWrapper.SkipIncrement" /> dependency property.
-        /// </summary>
-        /// <returns>
-        /// The identifier for the <see cref="MediaElementWrapper.SkipIncrement" /> dependency property.
-        /// </returns>
+        /// <summary>Identifies the <see cref="SkipIncrement"/> dependency property.</summary>
         public static readonly DependencyProperty SkipIncrementProperty = DependencyProperty.Register(
             nameof(SkipIncrement),
             typeof(TimeSpan),
             typeof(MediaElementWrapper),
             new PropertyMetadata(TimeSpan.FromSeconds(1)));
 
-        /// <summary>
-        /// Gets or sets a list with video file formats.
-        /// This is a convenience for use in <see cref="Microsoft.Win32.OpenFileDialog"/>
-        /// https://support.microsoft.com/en-us/kb/316992
-        /// </summary>
+        /// <summary>Identifies the <see cref="VideoFormats"/> dependency property.</summary>
         public static readonly DependencyProperty VideoFormatsProperty = DependencyProperty.Register(
             nameof(VideoFormats),
             typeof(string),
             typeof(MediaElementWrapper),
             new PropertyMetadata(FileFormats.DefaultVideoFormats));
 
-        /// <summary>
-        /// Gets or sets a list with audio file formats.
-        /// This is a convenience for use in <see cref="Microsoft.Win32.OpenFileDialog"/>
-        /// https://support.microsoft.com/en-us/kb/316992
-        /// </summary>
+        /// <summary>Identifies the <see cref="AudioFormats"/> dependency property.</summary>
         public static readonly DependencyProperty AudioFormatsProperty = DependencyProperty.Register(
             nameof(AudioFormats),
             typeof(string),
             typeof(MediaElementWrapper),
             new PropertyMetadata(FileFormats.DefaultAudioFormats));
 
-        /// <summary>
-        /// The DependencyProperty for the MediaElementWrapper.LoadedBehavior property.
-        /// </summary>
+        /// <summary>Identifies the <see cref="LoadedBehavior"/> dependency property.</summary>
         public static readonly DependencyProperty LoadedBehaviorProperty = DependencyProperty.Register(
             nameof(LoadedBehavior),
             typeof(MediaState),
@@ -413,7 +323,9 @@
         }
 
         /// <summary>
-        /// A list of video file formats that can be sued when opening files.
+        /// Gets or sets a list with video file formats.
+        /// This is a convenience for use in <see cref="Microsoft.Win32.OpenFileDialog"/>
+        /// https://support.microsoft.com/en-us/kb/316992
         /// </summary>
         public string VideoFormats
         {
@@ -422,7 +334,9 @@
         }
 
         /// <summary>
-        /// A list of audio file formats that can be sued when opening files.
+        /// Gets or sets a list with audio file formats.
+        /// This is a convenience for use in <see cref="Microsoft.Win32.OpenFileDialog"/>
+        /// https://support.microsoft.com/en-us/kb/316992
         /// </summary>
         public string AudioFormats
         {
@@ -451,11 +365,6 @@
             {
                 wrapper.SetCurrentValue(StateProperty, MediaState.Pause);
             }
-        }
-
-        private static void OnSpeedRatioChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            ((MediaElementWrapper)d).mediaElement.SpeedRatio = (double)e.NewValue;
         }
 
         private static object OnVolumeCoerce(DependencyObject d, object basevalue)

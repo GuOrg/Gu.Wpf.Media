@@ -146,7 +146,7 @@ namespace Gu.Wpf.Media.UiTests
             if (!Directory.Exists(directoryName))
             {
                 // ReSharper disable once AssignNullToNotNullAttribute
-                Directory.CreateDirectory(directoryName);
+                _ = Directory.CreateDirectory(directoryName);
             }
 
             if (!File.Exists(otherFile))

@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.Media
+namespace Gu.Wpf.Media
 {
     using System.Windows;
     using System.Windows.Controls.Primitives;
@@ -19,21 +19,17 @@
             typeof(Icon),
             new PropertyMetadata(default(Geometry)));
 
-        /// <summary>
-        /// Set a <see cref="Geometry"/> that can be used in the <see cref="System.Windows.Controls.ControlTemplate"/>
-        /// </summary>
-        /// <param name="element">The button.</param>
-        /// <param name="value">The icon geometry.</param>
+        /// <summary>Helper for setting <see cref="GeometryProperty"/> on <paramref name="element"/>.</summary>
+        /// <param name="element"><see cref="ButtonBase"/> to set <see cref="GeometryProperty"/> on.</param>
+        /// <param name="value">Geometry property value.</param>
         public static void SetGeometry(this ButtonBase element, Geometry value)
         {
             element.SetValue(GeometryProperty, value);
         }
 
-        /// <summary>
-        /// Set a <see cref="Geometry"/> that can be used in the <see cref="System.Windows.Controls.ControlTemplate"/>
-        /// </summary>
-        /// <param name="element">The button.</param>
-        /// <returns>The icon geometry.</returns>
+        /// <summary>Helper for getting <see cref="GeometryProperty"/> from <paramref name="element"/>.</summary>
+        /// <param name="element"><see cref="ButtonBase"/> to read <see cref="GeometryProperty"/> from.</param>
+        /// <returns>Geometry property value.</returns>
         [AttachedPropertyBrowsableForChildren(IncludeDescendants = false)]
         [AttachedPropertyBrowsableForType(typeof(ButtonBase))]
         public static Geometry GetGeometry(this ButtonBase element)

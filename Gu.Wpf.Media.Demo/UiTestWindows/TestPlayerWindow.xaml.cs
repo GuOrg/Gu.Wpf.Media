@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.Media.Demo.UiTestWindows
+namespace Gu.Wpf.Media.Demo.UiTestWindows
 {
     using System.Linq;
     using System.Reflection;
@@ -40,7 +40,7 @@
                         Mode = BindingMode.OneWay,
                         Converter = NullConverter.Default
                     };
-                    BindingOperations.SetBinding(value, TextBox.TextProperty, binding);
+                    _ = BindingOperations.SetBinding(value, TextBox.TextProperty, binding);
                     value.IsEnabled = false;
                 }
                 else
@@ -52,7 +52,7 @@
                         Mode = BindingMode.TwoWay,
                         Converter = NullConverter.Default
                     };
-                    BindingOperations.SetBinding(value, TextBox.TextProperty, binding);
+                    _ = BindingOperations.SetBinding(value, TextBox.TextProperty, binding);
                     value.IsEnabled = true;
                 }
 

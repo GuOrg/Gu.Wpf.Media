@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.Media
+namespace Gu.Wpf.Media
 {
     using System.Windows;
     using System.Windows.Controls;
@@ -25,21 +25,17 @@
             EventManager.RegisterClassHandler(typeof(Slider), Thumb.DragCompletedEvent, new DragCompletedEventHandler(OnDragCompleted));
         }
 
-        /// <summary>
-        /// Set the <paramref name="value"/> for which playback will be paused while <paramref name="element"/> is dragging.
-        /// </summary>
-        /// <param name="element">A slider controlling position of <paramref name="value"/></param>
-        /// <param name="value">A <see cref="MediaElementWrapper"/></param>
+        /// <summary>Helper for setting <see cref="PauseWhileDraggingProperty"/> on <paramref name="element"/>.</summary>
+        /// <param name="element"><see cref="Slider"/> to set <see cref="PauseWhileDraggingProperty"/> on.</param>
+        /// <param name="value">PauseWhileDragging property value.</param>
         public static void SetPauseWhileDragging(Slider element, MediaElementWrapper value)
         {
             element.SetValue(PauseWhileDraggingProperty, value);
         }
 
-        /// <summary>
-        /// Get the <see cref="MediaElementWrapper"/> for which playback will be paused while <paramref name="element"/> is dragging.
-        /// </summary>
-        /// <param name="element">A slider controlling position of a <see cref="MediaElementWrapper"/></param>
-        /// <returns>The <see cref="MediaElementWrapper"/></returns>
+        /// <summary>Helper for getting <see cref="PauseWhileDraggingProperty"/> from <paramref name="element"/>.</summary>
+        /// <param name="element"><see cref="Slider"/> to read <see cref="PauseWhileDraggingProperty"/> from.</param>
+        /// <returns>PauseWhileDragging property value.</returns>
         [AttachedPropertyBrowsableForChildren(IncludeDescendants = false)]
         [AttachedPropertyBrowsableForType(typeof(Slider))]
         public static MediaElementWrapper GetPauseWhileDragging(Slider element)

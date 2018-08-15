@@ -1,4 +1,4 @@
-﻿// ReSharper disable SuppressSetMutable
+// ReSharper disable SuppressSetMutable
 namespace Gu.Wpf.Media.Demo
 {
     using System;
@@ -17,6 +17,7 @@ namespace Gu.Wpf.Media.Demo
             typeof(MainWindow),
             new PropertyMetadata(default(string)));
 
+        /// <summary>Identifies the <see cref="MediaFileName"/> dependency property.</summary>
         public static readonly DependencyProperty MediaFileNameProperty = MediaFileNamePropertyKey.DependencyProperty;
 
         private static readonly DependencyPropertyKey MediaUriPropertyKey = DependencyProperty.RegisterReadOnly(
@@ -25,6 +26,7 @@ namespace Gu.Wpf.Media.Demo
             typeof(MainWindow),
             new PropertyMetadata(default(Uri)));
 
+        /// <summary>Identifies the <see cref="MediaUri"/> dependency property.</summary>
         public static readonly DependencyProperty MediaUriProperty = MediaUriPropertyKey.DependencyProperty;
 #pragma warning restore SA1202 // Elements must be ordered by access
 
@@ -59,7 +61,7 @@ namespace Gu.Wpf.Media.Demo
 
                 if (files.Length > 1)
                 {
-                    MessageBox.Show(
+                    _ = MessageBox.Show(
                         this,
                         "Only onde file at the time can be dropped.",
                         "Error",
@@ -76,7 +78,7 @@ namespace Gu.Wpf.Media.Demo
                 }
                 catch (Exception exception)
                 {
-                    MessageBox.Show(
+                    _ = MessageBox.Show(
                         this,
                         exception.Message,
                         "Error",
@@ -137,48 +139,7 @@ namespace Gu.Wpf.Media.Demo
 
         private void OnMediaFailed(object sender, ExceptionRoutedEventArgs e)
         {
-            MessageBox.Show(this, e.ErrorException.Message, "Media failed");
+            _ = MessageBox.Show(this, e.ErrorException.Message, "Media failed");
         }
-
-        ////private void OnCloseExecuted(object sender, ExecutedRoutedEventArgs e)
-        ////{
-        ////    this.Close();
-        ////    e.Handled = true;
-        ////}
-
-        ////private void OnMinimizeCanExecute(object sender, CanExecuteRoutedEventArgs e)
-        ////{
-        ////    e.CanExecute = this.WindowState != WindowState.Minimized;
-        ////    e.Handled = true;
-        ////}
-
-        ////private void OnMinimizeExecuted(object sender, ExecutedRoutedEventArgs e)
-        ////{
-        ////    this.WindowState = WindowState.Minimized;
-        ////}
-
-        ////private void OnMaximizeCanExecute(object sender, CanExecuteRoutedEventArgs e)
-        ////{
-        ////    e.CanExecute = this.WindowState != WindowState.Maximized;
-        ////    e.Handled = true;
-        ////}
-
-        ////private void OnMaximizeExecuted(object sender, ExecutedRoutedEventArgs e)
-        ////{
-        ////    this.SizeToContent = SizeToContent.Manual;
-        ////    this.WindowState = WindowState.Maximized;
-        ////}
-
-        ////private void OnRestoreCanExecute(object sender, CanExecuteRoutedEventArgs e)
-        ////{
-        ////    e.CanExecute = this.WindowState != WindowState.Normal;
-        ////    e.Handled = true;
-        ////}
-
-        ////private void OnRestoreExecuted(object sender, ExecutedRoutedEventArgs e)
-        ////{
-        ////    this.SizeToContent = SizeToContent.WidthAndHeight;
-        ////    this.WindowState = WindowState.Normal;
-        ////}
     }
 }

@@ -41,12 +41,13 @@ Wrapper for System.Windows.Controls.MediaElement.
     - [1.2.6. MediaEnded](#126-mediaended)
   - [1.3. CommandBindings](#13-commandbindings)
     - [1.3.1 IncreaseVolume & DecreaseVolume](#131-increasevolume--decreasevolume)
-    - [1.3.2 Skip, SkipForward & SkipBack](#132-skip--skipforward--skipback)
-- [2. Icon](#2-icon)
-- [3. Drag](#3-drag)
-- [4. TimeSpanToStringConverter](#4-timespantostringconverter)
-- [5. Commands](#5-commands)
-- [6. Sample](#6-sample)
+    - [1.3.2 Skip, SkipForward & SkipBack](#132-skip-skipforward--skipback)
+- [2. MouseWheelGesture](#2-mousewheelgesture)   
+- [3. Icon](#3-icon)
+- [4. Drag](#4-drag)
+- [5. TimeSpanToStringConverter](#5-timespantostringconverter)
+- [6. Commands](#6-commands)
+- [7. Sample](#7-sample)
 
 # 1. MediaElementWrapper
 ## 1.1 Properties
@@ -230,7 +231,7 @@ And with modifier
 ```
 
 # 3. Icon
-Exposes a `Gemoetry` attached property.
+Exposes a `Geometry` attached property.
 ```xaml
 <Button media:Icon.Geometry="{StaticResource {x:Static media:Geometries.PlayGeometryKey}}"
         Command="Play"
@@ -257,6 +258,7 @@ When binidng this to a `MediaElementWrapper`playback is paused while dragging.
 
 # 5. TimeSpanToStringConverter
 Converts Timespans like this:
+
 |Time|Result|
 |---|---|
 |null|-:--|
@@ -536,4 +538,3 @@ public partial class MainWindow : Window
 
 Check out the demo project for more samples.
 Sample video from https://pixabay.com/
-

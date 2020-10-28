@@ -1,4 +1,4 @@
-﻿// not sure about exposing this
+// not sure about exposing this
 namespace Gu.Wpf.Media
 {
     using System;
@@ -12,7 +12,7 @@ namespace Gu.Wpf.Media
         /// <summary>
         /// Initializes a new instance of the <see cref="MouseWheelExtension"/> class.
         /// </summary>
-        /// <param name="direction"><see cref="MouseWheelDirection"/></param>
+        /// <param name="direction"><see cref="MouseWheelDirection"/>.</param>
         public MouseWheelExtension(MouseWheelDirection direction)
             : this(ModifierKeys.None, direction)
         {
@@ -21,8 +21,8 @@ namespace Gu.Wpf.Media
         /// <summary>
         /// Initializes a new instance of the <see cref="MouseWheelExtension"/> class.
         /// </summary>
-        /// <param name="direction"><see cref="MouseWheelDirection"/></param>
-        /// <param name="modifiers"><see cref="ModifierKeys"/></param>
+        /// <param name="direction"><see cref="MouseWheelDirection"/>.</param>
+        /// <param name="modifiers"><see cref="ModifierKeys"/>.</param>
         public MouseWheelExtension(ModifierKeys modifiers, MouseWheelDirection direction)
             : this(new MouseWheelGesture(direction, modifiers))
         {
@@ -31,19 +31,19 @@ namespace Gu.Wpf.Media
         /// <summary>
         /// Initializes a new instance of the <see cref="MouseWheelExtension"/> class.
         /// </summary>
-        /// <param name="gesture"><see cref="MouseWheelGesture"/></param>
+        /// <param name="gesture"><see cref="MouseWheelGesture"/>.</param>
         public MouseWheelExtension(MouseWheelGesture gesture)
         {
             this.Gesture = gesture;
         }
 
         /// <summary>
-        /// The gesture se <see cref="MouseWheelGesture"/>
+        /// The gesture se <see cref="MouseWheelGesture"/>.
         /// </summary>
         public MouseWheelGesture Gesture { get; set; }
 
         /// <summary>
-        /// Direction <see cref="MouseWheelDirection"/>
+        /// Direction <see cref="MouseWheelDirection"/>.
         /// </summary>
         public MouseWheelDirection Direction
         {
@@ -52,7 +52,7 @@ namespace Gu.Wpf.Media
         }
 
         /// <summary>
-        /// Modifiers <see cref="ModifierKeys"/>
+        /// Modifiers <see cref="ModifierKeys"/>.
         /// </summary>
         public ModifierKeys Modifiers
         {

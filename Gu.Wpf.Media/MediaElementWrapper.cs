@@ -161,7 +161,7 @@
         }
 
         /// <summary>
-        /// Sets <see cref="State"/> to <see cref="MediaState.Play"/>
+        /// Sets <see cref="State"/> to <see cref="MediaState.Play"/>.
         /// </summary>
         public void Play()
         {
@@ -178,7 +178,7 @@
         }
 
         /// <summary>
-        /// Sets <see cref="State"/> to <see cref="MediaState.Pause"/>
+        /// Sets <see cref="State"/> to <see cref="MediaState.Pause"/>.
         /// </summary>
         public void PausePlayback()
         {
@@ -212,7 +212,7 @@
         }
 
         /// <summary>
-        /// Sets <see cref="State"/> to <see cref="MediaState.Pause"/>
+        /// Sets <see cref="State"/> to <see cref="MediaState.Pause"/>.
         /// </summary>
         public void Stop()
         {
@@ -229,7 +229,7 @@
         }
 
         /// <summary>
-        /// Sets <see cref="Position"/> to <see cref="TimeSpan.Zero"/>
+        /// Sets <see cref="Position"/> to <see cref="TimeSpan.Zero"/>.
         /// </summary>
         public void Rewind()
         {
@@ -239,7 +239,7 @@
         /// <summary>
         /// Check if <see cref="Volume"/> can be decreased.
         /// </summary>
-        /// <param name="parameter">The command parameter</param>
+        /// <param name="parameter">The command parameter.</param>
         /// <returns>True if <see cref="Volume"/> can be decreased.</returns>
         public bool CanDecreaseVolume(object parameter)
         {
@@ -279,7 +279,7 @@
         /// <summary>
         /// Check if <see cref="Volume"/> can be increased.
         /// </summary>
-        /// <param name="parameter">The command parameter</param>
+        /// <param name="parameter">The command parameter.</param>
         /// <returns>True if <see cref="Volume"/> can be increased.</returns>
         public bool CanIncreaseVolume(object parameter)
         {
@@ -331,7 +331,7 @@
         }
 
         /// <summary>
-        /// Sets IsMuted = true
+        /// Sets IsMuted = true.
         /// </summary>
         public void MuteVolume()
         {
@@ -349,7 +349,7 @@
         }
 
         /// <summary>
-        /// Turns sound on by setting IsMuted = false
+        /// Turns sound on by setting IsMuted = false.
         /// </summary>
         public void UnmuteVolume()
         {
@@ -366,7 +366,7 @@
         }
 
         /// <summary>
-        /// Sets IsMuted = !Muted
+        /// Sets IsMuted = !Muted.
         /// </summary>
         public void ToggleMute()
         {
@@ -382,15 +382,15 @@
         /// <summary>
         /// Check if skip can be performed.
         /// </summary>
-        /// <param name="parameter">The command parameter</param>
-        /// <returns>True if <see cref="Length"/> is not null</returns>
+        /// <param name="parameter">The command parameter.</param>
+        /// <returns>True if <see cref="Length"/> is not null.</returns>
         public bool CanSkip(object parameter)
         {
             return this.Length != null && this.GetSkipIncrement(parameter) != TimeSpan.Zero;
         }
 
         /// <summary>
-        /// Changes current position by <paramref name="parameter"/>
+        /// Changes current position by <paramref name="parameter"/>.
         /// </summary>
         /// <param name="parameter">
         /// If null <see cref="SkipIncrement"/> is used.
@@ -408,15 +408,15 @@
         /// <summary>
         /// Check if skip can be performed.
         /// </summary>
-        /// <param name="parameter">The command parameter</param>
-        /// <returns>True if <see cref="Length"/> is not null</returns>
+        /// <param name="parameter">The command parameter.</param>
+        /// <returns>True if <see cref="Length"/> is not null.</returns>
         public bool CanSkipBack(object parameter)
         {
             return this.CanSkip(parameter) && this.Position > TimeSpan.Zero;
         }
 
         /// <summary>
-        /// Changes current position by <paramref name="parameter"/>
+        /// Changes current position by <paramref name="parameter"/>.
         /// </summary>
         /// <param name="parameter">
         /// If null <see cref="SkipIncrement"/> is used.
@@ -434,15 +434,15 @@
         /// <summary>
         /// Check if skip can be performed.
         /// </summary>
-        /// <param name="parameter">The command parameter</param>
-        /// <returns>True if <see cref="Length"/> is not null</returns>
+        /// <param name="parameter">The command parameter.</param>
+        /// <returns>True if <see cref="Length"/> is not null.</returns>
         public bool CanSkipForward(object parameter)
         {
             return this.CanSkip(parameter) && this.Position < this.Length;
         }
 
         /// <summary>
-        /// Changes current position by <paramref name="parameter"/>
+        /// Changes current position by <paramref name="parameter"/>.
         /// </summary>
         /// <param name="parameter">
         /// If null <see cref="SkipIncrement"/> is used.

@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.Media
+namespace Gu.Wpf.Media
 {
     using System;
     using System.Windows;
@@ -82,7 +82,7 @@
         }
 
         /// <summary>
-        /// MediaEnded is a routed event
+        /// MediaEnded is a routed event.
         /// </summary>
         public static readonly RoutedEvent MediaEndedEvent = MediaElement.MediaEndedEvent.AddOwner(typeof(MediaElementWrapper));
 

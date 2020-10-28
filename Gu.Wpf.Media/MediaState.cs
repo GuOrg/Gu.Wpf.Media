@@ -1,7 +1,7 @@
 ﻿namespace Gu.Wpf.Media
 {
     /// <summary>
-    /// States that can be applied to the <see cref="MediaElementWrapper"/>
+    /// States that can be applied to the <see cref="MediaElementWrapper"/>.
     /// </summary>
     public enum MediaState
     {

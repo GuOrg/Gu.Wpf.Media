@@ -3,15 +3,15 @@
     using System;
 
     /// <summary>
-    /// Helper methods for <see cref="MouseWheelDirection"/>
+    /// Helper methods for <see cref="MouseWheelDirection"/>.
     /// </summary>
     public static class MouseWheelDirectionExt
     {
         /// <summary>
         /// Get if <paramref name="direction"/> si a valid value.
         /// </summary>
-        /// <param name="direction"><see cref="MouseWheelDirection"/></param>
-        /// <returns>True if <paramref name="direction"/> is valid</returns>
+        /// <param name="direction"><see cref="MouseWheelDirection"/>.</param>
+        /// <returns>True if <paramref name="direction"/> is valid.</returns>
         public static bool IsDefined(MouseWheelDirection direction)
         {
             switch (direction)
@@ -26,9 +26,9 @@
         }
 
         /// <summary>
-        /// Get the string representation of <paramref name="direction"/>
+        /// Get the string representation of <paramref name="direction"/>.
         /// </summary>
-        /// <param name="direction"><see cref="MouseWheelDirection"/></param>
+        /// <param name="direction"><see cref="MouseWheelDirection"/>.</param>
         /// <returns>The string representation.</returns>
         public static string ToName(this MouseWheelDirection direction)
         {

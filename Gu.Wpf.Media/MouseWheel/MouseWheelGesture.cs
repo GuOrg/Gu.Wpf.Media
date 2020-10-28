@@ -23,7 +23,7 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="MouseWheelGesture"/> class.
         /// </summary>
-        /// <param name="direction">The <see cref="MouseWheelDirection"/></param>
+        /// <param name="direction">The <see cref="MouseWheelDirection"/>.</param>
         public MouseWheelGesture(MouseWheelDirection direction)
             //// ReSharper disable once IntroduceOptionalParameters.Global
             : this(direction, ModifierKeys.None)
@@ -33,8 +33,8 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="MouseWheelGesture"/> class.
         /// </summary>
-        /// <param name="direction">The <see cref="MouseWheelDirection"/></param>
-        /// <param name="modifiers">Modifiers</param>
+        /// <param name="direction">The <see cref="MouseWheelDirection"/>.</param>
+        /// <param name="modifiers">Modifiers.</param>
         public MouseWheelGesture(MouseWheelDirection direction, ModifierKeys modifiers)
             : base(MouseAction.WheelClick, modifiers)
         {
@@ -47,7 +47,7 @@
         public new MouseAction MouseAction => base.MouseAction;
 
         /// <summary>
-        /// Direction <see cref="MouseWheelDirection"/>
+        /// Direction <see cref="MouseWheelDirection"/>.
         /// </summary>
         public MouseWheelDirection Direction { get; set; }
 

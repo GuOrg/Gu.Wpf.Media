@@ -182,7 +182,7 @@ namespace Gu.Wpf.Media
         }
 
         /// <summary>
-        /// Sets <see cref="State"/> to <see cref="MediaState.Pause"/> if <see cref="MediaState.Play"/> and to <see cref="MediaState.Play"/> if <see cref="MediaState.Pause"/>
+        /// Sets <see cref="State"/> to <see cref="MediaState.Pause"/> if <see cref="MediaState.Play"/> and to <see cref="MediaState.Play"/> if <see cref="MediaState.Pause"/>.
         /// </summary>
         public bool IsPlaying
         {
@@ -201,7 +201,7 @@ namespace Gu.Wpf.Media
         }
 
         /// <summary>
-        /// The length of the current media
+        /// The length of the current media.
         /// </summary>
         public TimeSpan? Length
         {
@@ -325,7 +325,7 @@ namespace Gu.Wpf.Media
         /// <summary>
         /// Gets or sets a list with video file formats.
         /// This is a convenience for use in <see cref="Microsoft.Win32.OpenFileDialog"/>
-        /// https://support.microsoft.com/en-us/kb/316992
+        /// https://support.microsoft.com/en-us/kb/316992.
         /// </summary>
         public string VideoFormats
         {
@@ -336,7 +336,7 @@ namespace Gu.Wpf.Media
         /// <summary>
         /// Gets or sets a list with audio file formats.
         /// This is a convenience for use in <see cref="Microsoft.Win32.OpenFileDialog"/>
-        /// https://support.microsoft.com/en-us/kb/316992
+        /// https://support.microsoft.com/en-us/kb/316992.
         /// </summary>
         public string AudioFormats
         {

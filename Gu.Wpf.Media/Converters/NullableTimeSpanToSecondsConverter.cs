@@ -7,14 +7,14 @@
     using System.Windows.Markup;
 
     /// <summary>
-    /// An <see cref="IValueConverter"/> that returns <see cref="TimeSpan.TotalSeconds"/>
+    /// An <see cref="IValueConverter"/> that returns <see cref="TimeSpan.TotalSeconds"/>.
     /// </summary>
     [ValueConversion(typeof(TimeSpan?), typeof(double?))]
     [MarkupExtensionReturnType(typeof(NullableTimeSpanToSecondsConverter))]
     public class NullableTimeSpanToSecondsConverter : MarkupExtension, IValueConverter
     {
         /// <summary>
-        /// The default instance used like Converter="{x:Static NullableTimeSpanToSecondsConverter.Default}"
+        /// The default instance used like Converter="{x:Static NullableTimeSpanToSecondsConverter.Default}".
         /// </summary>
         public static readonly NullableTimeSpanToSecondsConverter Default = new NullableTimeSpanToSecondsConverter();
 

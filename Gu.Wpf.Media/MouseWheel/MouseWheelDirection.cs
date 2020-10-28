@@ -1,7 +1,7 @@
 ﻿namespace Gu.Wpf.Media
 {
     /// <summary>
-    /// A set of possible states for <see cref="MouseWheelGesture"/>
+    /// A set of possible states for <see cref="MouseWheelGesture"/>.
     /// </summary>
     public enum MouseWheelDirection
     {

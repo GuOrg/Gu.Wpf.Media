@@ -9,14 +9,14 @@ namespace Gu.Wpf.Media
     using System.Windows.Markup;
 
     /// <summary>
-    /// An <see cref="IValueConverter"/> that returns a formatted string of a <see cref="TimeSpan"/>
+    /// An <see cref="IValueConverter"/> that returns a formatted string of a <see cref="TimeSpan"/>.
     /// </summary>
     [ValueConversion(typeof(TimeSpan), typeof(string), ParameterType = typeof(string))]
     [MarkupExtensionReturnType(typeof(TimeSpanToStringConverter))]
     public class TimeSpanToStringConverter : MarkupExtension, IValueConverter
     {
         /// <summary>
-        /// The default instance used like Converter="{x:Static TimeSpanToStringConverter.Default}"
+        /// The default instance used like Converter="{x:Static TimeSpanToStringConverter.Default}".
         /// </summary>
         public static readonly TimeSpanToStringConverter Default = new TimeSpanToStringConverter();
 

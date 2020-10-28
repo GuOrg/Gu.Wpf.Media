@@ -8,8 +8,6 @@ namespace Gu.Wpf.Media.Demo.UiTestWindows
     using System.Windows.Controls;
     using System.Windows.Data;
 
-    using JetBrains.Annotations;
-
     public class PropertyItem : INotifyPropertyChanged
     {
         private static readonly Dictionary<DependencyProperty, PropertyItem> Cache = new Dictionary<DependencyProperty, PropertyItem>();
@@ -81,7 +79,6 @@ namespace Gu.Wpf.Media.Demo.UiTestWindows
             return $"{nameof(this.Property)}: {this.Property}, {nameof(this.Value)}: {this.Value}";
         }
 
-        [NotifyPropertyChangedInvocator]
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

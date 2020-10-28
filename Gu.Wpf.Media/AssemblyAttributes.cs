@@ -5,5 +5,5 @@ using System.Windows.Markup;
 [assembly: ThemeInfo(ResourceDictionaryLocation.None, ResourceDictionaryLocation.SourceAssembly)]
 [assembly: XmlnsDefinition("https://github.com/JohanLarsson/Gu.Wpf.Media", "Gu.Wpf.Media")]
 [assembly: XmlnsPrefix("https://github.com/JohanLarsson/Gu.Wpf.Media", "media")]
-[assembly: InternalsVisibleTo("Gu.Wpf.Media.Tests")]
-[assembly: InternalsVisibleTo("Gu.Wpf.Media.UiTests")]
+[assembly: InternalsVisibleTo("Gu.Wpf.Media.Tests, PublicKey=0024000004800000940000000602000000240000525341310004000001000100bd443f2b2459a39eec4083f81a6bd0361cd91363602a45870674028a1e8cc5d4493e1f19835a9e9b17ceb5df25db46f4d3e133629820eb19ea3fe09142c707f8f1606100a017747c573d7748efb1af578278d82dcc7ba9492c3b8841e001f55cb6d553c4cfbaea6aea19b3611915416c67695465f4ad4e13bf5fe04d920b79c9")]
+[assembly: InternalsVisibleTo("Gu.Wpf.Media.UiTests, PublicKey=0024000004800000940000000602000000240000525341310004000001000100bd443f2b2459a39eec4083f81a6bd0361cd91363602a45870674028a1e8cc5d4493e1f19835a9e9b17ceb5df25db46f4d3e133629820eb19ea3fe09142c707f8f1606100a017747c573d7748efb1af578278d82dcc7ba9492c3b8841e001f55cb6d553c4cfbaea6aea19b3611915416c67695465f4ad4e13bf5fe04d920b79c9")]

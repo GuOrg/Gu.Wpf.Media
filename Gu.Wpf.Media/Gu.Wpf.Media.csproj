@@ -14,10 +14,10 @@
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
   </PropertyGroup>
 
-  <!--<PropertyGroup>
+  <PropertyGroup>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>..\Gu.Wpf.Media.snk</AssemblyOriginatorKeyFile>
-  </PropertyGroup>-->
+  </PropertyGroup>
 
   <PropertyGroup>
     <Version>0.5.0.2</Version>

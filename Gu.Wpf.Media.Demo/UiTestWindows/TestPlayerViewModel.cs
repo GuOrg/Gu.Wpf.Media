@@ -1,11 +1,9 @@
-﻿namespace Gu.Wpf.Media.Demo.UiTestWindows
+namespace Gu.Wpf.Media.Demo.UiTestWindows
 {
     using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Linq;
     using System.Runtime.CompilerServices;
-
-    using JetBrains.Annotations;
 
     public class TestPlayerViewModel : INotifyPropertyChanged
     {
@@ -57,7 +55,6 @@
             }
         }
 
-        [NotifyPropertyChangedInvocator]
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

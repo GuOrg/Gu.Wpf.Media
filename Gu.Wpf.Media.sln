@@ -1,18 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27004.2009
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30621.155
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gu.Wpf.Media", "Gu.Wpf.Media\Gu.Wpf.Media.csproj", "{BD54B3C3-A3C3-41BD-B188-94B4A0C20303}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gu.Wpf.Media.Demo", "Gu.Wpf.Media.Demo\Gu.Wpf.Media.Demo.csproj", "{A465E2F7-3665-4B08-8FCF-05700F46C2F5}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".paket", ".paket", "{9DCE7658-6BAA-46CB-BE88-186B1998B653}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".sln", ".sln", "{9DCE7658-6BAA-46CB-BE88-186B1998B653}"
 	ProjectSection(SolutionItems) = preProject
 		appveyor.yml = appveyor.yml
-		paket.dependencies = paket.dependencies
-		paket.lock = paket.lock
-		.paket\Readme.paket.md = .paket\Readme.paket.md
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{3F38FD3E-995D-423C-A711-006D3F8A3E9E}"
@@ -23,9 +20,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{3F38FD3E-9
 		RELEASE_NOTES.md = RELEASE_NOTES.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gu.Wpf.Media.Tests", "Gu.Wpf.Media.Tests\Gu.Wpf.Media.Tests.csproj", "{62B99F94-EF1C-45AC-AFA3-811411419D58}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gu.Wpf.Media.Tests", "Gu.Wpf.Media.Tests\Gu.Wpf.Media.Tests.csproj", "{62B99F94-EF1C-45AC-AFA3-811411419D58}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gu.Wpf.Media.UiTests", "Gu.Wpf.Media.UiTests\Gu.Wpf.Media.UiTests.csproj", "{15FF6914-3EAA-4C3B-8C33-3268106C0477}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gu.Wpf.Media.UiTests", "Gu.Wpf.Media.UiTests\Gu.Wpf.Media.UiTests.csproj", "{15FF6914-3EAA-4C3B-8C33-3268106C0477}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -52,5 +49,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {49B5FB69-8FBE-40C4-80F9-59A42B58393C}
 	EndGlobalSection
 EndGlobal

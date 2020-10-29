@@ -9,6 +9,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Samples\coffee.mp4" />
+    <Content Include="Samples\coffee.mp4">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Gu.Wpf.Media\Gu.Wpf.Media.csproj" />
   </ItemGroup>
 

@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.Media
+namespace Gu.Wpf.Media
 {
     /// <summary>
     /// A set of possible states for <see cref="MouseWheelGesture"/>.
@@ -6,20 +6,20 @@
     public enum MouseWheelDirection
     {
         /// <summary>
-        /// This corresponds to zero <see cref="System.Windows.Input.MouseWheelEventArgs.Delta"/>
+        /// This corresponds to zero <see cref="System.Windows.Input.MouseWheelEventArgs.Delta"/>.
         /// </summary>
         None,
 
         /// <summary>
         /// User scrolled content up.
-        /// This corresponds to positive <see cref="System.Windows.Input.MouseWheelEventArgs.Delta"/>
+        /// This corresponds to positive <see cref="System.Windows.Input.MouseWheelEventArgs.Delta"/>.
         /// </summary>
         Up,
 
         /// <summary>
         /// User scrolled content down.
-        /// This corresponds to negative <see cref="System.Windows.Input.MouseWheelEventArgs.Delta"/>
+        /// This corresponds to negative <see cref="System.Windows.Input.MouseWheelEventArgs.Delta"/>.
         /// </summary>
-        Down
+        Down,
     }
 }

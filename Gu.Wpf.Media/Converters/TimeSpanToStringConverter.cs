@@ -52,7 +52,7 @@ namespace Gu.Wpf.Media
 
             if (!IsValidFormat(parameter))
             {
-                var message = this.CreateErrorMessage($"Expected parameter to be a valid format like 'fff' or 'FF', was: {parameter}");
+                var message = CreateErrorMessage($"Expected parameter to be a valid format like 'fff' or 'FF', was: {parameter}");
                 if (Is.InDesignMode)
                 {
                     throw new ArgumentException(message, nameof(parameter));
@@ -95,7 +95,7 @@ namespace Gu.Wpf.Media
             }
             else
             {
-                var message = this.CreateErrorMessage($"Expected a timespan, was {value}");
+                var message = CreateErrorMessage($"Expected a timespan, was {value}");
                 if (Is.InDesignMode)
                 {
                     throw new ArgumentException(message, nameof(parameter));
@@ -115,7 +115,7 @@ namespace Gu.Wpf.Media
 
             if (!IsValidFormat(parameter))
             {
-                var message = this.CreateErrorMessage($"Expected parameter to be a valid format like 'fff' or 'FF', was: {parameter}");
+                var message = CreateErrorMessage($"Expected parameter to be a valid format like 'fff' or 'FF', was: {parameter}");
                 if (Is.InDesignMode)
                 {
                     throw new ArgumentException(message, nameof(parameter));
@@ -131,7 +131,7 @@ namespace Gu.Wpf.Media
 
             if (Is.InDesignMode)
             {
-                var message = this.CreateErrorMessage($"Failed parsing a TimeSpan from {value}");
+                var message = CreateErrorMessage($"Failed parsing a TimeSpan from {value}");
                 throw new FormatException(message);
             }
 
@@ -160,9 +160,9 @@ namespace Gu.Wpf.Media
             return false;
         }
 
-        private string CreateErrorMessage(string message, [CallerMemberName] string caller = null)
+        private static string CreateErrorMessage(string message, [CallerMemberName] string caller = null)
         {
-            return $"{this.GetType().FullName}.{caller} failed\r\n" + message;
+            return $"{nameof(TimeSpanToStringConverter)}.{caller} failed\r\n" + message;
         }
     }
 }

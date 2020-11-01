@@ -40,6 +40,7 @@ namespace Gu.Wpf.Media
         /// <summary>
         /// The gesture se <see cref="MouseWheelGesture"/>.
         /// </summary>
+        [ConstructorArgument("gesture")]
         public MouseWheelGesture Gesture { get; set; }
 
         /// <summary>

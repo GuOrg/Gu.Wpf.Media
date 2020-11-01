@@ -12,7 +12,7 @@ namespace Gu.Wpf.Media.Demo.UiTestWindows
     {
         private static readonly Dictionary<DependencyProperty, PropertyItem> Cache = new Dictionary<DependencyProperty, PropertyItem>();
 
-        private static readonly FieldInfo MediaElementField = typeof(MediaElementWrapper).GetField("mediaElement", BindingFlags.NonPublic | BindingFlags.Instance);
+        private static readonly FieldInfo MediaElementField = typeof(MediaElementWrapper).GetField("mediaElement", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly);
         private readonly MediaElementWrapper wrapper;
         private readonly MediaElement mediaElement;
         private readonly PropertyInfo mediaElementProperty;

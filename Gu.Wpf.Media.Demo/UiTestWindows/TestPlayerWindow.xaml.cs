@@ -38,7 +38,7 @@ namespace Gu.Wpf.Media.Demo.UiTestWindows
                         Path = new PropertyPath(dp.Name),
                         ElementName = nameof(this.MediaElement),
                         Mode = BindingMode.OneWay,
-                        Converter = NullConverter.Default
+                        Converter = NullConverter.Default,
                     };
                     _ = BindingOperations.SetBinding(value, TextBox.TextProperty, binding);
                     value.IsEnabled = false;
@@ -50,7 +50,7 @@ namespace Gu.Wpf.Media.Demo.UiTestWindows
                         Path = new PropertyPath(dp.Name),
                         ElementName = nameof(this.MediaElement),
                         Mode = BindingMode.TwoWay,
-                        Converter = NullConverter.Default
+                        Converter = NullConverter.Default,
                     };
                     _ = BindingOperations.SetBinding(value, TextBox.TextProperty, binding);
                     value.IsEnabled = true;

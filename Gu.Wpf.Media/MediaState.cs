@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.Media
+namespace Gu.Wpf.Media
 {
     /// <summary>
     /// States that can be applied to the <see cref="MediaElementWrapper"/>.
@@ -18,6 +18,6 @@
         /// <summary>
         /// The media element should stop.
         /// </summary>
-        Stop = 4
+        Stop = 4,
     }
 }

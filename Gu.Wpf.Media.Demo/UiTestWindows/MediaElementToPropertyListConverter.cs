@@ -8,6 +8,7 @@ namespace Gu.Wpf.Media.Demo.UiTestWindows
     using System.Windows;
     using System.Windows.Data;
 
+    [ValueConversion(typeof(MediaElementWrapper), typeof(ReadOnlyObservableCollection<PropertyItem>))]
     public sealed class MediaElementToPropertyListConverter : IValueConverter
     {
         public static readonly MediaElementToPropertyListConverter Default = new MediaElementToPropertyListConverter();

@@ -1,4 +1,4 @@
-﻿#pragma warning disable SA1600 // Elements must be documented
+#pragma warning disable SA1600 // Elements must be documented
 namespace Gu.Wpf.Media
 {
     using System.ComponentModel;
@@ -11,6 +11,6 @@ namespace Gu.Wpf.Media
         /// <summary>
         /// Determines whether the current code is executed in a design time environment such as Visual Studio or Blend.
         /// </summary>
-        public static bool InDesignMode => DesignerProperties.GetIsInDesignMode(DependencyObject);
+        internal static bool InDesignMode => DesignerProperties.GetIsInDesignMode(DependencyObject);
     }
 }

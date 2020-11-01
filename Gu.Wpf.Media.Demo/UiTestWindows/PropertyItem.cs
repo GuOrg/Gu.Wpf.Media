@@ -29,12 +29,12 @@ namespace Gu.Wpf.Media.Demo.UiTestWindows
             if (property.ReadOnly)
             {
                 var binding = new Binding(property.Name) { Source = wrapper, Mode = BindingMode.OneWay };
-                _ = BindingOperations.SetBinding(wrapper, this.proxyProperty, binding);
+                _ = BindingOperations.SetBinding(wrapper, proxyProperty, binding);
             }
             else
             {
                 var binding = new Binding(property.Name) { Source = wrapper, Mode = BindingMode.TwoWay };
-                _ = BindingOperations.SetBinding(wrapper, this.proxyProperty, binding);
+                _ = BindingOperations.SetBinding(wrapper, proxyProperty, binding);
             }
         }
 

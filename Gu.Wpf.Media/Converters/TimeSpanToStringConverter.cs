@@ -13,7 +13,7 @@ namespace Gu.Wpf.Media
     /// </summary>
     [ValueConversion(typeof(TimeSpan), typeof(string), ParameterType = typeof(string))]
     [MarkupExtensionReturnType(typeof(TimeSpanToStringConverter))]
-    public class TimeSpanToStringConverter : MarkupExtension, IValueConverter
+    public sealed class TimeSpanToStringConverter : MarkupExtension, IValueConverter
     {
         /// <summary>
         /// The default instance used like Converter="{x:Static TimeSpanToStringConverter.Default}".
@@ -141,30 +141,23 @@ namespace Gu.Wpf.Media
 
         private static bool IsValidFormat(object parameter)
         {
-            if (parameter is null)
+            return parameter switch
             {
-                return true;
-            }
-
-            var text = parameter as string;
-            if (text is null)
-            {
-                return false;
-            }
-
-            return Regex.IsMatch(text, @"^(F{1,7}|f{1,7})$", RegexOptions.Singleline);
+                null => true,
+                string text => Regex.IsMatch(text, @"^(F{1,7}|f{1,7})$", RegexOptions.Singleline),
+                _ => false,
+            };
         }
 
         private static bool TryParse(object value, out TimeSpan result)
         {
-            var text = value as string;
-            if (text is null)
+            if (value is string text)
             {
-                result = default(TimeSpan);
-                return false;
+                return TimeSpan.TryParseExact(text, Formats, CultureInfo.InvariantCulture, out result);
             }
 
-            return TimeSpan.TryParseExact(text, Formats, CultureInfo.InvariantCulture, out result);
+            result = default;
+            return false;
         }
 
         private string CreateErrorMessage(string message, [CallerMemberName] string caller = null)

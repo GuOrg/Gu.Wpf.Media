@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.Media.Demo.UiTestWindows
+namespace Gu.Wpf.Media.Demo.UiTestWindows
 {
     using System;
     using System.Collections.ObjectModel;
@@ -8,7 +8,7 @@
     using System.Windows;
     using System.Windows.Data;
 
-    public class MediaElementToPropertyListConverter : IValueConverter
+    public sealed class MediaElementToPropertyListConverter : IValueConverter
     {
         public static readonly MediaElementToPropertyListConverter Default = new MediaElementToPropertyListConverter();
 

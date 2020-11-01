@@ -1,4 +1,4 @@
-﻿#pragma warning disable SA1600 // Elements must be documented
+#pragma warning disable SA1600 // Elements must be documented
 
 namespace Gu.Wpf.Media
 {
@@ -13,7 +13,7 @@ namespace Gu.Wpf.Media
                 throw new ArgumentNullException(nameof(text));
             }
 
-            if (!text.EndsWith(toTrim))
+            if (!text.EndsWith(toTrim, StringComparison.Ordinal))
             {
                 throw new ArgumentException($"The string {text} does not end with {toTrim}", nameof(text));
             }

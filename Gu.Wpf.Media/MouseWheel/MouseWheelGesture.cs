@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.Media
+namespace Gu.Wpf.Media
 {
     using System;
     using System.ComponentModel;
@@ -75,17 +75,13 @@
                 return false;
             }
 
-            switch (this.Direction)
+            return this.Direction switch
             {
-                case MouseWheelDirection.None:
-                    return e.Delta == 0;
-                case MouseWheelDirection.Up:
-                    return e.Delta > 0;
-                case MouseWheelDirection.Down:
-                    return e.Delta < 0;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
+                MouseWheelDirection.None => e.Delta == 0,
+                MouseWheelDirection.Up => e.Delta > 0,
+                MouseWheelDirection.Down => e.Delta < 0,
+                _ => throw new InvalidEnumArgumentException(nameof(this.Direction), (int)this.Direction, typeof(MouseWheelDirection)),
+            };
         }
     }
 }

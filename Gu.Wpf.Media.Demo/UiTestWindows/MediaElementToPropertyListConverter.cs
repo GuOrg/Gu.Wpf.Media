@@ -34,7 +34,7 @@ namespace Gu.Wpf.Media.Demo.UiTestWindows
 
         object IValueConverter.ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            throw new NotImplementedException();
+            throw new NotSupportedException($"{nameof(MediaElementToPropertyListConverter)} can only be used in OneWay bindings");
         }
     }
 }

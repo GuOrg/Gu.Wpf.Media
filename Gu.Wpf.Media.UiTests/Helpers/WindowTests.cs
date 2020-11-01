@@ -59,14 +59,14 @@ namespace Gu.Wpf.Media.UiTests.Helpers
         public Button FindButton([CallerMemberName]string name = null)
         {
             Assert.NotNull(name);
-            name = name.EndsWith("Button") ? name.TrimEnd("Button") : name;
+            name = name.EndsWith("Button", StringComparison.Ordinal) ? name.TrimEnd("Button") : name;
             return this.Window.FindButton(name);
         }
 
         public ToggleButton FindToggleButton([CallerMemberName]string name = null)
         {
             Assert.NotNull(name);
-            name = name.EndsWith("Button") ? name.TrimEnd("Button") : name;
+            name = name.EndsWith("Button", StringComparison.Ordinal) ? name.TrimEnd("Button") : name;
             return this.Window.FindToggleButton(name);
         }
 

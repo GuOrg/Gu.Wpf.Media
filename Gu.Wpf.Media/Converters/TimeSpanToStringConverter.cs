@@ -68,22 +68,22 @@ namespace Gu.Wpf.Media
                 {
                     StringBuilder.Append(timeSpan.Hours.ToString(CultureInfo.InvariantCulture))
                                  .Append(':')
-                                 .Append(timeSpan.Minutes.ToString("00"))
+                                 .Append(timeSpan.Minutes.ToString("00", CultureInfo.InvariantCulture))
                                  .Append(':')
-                                 .Append(timeSpan.Seconds.ToString("00"));
+                                 .Append(timeSpan.Seconds.ToString("00", CultureInfo.InvariantCulture));
                 }
                 else
                 {
                     StringBuilder.Append(timeSpan.Minutes)
                                  .Append(':')
-                                 .Append(timeSpan.Seconds.ToString("00"));
+                                 .Append(timeSpan.Seconds.ToString("00", CultureInfo.InvariantCulture));
                 }
 
                 var format = parameter as string;
                 if (!string.IsNullOrEmpty(format))
                 {
-                    var fraction = timeSpan.ToString(format);
-                    if (fraction != string.Empty)
+                    var fraction = timeSpan.ToString(format, CultureInfo.InvariantCulture);
+                    if (fraction.Length > 0)
                     {
                         StringBuilder.Append('.')
                                      .Append(fraction);

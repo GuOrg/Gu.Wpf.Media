@@ -7,7 +7,7 @@ namespace Gu.Wpf.Media.Demo.UiTestWindows
 
     public class TestPlayerViewModel : INotifyPropertyChanged
     {
-        private string selectedPropertyName;
+        private string? selectedPropertyName;
 
         private PropertyItem selectedProperty;
 
@@ -38,7 +38,7 @@ namespace Gu.Wpf.Media.Demo.UiTestWindows
             }
         }
 
-        public string SelectedPropertyName
+        public string? SelectedPropertyName
         {
             get => this.selectedPropertyName;
 

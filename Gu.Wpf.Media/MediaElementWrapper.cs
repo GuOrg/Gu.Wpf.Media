@@ -679,17 +679,16 @@ namespace Gu.Wpf.Media
 
         private double GetVolumeIncrementOrDefault(object parameter)
         {
-            if (parameter is null)
+            return parameter switch
             {
-                return this.VolumeIncrement;
-            }
-
-            if (ObjectExt.TryConvertToDouble(parameter, out var result))
-            {
-                return result;
-            }
-
-            return 0;
+                double d => d,
+                int i => i,
+                string s => double.TryParse(s, NumberStyles.Float, CultureInfo.InvariantCulture, out var result)
+                    ? result
+                    : this.VolumeIncrement,
+                IConvertible c => c.ToDouble(CultureInfo.InvariantCulture),
+                _ => this.VolumeIncrement,
+            };
         }
 
         private TimeSpan GetSkipIncrement(object parameter)

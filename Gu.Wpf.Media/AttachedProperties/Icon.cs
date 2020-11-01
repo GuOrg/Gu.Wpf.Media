@@ -24,6 +24,11 @@ namespace Gu.Wpf.Media
         /// <param name="value">Geometry property value.</param>
         public static void SetGeometry(this ButtonBase element, Geometry value)
         {
+            if (element is null)
+            {
+                throw new System.ArgumentNullException(nameof(element));
+            }
+
             element.SetValue(GeometryProperty, value);
         }
 
@@ -34,6 +39,11 @@ namespace Gu.Wpf.Media
         [AttachedPropertyBrowsableForType(typeof(ButtonBase))]
         public static Geometry GetGeometry(this ButtonBase element)
         {
+            if (element is null)
+            {
+                throw new System.ArgumentNullException(nameof(element));
+            }
+
             return (Geometry)element.GetValue(GeometryProperty);
         }
     }

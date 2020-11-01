@@ -30,6 +30,11 @@ namespace Gu.Wpf.Media
         /// <param name="value">PauseWhileDragging property value.</param>
         public static void SetPauseWhileDragging(Slider element, MediaElementWrapper value)
         {
+            if (element is null)
+            {
+                throw new System.ArgumentNullException(nameof(element));
+            }
+
             element.SetValue(PauseWhileDraggingProperty, value);
         }
 
@@ -40,6 +45,11 @@ namespace Gu.Wpf.Media
         [AttachedPropertyBrowsableForType(typeof(Slider))]
         public static MediaElementWrapper GetPauseWhileDragging(Slider element)
         {
+            if (element is null)
+            {
+                throw new System.ArgumentNullException(nameof(element));
+            }
+
             return (MediaElementWrapper)element.GetValue(PauseWhileDraggingProperty);
         }
 

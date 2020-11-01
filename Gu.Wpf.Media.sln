@@ -9,7 +9,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gu.Wpf.Media.Demo", "Gu.Wpf
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".sln", ".sln", "{9DCE7658-6BAA-46CB-BE88-186B1998B653}"
 	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		.gitignore = .gitignore
 		appveyor.yml = appveyor.yml
+		Settings.XamlStyler = Settings.XamlStyler
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{3F38FD3E-995D-423C-A711-006D3F8A3E9E}"

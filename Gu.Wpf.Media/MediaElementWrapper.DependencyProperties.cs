@@ -367,11 +367,6 @@ namespace Gu.Wpf.Media
             }
         }
 
-        private static object OnVolumeCoerce(DependencyObject d, object baseValue)
-        {
-            return Clamp.Between((double)baseValue, 0, 1, 3);
-        }
-
         private static object OnIsMutedCoerce(DependencyObject d, object baseValue)
         {
             var wrapper = (MediaElementWrapper)d;

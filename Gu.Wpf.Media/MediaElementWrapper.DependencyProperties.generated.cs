@@ -1,7 +1,6 @@
-﻿namespace Gu.Wpf.Media
+namespace Gu.Wpf.Media
 {
     using System;
-    using System.ComponentModel;
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Media;
@@ -34,7 +33,7 @@
                 MediaElement.VolumeProperty.DefaultMetadata.DefaultValue,
                 FrameworkPropertyMetadataOptions.BindsTwoWayByDefault,
                 OnVolumeChanged,
-                OnVolumeCoerce));
+                (_, baseValue) => Clamp.Between((double)baseValue, 0, 1, 3)));
 
         /// <summary>
         /// Identifies the <see cref="MediaElementWrapper.Balance" /> dependency property.
@@ -104,10 +103,10 @@
         /// <returns>
         /// The URI that specifies the source of the element. The default is null.
         /// </returns>
-        public Uri Source
+        public Uri? Source
         {
-            get { return (Uri)this.GetValue(SourceProperty); }
-            set { this.SetValue(SourceProperty, value); }
+            get => (Uri)this.GetValue(SourceProperty);
+            set => this.SetValue(SourceProperty, value);
         }
 
         /// <summary>
@@ -118,8 +117,8 @@
         /// </returns>
         public double Volume
         {
-            get { return (double)this.GetValue(VolumeProperty); }
-            set { this.SetValue(VolumeProperty, value); }
+            get => (double)this.GetValue(VolumeProperty);
+            set => this.SetValue(VolumeProperty, value);
         }
 
         /// <summary>
@@ -130,8 +129,8 @@
         /// </returns>
         public double Balance
         {
-            get { return (double)this.GetValue(BalanceProperty); }
-            set { this.SetValue(BalanceProperty, value); }
+            get => (double)this.GetValue(BalanceProperty);
+            set => this.SetValue(BalanceProperty, value);
         }
 
         /// <summary>
@@ -142,8 +141,8 @@
         /// </returns>
         public bool IsMuted
         {
-            get { return (bool)this.GetValue(IsMutedProperty); }
-            set { this.SetValue(IsMutedProperty, value); }
+            get => (bool)this.GetValue(IsMutedProperty);
+            set => this.SetValue(IsMutedProperty, value);
         }
 
         /// <summary>
@@ -154,8 +153,8 @@
         /// </returns>
         public bool ScrubbingEnabled
         {
-            get { return (bool)this.GetValue(ScrubbingEnabledProperty); }
-            set { this.SetValue(ScrubbingEnabledProperty, value); }
+            get => (bool)this.GetValue(ScrubbingEnabledProperty);
+            set => this.SetValue(ScrubbingEnabledProperty, value);
         }
 
         /// <summary>
@@ -165,8 +164,8 @@
         /// <seealso cref="MediaElement.StretchProperty" />
         public Stretch Stretch
         {
-            get { return (Stretch)this.GetValue(StretchProperty); }
-            set { this.SetValue(StretchProperty, value); }
+            get => (Stretch)this.GetValue(StretchProperty);
+            set => this.SetValue(StretchProperty, value);
         }
 
         /// <summary>
@@ -178,8 +177,8 @@
         /// <seealso cref="Viewbox.StretchDirectionProperty" />
         public StretchDirection StretchDirection
         {
-            get { return (StretchDirection)this.GetValue(StretchDirectionProperty); }
-            set { this.SetValue(StretchDirectionProperty, value); }
+            get => (StretchDirection)this.GetValue(StretchDirectionProperty);
+            set => this.SetValue(StretchDirectionProperty, value);
         }
 
         private static object OnSourceCoerce(DependencyObject d, object baseValue)
@@ -216,32 +215,27 @@
 
         private static void OnBalanceChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var wrapper = (MediaElementWrapper)d;
-            wrapper.mediaElement.SetCurrentValue(MediaElement.BalanceProperty, e.NewValue);
+            ((MediaElementWrapper)d).mediaElement.SetCurrentValue(MediaElement.BalanceProperty, e.NewValue);
         }
 
         private static void OnIsMutedChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var wrapper = (MediaElementWrapper)d;
-            wrapper.mediaElement.SetCurrentValue(MediaElement.IsMutedProperty, e.NewValue);
+            ((MediaElementWrapper)d).mediaElement.SetCurrentValue(MediaElement.IsMutedProperty, e.NewValue);
         }
 
         private static void OnIsScrubbingEnabledChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var wrapper = (MediaElementWrapper)d;
-            wrapper.mediaElement.SetCurrentValue(MediaElement.ScrubbingEnabledProperty, e.NewValue);
+            ((MediaElementWrapper)d).mediaElement.SetCurrentValue(MediaElement.ScrubbingEnabledProperty, e.NewValue);
         }
 
         private static void OnStretchChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var wrapper = (MediaElementWrapper)d;
-            wrapper.mediaElement.SetCurrentValue(MediaElement.StretchProperty, e.NewValue);
+            ((MediaElementWrapper)d).mediaElement.SetCurrentValue(MediaElement.StretchProperty, e.NewValue);
         }
 
         private static void OnStretchDirectionChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var wrapper = (MediaElementWrapper)d;
-            wrapper.mediaElement.SetCurrentValue(MediaElement.StretchDirectionProperty, e.NewValue);
+            ((MediaElementWrapper)d).mediaElement.SetCurrentValue(MediaElement.StretchDirectionProperty, e.NewValue);
         }
     }
 }

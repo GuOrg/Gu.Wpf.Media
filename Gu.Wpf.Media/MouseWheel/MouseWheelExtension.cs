@@ -7,7 +7,7 @@ namespace Gu.Wpf.Media
 
     /// <inheritdoc />
     [MarkupExtensionReturnType(typeof(MouseWheelGesture))]
-    internal class MouseWheelExtension : MarkupExtension
+    public class MouseWheelExtension : MarkupExtension
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="MouseWheelExtension"/> class.
@@ -38,13 +38,13 @@ namespace Gu.Wpf.Media
         }
 
         /// <summary>
-        /// The gesture se <see cref="MouseWheelGesture"/>.
+        /// Gets or sets the gesture <see cref="MouseWheelGesture"/>.
         /// </summary>
         [ConstructorArgument("gesture")]
         public MouseWheelGesture Gesture { get; set; }
 
         /// <summary>
-        /// Direction <see cref="MouseWheelDirection"/>.
+        /// Gets or sets direction <see cref="MouseWheelDirection"/>.
         /// </summary>
         public MouseWheelDirection Direction
         {
@@ -53,7 +53,7 @@ namespace Gu.Wpf.Media
         }
 
         /// <summary>
-        /// Modifiers <see cref="ModifierKeys"/>.
+        /// Gets or sets modifiers <see cref="ModifierKeys"/>.
         /// </summary>
         public ModifierKeys Modifiers
         {

@@ -16,7 +16,7 @@ namespace Gu.Wpf.Media.Demo.UiTestWindows
             this.Properties = MediaElementToPropertyListConverter.GetPropertyItems(wrapper);
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
 
         public ReadOnlyObservableCollection<PropertyItem> Properties { get; }
 
@@ -55,7 +55,7 @@ namespace Gu.Wpf.Media.Demo.UiTestWindows
             }
         }
 
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
         {
             this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }

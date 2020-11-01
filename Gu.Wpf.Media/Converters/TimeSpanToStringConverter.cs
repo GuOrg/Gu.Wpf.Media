@@ -160,7 +160,7 @@ namespace Gu.Wpf.Media
             return false;
         }
 
-        private static string CreateErrorMessage(string message, [CallerMemberName] string caller = null)
+        private static string CreateErrorMessage(string message, [CallerMemberName] string? caller = null)
         {
             return $"{nameof(TimeSpanToStringConverter)}.{caller} failed\r\n" + message;
         }

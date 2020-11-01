@@ -1,6 +1,7 @@
-﻿namespace Gu.Wpf.Media
+namespace Gu.Wpf.Media
 {
     using System;
+    using System.ComponentModel;
     using System.Globalization;
     using System.Windows;
     using System.Windows.Controls;
@@ -543,7 +544,7 @@
                         this.SetCurrentValue(PositionProperty, TimeSpan.Zero);
                         break;
                     default:
-                        throw new ArgumentOutOfRangeException();
+                        throw new InvalidEnumArgumentException(nameof(this.LoadedBehavior), (int)this.LoadedBehavior, typeof(MediaState));
                 }
             }
         }
@@ -557,15 +558,15 @@
             }
         }
 
-        private static object CoercePosition(DependencyObject d, object basevalue)
+        private static object? CoercePosition(DependencyObject d, object? baseValue)
         {
             var wrapper = (MediaElementWrapper)d;
-            if (wrapper.Length is null || basevalue is null)
+            if (wrapper.Length is null || baseValue is null)
             {
                 return null;
             }
 
-            var time = (TimeSpan)basevalue;
+            var time = (TimeSpan)baseValue;
             if (time < TimeSpan.Zero)
             {
                 return TimeSpan.Zero;
@@ -576,7 +577,7 @@
                 return wrapper.Length.Value;
             }
 
-            return basevalue;
+            return baseValue;
         }
 
         private static void OnStateChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -604,7 +605,7 @@
                     wrapper.updatePositionTimer.Stop();
                     break;
                 default:
-                    throw new ArgumentOutOfRangeException();
+                    throw new InvalidEnumArgumentException(nameof(newValue), (int)newValue, typeof(MediaState));
             }
         }
 
@@ -670,7 +671,7 @@
             CommandManager.InvalidateRequerySuggested();
         }
 
-        private void ReRaiseEvent(object sender, RoutedEventArgs e)
+        private void ReRaiseEvent(object? sender, RoutedEventArgs e)
         {
             this.RaiseEvent(e);
             e.Handled = true;
@@ -693,51 +694,23 @@
 
         private TimeSpan GetSkipIncrement(object parameter)
         {
-            if (parameter is null)
+            return parameter switch
             {
-                return this.SkipIncrement;
-            }
-
-            if (parameter is TimeSpan)
-            {
-                return (TimeSpan)parameter;
-            }
-
-            if (parameter is double)
-            {
-                return TimeSpan.FromSeconds((double)parameter);
-            }
-
-            if (parameter is int)
-            {
-                return TimeSpan.FromSeconds((int)parameter * this.SkipIncrement.TotalSeconds);
-            }
-
-            var text = parameter as string;
-            if (text != null)
-            {
-                if (text == string.Empty)
-                {
-                    return this.SkipIncrement;
-                }
-
-                if (int.TryParse(text, NumberStyles.Integer, CultureInfo.InvariantCulture, out var intResult))
-                {
-                    return this.GetSkipIncrement(intResult);
-                }
-
-                if (double.TryParse(text, NumberStyles.Float, CultureInfo.InvariantCulture, out var doubleResult))
-                {
-                    return this.GetSkipIncrement(doubleResult);
-                }
-
-                if (TimeSpan.TryParse(text, CultureInfo.InvariantCulture, out var timeResult))
-                {
-                    return this.GetSkipIncrement(timeResult);
-                }
-            }
-
-            return TimeSpan.Zero;
+                null => this.SkipIncrement,
+                TimeSpan span => span,
+                double d => TimeSpan.FromSeconds(d),
+                int i => TimeSpan.FromSeconds(i * this.SkipIncrement.TotalSeconds),
+                string { Length: 0 } => this.SkipIncrement,
+                string text
+                    when int.TryParse(text, NumberStyles.Integer, CultureInfo.InvariantCulture, out var intResult)
+                    => this.GetSkipIncrement(intResult),
+                string text
+                    when double.TryParse(text, NumberStyles.Float, CultureInfo.InvariantCulture, out var doubleResult)
+                    => this.GetSkipIncrement(doubleResult),
+                string text when TimeSpan.TryParse(text, CultureInfo.InvariantCulture, out var timeResult)
+                    => this.GetSkipIncrement(timeResult),
+                _ => TimeSpan.Zero,
+            };
         }
     }
 }

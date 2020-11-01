@@ -38,7 +38,7 @@ namespace Gu.Wpf.Media.Demo.UiTestWindows
             }
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
 
         public DependencyProperty Property { get; }
 
@@ -59,8 +59,7 @@ namespace Gu.Wpf.Media.Demo.UiTestWindows
 
         public static PropertyItem GetOrCreate(MediaElementWrapper wrapper, DependencyProperty property)
         {
-            PropertyItem item;
-            if (!Cache.TryGetValue(property, out item))
+            if (!Cache.TryGetValue(property, out PropertyItem item))
             {
                 var proxy = DependencyProperty.RegisterAttached(
                     property.Name + "Proxy",
@@ -79,7 +78,7 @@ namespace Gu.Wpf.Media.Demo.UiTestWindows
             return $"{nameof(this.Property)}: {this.Property}, {nameof(this.Value)}: {this.Value}";
         }
 
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
         {
             this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }

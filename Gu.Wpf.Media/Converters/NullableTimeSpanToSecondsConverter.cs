@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.Media
+namespace Gu.Wpf.Media
 {
     using System;
     using System.Globalization;
@@ -11,7 +11,7 @@
     /// </summary>
     [ValueConversion(typeof(TimeSpan?), typeof(double?))]
     [MarkupExtensionReturnType(typeof(NullableTimeSpanToSecondsConverter))]
-    public class NullableTimeSpanToSecondsConverter : MarkupExtension, IValueConverter
+    public sealed class NullableTimeSpanToSecondsConverter : MarkupExtension, IValueConverter
     {
         /// <summary>
         /// The default instance used like Converter="{x:Static NullableTimeSpanToSecondsConverter.Default}".
@@ -24,60 +24,42 @@
         public double? WhenNull { get; set; } = 0;
 
         /// <inheritdoc/>
-        public override object ProvideValue(IServiceProvider serviceProvider)
+        public override object ProvideValue(IServiceProvider? serviceProvider)
         {
             return this;
         }
 
         /// <inheritdoc/>
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
         {
-            if (value is null)
+            return value switch
             {
-                return this.WhenNull;
-            }
-
-            if (value is TimeSpan timeSpan)
-            {
-                return timeSpan.TotalSeconds;
-            }
-
-            if (Is.InDesignMode)
-            {
-                var message = this.CreateErrorMessage($"Expected value to be a Nullable<TimeSpan>, was: {value}");
-                throw new ArgumentException(message, nameof(value));
-            }
-
-            // Returning raw value letting the binding fail the standard way
-            return value;
+                null => this.WhenNull,
+                TimeSpan timeSpan => timeSpan.TotalSeconds,
+                _ when Is.InDesignMode
+                  => throw new ArgumentException(this.CreateErrorMessage($"Expected value to be a Nullable<TimeSpan>, was: {value}"), nameof(value)),
+                //// Returning raw value letting the binding fail the standard way
+                _ => value,
+            };
         }
 
         /// <inheritdoc/>
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
         {
-            if (value is null)
+            return value switch
             {
-                return null;
-            }
-
-            if (value is double d)
-            {
-                return TimeSpan.FromSeconds(d);
-            }
-
-            if (Is.InDesignMode)
-            {
-                var message = this.CreateErrorMessage($"Expected value to be a Nullable<double>, was: {value}");
-                throw new ArgumentException(message, nameof(value));
-            }
-
-            // Returning raw value letting the binding fail the framework way
-            return value;
+                null => null,
+                double d => TimeSpan.FromSeconds(d),
+                _ when Is.InDesignMode
+                    => throw new ArgumentException(this.CreateErrorMessage($"Expected value to be a Nullable<TimeSpan>, was: {value}"), nameof(value)),
+                //// Returning raw value letting the binding fail the standard way
+                _ => value,
+            };
         }
 
-        private string CreateErrorMessage(string message, [CallerMemberName] string caller = null)
+        private string CreateErrorMessage(string message, [CallerMemberName] string? caller = null)
         {
-            return $"{this.GetType().FullName}.{caller} failed\r\n" + message;
+            return $"{nameof(NullableTimeSpanToSecondsConverter)}.{caller} failed\r\n" + message;
         }
     }
 }

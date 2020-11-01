@@ -18,7 +18,7 @@ namespace Gu.Wpf.Media
 
         public static ResourceKey SemiTransparentBackgroundBrushKey { get; } = Create();
 
-        private static ComponentResourceKey Create([CallerMemberName]string name = null)
+        private static ComponentResourceKey Create([CallerMemberName]string? name = null)
         {
             return new ComponentResourceKey(typeof(Brushes), name.TrimEnd("Key"));
         }

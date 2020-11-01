@@ -1,4 +1,4 @@
-﻿#pragma warning disable SA1600
+#pragma warning disable SA1600
 #pragma warning disable 1591
 namespace Gu.Wpf.Media
 {
@@ -22,7 +22,7 @@ namespace Gu.Wpf.Media
 
         public static ResourceKey SystemButtonStyleKey { get; } = Create();
 
-        private static ComponentResourceKey Create([CallerMemberName]string name = null)
+        private static ComponentResourceKey Create([CallerMemberName]string? name = null)
         {
             return new ComponentResourceKey(typeof(Styles), name.TrimEnd("Key"));
         }

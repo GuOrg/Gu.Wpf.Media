@@ -367,12 +367,12 @@ namespace Gu.Wpf.Media
             }
         }
 
-        private static object OnVolumeCoerce(DependencyObject d, object basevalue)
+        private static object OnVolumeCoerce(DependencyObject d, object baseValue)
         {
-            return Clamp.Between((double)basevalue, 0, 1, 3);
+            return Clamp.Between((double)baseValue, 0, 1, 3);
         }
 
-        private static object OnIsMutedCoerce(DependencyObject d, object basevalue)
+        private static object OnIsMutedCoerce(DependencyObject d, object baseValue)
         {
             var wrapper = (MediaElementWrapper)d;
             if (wrapper.Volume <= 0)
@@ -380,7 +380,7 @@ namespace Gu.Wpf.Media
                 return true;
             }
 
-            return basevalue;
+            return baseValue;
         }
     }
 }

@@ -70,7 +70,7 @@
 
         private bool MatchesDirection(MouseWheelEventArgs e)
         {
-            if (e == null)
+            if (e is null)
             {
                 return false;
             }

@@ -54,7 +54,7 @@ namespace Gu.Wpf.Media.Demo
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
             {
                 var files = (string[])e.Data.GetData(DataFormats.FileDrop);
-                if (files == null)
+                if (files is null)
                 {
                     return;
                 }

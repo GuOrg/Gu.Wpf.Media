@@ -45,7 +45,7 @@ namespace Gu.Wpf.Media
         /// <inheritdoc/>
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value == null)
+            if (value is null)
             {
                 return this.NullString;
             }
@@ -108,7 +108,7 @@ namespace Gu.Wpf.Media
         /// <inheritdoc/>
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value == null || Equals(this.NullString, value))
+            if (value is null || Equals(this.NullString, value))
             {
                 return null;
             }
@@ -141,13 +141,13 @@ namespace Gu.Wpf.Media
 
         private static bool IsValidFormat(object parameter)
         {
-            if (parameter == null)
+            if (parameter is null)
             {
                 return true;
             }
 
             var text = parameter as string;
-            if (text == null)
+            if (text is null)
             {
                 return false;
             }
@@ -158,7 +158,7 @@ namespace Gu.Wpf.Media
         private static bool TryParse(object value, out TimeSpan result)
         {
             var text = value as string;
-            if (text == null)
+            if (text is null)
             {
                 result = default(TimeSpan);
                 return false;

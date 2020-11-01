@@ -191,7 +191,7 @@
         /// </summary>
         public void TogglePlayPause()
         {
-            if (this.Length == null)
+            if (this.Length is null)
             {
                 return;
             }
@@ -480,7 +480,7 @@
         /// <param name="time">The amount of time to skip, can be negative.</param>
         public void Skip(TimeSpan time)
         {
-            if (this.Position == null || this.Length == null)
+            if (this.Position is null || this.Length is null)
             {
                 return;
             }
@@ -494,7 +494,7 @@
         /// <param name="source">The new source.</param>
         protected virtual void OnSourceChanged(Uri source)
         {
-            if (source == null)
+            if (source is null)
             {
                 this.mediaElement.SetCurrentValue(MediaElement.SourceProperty, null);
                 this.ResetToNoSource();
@@ -560,7 +560,7 @@
         private static object CoercePosition(DependencyObject d, object basevalue)
         {
             var wrapper = (MediaElementWrapper)d;
-            if (wrapper.Length == null || basevalue == null)
+            if (wrapper.Length is null || basevalue is null)
             {
                 return null;
             }
@@ -678,7 +678,7 @@
 
         private double GetVolumeIncrementOrDefault(object parameter)
         {
-            if (parameter == null)
+            if (parameter is null)
             {
                 return this.VolumeIncrement;
             }
@@ -693,7 +693,7 @@
 
         private TimeSpan GetSkipIncrement(object parameter)
         {
-            if (parameter == null)
+            if (parameter is null)
             {
                 return this.SkipIncrement;
             }

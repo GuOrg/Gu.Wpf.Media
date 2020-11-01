@@ -9,7 +9,7 @@ namespace Gu.Wpf.Media
     {
         internal static bool TryConvertToDouble(object value, out double result)
         {
-            if (value == null || value is bool)
+            if (value is null || value is bool)
             {
                 result = 0;
                 return false;
@@ -28,7 +28,7 @@ namespace Gu.Wpf.Media
             }
 
             var convertible = value as IConvertible;
-            if (convertible == null)
+            if (convertible is null)
             {
                 result = 0;
                 return false;

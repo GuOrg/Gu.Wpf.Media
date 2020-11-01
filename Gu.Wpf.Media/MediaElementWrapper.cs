@@ -493,7 +493,7 @@ namespace Gu.Wpf.Media
         /// This is invoked when <see cref="Source"/> changes.
         /// </summary>
         /// <param name="source">The new source.</param>
-        protected virtual void OnSourceChanged(Uri source)
+        protected virtual void OnSourceChanged(Uri? source)
         {
             if (source is null)
             {
@@ -681,13 +681,15 @@ namespace Gu.Wpf.Media
         {
             return parameter switch
             {
+                null => this.VolumeIncrement,
+                bool _ => 0,
                 double d => d,
                 int i => i,
                 string s => double.TryParse(s, NumberStyles.Float, CultureInfo.InvariantCulture, out var result)
                     ? result
-                    : this.VolumeIncrement,
+                    : 0,
                 IConvertible c => c.ToDouble(CultureInfo.InvariantCulture),
-                _ => this.VolumeIncrement,
+                _ => 0,
             };
         }
 

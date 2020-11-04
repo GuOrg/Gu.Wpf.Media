@@ -28,7 +28,7 @@ namespace Gu.Wpf.Media
         /// <summary>Helper for setting <see cref="PauseWhileDraggingProperty"/> on <paramref name="element"/>.</summary>
         /// <param name="element"><see cref="Slider"/> to set <see cref="PauseWhileDraggingProperty"/> on.</param>
         /// <param name="value">PauseWhileDragging property value.</param>
-        public static void SetPauseWhileDragging(Slider element, MediaElementWrapper value)
+        public static void SetPauseWhileDragging(Slider element, MediaElementWrapper? value)
         {
             if (element is null)
             {
@@ -43,14 +43,14 @@ namespace Gu.Wpf.Media
         /// <returns>PauseWhileDragging property value.</returns>
         [AttachedPropertyBrowsableForChildren(IncludeDescendants = false)]
         [AttachedPropertyBrowsableForType(typeof(Slider))]
-        public static MediaElementWrapper GetPauseWhileDragging(Slider element)
+        public static MediaElementWrapper? GetPauseWhileDragging(Slider element)
         {
             if (element is null)
             {
                 throw new System.ArgumentNullException(nameof(element));
             }
 
-            return (MediaElementWrapper)element.GetValue(PauseWhileDraggingProperty);
+            return (MediaElementWrapper?)element.GetValue(PauseWhileDraggingProperty);
         }
 
         private static void OnDragStarted(object sender, DragStartedEventArgs e)

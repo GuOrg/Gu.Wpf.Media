@@ -5,8 +5,6 @@ namespace Gu.Wpf.Media
 
     public partial class MediaElementWrapper
     {
-#pragma warning disable SA1202 // Elements must be ordered by access
-
         /// <summary>Identifies the <see cref="State"/> dependency property.</summary>
         public static readonly DependencyProperty StateProperty = DependencyProperty.Register(
             nameof(State),
@@ -367,7 +365,7 @@ namespace Gu.Wpf.Media
             }
         }
 
-        private static object OnIsMutedCoerce(DependencyObject d, object baseValue)
+        private static object CoerceIsMuted(DependencyObject d, object baseValue)
         {
             var wrapper = (MediaElementWrapper)d;
             if (wrapper.Volume <= 0)

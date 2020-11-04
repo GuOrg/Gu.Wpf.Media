@@ -8,24 +8,24 @@ namespace Gu.Wpf.Media
     public partial class MediaElementWrapper
     {
         /// <summary>
-        /// Identifies the <see cref="MediaElementWrapper.Source" /> dependency property.
+        /// Identifies the <see cref="Source" /> dependency property.
         /// </summary>
         /// <returns>
-        /// The identifier for the <see cref="MediaElementWrapper.Source" /> dependency property.
+        /// The identifier for the <see cref="Source" /> dependency property.
         /// </returns>
         public static readonly DependencyProperty SourceProperty = MediaElement.SourceProperty.AddOwner(
             typeof(MediaElementWrapper),
             new FrameworkPropertyMetadata(
                 null,
                 FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender,
-                OnSourceChanged,
-                OnSourceCoerce));
+                (d, e) => ((MediaElementWrapper)d).OnSourceChanged(e.NewValue as Uri),
+                CoerceSource));
 
         /// <summary>
-        /// Identifies the <see cref="P:MediaElementWrapper.Volume" /> dependency property.
+        /// Identifies the <see cref="Volume" /> dependency property.
         /// </summary>
         /// <returns>
-        /// The identifier for the <see cref="MediaElementWrapper.Volume" /> dependency property.
+        /// The identifier for the <see cref="Volume" /> dependency property.
         /// </returns>
         public static readonly DependencyProperty VolumeProperty = MediaElement.VolumeProperty.AddOwner(
             typeof(MediaElementWrapper),
@@ -36,43 +36,43 @@ namespace Gu.Wpf.Media
                 (_, baseValue) => Clamp.Between((double)baseValue, 0, 1, 3)));
 
         /// <summary>
-        /// Identifies the <see cref="MediaElementWrapper.Balance" /> dependency property.
+        /// Identifies the <see cref="Balance" /> dependency property.
         /// </summary>
         /// <returns>
-        /// The identifier for the <see cref="MediaElementWrapper.Balance" /> dependency property.
+        /// The identifier for the <see cref="Balance" /> dependency property.
         /// </returns>
         public static readonly DependencyProperty BalanceProperty = MediaElement.BalanceProperty.AddOwner(
             typeof(MediaElementWrapper),
             new FrameworkPropertyMetadata(
                  MediaElement.BalanceProperty.DefaultMetadata.DefaultValue,
                  FrameworkPropertyMetadataOptions.BindsTwoWayByDefault,
-                 OnBalanceChanged));
+                 (d, e) => ((MediaElementWrapper)d).mediaElement.SetCurrentValue(MediaElement.BalanceProperty, e.NewValue)));
 
         /// <summary>
-        /// Identifies the <see cref="MediaElementWrapper.IsMuted" /> dependency property.
+        /// Identifies the <see cref="IsMuted" /> dependency property.
         /// </summary>
         /// <returns>
-        /// The identifier for the <see cref="MediaElementWrapper.IsMuted" /> dependency property.
+        /// The identifier for the <see cref="IsMuted" /> dependency property.
         /// </returns>
         public static readonly DependencyProperty IsMutedProperty = MediaElement.IsMutedProperty.AddOwner(
             typeof(MediaElementWrapper),
             new FrameworkPropertyMetadata(
                 MediaElement.IsMutedProperty.DefaultMetadata.DefaultValue,
                 FrameworkPropertyMetadataOptions.BindsTwoWayByDefault,
-                OnIsMutedChanged,
-                OnIsMutedCoerce));
+                (d, e) => ((MediaElementWrapper)d).mediaElement.SetCurrentValue(MediaElement.IsMutedProperty, e.NewValue),
+                CoerceIsMuted));
 
         /// <summary>
-        /// Identifies the <see cref="MediaElementWrapper.ScrubbingEnabled" /> dependency property.
+        /// Identifies the <see cref="ScrubbingEnabled" /> dependency property.
         /// </summary>
         /// <returns>
-        /// The identifier for the <see cref="MediaElementWrapper.ScrubbingEnabled" /> dependency property.
+        /// The identifier for the <see cref="ScrubbingEnabled" /> dependency property.
         /// </returns>
         public static readonly DependencyProperty ScrubbingEnabledProperty = MediaElement.ScrubbingEnabledProperty.AddOwner(
             typeof(MediaElementWrapper),
             new PropertyMetadata(
                 MediaElement.ScrubbingEnabledProperty.DefaultMetadata.DefaultValue,
-                OnIsScrubbingEnabledChanged));
+                (d, e) => ((MediaElementWrapper)d).mediaElement.SetCurrentValue(MediaElement.ScrubbingEnabledProperty, e.NewValue)));
 
         /// <summary>
         /// DependencyProperty for Stretch property.
@@ -84,7 +84,7 @@ namespace Gu.Wpf.Media
             new FrameworkPropertyMetadata(
                  System.Windows.Media.Stretch.None,
                  FrameworkPropertyMetadataOptions.AffectsMeasure,
-                 OnStretchChanged));
+                 (d, e) => ((MediaElementWrapper)d).mediaElement.SetCurrentValue(MediaElement.StretchProperty, e.NewValue)));
 
         /// <summary>
         /// DependencyProperty for StretchDirection property.
@@ -92,10 +92,10 @@ namespace Gu.Wpf.Media
         /// <seealso cref="Viewbox.Stretch" />
         public static readonly DependencyProperty StretchDirectionProperty = Viewbox.StretchDirectionProperty.AddOwner(
             typeof(MediaElementWrapper),
-             new FrameworkPropertyMetadata(
-                 StretchDirection.Both,
-                 FrameworkPropertyMetadataOptions.AffectsMeasure,
-                 OnStretchDirectionChanged));
+            new FrameworkPropertyMetadata(
+                StretchDirection.Both,
+                FrameworkPropertyMetadataOptions.AffectsMeasure,
+                (d, e) => ((MediaElementWrapper)d).mediaElement.SetCurrentValue(MediaElement.StretchDirectionProperty, e.NewValue)));
 
         /// <summary>
         /// Gets or sets a media source on the <see cref="MediaElementWrapper" />.
@@ -181,7 +181,7 @@ namespace Gu.Wpf.Media
             set => this.SetValue(StretchDirectionProperty, value);
         }
 
-        private static object OnSourceCoerce(DependencyObject d, object baseValue)
+        private static object? CoerceSource(DependencyObject d, object baseValue)
         {
             var uri = baseValue as Uri;
             if (string.IsNullOrWhiteSpace(uri?.OriginalString))
@@ -190,12 +190,6 @@ namespace Gu.Wpf.Media
             }
 
             return baseValue;
-        }
-
-        private static void OnSourceChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            var wrapper = (MediaElementWrapper)d;
-            wrapper.OnSourceChanged(e.NewValue as Uri);
         }
 
         private static void OnVolumeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -211,31 +205,6 @@ namespace Gu.Wpf.Media
             {
                 wrapper.SetCurrentValue(IsMutedProperty, false);
             }
-        }
-
-        private static void OnBalanceChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            ((MediaElementWrapper)d).mediaElement.SetCurrentValue(MediaElement.BalanceProperty, e.NewValue);
-        }
-
-        private static void OnIsMutedChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            ((MediaElementWrapper)d).mediaElement.SetCurrentValue(MediaElement.IsMutedProperty, e.NewValue);
-        }
-
-        private static void OnIsScrubbingEnabledChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            ((MediaElementWrapper)d).mediaElement.SetCurrentValue(MediaElement.ScrubbingEnabledProperty, e.NewValue);
-        }
-
-        private static void OnStretchChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            ((MediaElementWrapper)d).mediaElement.SetCurrentValue(MediaElement.StretchProperty, e.NewValue);
-        }
-
-        private static void OnStretchDirectionChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            ((MediaElementWrapper)d).mediaElement.SetCurrentValue(MediaElement.StretchDirectionProperty, e.NewValue);
         }
     }
 }

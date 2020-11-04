@@ -37,7 +37,7 @@ namespace Gu.Wpf.Media
                 null => this.WhenNull,
                 TimeSpan timeSpan => timeSpan.TotalSeconds,
                 _ when Is.InDesignMode
-                  => throw new ArgumentException(this.CreateErrorMessage($"Expected value to be a Nullable<TimeSpan>, was: {value}"), nameof(value)),
+                  => throw new ArgumentException(CreateErrorMessage($"Expected value to be a Nullable<TimeSpan>, was: {value}"), nameof(value)),
                 //// Returning raw value letting the binding fail the standard way
                 _ => value,
             };
@@ -51,13 +51,13 @@ namespace Gu.Wpf.Media
                 null => null,
                 double d => TimeSpan.FromSeconds(d),
                 _ when Is.InDesignMode
-                    => throw new ArgumentException(this.CreateErrorMessage($"Expected value to be a Nullable<TimeSpan>, was: {value}"), nameof(value)),
+                    => throw new ArgumentException(CreateErrorMessage($"Expected value to be a Nullable<TimeSpan>, was: {value}"), nameof(value)),
                 //// Returning raw value letting the binding fail the standard way
                 _ => value,
             };
         }
 
-        private string CreateErrorMessage(string message, [CallerMemberName] string? caller = null)
+        private static string CreateErrorMessage(string message, [CallerMemberName] string? caller = null)
         {
             return $"{nameof(NullableTimeSpanToSecondsConverter)}.{caller} failed\r\n" + message;
         }

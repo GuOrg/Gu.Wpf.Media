@@ -22,7 +22,7 @@ namespace Gu.Wpf.Media
         /// <summary>Helper for setting <see cref="GeometryProperty"/> on <paramref name="element"/>.</summary>
         /// <param name="element"><see cref="ButtonBase"/> to set <see cref="GeometryProperty"/> on.</param>
         /// <param name="value">Geometry property value.</param>
-        public static void SetGeometry(this ButtonBase element, Geometry value)
+        public static void SetGeometry(this ButtonBase element, Geometry? value)
         {
             if (element is null)
             {
@@ -37,14 +37,14 @@ namespace Gu.Wpf.Media
         /// <returns>Geometry property value.</returns>
         [AttachedPropertyBrowsableForChildren(IncludeDescendants = false)]
         [AttachedPropertyBrowsableForType(typeof(ButtonBase))]
-        public static Geometry GetGeometry(this ButtonBase element)
+        public static Geometry? GetGeometry(this ButtonBase element)
         {
             if (element is null)
             {
                 throw new System.ArgumentNullException(nameof(element));
             }
 
-            return (Geometry)element.GetValue(GeometryProperty);
+            return (Geometry?)element.GetValue(GeometryProperty);
         }
     }
 }

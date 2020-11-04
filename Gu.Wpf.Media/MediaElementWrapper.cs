@@ -397,7 +397,7 @@ namespace Gu.Wpf.Media
         /// If null <see cref="SkipIncrement"/> is used.
         /// If a <see cref="TimeSpan"/> it is used.
         /// If an <see cref="int"/> it is <see cref="SkipIncrement"/> is multiplied by this.
-        /// If a <see cref="double"/> position is skippedthis amount of seconds.
+        /// If a <see cref="double"/> position is skipped this amount of seconds.
         ///  If else no skip is performed.
         /// Negative values are allowed.
         /// </param>
@@ -423,7 +423,7 @@ namespace Gu.Wpf.Media
         /// If null <see cref="SkipIncrement"/> is used.
         /// If a <see cref="TimeSpan"/> it is used.
         /// If an <see cref="int"/> it is <see cref="SkipIncrement"/> is multiplied by this.
-        /// If a <see cref="double"/> position is skippedthis amount of seconds.
+        /// If a <see cref="double"/> position is skipped this amount of seconds.
         ///  If else no skip is performed.
         /// Negative values are allowed.
         /// </param>

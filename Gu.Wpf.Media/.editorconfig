@@ -2,3 +2,6 @@
 
 # SA1633: File should have header
 dotnet_diagnostic.SA1633.severity = none
+
+# SA1623: Property summary documentation should match accessors
+dotnet_diagnostic.SA1623.severity = none

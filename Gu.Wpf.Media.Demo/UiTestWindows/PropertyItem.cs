@@ -48,7 +48,7 @@ namespace Gu.Wpf.Media.Demo.UiTestWindows
 
             set
             {
-                this.wrapper.SetCurrentValue(this.proxyProperty, value);
+                this.wrapper.SetValue(this.proxyProperty, value);
                 this.OnPropertyChanged();
             }
         }

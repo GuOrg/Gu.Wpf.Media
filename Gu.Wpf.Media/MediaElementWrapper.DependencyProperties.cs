@@ -171,7 +171,7 @@ namespace Gu.Wpf.Media
 #pragma warning restore SA1202 // Elements must be ordered by access
 
         /// <summary>
-        /// Get or sets the current <see cref="MediaState"/>.
+        /// Gets or sets the current <see cref="MediaState"/>.
         /// </summary>
         public MediaState State
         {

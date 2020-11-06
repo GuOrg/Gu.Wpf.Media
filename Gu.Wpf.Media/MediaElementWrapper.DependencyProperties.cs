@@ -171,8 +171,6 @@ namespace Gu.Wpf.Media
             typeof(MediaElementWrapper),
             new PropertyMetadata(MediaState.Play));
 
-#pragma warning restore SA1202 // Elements must be ordered by access
-
         /// <summary>
         /// Gets or sets the current <see cref="MediaState"/>.
         /// </summary>

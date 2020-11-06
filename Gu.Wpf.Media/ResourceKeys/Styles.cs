@@ -24,7 +24,7 @@ namespace Gu.Wpf.Media
 
         private static ComponentResourceKey Create([CallerMemberName]string? name = null)
         {
-            return new ComponentResourceKey(typeof(Styles), name.TrimEnd("Key"));
+            return new ComponentResourceKey(typeof(Styles), name?.TrimEnd("Key"));
         }
     }
 }

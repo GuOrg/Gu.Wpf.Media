@@ -1,4 +1,4 @@
-﻿#pragma warning disable SA1600 // Elements must be documented
+#pragma warning disable SA1600 // Elements must be documented
 #pragma warning disable 1591
 namespace Gu.Wpf.Media
 {
@@ -42,7 +42,7 @@ namespace Gu.Wpf.Media
 
         private static ComponentResourceKey Create([CallerMemberName]string? name = null)
         {
-            return new ComponentResourceKey(typeof(Geometries), name.TrimEnd("Key"));
+            return new ComponentResourceKey(typeof(Geometries), name?.TrimEnd("Key"));
         }
     }
 }

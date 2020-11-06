@@ -1,3 +1,4 @@
+#nullable enable
 namespace Gu.Wpf.Media
 {
     using System;

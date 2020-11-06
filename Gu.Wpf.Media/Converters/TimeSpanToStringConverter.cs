@@ -43,7 +43,7 @@ namespace Gu.Wpf.Media
         }
 
         /// <inheritdoc/>
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public object Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
         {
             if (value is null)
             {
@@ -106,7 +106,7 @@ namespace Gu.Wpf.Media
         }
 
         /// <inheritdoc/>
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
         {
             if (value is null || Equals(this.NullString, value))
             {
@@ -139,7 +139,7 @@ namespace Gu.Wpf.Media
             return value;
         }
 
-        private static bool IsValidFormat(object parameter)
+        private static bool IsValidFormat(object? parameter)
         {
             return parameter switch
             {
@@ -149,7 +149,7 @@ namespace Gu.Wpf.Media
             };
         }
 
-        private static bool TryParse(object value, out TimeSpan result)
+        private static bool TryParse(object? value, out TimeSpan result)
         {
             if (value is string text)
             {

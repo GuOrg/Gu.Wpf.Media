@@ -68,7 +68,7 @@ namespace Gu.Wpf.Media
             return false;
         }
 
-        private bool MatchesDirection(MouseWheelEventArgs e)
+        private bool MatchesDirection(MouseWheelEventArgs? e)
         {
             if (e is null)
             {

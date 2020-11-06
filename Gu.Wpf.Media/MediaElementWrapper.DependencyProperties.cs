@@ -3,6 +3,9 @@ namespace Gu.Wpf.Media
     using System;
     using System.Windows;
 
+    /// <summary>
+    /// Dependency properties.
+    /// </summary>
     public partial class MediaElementWrapper
     {
         /// <summary>Identifies the <see cref="State"/> dependency property.</summary>

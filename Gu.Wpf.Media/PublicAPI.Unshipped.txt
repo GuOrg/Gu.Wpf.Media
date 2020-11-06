@@ -134,7 +134,7 @@ Gu.Wpf.Media.NullableTimeSpanToSecondsConverter.WhenNull.set -> void
 Gu.Wpf.Media.Styles
 Gu.Wpf.Media.TimeSpanToStringConverter
 Gu.Wpf.Media.TimeSpanToStringConverter.Convert(object! value, System.Type! targetType, object! parameter, System.Globalization.CultureInfo! culture) -> object!
-Gu.Wpf.Media.TimeSpanToStringConverter.ConvertBack(object! value, System.Type! targetType, object! parameter, System.Globalization.CultureInfo! culture) -> object!
+Gu.Wpf.Media.TimeSpanToStringConverter.ConvertBack(object? value, System.Type! targetType, object? parameter, System.Globalization.CultureInfo! culture) -> object!
 Gu.Wpf.Media.TimeSpanToStringConverter.NullString.get -> string!
 Gu.Wpf.Media.TimeSpanToStringConverter.NullString.set -> void
 Gu.Wpf.Media.TimeSpanToStringConverter.TimeSpanToStringConverter() -> void
@@ -195,7 +195,7 @@ static Gu.Wpf.Media.Styles.ToolTipStyleKey.get -> System.Windows.ResourceKey!
 static readonly Gu.Wpf.Media.Drag.PauseWhileDraggingProperty -> System.Windows.DependencyProperty!
 static readonly Gu.Wpf.Media.Icon.GeometryProperty -> System.Windows.DependencyProperty!
 static readonly Gu.Wpf.Media.MediaElementWrapper.AudioFormatsProperty -> System.Windows.DependencyProperty!
-~static readonly Gu.Wpf.Media.MediaElementWrapper.BalanceProperty -> System.Windows.DependencyProperty
+static readonly Gu.Wpf.Media.MediaElementWrapper.BalanceProperty -> System.Windows.DependencyProperty!
 static readonly Gu.Wpf.Media.MediaElementWrapper.BufferingEndedEvent -> System.Windows.RoutedEvent!
 static readonly Gu.Wpf.Media.MediaElementWrapper.BufferingProgressProperty -> System.Windows.DependencyProperty!
 static readonly Gu.Wpf.Media.MediaElementWrapper.BufferingStartedEvent -> System.Windows.RoutedEvent!
@@ -205,7 +205,7 @@ static readonly Gu.Wpf.Media.MediaElementWrapper.HasAudioProperty -> System.Wind
 static readonly Gu.Wpf.Media.MediaElementWrapper.HasMediaProperty -> System.Windows.DependencyProperty!
 static readonly Gu.Wpf.Media.MediaElementWrapper.HasVideoProperty -> System.Windows.DependencyProperty!
 static readonly Gu.Wpf.Media.MediaElementWrapper.IsBufferingProperty -> System.Windows.DependencyProperty!
-~static readonly Gu.Wpf.Media.MediaElementWrapper.IsMutedProperty -> System.Windows.DependencyProperty
+static readonly Gu.Wpf.Media.MediaElementWrapper.IsMutedProperty -> System.Windows.DependencyProperty!
 static readonly Gu.Wpf.Media.MediaElementWrapper.IsPlayingProperty -> System.Windows.DependencyProperty!
 static readonly Gu.Wpf.Media.MediaElementWrapper.LengthProperty -> System.Windows.DependencyProperty!
 static readonly Gu.Wpf.Media.MediaElementWrapper.LoadedBehaviorProperty -> System.Windows.DependencyProperty!
@@ -216,16 +216,16 @@ static readonly Gu.Wpf.Media.MediaElementWrapper.NaturalVideoHeightProperty -> S
 static readonly Gu.Wpf.Media.MediaElementWrapper.NaturalVideoWidthProperty -> System.Windows.DependencyProperty!
 static readonly Gu.Wpf.Media.MediaElementWrapper.PositionProperty -> System.Windows.DependencyProperty!
 static readonly Gu.Wpf.Media.MediaElementWrapper.ScriptCommandEvent -> System.Windows.RoutedEvent!
-~static readonly Gu.Wpf.Media.MediaElementWrapper.ScrubbingEnabledProperty -> System.Windows.DependencyProperty
+static readonly Gu.Wpf.Media.MediaElementWrapper.ScrubbingEnabledProperty -> System.Windows.DependencyProperty!
 static readonly Gu.Wpf.Media.MediaElementWrapper.SkipIncrementProperty -> System.Windows.DependencyProperty!
-~static readonly Gu.Wpf.Media.MediaElementWrapper.SourceProperty -> System.Windows.DependencyProperty
+static readonly Gu.Wpf.Media.MediaElementWrapper.SourceProperty -> System.Windows.DependencyProperty!
 static readonly Gu.Wpf.Media.MediaElementWrapper.SpeedRatioProperty -> System.Windows.DependencyProperty!
 static readonly Gu.Wpf.Media.MediaElementWrapper.StateProperty -> System.Windows.DependencyProperty!
-~static readonly Gu.Wpf.Media.MediaElementWrapper.StretchDirectionProperty -> System.Windows.DependencyProperty
-~static readonly Gu.Wpf.Media.MediaElementWrapper.StretchProperty -> System.Windows.DependencyProperty
+static readonly Gu.Wpf.Media.MediaElementWrapper.StretchDirectionProperty -> System.Windows.DependencyProperty!
+static readonly Gu.Wpf.Media.MediaElementWrapper.StretchProperty -> System.Windows.DependencyProperty!
 static readonly Gu.Wpf.Media.MediaElementWrapper.VideoFormatsProperty -> System.Windows.DependencyProperty!
 static readonly Gu.Wpf.Media.MediaElementWrapper.VolumeIncrementProperty -> System.Windows.DependencyProperty!
-~static readonly Gu.Wpf.Media.MediaElementWrapper.VolumeProperty -> System.Windows.DependencyProperty
+static readonly Gu.Wpf.Media.MediaElementWrapper.VolumeProperty -> System.Windows.DependencyProperty!
 static readonly Gu.Wpf.Media.NullableTimeSpanToSecondsConverter.Default -> Gu.Wpf.Media.NullableTimeSpanToSecondsConverter!
 static readonly Gu.Wpf.Media.TimeSpanToStringConverter.Default -> Gu.Wpf.Media.TimeSpanToStringConverter!
 virtual Gu.Wpf.Media.MediaElementWrapper.OnSourceChanged(System.Uri? source) -> void

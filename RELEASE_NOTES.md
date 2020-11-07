@@ -1,3 +1,7 @@
+#### 0.5.1
+* FEATURE: netcoreapp3.1
+* nullable enable
+
 #### 0.5.0
 * Rename CanPause property and CanPausePlayback and PausePlayback
 

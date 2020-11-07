@@ -18,15 +18,19 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <Version>0.5.0.2</Version>
+    <Version>0.5.1</Version>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <Authors>Johan Larsson</Authors>
     <Description>Controls for media in WPF</Description>
     <NeutralLanguage>en</NeutralLanguage>
     <RepositoryUrl>https://github.com/GuOrg/Gu.Wpf.Media</RepositoryUrl>
     <PackageReleaseNotes>
-      BUGFIX Check HasTimeSpan
-    </PackageReleaseNotes>
+        0.5.1
+	    * FEATURE: netcoreapp3.1
+	    * nullable enable
+        0.5.0.2
+		BUGFIX Check HasTimeSpan
+	</PackageReleaseNotes>
     <PackageTags>wpf xaml media mediaelement</PackageTags>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>

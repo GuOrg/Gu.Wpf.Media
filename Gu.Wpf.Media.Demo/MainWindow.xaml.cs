@@ -37,15 +37,15 @@ namespace Gu.Wpf.Media.Demo
             this.InitializeComponent();
         }
 
-        public Uri MediaUri
+        public Uri? MediaUri
         {
-            get => (Uri)this.GetValue(MediaUriProperty);
+            get => (Uri?)this.GetValue(MediaUriProperty);
             protected set => this.SetValue(MediaUriPropertyKey, value);
         }
 
-        public string MediaFileName
+        public string? MediaFileName
         {
-            get => (string)this.GetValue(MediaFileNameProperty);
+            get => (string?)this.GetValue(MediaFileNameProperty);
             protected set => this.SetValue(MediaFileNamePropertyKey, value);
         }
 
@@ -76,7 +76,9 @@ namespace Gu.Wpf.Media.Demo
                     this.MediaFileName = files[0];
                     this.MediaUri = new Uri(this.MediaFileName);
                 }
+#pragma warning disable CA1031 // Do not catch general exception types
                 catch (Exception exception)
+#pragma warning restore CA1031 // Do not catch general exception types
                 {
                     _ = MessageBox.Show(
                         this,
@@ -92,7 +94,7 @@ namespace Gu.Wpf.Media.Demo
         {
             OpenFileDialog openFileDialog = new OpenFileDialog
             {
-                Filter = $"Media files|{this.MediaElement.VideoFormats}|All files (*.*)|*.*"
+                Filter = $"Media files|{this.MediaElement.VideoFormats}|All files (*.*)|*.*",
             };
 
             if (openFileDialog.ShowDialog() == true)

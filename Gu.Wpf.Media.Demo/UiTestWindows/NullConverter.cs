@@ -1,14 +1,15 @@
-﻿namespace Gu.Wpf.Media.Demo.UiTestWindows
+namespace Gu.Wpf.Media.Demo.UiTestWindows
 {
     using System;
     using System.Globalization;
     using System.Windows.Data;
 
-    public class NullConverter : IValueConverter
+    [ValueConversion(typeof(object), typeof(object))]
+    public sealed class NullConverter : IValueConverter
     {
         public static readonly NullConverter Default = new NullConverter();
 
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public object Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
         {
             if (value is null)
             {
@@ -18,7 +19,7 @@
             return value;
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
         {
             if (Equals(value, "null"))
             {

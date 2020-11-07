@@ -9,12 +9,12 @@ namespace Gu.Wpf.Media.Demo.UiTestWindows
     {
         public static readonly ContentToIdConverter Default = new ContentToIdConverter();
 
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
         {
             return value?.ToString();
         }
 
-        object IValueConverter.ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        object IValueConverter.ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
         {
             throw new NotSupportedException($"{nameof(ContentToIdConverter)} can only be used in OneWay bindings");
         }

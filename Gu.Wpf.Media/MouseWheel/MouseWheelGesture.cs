@@ -54,6 +54,11 @@ namespace Gu.Wpf.Media
         /// <inheritdoc />
         public override bool Matches(object targetElement, InputEventArgs inputEventArgs)
         {
+            if (inputEventArgs is null)
+            {
+                throw new ArgumentNullException(nameof(inputEventArgs));
+            }
+
             if (!base.Matches(targetElement, inputEventArgs))
             {
                 return false;

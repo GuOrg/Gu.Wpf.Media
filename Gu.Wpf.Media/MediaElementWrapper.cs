@@ -8,6 +8,9 @@ namespace Gu.Wpf.Media
     using System.Windows.Input;
     using System.Windows.Threading;
 
+    /// <summary>
+    /// Wrapper for <see cref="MediaElement"/> that is perhaps nicer for binidng.
+    /// </summary>
     public partial class MediaElementWrapper : Decorator
     {
         private readonly DispatcherTimer updatePositionTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(0.1) };

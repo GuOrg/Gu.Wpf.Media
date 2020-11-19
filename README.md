@@ -2,6 +2,7 @@
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE.md) 
 [![NuGet](https://img.shields.io/nuget/v/Gu.Wpf.Media.svg)](https://www.nuget.org/packages/Gu.Wpf.Media/)
 [![Build status](https://ci.appveyor.com/api/projects/status/eg96glf1osi8on6y/branch/master?svg=true)](https://ci.appveyor.com/project/JohanLarsson/gu-wpf-media/branch/master)
+[![Build Status](https://dev.azure.com/guorg/Gu.Wpf.Media/_apis/build/status/GuOrg.Gu.Wpf.Media?branchName=master)](https://dev.azure.com/guorg/Gu.Wpf.Media/_build/latest?definitionId=24&branchName=master)
 
 Wrapper for System.Windows.Controls.MediaElement.
 

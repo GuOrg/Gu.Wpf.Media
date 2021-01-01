@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.Media
+namespace Gu.Wpf.Media
 {
     using System;
     using System.ComponentModel;
@@ -18,12 +18,13 @@
         }
 
         /// <inheritdoc />
-        public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object source)
+        public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
         {
-            var text = source as string;
-            if (text != null)
+            if (value is string text)
             {
+#pragma warning disable CA1508 // Avoid dead conditional code
                 if (string.IsNullOrWhiteSpace(text))
+#pragma warning restore CA1508 // Avoid dead conditional code
                 {
                     return new MouseWheelGesture(MouseWheelDirection.None, ModifierKeys.None);
                 }
@@ -35,27 +36,25 @@
                     //// ReSharper disable once PossibleNullReferenceException
                     var modifiers = (ModifierKeys)ModifierKeysConverter.ConvertFrom(context, culture, modifiersToken);
                     var directionToken = text.Substring(index + 1);
-                    MouseWheelDirection direction;
-                    if (Enum.TryParse(directionToken, out direction))
+                    if (Enum.TryParse(directionToken, out MouseWheelDirection direction))
                     {
                         return new MouseWheelGesture(direction, modifiers);
                     }
 
-                    throw this.GetConvertFromException(source);
+                    throw this.GetConvertFromException(value);
                 }
                 else
                 {
-                    MouseWheelDirection direction;
-                    if (Enum.TryParse(text, out direction))
+                    if (Enum.TryParse(text, out MouseWheelDirection direction))
                     {
                         return new MouseWheelGesture(direction, ModifierKeys.None);
                     }
 
-                    throw this.GetConvertFromException(source);
+                    throw this.GetConvertFromException(value);
                 }
             }
 
-            throw this.GetConvertFromException(source);
+            throw this.GetConvertFromException(value);
         }
 
         /// <inheritdoc />
@@ -65,8 +64,7 @@
             if (destinationType == typeof(string))
             {
                 // When invoked by the serialization engine we can convert to string only for known type
-                var gesture = context?.Instance as MouseWheelGesture;
-                if (gesture != null)
+                if (context?.Instance is MouseWheelGesture gesture)
                 {
                     if (System.Windows.Input.ModifierKeysConverter.IsDefinedModifierKeys(gesture.Modifiers) &&
                         gesture.MouseAction == MouseAction.WheelClick &&
@@ -90,20 +88,14 @@
 
             if (destinationType == typeof(string))
             {
-                if (value is null)
+                switch (value)
                 {
-                    return string.Empty;
-                }
-
-                var gesture = value as MouseWheelGesture;
-                if (gesture != null)
-                {
-                    if (gesture.Modifiers == ModifierKeys.None)
-                    {
+                    case null:
+                        return string.Empty;
+                    case MouseWheelGesture { Modifiers: ModifierKeys.None } gesture:
                         return gesture.Direction.ToName();
-                    }
-
-                    return $"{ModifierKeysConverter.ConvertTo(context, culture, gesture.Modifiers, destinationType)}+{gesture.Direction.ToName()}";
+                    case MouseWheelGesture gesture:
+                        return $"{ModifierKeysConverter.ConvertTo(context, culture, gesture.Modifiers, destinationType)}+{gesture.Direction.ToName()}";
                 }
             }
 

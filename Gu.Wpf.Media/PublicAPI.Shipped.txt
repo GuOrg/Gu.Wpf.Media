@@ -143,7 +143,7 @@ override Gu.Wpf.Media.MouseWheelExtension.ProvideValue(System.IServiceProvider! 
 override Gu.Wpf.Media.MouseWheelGesture.Matches(object! targetElement, System.Windows.Input.InputEventArgs! inputEventArgs) -> bool
 override Gu.Wpf.Media.MouseWheelGestureConverter.CanConvertFrom(System.ComponentModel.ITypeDescriptorContext! context, System.Type! sourceType) -> bool
 override Gu.Wpf.Media.MouseWheelGestureConverter.CanConvertTo(System.ComponentModel.ITypeDescriptorContext! context, System.Type! destinationType) -> bool
-override Gu.Wpf.Media.MouseWheelGestureConverter.ConvertFrom(System.ComponentModel.ITypeDescriptorContext! context, System.Globalization.CultureInfo! culture, object! source) -> object!
+override Gu.Wpf.Media.MouseWheelGestureConverter.ConvertFrom(System.ComponentModel.ITypeDescriptorContext! context, System.Globalization.CultureInfo! culture, object! value) -> object!
 override Gu.Wpf.Media.MouseWheelGestureConverter.ConvertTo(System.ComponentModel.ITypeDescriptorContext! context, System.Globalization.CultureInfo! culture, object! value, System.Type! destinationType) -> object!
 override Gu.Wpf.Media.MouseWheelGestureValueSerializer.CanConvertFromString(string! value, System.Windows.Markup.IValueSerializerContext! context) -> bool
 override Gu.Wpf.Media.MouseWheelGestureValueSerializer.CanConvertToString(object! value, System.Windows.Markup.IValueSerializerContext! context) -> bool

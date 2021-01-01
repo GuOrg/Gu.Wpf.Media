@@ -20,7 +20,6 @@ namespace Gu.Wpf.Media
         /// <summary>Initializes a new instance of the <see cref="MediaElementWrapper"/> class.</summary>
         public MediaElementWrapper()
         {
-#pragma warning disable WPF0041 // Set mutable dependency properties using SetCurrentValue.
             this.mediaElement = new MediaElement
             {
                 LoadedBehavior = System.Windows.Controls.MediaState.Manual,
@@ -32,7 +31,6 @@ namespace Gu.Wpf.Media
                 Stretch = this.Stretch,
                 StretchDirection = this.StretchDirection,
             };
-#pragma warning restore WPF0041 // Set mutable dependency properties using SetCurrentValue.
 
             this.mediaElement.MediaFailed += (o, e) =>
                 {

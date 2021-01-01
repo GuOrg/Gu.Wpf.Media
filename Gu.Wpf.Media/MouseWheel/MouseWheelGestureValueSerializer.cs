@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.Media
+namespace Gu.Wpf.Media
 {
     using System.ComponentModel;
     using System.Windows.Input;
@@ -20,20 +20,14 @@
         /// <inheritdoc />
         public override bool CanConvertToString(object value, IValueSerializerContext context)
         {
-            var result = false;
-            var gesture = value as MouseWheelGesture;
-
-            if (gesture != null)
+            if (value is MouseWheelGesture { MouseAction: MouseAction.WheelClick } gesture &&
+                ModifierKeysConverter.IsDefinedModifierKeys(gesture.Modifiers) &&
+                MouseWheelDirectionExt.IsDefined(gesture.Direction))
             {
-                if (ModifierKeysConverter.IsDefinedModifierKeys(gesture.Modifiers) &&
-                    gesture.MouseAction == MouseAction.WheelClick &&
-                    MouseWheelDirectionExt.IsDefined(gesture.Direction))
-                {
-                    result = true;
-                }
+                return true;
             }
 
-            return result;
+            return false;
         }
 
         /// <inheritdoc />

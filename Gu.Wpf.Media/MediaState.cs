@@ -6,6 +6,11 @@ namespace Gu.Wpf.Media
     public enum MediaState
     {
         /// <summary>
+        /// Not specified.
+        /// </summary>
+        None,
+
+        /// <summary>
         /// The media element should play.
         /// </summary>
         Play = 1,

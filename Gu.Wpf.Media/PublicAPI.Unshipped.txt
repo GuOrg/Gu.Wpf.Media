@@ -1,1 +1,1 @@
-﻿
+﻿Gu.Wpf.Media.MediaState.None = 0 -> Gu.Wpf.Media.MediaState

@@ -1,7 +1,9 @@
+using System;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Markup;
 
+[assembly: CLSCompliant(false)]
 [assembly: ThemeInfo(ResourceDictionaryLocation.None, ResourceDictionaryLocation.SourceAssembly)]
 [assembly: XmlnsDefinition("https://github.com/JohanLarsson/Gu.Wpf.Media", "Gu.Wpf.Media")]
 [assembly: XmlnsPrefix("https://github.com/JohanLarsson/Gu.Wpf.Media", "media")]

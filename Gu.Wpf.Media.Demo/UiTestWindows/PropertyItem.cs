@@ -12,7 +12,7 @@ namespace Gu.Wpf.Media.Demo.UiTestWindows
     {
         private static readonly Dictionary<DependencyProperty, PropertyItem> Cache = new();
 
-        private static readonly FieldInfo MediaElementField = typeof(MediaElementWrapper).GetField("mediaElement", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly);
+        private static readonly FieldInfo MediaElementField = typeof(MediaElementWrapper).GetField("mediaElement", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly)!;
         private readonly MediaElementWrapper wrapper;
         private readonly MediaElement mediaElement;
         private readonly PropertyInfo mediaElementProperty;
@@ -22,9 +22,9 @@ namespace Gu.Wpf.Media.Demo.UiTestWindows
         private PropertyItem(MediaElementWrapper wrapper, DependencyProperty property, DependencyProperty proxyProperty)
         {
             this.wrapper = wrapper;
-            this.mediaElement = (MediaElement)MediaElementField.GetValue(wrapper);
+            this.mediaElement = (MediaElement)MediaElementField.GetValue(wrapper)!;
             this.Property = property;
-            this.mediaElementProperty = typeof(MediaElement).GetProperty(property.Name);
+            this.mediaElementProperty = typeof(MediaElement).GetProperty(property.Name)!;
             this.proxyProperty = proxyProperty;
             if (property.ReadOnly)
             {
@@ -59,7 +59,7 @@ namespace Gu.Wpf.Media.Demo.UiTestWindows
 
         public static PropertyItem GetOrCreate(MediaElementWrapper wrapper, DependencyProperty property)
         {
-            if (!Cache.TryGetValue(property, out PropertyItem item))
+            if (!Cache.TryGetValue(property, out PropertyItem? item))
             {
                 var proxy = DependencyProperty.RegisterAttached(
                     property.Name + "Proxy",

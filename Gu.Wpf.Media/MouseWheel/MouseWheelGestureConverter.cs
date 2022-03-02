@@ -22,9 +22,7 @@ namespace Gu.Wpf.Media
         {
             if (value is string text)
             {
-#pragma warning disable CA1508 // Avoid dead conditional code
                 if (string.IsNullOrWhiteSpace(text))
-#pragma warning restore CA1508 // Avoid dead conditional code
                 {
                     return new MouseWheelGesture(MouseWheelDirection.None, ModifierKeys.None);
                 }

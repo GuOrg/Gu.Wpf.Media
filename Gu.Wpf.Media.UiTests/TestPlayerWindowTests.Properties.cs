@@ -107,7 +107,7 @@ namespace Gu.Wpf.Media.UiTests
             this.SetValue(MediaElementWrapper.LoadedBehaviorProperty, "Pause");
             this.SetValue(MediaElementWrapper.SourceProperty, Info.CoffeeClipFileName());
             this.PlayButton.Click();
-            var otherFile = Info.CoffeeClipFileName().Replace("coffee.mp4", "other.mp4");
+            var otherFile = Info.CoffeeClipFileName().Replace("coffee.mp4", "other.mp4", StringComparison.Ordinal);
             if (!File.Exists(otherFile))
             {
                 File.Copy(Info.CoffeeClipFileName(), otherFile);
@@ -141,7 +141,7 @@ namespace Gu.Wpf.Media.UiTests
         [Test]
         public void SetSourceToClipWithHashInPath()
         {
-            var otherFile = Info.CoffeeClipFileName().Replace(@"Samples\coffee.mp4", @"# Samples #\coffee.mp4");
+            var otherFile = Info.CoffeeClipFileName().Replace(@"Samples\coffee.mp4", @"# Samples #\coffee.mp4", StringComparison.Ordinal);
             var directoryName = Path.GetDirectoryName(otherFile);
             if (!Directory.Exists(directoryName))
             {

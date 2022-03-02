@@ -1,6 +1,5 @@
-﻿namespace Gu.Wpf.Media.UiTests.Helpers
+namespace Gu.Wpf.Media.UiTests.Helpers
 {
-    using System;
     using System.IO;
     using System.Reflection;
 
@@ -10,7 +9,7 @@
     {
         internal static string TestAssemblyFullFileName()
         {
-            return new Uri(Assembly.GetExecutingAssembly().CodeBase).LocalPath;
+            return Assembly.GetExecutingAssembly().Location;
         }
 
         internal static string TestAssemblyDirectory() => Path.GetDirectoryName(TestAssemblyFullFileName());

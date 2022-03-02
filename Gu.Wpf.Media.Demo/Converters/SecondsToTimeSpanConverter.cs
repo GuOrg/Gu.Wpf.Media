@@ -7,7 +7,7 @@ namespace Gu.Wpf.Media.Demo
     [ValueConversion(typeof(double), typeof(TimeSpan))]
     public sealed class SecondsToTimeSpanConverter : IValueConverter
     {
-        public static readonly SecondsToTimeSpanConverter Default = new SecondsToTimeSpanConverter();
+        public static readonly SecondsToTimeSpanConverter Default = new();
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {

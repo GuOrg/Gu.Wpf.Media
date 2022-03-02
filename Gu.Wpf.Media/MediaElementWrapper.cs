@@ -13,8 +13,8 @@ namespace Gu.Wpf.Media
     /// </summary>
     public partial class MediaElementWrapper : Decorator
     {
-        private readonly DispatcherTimer updatePositionTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(0.1) };
-        private readonly DispatcherTimer updateProgressTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
+        private readonly DispatcherTimer updatePositionTimer = new() { Interval = TimeSpan.FromSeconds(0.1) };
+        private readonly DispatcherTimer updateProgressTimer = new() { Interval = TimeSpan.FromSeconds(1) };
         private readonly MediaElement mediaElement;
 
         /// <summary>Initializes a new instance of the <see cref="MediaElementWrapper"/> class.</summary>

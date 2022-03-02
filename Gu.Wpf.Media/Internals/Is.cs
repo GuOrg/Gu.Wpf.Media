@@ -5,7 +5,7 @@ namespace Gu.Wpf.Media
 
     internal static class Is
     {
-        private static readonly DependencyObject DependencyObject = new DependencyObject();
+        private static readonly DependencyObject DependencyObject = new();
 
         /// <summary>
         /// Determines whether the current code is executed in a design time environment such as Visual Studio or Blend.

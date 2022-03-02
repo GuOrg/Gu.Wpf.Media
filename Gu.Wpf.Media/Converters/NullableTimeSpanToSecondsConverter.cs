@@ -16,7 +16,7 @@ namespace Gu.Wpf.Media
         /// <summary>
         /// The default instance used like Converter="{x:Static NullableTimeSpanToSecondsConverter.Default}".
         /// </summary>
-        public static readonly NullableTimeSpanToSecondsConverter Default = new NullableTimeSpanToSecondsConverter();
+        public static readonly NullableTimeSpanToSecondsConverter Default = new();
 
         /// <summary>
         /// The converted value to return when the value is null.

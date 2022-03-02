@@ -10,7 +10,7 @@ namespace Gu.Wpf.Media.Demo.UiTestWindows
 
     public class PropertyItem : INotifyPropertyChanged
     {
-        private static readonly Dictionary<DependencyProperty, PropertyItem> Cache = new Dictionary<DependencyProperty, PropertyItem>();
+        private static readonly Dictionary<DependencyProperty, PropertyItem> Cache = new();
 
         private static readonly FieldInfo MediaElementField = typeof(MediaElementWrapper).GetField("mediaElement", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly);
         private readonly MediaElementWrapper wrapper;

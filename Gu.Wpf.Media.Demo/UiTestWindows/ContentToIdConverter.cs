@@ -7,7 +7,7 @@ namespace Gu.Wpf.Media.Demo.UiTestWindows
     [ValueConversion(typeof(object), typeof(string))]
     public sealed class ContentToIdConverter : IValueConverter
     {
-        public static readonly ContentToIdConverter Default = new ContentToIdConverter();
+        public static readonly ContentToIdConverter Default = new();
 
         public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
         {

@@ -7,7 +7,7 @@ namespace Gu.Wpf.Media.Demo.UiTestWindows
     [ValueConversion(typeof(bool), typeof(bool))]
     public sealed class InvertBoolConverter : IValueConverter
     {
-        public static readonly InvertBoolConverter Default = new InvertBoolConverter();
+        public static readonly InvertBoolConverter Default = new();
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {

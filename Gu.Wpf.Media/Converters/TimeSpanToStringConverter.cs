@@ -18,11 +18,11 @@ namespace Gu.Wpf.Media
         /// <summary>
         /// The default instance used like Converter="{x:Static TimeSpanToStringConverter.Default}".
         /// </summary>
-        public static readonly TimeSpanToStringConverter Default = new TimeSpanToStringConverter();
+        public static readonly TimeSpanToStringConverter Default = new();
 
         // Expecting this to only be called from the UI-thread.
         // Sharing it and no locks.
-        private static readonly StringBuilder StringBuilder = new StringBuilder();
+        private static readonly StringBuilder StringBuilder = new();
         private static readonly string[] Formats =
         {
             @"h\:mm\:ss",

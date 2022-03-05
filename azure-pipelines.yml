@@ -2,6 +2,11 @@ pool:
   vmImage: 'windows-2022'
 
 steps:
+- task: UseDotNet@2
+  displayName: 'Install .net6 runtime (required for running Unit Tests only)'
+  inputs:
+    packageType: 'runtime'
+    version: '6.x'
 
 - task: VSBuild@1
   displayName: Build

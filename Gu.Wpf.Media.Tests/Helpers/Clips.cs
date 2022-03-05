@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.Media.Tests
+namespace Gu.Wpf.Media.Tests
 {
     using System;
     using System.IO;
@@ -7,10 +7,7 @@
 
     public static class Clips
     {
-        internal static string TestAssemblyFullFileName()
-        {
-            return new Uri(Assembly.GetExecutingAssembly().CodeBase).LocalPath;
-        }
+        internal static string TestAssemblyFullFileName() => Assembly.GetExecutingAssembly().Location;
 
         internal static string TestAssemblyDirectory() => Path.GetDirectoryName(TestAssemblyFullFileName());
 
